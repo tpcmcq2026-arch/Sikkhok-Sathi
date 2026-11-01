@@ -1355,7 +1355,7 @@ html[data-mode=dark] .qp-pv{background:#0a0f19}
 .qp-pv #qppv{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.qpvh{position:relative;flex:none;z-index:20;margin:-12px -12px 10px;padding:10px 12px;background:#cfd6e2;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-bottom:1px solid rgba(0,0,0,.08)}
 html[data-mode=dark] .qpvh{background:#0a0f19}
 .qpvh .btn{padding:6px 11px;font-size:13.5px}.qpvh .grow{flex:1;min-width:8px}
-.qpvh .qfs{display:flex;gap:6px}.qmv2{display:inline-flex;flex-direction:column;gap:4px;margin-left:auto;margin-right:6px;flex:none}.qmv2 button{width:34px;height:26px;padding:0;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit;font-size:12px;line-height:1;cursor:pointer}.qmv2 button:disabled{opacity:.28}.qmv2 button:active{background:var(--ac);color:#fff}
+.qpvh .qfs{display:flex;gap:6px;order:-5}.qpvh .qfs.hide{display:none}.qmv2{display:inline-flex;flex-direction:column;gap:4px;margin-left:auto;margin-right:6px;flex:none}.qmv2 button{width:34px;height:26px;padding:0;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit;font-size:12px;line-height:1;cursor:pointer}.qmv2 button:disabled{opacity:.28}.qmv2 button:active{background:var(--ac);color:#fff}
 .qpw{margin:0 auto 14px;box-shadow:0 4px 20px rgba(0,0,0,.28);background:#fff;overflow:hidden}
 @media(max-width:860px){#qp{--qsh:64px}.qp-w{grid-template-columns:minmax(0,1fr)}.qp-pv{position:relative;top:auto;max-height:calc(100dvh - var(--rth,52px) - var(--qsh) - 96px);overflow:hidden;max-width:100%;min-width:0}.qpvh{position:relative;top:auto;flex:none;z-index:20;margin:-12px -12px 10px;padding:6px 12px;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.qpvh::-webkit-scrollbar{display:none}.qpvh>*{flex:0 0 auto}.qpvh .grow{display:none}.qpvh .btn{padding:5px 9px;font-size:13px;white-space:nowrap}#qpbody.pvm .qp-fm{display:none}#qpbody:not(.pvm) .qp-pv{display:none}}
 @media(min-width:861px){#qpseg{display:none!important}}
@@ -1436,7 +1436,7 @@ html[data-mode=dark] .qpvh{background:#0a0f19}
 .qtgrid{display:grid;gap:6px;margin:10px 0;max-height:42vh;overflow:auto}
 .qtgrid input{width:100%;box-sizing:border-box;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 8px;background:var(--card)}
 /* floating items (preview) */
-.qfl{position:absolute;z-index:6;box-sizing:border-box}
+.qfl{position:absolute;z-index:6;box-sizing:border-box}#qppv.qdrag .qpw,#qppv.qdrag .qpg{overflow:visible!important}#qppv.qdrag .qpw{z-index:1}#qppv.qdrag .qfl.ed{z-index:9999}.qim{position:relative}.qimg-h{position:absolute;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:15px;color:#fff;background:var(--ac,#0f766e);border-radius:7px;cursor:grab;touch-action:none;z-index:4;user-select:none;-webkit-user-select:none;box-shadow:0 1px 5px rgba(0,0,0,.35);opacity:.85}.qfs .al{padding:4px 8px}.qalg{display:flex;gap:6px;margin:4px 0}.qalg .btn{flex:1;padding:7px 4px;font-size:13px}
 .qfl.ed{cursor:move;touch-action:none;-webkit-user-select:none;user-select:none}
 .qfl.ed:hover{outline:1.5px dashed #2563eb}
 .qfl.sel{outline:2px solid #2563eb!important}
@@ -1568,7 +1568,7 @@ body.qdragging,body.qdragging *{user-select:none!important;-webkit-user-select:n
 .qimx{flex:1 0 100%;margin-top:6px}.qimx .qpt{margin:4px 0}.qsts{margin:8px 0}.qrm{min-width:26px;display:inline-block}
 
 .qfl.wc{display:flex;flex-direction:column}.qfc{flex:none;text-align:center;font-size:.9em;font-weight:600;padding:1px 0 3px}.qfin{flex:1;min-height:0}.qfin>table,.qfin>img{width:100%;height:100%}
-.qft2.tsS tr:nth-child(even) td{background:#f1f5f8}.qft2.tsH td,.qft2.tsH th{border-left:0;border-right:0}
+.qft2.tsS tr:nth-child(odd) td{background:#f1f5f8}.qft2.tsH td,.qft2.tsH th{border-left:0;border-right:0}
 .qie-tb,.qie-md{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.qie-op{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0;min-height:42px}
 .qie-cv{background:#e3e8ef;border-radius:12px;padding:8px;text-align:center;max-height:52vh;overflow:auto}.qie-cv canvas{max-width:100%;height:auto;touch-action:none;cursor:crosshair;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
 .qtcf{display:inline-flex;gap:6px;align-items:center}.qtcf input[type=color]{width:42px;height:34px;padding:2px;border-radius:8px;border:1px solid var(--line);background:var(--card)}
@@ -1601,7 +1601,7 @@ body.qdragging,body.qdragging *{user-select:none!important;-webkit-user-select:n
 .qpar{padding:5px 12px;background:#f6f7f7;border-left:3px solid var(--qa,#0f766e);text-align:justify;line-height:1.55}.qpar.qpf{padding-top:10px;border-radius:6px 6px 0 0}.qpar.qpl{padding-bottom:10px;border-radius:0 0 6px 6px}
 .qpar.qpf.qpl{border-radius:6px}.qpti{font-weight:700;text-align:center;margin-bottom:4px}.qppn{display:inline-block;min-width:1.4em;margin-right:.4em;color:var(--qa,#0f766e)}
 .qwb{margin:4px 0 6px;padding:6px 10px;border:1.5px solid #333;border-radius:6px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}.qwb b{font-size:.85em;margin-right:4px;text-decoration:underline}
-.qtb2 td,.qtb2 th{height:2.1em;padding:3px 8px}
+.qtb2 td,.qtb2 th{height:2.1em;padding:3px 8px}.qft2.qtb3{height:auto;table-layout:auto;margin-top:.3em}.qft2.qtb3 td,.qft2.qtb3 th{height:2.1em;text-align:left;padding:3px 8px}
 .qtbs{overflow-x:auto;display:grid;gap:5px;padding-bottom:4px}.qtbe{display:grid;gap:5px}.qtbe input{width:100%;box-sizing:border-box;min-width:0}
 .qktx td.a{width:auto;text-align:left}.qktx td.n{width:6%}
 @media(max-width:860px){.qp-fm{padding-bottom:130px}}
@@ -4666,7 +4666,7 @@ function mkSec(ty,n){
  o.qs=Array.from({length:['ttl','pas','tab'].includes(ty)?0:(n??3)},()=>mkQ(ty,o));
  if(ty==='ttl'){o.ta='c';o.sm=false}
  if(ty==='pas'){o.ptx='';o.pti='';o.ppn=false;o.sm=false}
- if(ty==='tab'){o.tb={r:3,c:3,cells:[['','',''],['','',''],['','','']]};o.hd=true;o.sm=false}
+ if(ty==='tab'){o.tb={r:3,c:3,cells:[['','',''],['','',''],['','','']]};o.hd=true;o.sm=false;o.tts='grid'}
  return o;
 }
 const QSK='trsm_qstyles',qStyles=()=>J(QSK,[]),qStyleSave=L=>{try{LS.setItem(QSK,JSON.stringify(L))}catch(e){toast('সেভ হলো না')}};
@@ -4748,20 +4748,30 @@ let qFig=0,qGrpLbl='';
 const qCapNo=(c,n)=>c.capn==='en'?String(n):qbn(n);
 const qRf=(s,l)=>String(s==null?'':s).replace(/\[\[\s*(?:ছবি|চিত্র|fig)\s*\]\]/gi,l||'চিত্র');
 const qLblFor=(q,c)=>q&&q.img&&q.capOn?(c.capw||'চিত্র')+' '+qCapNo(c,qFig+1):qGrpLbl;
-function qImgH(src,w,c,capOn,cap,side){
+let qIN=0;const qIR={};
+function qIid(o){if(!o._iid)Object.defineProperty(o,'_iid',{value:'i'+(++qIN),enumerable:false,writable:true});qIR[o._iid]=o;return o._iid}
+function qImgH(src,w,c,capOn,cap,side,o,pf){
  if(!src)return '';
  const bs=(c.imb?'border:1px solid #333;':'')+(c.imr?'border-radius:10px;':'');
  let cpn='';
  if(capOn){const n=++qFig;cpn=`<div class="qcap">${esc(c.capw||'চিত্র')} ${c.capn==='en'?n:qbn(n)}${cap?': '+qf(cap):''}</div>`}
  const im=`<img src="${src}" style="width:${side?100:(w||50)}%;${bs}">`;
- return `<div class="qim"${side?` style="width:${w||50}%"`:''}>${c.capp==='t'?cpn+im:im+cpn}</div>`;
+ const st=[];if(side)st.push('width:'+(w||50)+'%');
+ let at='';
+ if(o&&pf){const al=o[pf+'a'],ox=+o[pf+'x']||0,oy=+o[pf+'y']||0;
+  if(!side&&(al==='l'||al==='r'))st.push('text-align:'+(al==='l'?'left':'right'));
+  if(ox||oy)st.push(`transform:translate(${ox}px,${oy}px)`);
+  at=` data-iid="${qIid(o)}" data-ipf="${pf}"`}
+ return `<div class="qim"${at}${st.length?` style="${st.join(';')}"`:''}>${c.capp==='t'?cpn+im:im+cpn}</div>`;
 }
+const qHtb=s=>{const t=s.htb;if(!t)return '';const w=100,al=s.htba;
+ return `<div class="qhtb" style="width:${w}%;margin:.35em ${al==='r'?'0':'auto'} .35em ${al==='l'?'0':'auto'}">${t.capOn&&t.cap?`<div class="qfc" style="text-align:center">${qf(t.cap)}</div>`:''}${qTblHtml(t,'qtb3',al==='r'?'margin-left:auto;':al==='c'?'margin-left:auto;margin-right:auto;':'')}</div>`};
+const qHimg=(s,c)=>(s.himg?qImgH(s.himg,s.hiw||50,c,s.hcapOn,s.hcap,false,s,'hi'):'')+qHtb(s);
 function qBody0(q,c){
  const t=qf(qRf(q.t,qLblFor(q,c))),ip=q.ip||'b';
  if(!q.img)return t;
- if(ip==='l'||ip==='r')return `<div class="qside ${ip}"><div class="qsx">${t}</div>${qImgH(q.img,q.iw,c,q.capOn,q.cap,true)}</div>`;
- let im=qImgH(q.img,q.iw,c,q.capOn,q.cap,false);
- if(q.ia==='l'||q.ia==='r')im=im.replace('<div class="qim"','<div class="qim" style="text-align:'+(q.ia==='l'?'left':'right')+'"');
+ if(ip==='l'||ip==='r')return `<div class="qside ${ip}"><div class="qsx">${t}</div>${qImgH(q.img,q.iw,c,q.capOn,q.cap,true,q,'i')}</div>`;
+ const im=qImgH(q.img,q.iw,c,q.capOn,q.cap,false,q,'i');
  return ip==='t'?im+t:t+im;
 }
 const qPbn=v=>!v?0:v===true?1:Math.max(1,+v||1);
@@ -4771,7 +4781,7 @@ function qBlocks(p,x){
   if(s.ty==='raw'){s.blocks.forEach(h=>B.push({keep:0,h}));return}
   if(s.ty==='pas'){qSecHead(p,s,si,x,B);const ps=String(s.ptx||'').split('\n').map(z=>z.trim()).filter(Boolean);if(!ps.length)ps.push('');
    ps.forEach((z,i)=>B.push({keep:0,st:qSecSt(c,s,false),h:`<div class="qpar${i===0?' qpf':''}${i===ps.length-1?' qpl':''}">${i===0&&s.pti?`<div class="qpti">${qf(s.pti)}</div>`:''}${s.ppn?`<b class="qppn">${i+1}</b>`:''}${qf(z)}</div>`}));return}
-  if(s.ty==='tab'){qSecHead(p,s,si,x,B);const t=s.tb;B.push({keep:0,h:`<table class="qmt qtb2">${t.cells.map((row,ri)=>`<tr>${row.map(cv=>ri===0&&s.hd!==false?`<th>${qf(cv)}</th>`:`<td>${qf(cv)}</td>`).join('')}</tr>`).join('')}</table>`});return}
+  if(s.ty==='tab'){qSecHead(p,s,si,x,B);const t=s.tb;const ns=!s.tts,tc=ns?'qmt qtb2':'qft2 qtb3'+(s.tbd===false?' nb':'')+(s.tts==='stripe'?' tsS':'')+(s.tts==='hline'?' tsH':''),hs=(!ns&&s.thc)?` style="background:${s.thc}"`:'';B.push({keep:0,h:`<table class="${tc}"${(s.cw||s.tba)?` style="${qCwSt(s.cw,t.c)}${s.tba==='c'?'margin-left:auto;margin-right:auto;':s.tba==='r'?'margin-left:auto;':''}"`:''}>${qCwG(s.cw,t.c)}${t.cells.map((row,ri)=>`<tr>${row.map((cv,ci)=>{const fx=qCellFx(s,ri,ci),fa=fx?` style="${fx}"`:'';return ri===0&&s.hd!==false?`<th${hs?hs.replace('"',fx?'"'+fx:'"'):fa}>${qf(cv)}</th>`:`<td${fa}>${qf(cv)}</td>`}).join('')}</tr>`).join('')}</table>`});return}
   if(s.ty==='ttl'){const t=(s.title||'').trim();B.push({keep:1,pb:qPbn(s.pb),cb:s.cb&&si>0,cl:'sec',sq:(x.ci||0)+':'+si+':h',h:t?`<div class="qtl ta-${s.ta||'c'}${s.ul?' ul':''}" style="font-size:${(1.3*(s.tsz||100)/100).toFixed(3)}em">${qf(t)}</div>`:'<div style="height:2px"></div>'});return}
   if(!c.numCont||s.rs)cnt=0;qGrpLbl='';
   const m=qm(s),ch=s.choose&&s.choose<s.qs.length?qT(`যেকোনো ${qbn(s.choose)}টি প্রশ্নের উত্তর দাও।`,`Answer any ${s.choose} question${s.choose>1?'s':''}.`):'',note=p.hs.sn===false?'':[s.note,ch].filter(Boolean).join(' '),ti=p.hs.st===false?'':(s.title||'').trim();
@@ -4783,10 +4793,11 @@ function qBlocks(p,x){
   else if(note||mk)hh=`<div class="qsh2${s.nol?' nol':''}"><span class="qsn2" style="flex:1;${nal?nal+';':''}${s.nsz&&s.nsz!==100?`font-size:${(s.nsz/100).toFixed(3)}em`:''};${qFx(s,'n')}">${qf(note)}</span>${mk?`<span class="qsm">${mk}</span>`:''}</div>`;
   else hh='<div style="height:2px"></div>';
   if(s.wb&&s.wb.trim())hh+=qWbHtml(s.wb);
+  hh+=qHimg(s,c);
   if(s.ty==='grp'){const N=s.qs.length,a=qbn(cnt+1),b2=qbn(cnt+N),R=N<2?a:N===2?a+qT(' ও ',' and ')+b2:a+qT(' থেকে ',' to ')+b2,what=qT(s.gimg&&s.gtx?'চিত্র ও উদ্দীপক':s.gimg?'চিত্র':'উদ্দীপক',s.gimg&&s.gtx?'figure and passage':s.gimg?'figure':'passage'),
    lead=(s.gl&&s.gl.trim())?s.gl.replace(/\{r\}/g,R):qT(`উপরের ${what} থেকে ${R} নং প্রশ্নের উত্তর দাও :`,`Answer question${N>1?'s':''} ${R} from the above ${what}:`),
    gl0=s.gimg&&s.gcapOn?(c.capw||'চিত্র')+' '+qCapNo(c,qFig+1):'';qGrpLbl=gl0;
-   hh+=`<div class="qgx">${s.gtx?`<div class="qgt">${qf(qRf(s.gtx,gl0))}</div>`:''}${qImgH(s.gimg,s.giw,c,s.gcapOn,s.gcap,false)}${(s.gtx||s.gimg||(s.gl&&s.gl.trim()))?`<div class="qgld">${qf(qRf(lead,gl0))}</div>`:''}</div>`}
+   hh+=`<div class="qgx">${s.gtx?`<div class="qgt">${qf(qRf(s.gtx,gl0))}</div>`:''}${qImgH(s.gimg,s.giw,c,s.gcapOn,s.gcap,false,s,'gi')}${(s.gtx||s.gimg||(s.gl&&s.gl.trim()))?`<div class="qgld">${qf(qRf(lead,gl0))}</div>`:''}</div>`}
   B.push({keep:1,pb:qPbn(s.pb),cb:s.cb&&si>0,cl:'sec',sq:(x.ci||0)+':'+si+':h',h:hh});
   const lhp=Math.round(c.fs*c.lh/100*10)/10,mkq=q=>{const v=q.m!==''&&q.m!=null&&!isNaN(+q.m)?+q.m:s.marks;return s.showMk&&v?`<span class="qmk">${qbn(v)}</span>`:''};
   s.qs.forEach((q,qi)=>{
@@ -4847,11 +4858,20 @@ function qTblMap(f){
  const hole=new Set((f.hole||[]).filter(k=>{const[a,b]=k.split(':').map(Number);return a<f.r&&b<f.c&&!cov[a][b]}));
  return{cov,org,hole};
 }
-function qFl(f,PW,PH,ed,no,cc){
- const w=Math.max(20,Math.min(f.w,PW)),h=Math.max(14,Math.min(f.h,PH)),x=Math.min(Math.max(0,f.x),Math.max(0,PW-w)),y=Math.min(Math.max(0,f.y),Math.max(0,PH-h));
- let inner='';
- if(f.ty==='img')inner=`<img src="${f.src}" style="width:100%;height:100%;object-fit:fill;display:block;pointer-events:none">`;
- else{
+const qCwN=(cw,c)=>{if(cw&&cw.length>=c&&cw.slice(0,c).every(x=>x>0))return cw.slice(0,c);const a=[],b=Math.floor(100/c);for(let i=0;i<c;i++)a.push(b);a[c-1]=100-b*(c-1);return a};
+const qCwSum=(cw,c)=>qCwN(cw,c).reduce((a,b)=>a+b,0);
+const qCwG=(cw,c)=>cw&&cw.length?`<colgroup>${qCwN(cw,c).map(x=>`<col style="width:${x*100/qCwSum(cw,c)}%">`).join('')}</colgroup>`:'';
+const qCwSt=(cw,c)=>cw&&cw.length?`width:${Math.min(100,qCwSum(cw,c))}%;table-layout:fixed;`:'';
+/* each column is independent; table width = sum of columns (max 100%) */
+function qCwSet(cw0,c,i,v){const cw=qCwN(cw0,c).slice();cw[i]=Math.max(5,Math.min(100,Math.round(v)));return cw}
+const qCwTxt=t=>'মোট '+t+'%'+(t>100?' — ১০০%-এর বেশি হলে পেজে মাপসই করে ছোট হবে':'');
+function qCwSync(h,cw){const r=h.querySelectorAll('input[type=range]'),sp=h.querySelectorAll('[data-cwv]');cw.forEach((x,k)=>{if(r[k])r[k].value=x;if(sp[k])sp[k].textContent=x+'%'});const e=h.querySelector('[data-cwt]');if(e)e.textContent=qCwTxt(cw.reduce((x,y)=>x+y,0))}
+const qCwUI=(cw,c,at)=>{const a=qCwN(cw,c),t=a.reduce((x,y)=>x+y,0);const row=(l,x,att)=>`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;font-size:13px"><b style="min-width:62px">${l}</b><input type="range" min="5" max="100" step="1" ${att} value="${x}" style="flex:1"><span style="min-width:40px;text-align:right" data-cwv="1">${x}%</span></div>`;
+ return `<div class="w"><label>↔ কলামের প্রস্থ (প্রতিটি আলাদা)</label>${a.map((x,i)=>row('কলাম '+qbn(i+1),x,at(i))).join('')}<div class="qhint" data-cwt="1">${qCwTxt(t)}</div><div class="qhint">একটা কলাম বদলালে অন্য কলাম একটুও বদলায় না। টেবিলের প্রস্থ = সব কলামের যোগফল।</div><button type="button" class="btn" ${at('r')} style="padding:4px 10px">↺ সব সমান (পুরো প্রস্থ)</button></div>`};
+const qCellFx=(o,r,c)=>{let a='';const g=(p,n)=>{if(o[p+'b'])a+='font-weight:700;';if(o[p+'i'])a+='font-style:italic;';if(o[p+'u'])a+='text-decoration:underline;'};
+ if(r===0)g('xr');if(c===0)g('xc');return a};
+const qFxUI=(o,fn)=>`<div class="w"><label>✍ প্রথম সারি ও প্রথম কলামের লেখা</label><div class="qalg" style="flex-wrap:wrap;align-items:center"><b style="font-size:12.5px;min-width:70px">প্রথম সারি</b>${[['b','B'],['i','I'],['u','U']].map(([k,l])=>`<label class="qck" style="margin:0 8px 0 0"><input type="checkbox" ${fn('xr'+k)}${o['xr'+k]?' checked':''}> ${l}</label>`).join('')}</div><div class="qalg" style="flex-wrap:wrap;align-items:center"><b style="font-size:12.5px;min-width:70px">প্রথম কলাম</b>${[['b','B'],['i','I'],['u','U']].map(([k,l])=>`<label class="qck" style="margin:0 8px 0 0"><input type="checkbox" ${fn('xc'+k)}${o['xc'+k]?' checked':''}> ${l}</label>`).join('')}</div></div>`;
+function qTblHtml(f,cls,ex){
   const M=qTblMap(f),hs=(a,b)=>a>=0&&b>=0&&a<f.r&&b<f.c&&M.hole.has(a+':'+b);let tr='';
   for(let r=0;r<f.r;r++){tr+='<tr>';for(let c=0;c<f.c;c++){
    const k=r+':'+c;if(M.cov[r][c]&&M.cov[r][c]!==k)continue;
@@ -4860,10 +4880,16 @@ function qFl(f,PW,PH,ed,no,cc){
    for(let j=0;j<o.cs;j++){if(hs(r-1,c+j))tp=1;if(hs(r+o.rs,c+j))bt=1}
    for(let i=0;i<o.rs;i++){if(hs(r+i,c-1))lf=1;if(hs(r+i,c+o.cs))rt=1}
    if(tp)st+='border-top:0;';if(bt)st+='border-bottom:0;';if(lf)st+='border-left:0;';if(rt)st+='border-right:0;';
-   {const bg=(f.cf&&f.cf[k])||(r===0&&f.hd&&f.hc?f.hc:'');if(bg)st+='background:'+bg+';'}
+   {const bg=(f.cf&&f.cf[k])||(r===0&&f.hd&&f.hc?f.hc:'');if(bg)st+='background:'+bg+';'}st+=qCellFx(f,r,c);
    tr+=`<${t}${o.rs>1?` rowspan="${o.rs}"`:''}${o.cs>1?` colspan="${o.cs}"`:''}${st?` style="${st}"`:''}>${qf((f.cells[r]&&f.cells[r][c])||'')}</${t}>`}
    tr+='</tr>'}
-  inner=`<table class="qft2${f.bd===false?' nb':''}${f.ts==='stripe'?' tsS':''}${f.ts==='hline'?' tsH':''}" style="${f.fs?`font-size:${f.fs}px;`:''}">${tr}</table>`}
+  return `<table class="qft2${cls?' '+cls:''}${f.bd===false?' nb':''}${f.ts==='stripe'?' tsS':''}${f.ts==='hline'?' tsH':''}" style="${f.fs?`font-size:${f.fs}px;`:''}${qCwSt(f.cw,f.c)}${ex||''}">${qCwG(f.cw,f.c)}${tr}</table>`}
+function qFl(f,PW,PH,ed,no,cc){
+ const w=Math.max(20,Math.min(f.w,PW)),h=Math.max(14,Math.min(f.h,PH)),x=Math.min(Math.max(0,f.x),Math.max(0,PW-w)),y=Math.min(Math.max(0,f.y),Math.max(0,PH-h));
+ let inner='';
+ if(f.ty==='img')inner=`<img src="${f.src}" style="width:100%;height:100%;object-fit:fill;display:block;pointer-events:none">`;
+ else{
+  inner=qTblHtml(f)}
  if(f.capOn&&no){const k2=cc||{};inner=`<div class="qfc">${esc(k2.capt||'সারণি')} ${k2.capn==='en'?no:qbn(no)}${f.cap?': '+qf(f.cap):''}</div><div class="qfin">${inner}</div>`}
  return `<div class="qfl${ed?' ed':''}${f.capOn&&no?' wc':''}" data-fid="${f.id}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${inner}</div>`;
 }
@@ -4929,6 +4955,7 @@ function qPvNow(){
  host.style.setProperty('--iz',String(1/z));
  host.innerHTML=r.pages.map((h,pi)=>`<div class="qpw" style="width:${r.PW*z}px;height:${r.PH*z}px"><div style="transform:scale(${z});transform-origin:0 0;width:${r.PW}px;height:${r.PH}px">${h}</div>${qBadge(r,pi)}</div>`).join('');
  {const xp=$('#qxpg');if(xp)xp.textContent=(+qx.cfg.xpg)?'পেজ +'+qbn(+qx.cfg.xpg):'পেজ';const zv=$('#qzv');if(zv)zv.textContent=qbn(qZoom)+'%';const gb=$('#qgb');if(gb)gb.classList.toggle('p',qGd)}
+ qImgHandles(host);
  qInfoUpd(r);
  if(qsel&&!qFlById(qsel))qsel=null;qSelect(qsel);qBSel();
  document.querySelectorAll('.qvw [data-a]').forEach(b=>b.classList.toggle('p',b.dataset.a==='vw:'+qView));['ftbl','fimg'].forEach(a=>{const b=document.querySelector('.qpvh [data-a="'+a+'"]');if(b)b.style.display=qView==='k'?'none':''});
@@ -4972,7 +4999,7 @@ function qOpenEd(p){qView='p';
  qx=qMig(p);if(qx.cfg.srcOn===undefined){qx.cfg.srcOn=true;qx.cfg.srcPos='e'}qhist=[];qhi=-1;qSnap();qNav('ed');$('#qph').textContent='← তালিকা';$('#qpt').textContent='প্রশ্নপত্র তৈরি';
  qtab='q';qsel=null;qopenS=p.secs[0]?p.secs[0].id:null;qoq=null;
  $('#qpbody').className='';
- $('#qpbody').innerHTML=`<div class="qp-w"><div class="qp-fm" id="qpfm"></div><div class="qp-pv"><div class="qpvh"><span class="qvw"><button class="btn p" data-a="vw:p">📄 প্রশ্নপত্র</button><button class="btn" data-a="vw:k">🔑 উত্তরমালা</button></span><button class="btn" data-a="ftbl">▦ ভাসমান টেবিল</button><button class="btn" data-a="fimg">🖼 ভাসমান ছবি</button><span class="qzm"><button class="btn" data-a="zout" title="ছোট করো">−</button><button class="btn" data-a="zfit" id="qzv" title="ঠিক মাপে ফেরো">১০০%</button><button class="btn" data-a="zin" title="বড় করো">＋</button></span><button class="btn" data-a="guide" id="qgb" title="গাইডলাইন দেখাও / লুকাও">📐</button><span class="qzm"><button class="btn" data-a="xpgm" title="শেষের বাড়তি পেজ বাদ দাও">−</button><span class="qpgl" id="qxpg">পেজ</span><button class="btn" data-a="xpgp" title="নতুন ফাঁকা পেজ যোগ করো">＋</button></span><span id="qfsel" class="qfs hide"><button class="btn" id="qfedit" data-a="fedit">✎ এডিট</button><button class="btn" data-a="fdup">⧉</button><button class="btn" data-a="fdel" style="color:var(--red)">🗑</button></span><span class="grow"></span><span id="qpinfo"></span><div id="qfpop" class="qfpop hide"></div></div><div id="qppv"></div></div></div>`;
+ $('#qpbody').innerHTML=`<div class="qp-w"><div class="qp-fm" id="qpfm"></div><div class="qp-pv"><div class="qpvh"><span id="qfbar" class="qfs hide"><button class="btn" id="qfedit" data-a="fedit">✎ এডিট</button><button class="btn al" data-a="fal:l" title="বামে সাজাও">⬅</button><button class="btn al" data-a="fal:c" title="মাঝে সাজাও">⬌</button><button class="btn al" data-a="fal:r" title="ডানে সাজাও">➡</button><button class="btn" data-a="fdup">⧉</button><button class="btn" data-a="fdel" style="color:var(--red)">🗑</button></span><span class="qvw"><button class="btn p" data-a="vw:p">📄 প্রশ্নপত্র</button><button class="btn" data-a="vw:k">🔑 উত্তরমালা</button></span><button class="btn" data-a="ftbl">▦ ভাসমান টেবিল</button><button class="btn" data-a="fimg">🖼 ভাসমান ছবি</button><span class="qzm"><button class="btn" data-a="zout" title="ছোট করো">−</button><button class="btn" data-a="zfit" id="qzv" title="ঠিক মাপে ফেরো">১০০%</button><button class="btn" data-a="zin" title="বড় করো">＋</button></span><button class="btn" data-a="guide" id="qgb" title="গাইডলাইন দেখাও / লুকাও">📐</button><span class="qzm"><button class="btn" data-a="xpgm" title="শেষের বাড়তি পেজ বাদ দাও">−</button><span class="qpgl" id="qxpg">পেজ</span><button class="btn" data-a="xpgp" title="নতুন ফাঁকা পেজ যোগ করো">＋</button></span><span class="grow"></span><span id="qpinfo"></span><div id="qfpop" class="qfpop hide"></div></div><div id="qppv"></div></div></div>`;
  qSeg(false);qEd();qPvNow();scrollTo(0,0);
 }
 const qScr={ed:0,pv:0};
@@ -4982,6 +5009,11 @@ function qSeg(pv){const b=$('#qpbody'),cur=b.classList.contains('pvm')?'pv':'ed'
 /* ---- editor ---- */
 const AL3=[['l','বাম'],['c','মাঝ'],['r','ডান']],AL4=AL3.concat([['j','জাস্টিফাই']]);
 const qAlg=(k,x,y,cur,o)=>`<div class="qal">${o.map(v=>`<button type="button" class="${cur===v[0]?'on':''}" data-a="${k}:${x}:${y}:${v[0]}">${v[1]}</button>`).join('')}</div>`;
+const qAl3=(act,cur)=>`<div class="qalg">${[['l','⬅ বামে'],['c','⬌ মাঝে'],['r','ডানে ➡']].map(([v,l])=>`<button type="button" class="btn${(cur||'c')===v?' p':''}" data-a="${act}:${v}">${l}</button>`).join('')}</div>`;
+function qHtbUI(s,si){
+ return `<div class="w"><label>▦ শিরোনামের পরে টেবিল (ঐচ্ছিক)</label>${s.htb?`<div class="qhint" style="margin:2px 0">টেবিল: ${qbn(s.htb.r)} সারি × ${qbn(s.htb.c)} কলাম</div><div class="qrow"><button class="btn" data-a="htbe:${si}">✎ টেবিল এডিট</button><button class="btn" data-a="htbx:${si}" style="color:var(--red)">✕ মুছো</button></div>${qAl3('htal:'+si,s.htba)}`:`<button class="btn" data-a="htba:${si}" style="padding:5px 11px;font-size:13px">▦ টেবিল যোগ করো</button>`}</div>`}
+function qHimgUI(s,si){
+ return `<div class="w"><label>🖼 শিরোনামের পরে ছবি (ঐচ্ছিক)</label>${s.himg?`<div class="qimr"><img src="${s.himg}"><input type="range" min="10" max="100" data-s="${si}:hiw" value="${s.hiw||50}" title="ছবির আকার"><button class="btn" data-a="hied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmhimg:${si}" style="padding:4px 10px">✕</button></div>${qAl3('hial:'+si,s.hia)}<label class="qck"><input type="checkbox" data-s="${si}:hcapOn"${s.hcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:hcap"`,s.hcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}<div class="qhint">ছবি ইচ্ছামতো সরাতে প্রিভিউতে ছবির কোণার ✥ চিহ্ন ধরে টানো।</div>${(s.hix||s.hiy)?`<button class="btn" data-a="hiof:${si}" style="padding:4px 10px;font-size:12.5px">↺ জায়গা আগের মতো করো</button>`:''}`:`<button class="btn" data-a="himg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো</button>`}</div>`}
 const qSS=(si,k,l)=>{const v=qx.secs[si][k]||100;return `<div class="w nsr"><label>${l} <b data-sv="${si}:${k}">${v}%</b><button type="button" class="rs" data-a="srs:${si}:${k}">↺</button></label><input type="range" data-s="${si}:${k}" min="50" max="200" value="${v}"></div>`};
 const qSR=(k,l,a,b,u)=>`<div class="w nsr"><label>${l} <b data-cv="${k}" data-u="${u}"></b><button type="button" class="rs" data-a="rs:${k}">↺</button></label><input type="range" data-c="${k}" min="${a}" max="${b}" value="${qx.cfg[k]}"></div>`;
 const qSel=(k,l,o,w)=>`<div${w?' class="w"':''}><label>${l}</label><select data-c="${k}" class="qpt">${o.map(x=>`<option value="${x[0]}"${String(qx.cfg[k])===String(x[0])?' selected':''}>${x[1]}</option>`).join('')}</select></div>`;
@@ -4998,7 +5030,7 @@ function qQC(s,si,q,qi){
   else if(s.ty==='match'){b=ta('t','নির্দেশনা (ঐচ্ছিক)',1)+`<div class="qfm-g" style="margin-top:8px"><div><label>বাম পাশ (প্রতি লাইনে একটি)</label>${ta('l','',4)}</div><div><label>ডান পাশ (প্রতি লাইনে একটি)</label>${ta('r','',4)}</div></div>`}
   else{b=ta('t',s.ty==='fill'?'বাক্য লিখুন, ফাঁকা জায়গায় ___ দাও':'প্রশ্ন লিখুন…',2)+(s.showMk?`<div style="margin-top:6px;max-width:220px"><label>এই প্রশ্নের নম্বর (ফাঁকা = বিভাগের)</label><input class="qpt" type="number" min="0" data-q="${P}:m" value="${q.m??''}"></div>`:'')}
   const sel=(k,L,v)=>`<select class="qpt" data-q="${P}:${k}">${L.map(x=>`<option value="${x[0]}"${(v||L[0][0])===x[0]?' selected':''}>${x[1]}</option>`).join('')}</select>`;
-  const im=q.img?`<img src="${q.img}"><input type="range" min="10" max="100" data-q="${P}:iw" value="${q.iw||50}" title="ছবির আকার"><button class="btn" data-a="rmimg:${P}" style="padding:4px 10px">✕</button><div class="qimx"><button class="btn" data-a="ied:${P}" style="padding:5px 11px;font-size:13px">✎ ছবি এডিট (ঘোরাও, ছাঁটো, লেবেল, তীর)</button><div class="qhint" style="margin:4px 0">লেখায় <code>[[ছবি]]</code> লিখলে ক্যাপশনের নম্বর (যেমন "চিত্র ১") নিজে বসবে।</div><label class="qck"><input type="checkbox" data-q="${P}:capOn"${q.capOn?' checked':''}> ছবির ক্যাপশন দাও (চিত্র ১, ২ …)</label><input class="qpt" data-q="${P}:cap" value="${esc(q.cap||'')}" placeholder="ক্যাপশনের লেখা (ঐচ্ছিক)"><div class="qrw"><label>ছবির অবস্থান</label>${sel('ip',[['b','লেখার নিচে'],['t','লেখার উপরে'],['l','লেখার বামে'],['r','লেখার ডানে']],q.ip)}</div><div class="qrw"><label>ছবির অ্যালাইনমেন্ট (নিচে/উপরে হলে)</label>${sel('ia',[['c','মাঝে'],['l','বামে'],['r','ডানে']],q.ia)}</div></div>`:`<button class="btn" data-a="img:${P}" style="padding:5px 11px;font-size:13px">🖼 প্রশ্নে ছবি যোগ করো</button>`;
+  const im=q.img?`<img src="${q.img}"><input type="range" min="10" max="100" data-q="${P}:iw" value="${q.iw||50}" title="ছবির আকার"><button class="btn" data-a="rmimg:${P}" style="padding:4px 10px">✕</button><div class="qimx"><button class="btn" data-a="ied:${P}" style="padding:5px 11px;font-size:13px">✎ ছবি এডিট (ঘোরাও, ছাঁটো, তীর)</button><div class="qhint" style="margin:4px 0">লেখায় <code>[[ছবি]]</code> লিখলে ক্যাপশনের নম্বর (যেমন "চিত্র ১") নিজে বসবে।</div><label class="qck"><input type="checkbox" data-q="${P}:capOn"${q.capOn?' checked':''}> ছবির ক্যাপশন দাও (চিত্র ১, ২ …)</label><input class="qpt" data-q="${P}:cap" value="${esc(q.cap||'')}" placeholder="ক্যাপশনের লেখা (ঐচ্ছিক)"><div class="qrw"><label>ছবির অবস্থান</label>${sel('ip',[['b','লেখার নিচে'],['t','লেখার উপরে'],['l','লেখার বামে'],['r','লেখার ডানে']],q.ip)}</div><label style="font-weight:600;font-size:13px">↔ ছবি কোথায় বসবে</label>${qAl3('ial:'+P,q.ia)}<div class="qhint" style="margin:2px 0 6px">বামে/মাঝে/ডানে — লেখার নিচে বা উপরে থাকলে কাজ করবে। ছবি ইচ্ছামতো সরাতে প্রিভিউতে ছবির কোণার <b>✥</b> চিহ্ন ধরে টানো।</div>${(q.ix||q.iy)?`<button class="btn" data-a="iof:${P}" style="padding:4px 10px;font-size:12.5px">↺ ছবির জায়গা আগের মতো করো</button>`:''}</div>`:`<button class="btn" data-a="img:${P}" style="padding:5px 11px;font-size:13px">🖼 প্রশ্নে ছবি যোগ করো</button>`;
   if(s.ty==='fill')b+=qBlr(P);
   if(s.ty==='tf')b+=qTfRow(P,q);
   else if(s.ty!=='mcq'&&s.ty!=='grp'&&s.ty!=='cq')b+=`<textarea class="qpt qma" rows="2" data-q="${P}:ma" placeholder="${s.ty==='tf'||s.ty==='fill'?'🔑 উত্তর (যেমন: True / শূন্যস্থানের শব্দ) — উত্তরমালায় আসবে':'🔑 আদর্শ উত্তর (ঐচ্ছিক — উত্তরমালা পেজে দেখাবে)'}">${esc(q.ma||'')}</textarea>`;
@@ -5020,7 +5052,7 @@ function qSC(s,si){
  ${(qx.cfg.cols>1&&!qx.cfg.indep&&qx.cfg.fill1!==false)?`<label class="qck"><input type="checkbox" data-s="${si}:cb"${s.cb?' checked':''}> এই বিভাগ নতুন কলাম থেকে শুরু হবে</label>`:''}</div></div>`;
  return `<div class="qsc open">${head}<div class="qscb">
  ${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম (ফাঁকা রাখলে দেখাবে না)','যেমন: ক বিভাগ — বহুনির্বাচনি')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: সকল প্রশ্নের উত্তর দাও')}${qSS(si,'nsz','নির্দেশনার সাইজ')}<div class="w"><label>নির্দেশনার অ্যালাইনমেন্ট</label>${qAlg('sal',si,'na',s.na||'l',AL4)}</div>${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','প্রশ্নের লেখার সাইজ')}${qSS(si,'qlh','প্রশ্নের লাইনের ফাঁক')}<div class="w nsr"><label>প্রশ্নের মাঝের ফাঁক <b data-sv="${si}:qgp">${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}px</b><button type="button" class="rs" data-a="srg:${si}:qgp">↺</button></label><input type="range" data-s="${si}:qgp" min="0" max="40" value="${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}"></div><div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}
+ <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম (ফাঁকা রাখলে দেখাবে না)','যেমন: ক বিভাগ — বহুনির্বাচনি')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: সকল প্রশ্নের উত্তর দাও')}${qSS(si,'nsz','নির্দেশনার সাইজ')}<div class="w"><label>নির্দেশনার অ্যালাইনমেন্ট</label>${qAlg('sal',si,'na',s.na||'l',AL4)}</div>${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','প্রশ্নের লেখার সাইজ')}${qSS(si,'qlh','প্রশ্নের লাইনের ফাঁক')}<div class="w nsr"><label>প্রশ্নের মাঝের ফাঁক <b data-sv="${si}:qgp">${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}px</b><button type="button" class="rs" data-a="srg:${si}:qgp">↺</button></label><input type="range" data-s="${si}:qgp" min="0" max="40" value="${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}"></div><div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}
  ${isc?'':`<div><label>প্রতি প্রশ্নের নম্বর</label><input class="qpt" type="number" min="0" step="0.5" data-s="${si}:marks" value="${s.marks}"></div>`}
  <div><label>যেকোনো কয়টি (০ = সব)</label><input class="qpt" type="number" min="0" data-s="${si}:choose" value="${s.choose}"></div>
  ${nm?'':`<div><label>উত্তরের লাইন</label><input class="qpt" type="number" min="0" max="15" data-s="${si}:lines" value="${s.lines}"></div>`}</div>
@@ -5034,7 +5066,7 @@ function qSC(s,si){
 ${(s.ty==='mcq'||s.ty==='grp')&&s.qs.some(q=>q.st)?`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:ld"`,s.ld,'"নিচের কোনটি সঠিক?" লাইন','ফাঁকা = নিচের কোনটি সঠিক?')}<div><label>বিবৃতির ক্রম চিহ্ন</label><select class="qpt" data-s="${si}:sty"><option value="r"${s.sty!=='bn'?' selected':''}>i, ii, iii</option><option value="bn"${s.sty==='bn'?' selected':''}>১, ২, ৩</option></select></div></div>`:''}
  ${s.ty==='grp'?`<div class="qpn" style="margin:8px 0"><h4>🖼 অভিন্ন তথ্য (সব প্রশ্নের উপরে দেখাবে)</h4><label>উদ্দীপক লেখা (ঐচ্ছিক)</label><textarea class="qpt" rows="3" data-s="${si}:gtx" placeholder="ঐচ্ছিক — শুধু ছবি দিলেও চলবে">${esc(s.gtx||'')}</textarea>
  <div class="qimr">${s.gimg?`<img src="${s.gimg}"><input type="range" min="10" max="100" data-s="${si}:giw" value="${s.giw||60}" title="ছবির আকার"><button class="btn" data-a="gied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmgimg:${si}" style="padding:4px 10px">✕</button>`:`<button class="btn" data-a="gimg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো (ঐচ্ছিক)</button>`}</div>
- ${s.gimg?`<label class="qck"><input type="checkbox" data-s="${si}:gcapOn"${s.gcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:gcap"`,s.gcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}`:''}
+ ${s.gimg?qAl3('gial:'+si,s.gia)+`<label class="qck"><input type="checkbox" data-s="${si}:gcapOn"${s.gcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:gcap"`,s.gcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}`:''}
  ${qIn(`data-s="${si}:gl"`,s.gl,'নির্দেশনা লাইন','ফাঁকা = অটো: উপরের চিত্র থেকে ১২৭ ও ১২৮ নং প্রশ্নের উত্তর দাও :   ({r} = প্রশ্ন নম্বর)')}</div>`:''}
  <div style="margin-top:8px">${s.qs.map((q,qi)=>qQC(s,si,q,qi)).join('')}</div>
  <div class="qrow qadd" style="margin-top:8px"><button class="btn p" data-a="addq:${si}">＋ প্রশ্ন যোগ</button>${s.ty!=='cq'&&s.ty!=='match'?`<button class="btn" data-a="bulk:${si}">📥 একসাথে পেস্ট করো</button>`:''}</div></div></div>`;
@@ -5100,6 +5132,8 @@ function qCaret(el){const r=el.getBoundingClientRect();if(el.tagName!=='TEXTAREA
  const lh=parseFloat(cs.lineHeight)||(parseFloat(cs.fontSize)*1.5),y=sp.offsetTop-el.scrollTop;d.remove();
  const t=r.top+y;return[t,t+lh]}
 function qKeep(el){if(!el||!el.closest||!el.closest('#qpfm'))return;const c=qCaret(el),sf=qSafe();let d=0;if(c[1]>sf[1])d=c[1]-sf[1];else if(c[0]<sf[0])d=c[0]-sf[0];if(Math.abs(d)>1)scrollBy(0,d)}
+function qScrSave(){const L=[];let e=document.querySelector('#qpfm');while(e){if(e.scrollTop)L.push([e,e.scrollTop]);e=e.parentElement}const y=window.scrollY;
+ return()=>{const go=()=>{L.forEach(([x,t])=>{x.scrollTop=t});window.scrollTo(0,y)};go();requestAnimationFrame(go);setTimeout(go,120);setTimeout(go,400)}}
 function qScr2(sel){const go=()=>{const e=document.querySelector(sel),st=document.querySelector('#qpfm .qsticky');if(!e)return;const top=st?(parseFloat(getComputedStyle(st).top)||0)+st.offsetHeight:0;e.style.scrollMarginTop=(top+8)+'px';e.scrollIntoView({block:'start'})};go();requestAnimationFrame(go);setTimeout(go,150);setTimeout(go,450)}
 function qEd(){
  const fm=$('#qpfm');if(!fm||!qx)return;const qsy=window.scrollY,qmh=fm.offsetHeight;fm.style.minHeight=qmh+'px';const oldT=fm.querySelector('.qtabs'),sl0=oldT?oldT.scrollLeft:null;
@@ -5184,8 +5218,24 @@ function qAct(a,el){
   case'ans':{const q=qx.secs[+x].qs[+y];q.ans=q.ans===+z?-1:+z;qTouch(true);return}
   case'img':{qimT=[+x,+y];$('#qpimg').click();return}
   case'rmimg':{delete Q().img;qTouch(true);return}
-  case'ied':{const q=Q();if(q.img)qImgEd(q.img,u=>{q.img=u;qTouch(true)});return}
-  case'gied':{const s=S();if(s.gimg)qImgEd(s.gimg,u=>{s.gimg=u;qTouch(true)});return}
+  case'ied':{const q=Q(),rs=qScrSave();if(q.img)qImgEd(q.img,(u,a)=>{q.img=u;if(a)q.ia=a;qTouch(true);rs()},q.ia||'c');return}
+  case'gied':{const s=S(),rs=qScrSave();if(s.gimg)qImgEd(s.gimg,(u,a)=>{s.gimg=u;if(a)s.gia=a;qTouch(true);rs()},s.gia||'c');return}
+  case'tts':{const s=S();if(z==='x')delete s.thc;else s.tts=y;qTouch(true);return}
+  case'htba':{const rs=qScrSave();qTblDlg(null,o=>{S().htb=o;qTouch(true);rs()});return}
+  case'htbe':{const s=S(),rs=qScrSave();if(s.htb)qTblDlg(s.htb,()=>{qTouch(true);rs()});return}
+  case'htbx':{delete S().htb;qTouch(true);return}
+  case'htal':{S().htba=y;qTouch(true);return}
+  case'tbal':{S().tba=y;qTouch(true);return}
+  case'cwr':{delete S().cw;qTouch(true);return}
+  case'ial':{Q().ia=z;qTouch(true);return}
+  case'gial':{S().gia=y;qTouch(true);return}
+  case'hial':{S().hia=y;qTouch(true);return}
+  case'iof':{const q=Q();delete q.ix;delete q.iy;qTouch(true);return}
+  case'hiof':{const s=S();delete s.hix;delete s.hiy;qTouch(true);return}
+  case'himg':{qimT=[+x,-2];$('#qpimg').click();return}
+  case'hied':{const s=S(),rs=qScrSave();if(s.himg)qImgEd(s.himg,(u,a)=>{s.himg=u;if(a)s.hia=a;qTouch(true);rs()},s.hia||'c');return}
+  case'rmhimg':{const s=S();['himg','hix','hiy'].forEach(k=>delete s[k]);qTouch(true);return}
+  case'fal':{const f=qFlById(qsel);if(f)qFlAlign(f,x);return}
   case'gimg':{qimT=[+x,-1];$('#qpimg').click();return}
   case'rmgimg':{delete S().gimg;qTouch(true);return}
   case'plon':{const q=Q();q.st=['','',''];if(!q.o.some(Boolean))q.o=[...POLYO];qTouch(true);return}
@@ -5268,42 +5318,43 @@ const qMpChk=()=>{if(!qx)return;const c=qx.cfg;qmCus=!Object.values(MPRE).some(a
 let qmCus=false;
 function qSyncMp(){const s=$('#qmp');if(!s||!qx)return;const c=qx.cfg;let v='custom';if(!qmCus)for(const k in MPRE){const a=MPRE[k];if(a[0]===c.mt&&a[1]===c.mb&&a[2]===c.ml&&a[3]===c.mr)v=k}s.value=v;const w=$('#qmcw');if(w)w.classList.toggle('hide',v!=='custom')}
 /* ---- floating table / image ---- */
+function qFlAlign(f,a){const g=qGeo;if(!g)return;const w=f.w||0;f.x=Math.round(a==='l'?g.ML:a==='r'?g.PW-g.MR-w:(g.PW-w)/2);qTouch(false);qPvNow()}
 const qFlById=id=>(qx&&qx.fl||[]).find(f=>f.id===id);
 function qSelect(id){
  qsel=id||null;if(id&&qbs){qbs=null;qBSel()}
  document.querySelectorAll('#qppv .qfl').forEach(e=>{const on=e.dataset.fid===qsel,h=e.querySelector('.qfh');e.classList.toggle('sel',on);if(on&&!h){const i=document.createElement('i');i.className='qfh';e.appendChild(i)}if(!on&&h)h.remove()});
- const f=qsel&&qFlById(qsel),bar=$('#qfsel');if(bar){bar.classList.toggle('hide',!f);const e=$('#qfedit');if(e)e.classList.toggle('hide',!f)}
+ const f=qsel&&qFlById(qsel),bar=$('#qfbar');if(bar){bar.classList.toggle('hide',!f);const e=$('#qfedit');if(e)e.classList.toggle('hide',!f)}
 }
 function qCurPage(){const ws=[...document.querySelectorAll('#qppv .qpw')];if(!ws.length)return 0;const mid=innerHeight/2;let best=0,bd=1e9;ws.forEach((w,i)=>{const b=w.getBoundingClientRect(),d=Math.abs((b.top+b.bottom)/2-mid);if(d<bd){bd=d;best=i}});return best}
 function qFlAdd(f){f.id=uid();f.pg=qCurPage();qx.fl.push(f);qsel=f.id;qTouch(false);qPvNow();if($('#qpbody').classList.contains('pvm')===false&&innerWidth<=860)qSeg(true);qSelect(f.id)}
 function qFlDel(){const i=qx.fl.findIndex(f=>f.id===qsel);if(i<0)return;qx.fl.splice(i,1);qsel=null;qTouch(false);qPvNow()}
 function qFlDup(){const f=qFlById(qsel);if(!f)return;const c=cp(f);c.id=uid();c.x+=18;c.y+=18;qx.fl.push(c);qsel=c.id;qTouch(false);qPvNow()}
-function qImgEd(src,done){
+function qImgEd(src,done,al0){
  const im=new Image();
  im.onload=()=>{
   qDlg(`<div class="qdlg"><div class="qdh"><h3>✎ ছবি এডিট</h3><button class="btn" id="dn">✕</button></div>
   <div class="qie-tb"><button class="btn" data-ie="rl">↺ বামে ঘোরাও</button><button class="btn" data-ie="rr">↻ ডানে ঘোরাও</button><button class="btn" data-ie="fh">⇋ আয়না</button><button class="btn" data-ie="fv">⇅ উল্টাও</button><button class="btn" data-ie="undo">↶ Undo</button></div>
-  <div class="qie-md"><button class="btn p" data-im="text">🅰 লেখা (A, B, ক…)</button><button class="btn" data-im="arrow">➜ তীর</button><button class="btn" data-im="crop">✂ ছাঁটো</button></div>
+  <div class="qie-md"><button class="btn p" data-im="arrow">➜ তীর</button><button class="btn" data-im="crop">✂ ছাঁটো</button></div>
+  ${al0!==undefined?`<div class="qie-al"><b style="font-size:13px">ছবির অবস্থান:</b><div class="qalg" id="qieal">${[['l','⬅ বামে'],['c','⬌ মাঝে'],['r','ডানে ➡']].map(([v,l])=>`<button type="button" class="btn${al0===v?' p':''}" data-al="${v}">${l}</button>`).join('')}</div></div>`:''}
   <div class="qie-op" id="qieop"></div>
   <div class="qie-cv"><canvas id="qie"></canvas></div><div class="qhint" id="qieh" style="margin-top:6px"></div>
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" id="qieno">বাতিল</button><button class="btn p" id="qieok">সম্পন্ন</button></div></div>`,'640px');
   const cv=$('#qie'),ctx=cv.getContext('2d',{willReadFrequently:true}),sc=Math.min(1,1000/Math.max(im.width,im.height));
   cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);ctx.drawImage(im,0,0,cv.width,cv.height);
-  const hist=[];let mode='text',col='#d90429',txt='A',szp=.08,tk=2,base=null,rect=null,p0=null;
+  const hist=[];let mode='arrow',alv=null,col='#d90429',txt='A',szp=.08,tk=2,base=null,rect=null,p0=null;
   const snapNow=()=>{hist.push(ctx.getImageData(0,0,cv.width,cv.height));if(hist.length>15)hist.shift()};
   const clearOv=()=>{if(base){ctx.putImageData(base,0,0);base=null;rect=null}};
   const copy=()=>{const t=document.createElement('canvas');t.width=cv.width;t.height=cv.height;t.getContext('2d').drawImage(cv,0,0);return t};
   const rot=d=>{clearOv();snapNow();const t=copy();cv.width=t.height;cv.height=t.width;ctx.save();ctx.translate(cv.width/2,cv.height/2);ctx.rotate(d*Math.PI/2);ctx.drawImage(t,-t.width/2,-t.height/2);ctx.restore()};
   const flip=h=>{clearOv();snapNow();const t=copy();ctx.save();ctx.translate(h?cv.width:0,h?0:cv.height);ctx.scale(h?-1:1,h?1:-1);ctx.drawImage(t,0,0);ctx.restore()};
-  const hint={text:'ছবির যেখানে লেখা বসাতে চাও সেখানে ক্লিক বা ট্যাপ করো।',arrow:'তীরের শুরু থেকে শেষ পর্যন্ত টেনে আঁকো।',crop:'যে অংশ রাখতে চাও তার ওপর টেনে বক্স আঁকো, তারপর "ছাঁটো" চাপো।'};
+  const hint={arrow:'তীরের শুরু থেকে শেষ পর্যন্ত টেনে আঁকো।',crop:'যে অংশ রাখতে চাও তার ওপর টেনে বক্স আঁকো, তারপর "ছাঁটো" চাপো।'};
   const ops=()=>{
    const colr=`<input type="color" id="qiec" value="${col}" title="রং">`;
-   $('#qieop').innerHTML=mode==='text'?`<input class="qpt" id="qiet" value="${esc(txt)}" style="width:110px" maxlength="20" placeholder="লেখা">${colr}<select class="qpt" id="qies" style="width:auto"><option value=".05"${szp===.05?' selected':''}>ছোট</option><option value=".08"${szp===.08?' selected':''}>মাঝারি</option><option value=".12"${szp===.12?' selected':''}>বড়</option></select>`
-    :mode==='arrow'?`${colr}<select class="qpt" id="qiek" style="width:auto"><option value="1"${tk===1?' selected':''}>চিকন</option><option value="2"${tk===2?' selected':''}>মাঝারি</option><option value="3"${tk===3?' selected':''}>মোটা</option></select>`
+   $('#qieop').innerHTML=mode==='arrow'?`${colr}<select class="qpt" id="qiek" style="width:auto"><option value="1"${tk===1?' selected':''}>চিকন</option><option value="2"${tk===2?' selected':''}>মাঝারি</option><option value="3"${tk===3?' selected':''}>মোটা</option></select>`
     :`<button class="btn p" id="qiecr">✂ ছাঁটো</button>`;
    $('#qieh').textContent=hint[mode];
    document.querySelectorAll('[data-im]').forEach(b=>b.classList.toggle('p',b.dataset.im===mode));
-   const a=$('#qiec');if(a)a.oninput=()=>col=a.value;const t=$('#qiet');if(t)t.oninput=()=>txt=t.value;const s=$('#qies');if(s)s.onchange=()=>szp=+s.value;const k=$('#qiek');if(k)k.onchange=()=>tk=+k.value;
+   const a=$('#qiec');if(a)a.oninput=()=>col=a.value;const k=$('#qiek');if(k)k.onchange=()=>tk=+k.value;
    const c=$('#qiecr');if(c)c.onclick=()=>{if(!rect||rect.w<8||rect.h<8)return toast('আগে ছবির ওপর টেনে বক্স আঁকো');ctx.putImageData(base,0,0);snapNow();const d=ctx.getImageData(rect.x,rect.y,rect.w,rect.h);cv.width=rect.w;cv.height=rect.h;ctx.putImageData(d,0,0);base=null;rect=null;toast('ছাঁটা হয়েছে ✓')};
   };
   ops();
@@ -5317,21 +5368,25 @@ function qImgEd(src,done){
    else if(mode==='crop'){ctx.putImageData(base,0,0);const x=Math.min(p0.x,p.x),y=Math.min(p0.y,p.y),w=Math.abs(p.x-p0.x),h=Math.abs(p.y-p0.y);rect={x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h)};ctx.save();ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(0,0,cv.width,y);ctx.fillRect(0,y+h,cv.width,cv.height-y-h);ctx.fillRect(0,y,x,h);ctx.fillRect(x+w,y,cv.width-x-w,h);ctx.strokeStyle='#fff';ctx.setLineDash([8,6]);ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);ctx.restore()}};
   cv.onpointerup=e=>{if(!p0||!base){p0=null;return}const p=pt(e),a=p0;p0=null;
    if(mode==='arrow'){ctx.putImageData(base,0,0);if(Math.hypot(p.x-a.x,p.y-a.y)>10){hist.push(base);arrow(a,p)}base=null}
-   else if(mode==='text'){ctx.putImageData(base,0,0);hist.push(base);base=null;const fz=Math.round(Math.max(cv.width,cv.height)*szp);ctx.save();ctx.font=`700 ${fz}px "Noto Sans Bengali",Hind Siliguri,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=Math.max(3,fz/5);ctx.strokeStyle='#fff';ctx.strokeText(txt||'A',p.x,p.y);ctx.fillStyle=col;ctx.fillText(txt||'A',p.x,p.y);ctx.restore()}};
+};
   document.querySelectorAll('[data-im]').forEach(b=>b.onclick=()=>{clearOv();mode=b.dataset.im;ops()});
+  document.querySelectorAll('[data-al]').forEach(b=>b.onclick=()=>{alv=b.dataset.al;document.querySelectorAll('[data-al]').forEach(x=>x.classList.toggle('p',x===b))});
   document.querySelectorAll('[data-ie]').forEach(b=>b.onclick=()=>{const k=b.dataset.ie;if(k==='rl')rot(-1);else if(k==='rr')rot(1);else if(k==='fh')flip(true);else if(k==='fv')flip(false);else{clearOv();const d=hist.pop();if(!d)return toast('আর পেছনে নেই');cv.width=d.width;cv.height=d.height;ctx.putImageData(d,0,0)}});
   $('#qieno').onclick=qDlgClose;
-  $('#qieok').onclick=()=>{clearOv();const u=cv.toDataURL('image/jpeg',.9);qDlgClose();done(u);toast('ছবি আপডেট হয়েছে ✓')};
+  $('#qieok').onclick=()=>{clearOv();const u=cv.toDataURL('image/jpeg',.9);qDlgClose();done(u,alv);toast('ছবি আপডেট হয়েছে ✓')};
  };
  im.src=src;
 }
-function qTblDlg(f){
- const T=f?{r:f.r,c:f.c,cells:cp(f.cells),mg:cp(f.mg||[]),hole:[...(f.hole||[])],hd:f.hd!==false,bd:f.bd!==false,fs:f.fs||qx.cfg.fs,ts:f.ts||'grid',hc:f.hc||'',cf:{...(f.cf||{})},capOn:!!f.capOn,cap:f.cap||''}:{r:3,c:3,cells:[],mg:[],hole:[],hd:true,bd:true,fs:qx.cfg.fs,ts:'grid',hc:'',cf:{},capOn:false,cap:''};
+function qTblDlg(f,cb){
+ const T=f?{r:f.r,c:f.c,cells:cp(f.cells),mg:cp(f.mg||[]),hole:[...(f.hole||[])],hd:f.hd!==false,bd:f.bd!==false,fs:f.fs||qx.cfg.fs,ts:f.ts||'grid',hc:f.hc||'',cf:{...(f.cf||{})},capOn:!!f.capOn,cap:f.cap||'',cw:f.cw?[...f.cw]:null,xrb:f.xrb,xri:f.xri,xru:f.xru,xcb:f.xcb,xci:f.xci,xcu:f.xcu}:{r:3,c:3,cells:[],mg:[],hole:[],hd:true,bd:true,fs:qx.cfg.fs,ts:'grid',hc:'',cf:{},capOn:false,cap:'',cw:null};
  const mapCf=fn=>{const o={};Object.keys(T.cf).forEach(k=>{const[a,b]=k.split(':').map(Number),n=fn(a,b);if(n)o[n[0]+':'+n[1]]=T.cf[k]});T.cf=o};
  let sel=null;
  const mp=()=>qTblMap(T),txt=(r,c)=>(T.cells[r]&&T.cells[r][c])||'',setT=(r,c,v)=>{(T.cells[r]=T.cells[r]||[])[c]=v};
  const clip=()=>{T.mg=T.mg.filter(m=>m.r<T.r&&m.c<T.c).map(m=>({r:m.r,c:m.c,rs:Math.min(m.rs,T.r-m.r),cs:Math.min(m.cs,T.c-m.c)})).filter(m=>m.rs>1||m.cs>1);T.hole=T.hole.filter(k=>{const[a,b]=k.split(':').map(Number);return a<T.r&&b<T.c});if(sel&&(sel[0]>=T.r||sel[1]>=T.c))sel=null};
- const tbar=()=>{const b=$('#qttb');if(!b)return;b.querySelectorAll('[data-need]').forEach(x=>x.disabled=!sel);$('#qtsl').textContent=sel?`বাছা ঘর: সারি ${qbn(sel[0]+1)}, কলাম ${qbn(sel[1]+1)}`:'ঘর মেলাতে বা বাদ দিতে আগে একটি ঘরে ক্লিক করো';const M=mp(),k=sel?sel[0]+':'+sel[1]:'',hb=b.querySelector('[data-tb="hole"]');if(hb)hb.textContent=sel&&M.hole.has(k)?'◉ ঘর ফিরিয়ে আনো':'◌ ঘর বাদ দাও';const ub=b.querySelector('[data-tb="um"]');if(ub)ub.disabled=!sel||!M.org[k];$('#qtr').value=T.r;$('#qtc').value=T.c};
+ const cwui=()=>{const h=$('#qcwh');if(!h)return;if(T.cw&&(T.cw.length!==T.c))T.cw=null;h.innerHTML=qCwUI(T.cw,T.c,i=>i==='r'?'data-dcwr="1"':`data-dcw="${i}"`);
+  h.querySelectorAll('[data-dcw]').forEach(r=>r.oninput=()=>{const k=r.dataset.dcw;T.cw=qCwSet(T.cw,T.c,+k,+r.value);qCwSync(h,T.cw)});
+  const rb=h.querySelector('[data-dcwr]');if(rb)rb.onclick=()=>{T.cw=null;cwui()}};
+ const tbar=()=>{const b=$('#qttb');if(!b)return;cwui();b.querySelectorAll('[data-need]').forEach(x=>x.disabled=!sel);$('#qtsl').textContent=sel?`বাছা ঘর: সারি ${qbn(sel[0]+1)}, কলাম ${qbn(sel[1]+1)}`:'ঘর মেলাতে বা বাদ দিতে আগে একটি ঘরে ক্লিক করো';const M=mp(),k=sel?sel[0]+':'+sel[1]:'',hb=b.querySelector('[data-tb="hole"]');if(hb)hb.textContent=sel&&M.hole.has(k)?'◉ ঘর ফিরিয়ে আনো':'◌ ঘর বাদ দাও';const ub=b.querySelector('[data-tb="um"]');if(ub)ub.disabled=!sel||!M.org[k];$('#qtr').value=T.r;$('#qtc').value=T.c};
  const grid=()=>{const g=$('#qtgrid'),M=mp();g.style.gridTemplateColumns=`repeat(${T.c},minmax(0,1fr))`;let h='';
   for(let r=0;r<T.r;r++)for(let c=0;c<T.c;c++){const k=r+':'+c;if(M.cov[r][c]&&M.cov[r][c]!==k)continue;const o=M.org[k],pos=`grid-row:${r+1}/span ${o?o.rs:1};grid-column:${c+1}/span ${o?o.cs:1}`,on=sel&&sel[0]===r&&sel[1]===c?' sel':'';
    if(M.hole.has(k))h+=`<div class="qhl2${on}" data-r="${r}" data-c2="${c}" style="${pos}">বাদ</div>`;
@@ -5344,7 +5399,8 @@ function qTblDlg(f){
   <button type="button" data-tb="ar">＋ সারি যোগ</button><button type="button" data-tb="ac">＋ কলাম যোগ</button><button type="button" data-tb="dr" data-need="1" class="rd">🗑 এই সারি মুছো</button><button type="button" data-tb="dc" data-need="1" class="rd">🗑 এই কলাম মুছো</button>
   <span class="qtcf"><input type="color" id="qtcc" value="#fff2b3" title="ঘরের রং"><button type="button" data-tb="cf" data-need="1">🎨 ঘরে রং দাও</button><button type="button" data-tb="cx" data-need="1">রং সরাও</button></span></div></div>
  <div id="qtgrid" class="qtgrid"></div>
- <label class="qck"><input type="checkbox" id="qth"${T.hd?' checked':''}> প্রথম সারি হেডার (বোল্ড)</label><label class="qck"><input type="checkbox" id="qtb2"${T.bd?' checked':''}> বর্ডার দেখাও</label>
+ <div id="qcwh"></div>
+ ${qFxUI(T,k=>`id="qfx-${k}"`)}<label class="qck"><input type="checkbox" id="qth"${T.hd?' checked':''}> প্রথম সারি হেডার (বোল্ড)</label><label class="qck"><input type="checkbox" id="qtb2"${T.bd?' checked':''}> বর্ডার দেখাও</label>
  <div class="qtg2" style="margin-top:8px"><div><label>টেবিলের স্টাইল</label><select class="qpt" id="qts">${[['grid','সব দিকে বর্ডার'],['stripe','ডোরাকাটা সারি'],['hline','শুধু আড়াআড়ি লাইন']].map(x=>`<option value="${x[0]}"${T.ts===x[0]?' selected':''}>${x[1]}</option>`).join('')}</select></div><div><label>হেডার সারির রং</label><div style="display:flex;gap:8px;align-items:center"><input type="color" id="qthc" value="${T.hc||'#e8f3f1'}" style="width:54px;height:40px;padding:2px;border-radius:10px;border:1px solid var(--line)"><label class="qck" style="margin:0"><input type="checkbox" id="qthco"${T.hc?' checked':''}> রং দাও</label></div></div></div>
  <label class="qck"><input type="checkbox" id="qtcp"${T.capOn?' checked':''}> টেবিলের ক্যাপশন দাও (সারণি ১, ২ …)</label><input class="qpt" id="qtcpt" value="${esc(T.cap)}" placeholder="ক্যাপশনের লেখা (ঐচ্ছিক)">
  <div class="w nsr" style="margin-top:8px"><label>লেখার সাইজ <b id="qtfv">${T.fs}px</b><button type="button" class="rs" id="qtfr">↺</button></label><input type="range" id="qtf" min="8" max="40" value="${T.fs}" style="width:100%"></div>
@@ -5390,9 +5446,10 @@ function qTblDlg(f){
  };
  $('#qtok').onclick=()=>{
   clip();const cells=Array.from({length:T.r},(_,r)=>Array.from({length:T.c},(_,c)=>txt(r,c)));
-  const hd=$('#qth').checked,bd=$('#qtb2').checked,fs=+$('#qtf').value||0,mg=T.mg.map(m=>({...m})),hole=[...T.hole],ts=$('#qts').value,hc=$('#qthco').checked?$('#qthc').value:'',cf={...T.cf},capOn=$('#qtcp').checked,cap=$('#qtcpt').value;
-  if(f){Object.assign(f,{r:T.r,c:T.c,cells,hd,bd,fs,mg,hole,ts,hc,cf,capOn,cap});qDlgClose();qTouch(false);qPvNow()}
-  else{qDlgClose();qFlAdd({ty:'tbl',r:T.r,c:T.c,cells,hd,bd,fs,mg,hole,ts,hc,cf,capOn,cap,x:60,y:260,w:Math.min(480,T.c*110),h:T.r*30+(capOn?24:0)})}};
+  const hd=$('#qth').checked,bd=$('#qtb2').checked,fs=+$('#qtf').value||0,mg=T.mg.map(m=>({...m})),hole=[...T.hole],ts=$('#qts').value,hc=$('#qthco').checked?$('#qthc').value:'',cf={...T.cf},capOn=$('#qtcp').checked,cap=$('#qtcpt').value,fx={cw:T.cw&&T.cw.length?qCwN(T.cw,T.c):undefined};['xrb','xri','xru','xcb','xci','xcu'].forEach(k=>{fx[k]=$('#qfx-'+k).checked});
+  if(cb){const o=f||{};Object.assign(o,{ty:'tbl',r:T.r,c:T.c,cells,hd,bd,fs,mg,hole,ts,hc,cf,capOn,cap},fx);qDlgClose();cb(o)}
+  else if(f){Object.assign(f,{r:T.r,c:T.c,cells,hd,bd,fs,mg,hole,ts,hc,cf,capOn,cap},fx);qDlgClose();qTouch(false);qPvNow()}
+  else{qDlgClose();qFlAdd({ty:'tbl',...fx,r:T.r,c:T.c,cells,hd,bd,fs,mg,hole,ts,hc,cf,capOn,cap,x:60,y:260,w:Math.min(480,T.c*110),h:T.r*30+(capOn?24:0)})}};
 }
 function qFlImg(file){
  const im=new Image(),u=URL.createObjectURL(file),png=file.type==='image/png';
@@ -5935,17 +5992,22 @@ const QNS=[['','কাগজের নিয়ম অনুযায়ী'],['
 const qSubS=s=>['k','kp','a','ap','r'].includes(s.ns);
 function qNumS(ns,n){if(ns==='no')return '';if(ns==='r')return (ROM[n-1]||n)+'.';const L={k:LB.bn,kp:LB.bn,a:LB.en,ap:LB.en};if(L[ns]){const l=L[ns][n-1]||n;return ns.endsWith('p')?'('+l+')':l+'.'}return qNum(ns,n)}
 function qPasEd(s,si,head,rowb){return `<div class="qsc open">${head}<div class="qscb">${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: A. Seen Comprehension')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: Read the passage and answer the questions.')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','অনুচ্ছেদের লেখার সাইজ')}${qSS(si,'qlh','অনুচ্ছেদের লাইনের ফাঁক')}<div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}${qIn(`data-s="${si}:pti"`,s.pti,'Passage-এর নিজস্ব শিরোনাম (ঐচ্ছিক)','')}</div>
+ <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: A. Seen Comprehension')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: Read the passage and answer the questions.')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','অনুচ্ছেদের লেখার সাইজ')}${qSS(si,'qlh','অনুচ্ছেদের লাইনের ফাঁক')}<div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}${qIn(`data-s="${si}:pti"`,s.pti,'Passage-এর নিজস্ব শিরোনাম (ঐচ্ছিক)','')}</div>
  <label style="font-weight:600;font-size:13px">📖 Passage / অনুচ্ছেদের লেখা (প্রতিটি নতুন লাইন = নতুন অনুচ্ছেদ)</label><textarea class="qpt" rows="9" data-s="${si}:ptx">${esc(s.ptx||'')}</textarea>
  <label class="qck"><input type="checkbox" data-s="${si}:ppn"${s.ppn?' checked':''}> প্রতিটি অনুচ্ছেদের পাশে নম্বর দাও (1, 2, 3…)</label>
  <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label>
  <div class="qhint">এর নিচে MCQ, সংক্ষিপ্ত, সত্য/মিথ্যা, শূন্যস্থান ইত্যাদি যেকোনো বিভাগ যোগ করো — প্রশ্ন নম্বর ধারাবাহিক থাকবে।</div></div></div>`}
 function qTabEd(s,si,head,rowb){const t=s.tb;return `<div class="qsc open">${head}<div class="qscb">${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: E. Information Transfer')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>
+ <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: E. Information Transfer')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>
  <div class="qtbs">${t.cells.map((row,ri)=>`<div class="qtbe" style="grid-template-columns:repeat(${t.c},minmax(78px,1fr))">${row.map((cv,ci)=>`<input class="qpt" data-tc="${si}:${ri}:${ci}" value="${esc(cv)}" placeholder="${ri===0&&s.hd!==false?'শিরোনাম':'ফাঁকা রাখো'}">`).join('')}</div>`).join('')}</div>
  <div class="qrow" style="margin-top:6px"><button class="btn" data-a="tbr:${si}:1">＋ সারি</button><button class="btn" data-a="tbr:${si}:-1">− সারি</button><button class="btn" data-a="tbc:${si}:1">＋ কলাম</button><button class="btn" data-a="tbc:${si}:-1">− কলাম</button></div>
  <div class="qhint">যে ঘর ফাঁকা রাখবে, পরীক্ষার্থী সেটি পূরণ করবে।</div>
  <label class="qck"><input type="checkbox" data-s="${si}:hd"${s.hd!==false?' checked':''}> প্রথম সারি শিরোনাম (গাঢ়)</label>
+ ${qFxUI(s,k=>`data-s="${si}:${k}"`)}
+ ${qCwUI(s.cw,t.c,i=>i==='r'?`data-a="cwr:${si}"`:`data-cwi="${si}:${i}"`)}
+ <div class="w"><label>↔ টেবিল পেজের কোথায় বসবে</label>${qAl3('tbal:'+si,s.tba||'l')}</div>
+ <div class="w"><label>🔲 টেবিলের স্টাইল</label><div class="qalg" style="flex-wrap:wrap">${[['','সাদামাটা'],['grid','সব দিকে বর্ডার'],['stripe','ডোরাকাটা'],['hline','আড়াআড়ি লাইন']].map(([v,l])=>`<button type="button" class="btn${(s.tts||'')===v?' p':''}" data-a="tts:${si}:${v}">${l}</button>`).join('')}</div></div>
+ ${s.tts?`<label class="qck"><input type="checkbox" data-s="${si}:tbd"${s.tbd!==false?' checked':''}> বর্ডার দেখাও</label><div class="w"><label>হেডার সারির রং</label><div style="display:flex;gap:8px;align-items:center"><input type="color" data-s="${si}:thc" value="${s.thc||'#eef2f7'}"><button type="button" class="btn" data-a="tts:${si}:${s.tts}:x" style="padding:4px 10px">↺ ডিফল্ট রং</button></div></div>`:''}
  <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label></div></div>`}
 function qFx(s,y){const g=f=>s['f'+y+f],a=[];if(g('b')!=null)a.push('font-weight:'+(g('b')?700:400));if(g('i')!=null)a.push('font-style:'+(g('i')?'italic':'normal'));if(g('u'))a.push('text-decoration:underline');return a.join(';')}
 const qMs=(base,fx)=>{const v=String(base||'').replace(/^ style="|"$/g,''),o=[v,fx].filter(Boolean).join(';');return o?` style="${o}"`:''},
@@ -5957,6 +6019,7 @@ function qSecHead(p,s,si,x,B){const ti=p.hs.st===false?'':(s.title||'').trim(),n
  const tz=s.tsz&&s.tsz!==100?` style="font-size:${(1.08*s.tsz/100).toFixed(3)}em"`:'',nz=s.nsz&&s.nsz!==100?` style="font-size:${(.92*s.nsz/100).toFixed(3)}em"`:'';
  let hh=(ti?`<div class="qsh${s.ta&&s.ta!=='l'?' ta-'+s.ta:''}${s.nol?' nol':''}"><span class="qst"${qMs(tz,qFx(s,'t'))}>${qf(ti)}</span></div>`:'')+(nt?`<div class="qsn"${qMs(nz,qFx(s,'n'))}>${qf(nt)}</div>`:'');
  if(s.wb&&s.wb.trim())hh+=qWbHtml(s.wb);
+ hh+=qHimg(s,p.cfg);
  B.push({keep:1,pb:qPbn(s.pb),cb:s.cb&&si>0,cl:'sec',sq:(x.ci||0)+':'+si+':h',h:hh||'<div style="height:2px"></div>'})}
 const qWbHtml=w=>`<div class="qwb"><b>${qT('শব্দ বাক্স','Word box')}</b>${w.split(/[,\n]+/).map(z=>z.trim()).filter(Boolean).map(z=>`<span>${qf(z)}</span>`).join('')}</div>`;
 function qKeyGroups(p){const c=p.cfg,g=[];
@@ -6018,7 +6081,8 @@ root.addEventListener('click',e=>{
   if(['bcopy','bcut','bdup','bpaste','btext','bmulti','ball'].includes(k))return qBAct(k);
   if(k==='ftbl')return qTblDlg(null);
   if(k==='fimg'){$('#qpfimg').click();return}
-  if(k==='fedit'){const f=qFlById(qsel);if(f&&f.ty==='tbl')qTblDlg(f);else if(f&&f.ty==='img')qImgEd(f.src,u=>{f.src=u;qTouch(false);qPvNow()});return}
+  if(k==='fal'){const f=qFlById(qsel);if(f)qFlAlign(f,x);return}
+  if(k==='fedit'){const f=qFlById(qsel);if(f&&f.ty==='tbl')qTblDlg(f);else if(f&&f.ty==='img')qImgEd(f.src,(u,al)=>{f.src=u;if(al)qFlAlign(f,al);qTouch(false);qPvNow()},'');return}
   if(k==='fdup')return qFlDup();
   if(k==='fdel')return qFlDel();
   if(k==='new')return qPick();
@@ -6407,6 +6471,24 @@ function qBAct(k){
   else{toast(qbn(Q.length)+'টি প্রশ্ন কপি হয়েছে — যেখানে চাও পেস্ট করো');qBSel()}
  }
 }
+/* free-drag handles for images inside questions / section headers */
+function qImgHandles(host){
+ host.querySelectorAll('.qim[data-iid]').forEach(w=>{const im=w.querySelector('img');if(!im||w.querySelector('.qimg-h'))return;
+  const h=document.createElement('i');h.className='qimg-h';h.textContent='✥';h.title='ধরে টেনে ছবি সরাও';
+  h.style.left=Math.max(0,im.offsetLeft+im.offsetWidth-28)+'px';h.style.top=(im.offsetTop+2)+'px';w.appendChild(h)})}
+let imd=null;
+root.addEventListener('pointerdown',e=>{
+ const h=e.target.closest&&e.target.closest('#qppv .qimg-h');if(!h)return;
+ const w=h.closest('.qim'),o=qIR[w.dataset.iid],pf=w.dataset.ipf;if(!o)return;
+ imd={w,o,pf,x0:e.clientX,y0:e.clientY,ox:+o[pf+'x']||0,oy:+o[pf+'y']||0,nx:0,ny:0,moved:false};
+ try{h.setPointerCapture(e.pointerId)}catch(x){}
+ e.preventDefault();e.stopPropagation()},true);
+addEventListener('pointermove',e=>{
+ if(!imd)return;const dx=(e.clientX-imd.x0)/qz,dy=(e.clientY-imd.y0)/qz;if(Math.abs(dx)+Math.abs(dy)>1){imd.moved=true;const pv=document.getElementById('qppv');pv&&pv.classList.add('qdrag')}
+ imd.nx=Math.round(imd.ox+dx);imd.ny=Math.round(imd.oy+dy);imd.w.style.transform=`translate(${imd.nx}px,${imd.ny}px)`});
+addEventListener('pointerup',()=>{
+ if(!imd)return;const d=imd;imd=null;const pv=document.getElementById('qppv');pv&&pv.classList.remove('qdrag');
+ if(!d.moved)return;d.o[d.pf+'x']=d.nx;d.o[d.pf+'y']=d.ny;qTouch(false)});
 /* floating item drag / resize */
 root.addEventListener('pointerdown',e=>{
  if(!qx||!e.target.closest('#qppv'))return;
@@ -6433,7 +6515,7 @@ function qDrawG(pg,xv,yv){
 }
 addEventListener('pointermove',e=>{
  if(!drag)return;
- const dx=(e.clientX-drag.x0)/qz,dy=(e.clientY-drag.y0)/qz;if(Math.abs(dx)+Math.abs(dy)>1)drag.moved=true;
+ const dx=(e.clientX-drag.x0)/qz,dy=(e.clientY-drag.y0)/qz;if(Math.abs(dx)+Math.abs(dy)>1){drag.moved=true;const pv=document.getElementById('qppv');pv&&pv.classList.add('qdrag')}
  const{el,f}=drag,thr=6/qz,T=(drag.moved&&!e.altKey)?qSnapTargets(el,f):null;
  if(drag.rs){
   let w=Math.max(30,drag.fw+dx),h=Math.max(20,drag.fh+dy);const L=parseFloat(el.style.left)||0,Tp=parseFloat(el.style.top)||0,xv=[],yv=[];
@@ -6453,7 +6535,7 @@ addEventListener('pointermove',e=>{
  }
 });
 addEventListener('pointerup',()=>{
- if(!drag)return;const d=drag;drag=null;qClrG();if(!d.moved)return;const f=d.f;
+ if(!drag)return;const d=drag;drag=null;qClrG();{const pv=document.getElementById('qppv');pv&&pv.classList.remove('qdrag')}if(!d.moved)return;const f=d.f;
  if(d.rs){f.w=Math.round(d.nw||f.w);f.h=Math.round(d.nh||f.h)}
  else{
   const r=d.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,ws=[...document.querySelectorAll('#qppv .qpw')];let tgt=-1;
@@ -6475,12 +6557,13 @@ addEventListener('keydown',e=>{
  if(m){e.preventDefault();qTouch(false)}
 });
 root.addEventListener('keyup',e=>{const t=e.target;if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT')&&['Enter','ArrowDown','ArrowUp','Backspace'].includes(e.key))qKeep(t)});
-root.addEventListener('input',e=>{const t=e.target;if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT'))qKeep(t)});
+root.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.cwi&&qx){const[si,k]=t.dataset.cwi.split(':'),s0=qx.secs[+si];if(s0&&s0.tb){const c=s0.tb.c;s0.cw=qCwSet(s0.cw,c,+k,+t.value);qCwSync(t.closest('.w'),s0.cw);qTouch(false)}return}
+if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT'))qKeep(t)});
 root.addEventListener('focusin',e=>{const t=e.target;if(t&&t.closest&&t.closest('#qpfm')&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT')){setTimeout(()=>qKeep(t),120);setTimeout(()=>qKeep(t),420)}});
 root.addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('.qpt')&&(t.tagName==='TEXTAREA'||(t.tagName==='INPUT'&&(!t.type||t.type==='text'))))qfocus=t});
 $('#qpimg').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f||!qimT||!qx)return;
  const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,800/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);
-  const so=qx.secs[qimT[0]],du=c.toDataURL('image/jpeg',.82);if(qimT[1]<0){so.gimg=du;so.giw=so.giw||60}else{const q=so.qs[qimT[1]];q.img=du;q.iw=q.iw||50}URL.revokeObjectURL(u);qTouch(true);toast('ছবি যোগ হয়েছে ✓')};im.src=u};
+  const so=qx.secs[qimT[0]],du=c.toDataURL('image/jpeg',.82);if(qimT[1]===-2){so.himg=du;so.hiw=so.hiw||50}else if(qimT[1]<0){so.gimg=du;so.giw=so.giw||60}else{const q=so.qs[qimT[1]];q.img=du;q.iw=q.iw||50}URL.revokeObjectURL(u);qTouch(true);toast('ছবি যোগ হয়েছে ✓')};im.src=u};
 $('#qpfimg').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f&&qx)qFlImg(f)};
 $('#qph').onclick=()=>{if(qx){qList()}else if(qmode==='pick')qList();else showHome()};
 document.querySelectorAll('#qpseg [data-sg]').forEach(b=>b.onclick=()=>qSeg(b.dataset.sg==='1'));
