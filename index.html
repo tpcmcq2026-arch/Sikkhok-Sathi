@@ -13,6 +13,21 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Dancing+Script:wght@600;700&family=Galada&family=Playfair+Display:wght@400;500;600;700;900&family=Cinzel:wght@700&family=Montserrat:wght@400;500;600;700&family=Great+Vibes&family=Baloo+Da+2:wght@400;500;600;700&family=Amiri:wght@700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla&family=Anek+Bangla:wght@400;500;600;700&family=Mukta:wght@500;700&family=Lora:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Oswald:wght@500;600&family=Pacifico&family=Satisfy&family=Noto+Sans+Bengali:wght@400;700&family=Merriweather:wght@400;700&family=Source+Serif+4:wght@400;600;700&family=PT+Serif:wght@400;700&family=Noto+Serif:wght@400;700&family=EB+Garamond:wght@400;500;700&family=Crimson+Text:wght@400;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Lato:wght@400;700&family=Nunito:wght@400;600;700&family=Raleway:wght@400;600;700&family=Work+Sans:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Quicksand:wght@400;600;700&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&family=Atma:wght@500;700&family=Mina:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+/* html2canvas cannot read modern colours (color-mix / color(srgb …)). Before every capture, turn them into plain rgb() in the cloned page. */
+(function(){const o=window.html2canvas;if(!o||o.__fx)return;
+const P=['color','background-color','background-image','border-top-color','border-right-color','border-bottom-color','border-left-color','outline-color','box-shadow','text-shadow','text-decoration-color','-webkit-text-stroke-color','column-rule-color','fill','stroke','filter'],
+RX=/color-mix\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)|color\([^()]*\)/g,cache={};let cx;
+const rgb=m=>{if(cache[m])return cache[m];try{if(!cx){const c=document.createElement('canvas');c.width=c.height=1;cx=c.getContext('2d',{willReadFrequently:true})}cx.clearRect(0,0,1,1);cx.fillStyle='#000';cx.fillStyle=m;cx.fillRect(0,0,1,1);const d=cx.getImageData(0,0,1,1).data;return cache[m]=d[3]===255?`rgb(${d[0]},${d[1]},${d[2]})`:`rgba(${d[0]},${d[1]},${d[2]},${(d[3]/255).toFixed(3)})`}catch(e){return 'rgb(0,0,0)'}};
+function prep(root){let css='',n=0;const els=[root,...root.querySelectorAll('*')];
+ els.forEach(e=>{[['',e],['::before',e],['::after',e]].forEach(([ps])=>{let cs;try{cs=getComputedStyle(e,ps||null)}catch(x){return}if(ps&&(!cs.content||cs.content==='none'||cs.content==='normal'))return;let r='';
+  P.forEach(k=>{const v=cs.getPropertyValue(k);if(v&&v.indexOf('color')>=0&&(v.indexOf('color(')>=0||v.indexOf('color-mix(')>=0)){r+=k+':'+v.replace(RX,rgb)+' !important;'}});
+  if(r){let id=e.getAttribute('data-hx');if(!id){id=String(++n);e.setAttribute('data-hx',id)}css+=`[data-hx="${id}"]${ps}{${r}}\n`}})});
+ return css}
+const w=function(el,opt){opt=Object.assign({},opt);let css='';try{css=prep(el)}catch(e){}const oc=opt.onclone;
+ opt.onclone=(doc,cl)=>{if(css){const st=doc.createElement('style');st.textContent=css;doc.head.appendChild(st)}return oc?oc(doc,cl):undefined};return o.call(this,el,opt)};
+Object.keys(o).forEach(k=>{w[k]=o[k]});w.__fx=1;w.__prep=prep;window.html2canvas=w})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--ink:#16213a;--mut:#6b7385;--bg:#f3f5f9;--card:#fff;--line:#dfe3ec;--ac:#0f766e;--ac2:#0b5a54;--red:#c0392b}
@@ -3688,9 +3703,9 @@ v.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>exportAs(b.dataset.x))}
 const fname=()=>`Result_${(cur.exam+'_Class'+cur.cls+'_'+cur.subject).replace(/[^\w\u0980-\u09FF]+/g,'_')}`;
 /* render every page one at a time (own spot in view, canvas freed at once) so 2+ pages do not run out of memory */
 async function rasterSheets(type,sc0){await document.fonts.ready;const h=$('#xhost'),tmp=document.createElement('div');tmp.innerHTML=sheetHTML(cur);const pg=[...tmp.children].map(e=>e.outerHTML),out=[];
-for(const html of pg){h.innerHTML=html;fitInst(h);await new Promise(r=>setTimeout(r,40));const el=h.firstElementChild;let b=null;
- for(const sc of [pg.length>1?Math.min(sc0,2):sc0,1.5,1]){try{const cv=await html2canvas(el,{scale:sc,backgroundColor:'#fff',useCORS:true,scrollX:0,scrollY:0,x:0,y:0});b=await new Promise(ok=>cv.toBlob(ok,type,.95));cv.width=cv.height=0;if(b&&b.size>2000)break}catch(e){b=null}await new Promise(r=>setTimeout(r,60))}
- if(!b)throw new Error('render');out.push(b)}
+for(const html of pg){h.innerHTML=html;fitInst(h);await new Promise(r=>setTimeout(r,40));const el=h.firstElementChild;let b=null,le=null;
+ for(const sc of [pg.length>1?Math.min(sc0,2):sc0,1.5,1]){try{const cv=await html2canvas(el,{scale:sc,backgroundColor:'#fff',useCORS:true,scrollX:0,scrollY:0,x:0,y:0});b=await new Promise(ok=>cv.toBlob(ok,type,.95));cv.width=cv.height=0;if(b&&b.size>2000)break}catch(e){b=null;le=e}await new Promise(r=>setTimeout(r,60))}
+ if(!b)throw le||new Error('render');out.push(b)}
 h.innerHTML='';return out}
 const blobURL=b=>new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(b)});
 async function shareWA(){if(!window.html2canvas)return toast('Export library failed to load — check internet');
@@ -3698,7 +3713,7 @@ toast('Preparing…');const h=$('#xhost');
 try{const bl=await rasterSheets('image/jpeg',2.5),files=bl.map((b,i)=>new File([b],fname()+(bl.length>1?'_page'+(i+1):'')+'.jpg',{type:'image/jpeg'}));
 if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({files,title:cur.exam||'Result'})}catch(e){if(e.name!=='AbortError')throw e}}
 else{for(const f of files){const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;a.click();await new Promise(r=>setTimeout(r,500))}toast('Image saved — attach it in WhatsApp');window.open('https://wa.me/','_blank')}}
-catch(e){toast('Could not share')}finally{h.innerHTML=''}}
+catch(e){console.error(e);toast('Could not share: '+String(e&&e.message||e).slice(0,80))}finally{h.innerHTML=''}}
 async function exportAs(t){
 if(t==='wa')return shareWA();
 if(t==='print'){let ps=document.getElementById('pgs');if(!ps){ps=document.createElement('style');ps.id='pgs';document.head.appendChild(ps)}ps.textContent='@media print{@page{size:A4 '+(cur.orient==='landscape'?'landscape':'portrait')+';margin:0}}';$('#pa').innerHTML=sheetHTML(cur);setTimeout(()=>print(),250);return}
@@ -3707,7 +3722,7 @@ toast('Preparing…');const h=$('#xhost');
 try{const bl=await rasterSheets(t==='png'?'image/png':'image/jpeg',3),n=bl.length;
 if(t==='pdf'){const{jsPDF}=window.jspdf,L=cur.orient==='landscape',o=L?'landscape':'portrait',p=new jsPDF({unit:'mm',format:'a4',orientation:o});for(let i=0;i<n;i++){if(i)p.addPage('a4',o);p.addImage(await blobURL(bl[i]),'JPEG',0,0,L?297:210,L?210:297)}p.save(fname()+'.pdf')}
 else for(let i=0;i<n;i++){const u=URL.createObjectURL(bl[i]),a=document.createElement('a');a.href=u;a.download=fname()+(n>1?'_page'+(i+1):'')+'.'+t;document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,700));setTimeout(()=>URL.revokeObjectURL(u),60000)}
-toast(n>1?n+' pages ready':'Download ready')}catch(e){toast('Export failed')}finally{h.innerHTML=''}}
+toast(n>1?n+' pages ready':'Download ready')}catch(e){console.error(e);toast('Export failed: '+String(e&&e.message||e).slice(0,80))}finally{h.innerHTML=''}}
 /* ===== Personal marksheets (one page per student) ===== */
 const MST={
 en:{title:'Personal Marksheet',top:'TOPPER',name:'Name',roll:'Roll',cls:'Class',sub:'Subject',date:'Date',comp:'Subject / Component',full:'Full',marks:'Marks',total:'Total',grade:'Grade',gpa:'GPA',pos:'Position',pm:'Previous Marks',pp:'Previous Position',now:'now',res:'Result',P:'Pass',F:'Fail',A:'Absent',avg:'Class Average',hi:'Highest Marks',cnt:'Students',rem:'Remarks',sch:'Scholarship',cmt:"Teacher's Comment",nt:'Note',gs:"Guardian's Signature",ct:'Class Teacher',hd:'Director',
