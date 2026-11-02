@@ -1436,7 +1436,7 @@ html[data-mode=dark] .qpvh{background:#0a0f19}
 .qtgrid{display:grid;gap:6px;margin:10px 0;max-height:42vh;overflow:auto}
 .qtgrid input{width:100%;box-sizing:border-box;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 8px;background:var(--card)}
 /* floating items (preview) */
-.qfl{position:absolute;z-index:6;box-sizing:border-box}#qppv.qdrag .qpw,#qppv.qdrag .qpg{overflow:visible!important}#qppv.qdrag .qpw{z-index:1}#qppv.qdrag .qfl.ed{z-index:9999}.qim{position:relative}.qimg-h{position:absolute;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:15px;color:#fff;background:var(--ac,#0f766e);border-radius:7px;cursor:grab;touch-action:none;z-index:4;user-select:none;-webkit-user-select:none;box-shadow:0 1px 5px rgba(0,0,0,.35);opacity:.85}.qfs .al{padding:4px 8px}.qalg{display:flex;gap:6px;margin:4px 0}.qalg .btn{flex:1;padding:7px 4px;font-size:13px}
+.qfl{position:absolute;z-index:6;box-sizing:border-box}.qacc{border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--card);overflow:hidden}.qach{display:flex;align-items:center;gap:9px;padding:11px 12px;cursor:pointer;font-size:14px;-webkit-tap-highlight-color:transparent;user-select:none}.qach b{font-weight:700}.qach small{color:var(--mut);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.qach i{margin-left:auto;font-style:normal;font-size:20px;line-height:1;color:var(--mut);transition:transform .18s}.qaci{font-size:16px;width:22px;text-align:center}.qacc.open>.qach{background:rgba(15,118,110,.1);color:var(--ac,#0f766e)}.qacc.open>.qach i{transform:rotate(90deg)}.qacb{padding:8px 12px 12px;border-top:1px solid var(--line)}#qppv.qdrag .qpw,#qppv.qdrag .qpg{overflow:visible!important}#qppv.qdrag .qpw{z-index:1}#qppv.qdrag .qfl.ed{z-index:9999}.qim{position:relative}.qimg-h{position:absolute;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:15px;color:#fff;background:var(--ac,#0f766e);border-radius:7px;cursor:grab;touch-action:none;z-index:4;user-select:none;-webkit-user-select:none;box-shadow:0 1px 5px rgba(0,0,0,.35);opacity:.85}.qfs .al{padding:4px 8px}.qalg{display:flex;gap:6px;margin:4px 0}.qalg .btn{flex:1;padding:7px 4px;font-size:13px}
 .qfl.ed{cursor:move;touch-action:none;-webkit-user-select:none;user-select:none}
 .qfl.ed:hover{outline:1.5px dashed #2563eb}
 .qfl.sel{outline:2px solid #2563eb!important}
@@ -1459,7 +1459,7 @@ html[data-mode=dark] .qpvh{background:#0a0f19}
 .qq{width:100%}
 .qtx{display:flex;gap:.35em}.qn{flex:none;min-width:1.7em;font-weight:700}.qtt{flex:1;min-width:0;overflow-wrap:anywhere}
 .qim{text-align:center;margin:.3em 0}.qim img{max-width:100%;display:inline-block}
-.qos{display:grid;gap:.05em .9em;margin:.1em 0 0 2em}
+.qos{font-size:calc(1em*var(--ofs,1));display:grid;gap:.05em .9em;margin:.1em 0 0 2em}
 .qop{display:flex;gap:.35em;padding:0 .2em;border-radius:4px}.qop b{flex:none;font-weight:600}.qop span{min-width:0;overflow-wrap:anywhere}.qop.ok{background:#dcfce7;outline:1px solid #16a34a}
 .qpr{margin:.15em 0 0 2em}.qpt2{display:flex;gap:.4em}.qpt2 b{flex:none;font-weight:600}.qpx{flex:1;min-width:0}.qpm{flex:none;min-width:1.6em;text-align:right;font-weight:700}
 .qmk{flex:none;font-weight:700;padding-left:.5em;white-space:nowrap}
@@ -1562,7 +1562,7 @@ body.qdragging,body.qdragging *{user-select:none!important;-webkit-user-select:n
 
 .qside{display:flex;gap:10px;align-items:flex-start}.qside.r{flex-direction:row-reverse}.qside>.qsx{flex:1;min-width:0}.qside>.qim{flex:none;margin:0}
 .qcap{font-size:.85em;margin:.2em 0;color:#222}
-.qpst{margin:.3em 0 0 2em}.qps{display:flex;gap:.5em;margin:.1em 0}.qps b{flex:none;min-width:1.5em}.qpld{margin:.35em 0 .1em 0;font-weight:600}
+.qpst{font-size:calc(1em*var(--sfs,1));margin:.3em 0 0 2em;display:flex;flex-wrap:wrap;column-gap:1.6em}.qps{display:flex;gap:.3em;margin:.1em 0;max-width:100%}.qnest{border-left:3px solid var(--ac,#0f766e);margin:8px 0 0 6px;padding-left:8px}.qps b{flex:none;min-width:0}.qps.lg{flex:0 0 100%}.qpld{font-size:calc(1em*var(--sfs,1));margin:.35em 0 .1em 0;font-weight:600}
 .qsh.qgrp{border:0;border-top:2px solid #111;border-bottom:1.5px solid #111;background:#f0f0f0;padding:4px 8px}
 .qgx{margin:.35em 0}.qgt{margin:.2em 0}.qgld{margin:.3em 0;font-weight:600}
 .qimx{flex:1 0 100%;margin-top:6px}.qimx .qpt{margin:4px 0}.qsts{margin:8px 0}.qrm{min-width:26px;display:inline-block}
@@ -4600,7 +4600,7 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const mm=v=>(+v||0)*96/25.4;
 const cp=o=>JSON.parse(JSON.stringify(o));
 const B4=['ক','খ','গ','ঘ'],LB={bn:['ক','খ','গ','ঘ','ঙ','চ','ছ','জ','ঝ','ঞ','ট','ঠ','ড','ঢ','ণ','ত','থ','দ','ধ','ন','প','ফ','ব','ভ','ম','য'],en:'abcdefghijklmnopqrstuvwxyz'.split(''),enU:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')};
-const QTY={mcq:['🔘','বহুনির্বাচনি (MCQ)'],cq:['🧩','সৃজনশীল'],short:['✍️','সংক্ষিপ্ত প্রশ্ন'],fill:['▁','শূন্যস্থান পূরণ'],tf:['⚖️','সত্য / মিথ্যা'],match:['🔗','মিলকরণ'],text:['📝','রচনা / অন্যান্য'],poly:['🔢','বহুপদী MCQ (i, ii, iii)'],grp:['🖼','অভিন্ন তথ্যভিত্তিক MCQ'],ttl:['🏷','শিরোনাম লাইন'],free:['✏️','নিজের মতো প্রশ্ন (ইচ্ছামতো)'],pas:['📖','Passage / অনুচ্ছেদ (লেখা)'],tab:['▦','ছক / টেবিল (ফাঁকা ঘরসহ)']};
+const QTY={mcq:['🔘','বহুনির্বাচনি (MCQ)'],cq:['🧩','সৃজনশীল'],short:['✍️','সংক্ষিপ্ত প্রশ্ন'],fill:['▁','শূন্যস্থান পূরণ'],tf:['⚖️','সত্য / মিথ্যা'],match:['🔗','মিলকরণ'],text:['📝','রচনা / অন্যান্য'],poly:['🔢','বহুপদী MCQ (i, ii, iii)'],grp:['🖼','বহুনির্বাচনি (MCQ) — অভিন্ন উদ্দীপকসহ'],ttl:['🏷','শিরোনাম লাইন'],free:['✏️','নিজের মতো প্রশ্ন (ইচ্ছামতো)'],pas:['📖','Passage / অনুচ্ছেদ (লেখা)'],tab:['▦','ছক / টেবিল (ফাঁকা ঘরসহ)']};
 const CQH=['জ্ঞানমূলক','অনুধাবনমূলক','প্রয়োগমূলক','উচ্চতর দক্ষতামূলক'];
 const PAPER={a4:['A4',794,1123,210,297],a5:['A5',559,794,148,210],b5:['B5',665,945,176,250],letter:['Letter',816,1056,216,279],legal:['Legal',816,1344,216,356]};
 const MPRE={narrow:[6,6,8,8],normal:[11,11,12,12],mid:[16,16,18,18],wide:[22,22,24,24]};
@@ -4666,6 +4666,7 @@ function mkSec(ty,n){
  o.qs=Array.from({length:['ttl','pas','tab'].includes(ty)?0:(n??3)},()=>mkQ(ty,o));
  if(ty==='ttl'){o.ta='c';o.sm=false}
  if(ty==='pas'){o.ptx='';o.pti='';o.ppn=false;o.sm=false}
+ if(ty==='match')o.tts='grid';
  if(ty==='tab'){o.tb={r:3,c:3,cells:[['','',''],['','',''],['','','']]};o.hd=true;o.sm=false;o.tts='grid'}
  return o;
 }
@@ -4767,6 +4768,7 @@ function qImgH(src,w,c,capOn,cap,side,o,pf){
 const qHtb=s=>{const t=s.htb;if(!t)return '';const w=100,al=s.htba;
  return `<div class="qhtb" style="width:${w}%;margin:.35em ${al==='r'?'0':'auto'} .35em ${al==='l'?'0':'auto'}">${t.capOn&&t.cap?`<div class="qfc" style="text-align:center">${qf(t.cap)}</div>`:''}${qTblHtml(t,'qtb3',al==='r'?'margin-left:auto;':al==='c'?'margin-left:auto;margin-right:auto;':'')}</div>`};
 const qHimg=(s,c)=>(s.himg?qImgH(s.himg,s.hiw||50,c,s.hcapOn,s.hcap,false,s,'hi'):'')+qHtb(s);
+const qUs=(q,c)=>{if(!q.us&&!q.uimg&&!q.ul)return '';return `<div class="qus">${q.ul?`<div class="qgld">${qf(q.ul)}</div>`:''}${q.us?`<div class="qgt">${qf(q.us)}</div>`:''}${qImgH(q.uimg,q.uiw||50,c,q.ucapOn,q.ucap,false,q,'ui')}</div>`};
 function qBody0(q,c){
  const t=qf(qRf(q.t,qLblFor(q,c))),ip=q.ip||'b';
  if(!q.img)return t;
@@ -4803,18 +4805,18 @@ function qBlocks(p,x){
   s.qs.forEach((q,qi)=>{
    const sub=qSubS(s),cn=sub?cnt:++cnt,num=s.ns?qNumS(s.ns,sub?qi+1:cn):qNum(c.numSt,cn),rl=qLblFor(q,c);let h='';const al=q.al&&q.al!=='l'?` style="text-align:${{c:'center',r:'right',j:'justify'}[q.al]}"`:'';
    if(s.ty==='mcq'||s.ty==='grp'){
-    const L=q.o.map(o=>String(o).replace(/[\\{}^_~*\/]/g,'').length),mx=Math.max(...L,1),ch2=x.cw/(c.fs*0.62);
+    const L=q.o.map(o=>String(o).replace(/[\\{}^_~*\/]/g,'').length),mx=Math.max(...L,1),fq=(+s.qfs||100)/100,ch2=x.cw/(c.fs*0.62*fq*((+s.ofs||100)/100)),ch3=x.cw/(c.fs*0.62*fq*((+s.sfs||100)/100));
     let k=c.optLay==='auto'?((mx+5)*4<=ch2?4:(mx+5)*2<=ch2?2:1):+c.optLay;
     if(q.o.some(o=>/\n/.test(o)))k=1;
-    const sts=(q.st||[]).filter(z=>String(z).trim()),pol=sts.length?`<div class="qpst">${sts.map((z,i)=>`<div class="qps"><b>${s.sty==='bn'?qbn(i+1)+'.':ROM[i]+'.'}</b><span>${qf(qRf(z,rl))}</span></div>`).join('')}</div><div class="qpld">${qf(s.ld||qT('নিচের কোনটি সঠিক?','Which one is correct?'))}</div>`:'';
-    h=`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${qBody(q,c)}</div></div>${pol}<div class="qos" style="grid-template-columns:repeat(${k},minmax(0,1fr))">${q.o.map((o,i)=>`<div class="qop${c.ans&&q.ans===i?' ok':''}"><b>${qOpt(c.optSt,i)}</b><span>${qf(o)}</span></div>`).join('')}</div></div>`;
+    const sts=(q.st||[]).filter(z=>String(z).trim()),pol=sts.length?`<div class="qpst">${sts.map((z,i)=>`<div class="qps${String(z).replace(/[\\{}^_~*\/]/g,'').length>ch3*0.36?' lg':''}"><b>${s.sty==='bn'?qbn(i+1)+'.':ROM[i]+'.'}</b><span>${qf(qRf(z,rl))}</span></div>`).join('')}</div><div class="qpld">${qf(s.ld||qT('নিচের কোনটি সঠিক?','Which one is correct?'))}</div>`:'';
+    h=qUs(q,c)+`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${qBody(q,c)}</div></div>${pol}<div class="qos" style="grid-template-columns:repeat(${k},minmax(0,1fr))">${q.o.map((o,i)=>`<div class="qop${c.ans&&q.ans===i?' ok':''}"><b>${qOpt(c.optSt,i)}</b><span>${qf(o)}</span></div>`).join('')}</div></div>`;
     if(q.ans>=0)keys.push([cnt,qOl(c.optSt,q.ans)]);
    }else if(s.ty==='cq'){
     h=`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${qBody(q,c)}</div></div><div class="qpr">${q.parts.map((o,i)=>`<div class="qpt2"><b>${qOpt(c.optSt,i)}</b><span class="qpx">${qf(qRf(o.t,rl))}</span><span class="qpm">${qbn(o.m)}</span></div>`).join('')}</div></div>`;
    }else if(s.ty==='match'){
     const Lf=(q.l||'').split('\n').filter(z=>z.trim()),Rt=(q.r||'').split('\n').filter(z=>z.trim()),n=Math.max(Lf.length,Rt.length);
-    let r='';for(let i=0;i<n;i++)r+=`<tr><td>${Lf[i]!=null?`<b>${qEn?qNum(c.numSt,i+1):qOpt(c.optSt,i)}</b>${qf(Lf[i])}`:''}</td><td>${Rt[i]!=null?`<b>${qEn?qOpt(c.optSt,i):qNum(c.numSt,i+1)}</b>${qf(Rt[i])}`:''}</td></tr>`;
-    h=`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${qBody(q,c)}<table class="qmt"><tr><th>${qf(s.hl||qT('বাম পাশ','Column A'))}</th><th>${qf(s.hr||qT('ডান পাশ','Column B'))}</th></tr>${r}</table></div></div></div>`;
+    let r='';for(let i=0;i<n;i++)r+=`<tr><td${qFa(qCellFx(s,i+1,0))}>${Lf[i]!=null?`<b>${qEn?qNum(c.numSt,i+1):qOpt(c.optSt,i)}</b>${qf(Lf[i])}`:''}</td><td${qFa(qCellFx(s,i+1,1))}>${Rt[i]!=null?`<b>${qEn?qOpt(c.optSt,i):qNum(c.numSt,i+1)}</b>${qf(Rt[i])}`:''}</td></tr>`;
+    h=`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${qBody(q,c)}<table class="${s.tts?'qft2 qtb3'+(s.tbd===false?' nb':'')+(s.tts==='stripe'?' tsS':'')+(s.tts==='hline'?' tsH':''):'qmt'}"${(s.cw||s.mba)?` style="${qCwSt(s.cw,2)}${s.mba==='c'?'margin-left:auto;margin-right:auto;':s.mba==='r'?'margin-left:auto;':''}"`:''}>${qCwG(s.cw,2)}<tr><th${qFa((s.tts&&s.thc?'background:'+s.thc+';':'')+qCellFx(s,0,0))}>${qf(s.hl||qT('বাম পাশ','Column A'))}</th><th${qFa((s.tts&&s.thc?'background:'+s.thc+';':'')+qCellFx(s,0,1))}>${qf(s.hr||qT('ডান পাশ','Column B'))}</th></tr>${r}</table></div></div></div>`;
    }else{
     const ln=Array.from({length:+s.lines||0},()=>`<div class="qln" style="height:${lhp}px"></div>`).join('');
     h=`<div class="qq"><div class="qtx"><b class="qn">${num}</b><div class="qtt"${al}>${s.ty==='tf'?(c.ans&&q.tf?`( <b class="qtfa">${q.tf==='t'?qT('সত্য','True'):qT('মিথ্যা','False')}</b> ) `:'( &nbsp; &nbsp; &nbsp; &nbsp;) '):''}${qBody(q,c)}</div>${mkq(q)}</div>${ln?`<div style="margin:0 0 0 2em">${ln}</div>`:''}</div>`;
@@ -4868,6 +4870,7 @@ const qCwTxt=t=>'মোট '+t+'%'+(t>100?' — ১০০%-এর বেশি �
 function qCwSync(h,cw){const r=h.querySelectorAll('input[type=range]'),sp=h.querySelectorAll('[data-cwv]');cw.forEach((x,k)=>{if(r[k])r[k].value=x;if(sp[k])sp[k].textContent=x+'%'});const e=h.querySelector('[data-cwt]');if(e)e.textContent=qCwTxt(cw.reduce((x,y)=>x+y,0))}
 const qCwUI=(cw,c,at)=>{const a=qCwN(cw,c),t=a.reduce((x,y)=>x+y,0);const row=(l,x,att)=>`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;font-size:13px"><b style="min-width:62px">${l}</b><input type="range" min="5" max="100" step="1" ${att} value="${x}" style="flex:1"><span style="min-width:40px;text-align:right" data-cwv="1">${x}%</span></div>`;
  return `<div class="w"><label>↔ কলামের প্রস্থ (প্রতিটি আলাদা)</label>${a.map((x,i)=>row('কলাম '+qbn(i+1),x,at(i))).join('')}<div class="qhint" data-cwt="1">${qCwTxt(t)}</div><div class="qhint">একটা কলাম বদলালে অন্য কলাম একটুও বদলায় না। টেবিলের প্রস্থ = সব কলামের যোগফল।</div><button type="button" class="btn" ${at('r')} style="padding:4px 10px">↺ সব সমান (পুরো প্রস্থ)</button></div>`};
+const qFa=x=>x?` style="${x}"`:'';
 const qCellFx=(o,r,c)=>{let a='';const g=(p,n)=>{if(o[p+'b'])a+='font-weight:700;';if(o[p+'i'])a+='font-style:italic;';if(o[p+'u'])a+='text-decoration:underline;'};
  if(r===0)g('xr');if(c===0)g('xc');return a};
 const qFxUI=(o,fn)=>`<div class="w"><label>✍ প্রথম সারি ও প্রথম কলামের লেখা</label><div class="qalg" style="flex-wrap:wrap;align-items:center"><b style="font-size:12.5px;min-width:70px">প্রথম সারি</b>${[['b','B'],['i','I'],['u','U']].map(([k,l])=>`<label class="qck" style="margin:0 8px 0 0"><input type="checkbox" ${fn('xr'+k)}${o['xr'+k]?' checked':''}> ${l}</label>`).join('')}</div><div class="qalg" style="flex-wrap:wrap;align-items:center"><b style="font-size:12.5px;min-width:70px">প্রথম কলাম</b>${[['b','B'],['i','I'],['u','U']].map(([k,l])=>`<label class="qck" style="margin:0 8px 0 0"><input type="checkbox" ${fn('xc'+k)}${o['xc'+k]?' checked':''}> ${l}</label>`).join('')}</div></div>`;
@@ -5010,6 +5013,10 @@ function qSeg(pv){const b=$('#qpbody'),cur=b.classList.contains('pvm')?'pv':'ed'
 const AL3=[['l','বাম'],['c','মাঝ'],['r','ডান']],AL4=AL3.concat([['j','জাস্টিফাই']]);
 const qAlg=(k,x,y,cur,o)=>`<div class="qal">${o.map(v=>`<button type="button" class="${cur===v[0]?'on':''}" data-a="${k}:${x}:${y}:${v[0]}">${v[1]}</button>`).join('')}</div>`;
 const qAl3=(act,cur)=>`<div class="qalg">${[['l','⬅ বামে'],['c','⬌ মাঝে'],['r','ডানে ➡']].map(([v,l])=>`<button type="button" class="btn${(cur||'c')===v?' p':''}" data-a="${act}:${v}">${l}</button>`).join('')}</div>`;
+function qTsUI(s,si){return `<div class="w"><label>🔲 টেবিলের স্টাইল</label><div class="qalg" style="flex-wrap:wrap">${[['','সাদামাটা'],['grid','সব দিকে বর্ডার'],['stripe','ডোরাকাটা'],['hline','আড়াআড়ি লাইন']].map(([v,l])=>`<button type="button" class="btn${(s.tts||'')===v?' p':''}" data-a="tts:${si}:${v}">${l}</button>`).join('')}</div></div>
+ ${s.tts?`<label class="qck"><input type="checkbox" data-s="${si}:tbd"${s.tbd!==false?' checked':''}> বর্ডার দেখাও</label><div class="w"><label>হেডার সারির রং</label><div style="display:flex;gap:8px;align-items:center"><input type="color" data-s="${si}:thc" value="${s.thc||'#eef2f7'}"><button type="button" class="btn" data-a="tts:${si}:${s.tts}:x" style="padding:4px 10px">↺ ডিফল্ট রং</button></div></div>`:''}`}
+function qMatchUI(s,si){
+ return `<div class="qpn" style="margin:8px 0"><h4>▦ মিলকরণ টেবিলের সাজসজ্জা</h4>${qTsUI(s,si)}${qFxUI(s,k=>`data-s="${si}:${k}"`)}${qCwUI(s.cw,2,i=>i==='r'?`data-a="cwr:${si}"`:`data-cwi="${si}:${i}"`)}<div class="w"><label>↔ টেবিল পেজের কোথায় বসবে</label>${qAl3('mbal:'+si,s.mba||'l')}</div></div>`}
 function qHtbUI(s,si){
  return `<div class="w"><label>▦ শিরোনামের পরে টেবিল (ঐচ্ছিক)</label>${s.htb?`<div class="qhint" style="margin:2px 0">টেবিল: ${qbn(s.htb.r)} সারি × ${qbn(s.htb.c)} কলাম</div><div class="qrow"><button class="btn" data-a="htbe:${si}">✎ টেবিল এডিট</button><button class="btn" data-a="htbx:${si}" style="color:var(--red)">✕ মুছো</button></div>${qAl3('htal:'+si,s.htba)}`:`<button class="btn" data-a="htba:${si}" style="padding:5px 11px;font-size:13px">▦ টেবিল যোগ করো</button>`}</div>`}
 function qHimgUI(s,si){
@@ -5020,12 +5027,19 @@ const qSel=(k,l,o,w)=>`<div${w?' class="w"':''}><label>${l}</label><select data-
 const qCk=(k,l)=>`<label class="qck"><input type="checkbox" data-c="${k}"${qx.cfg[k]?' checked':''}> ${l}</label>`;
 const qIn=(a,v,l,ph,w=true)=>`<div${w?' class="w"':''}><label>${l}</label><input class="qpt" ${a} value="${esc(v)}" placeholder="${ph||''}"></div>`;
 const qPrev=(s,q)=>{const t=s.ty==='mcq'||s.ty==='cq'||s.ty==='match'?q.t:q.t;return String(t||'').replace(/\s+/g,' ').trim().slice(0,48)||'(খালি — লিখতে ট্যাপ করো)'};
+const qChipUI=(s,q,P)=>{const[x,y]=P.split(':').map(Number),nx=s.qs[y+1];
+ if(q.lk)return `<div class="qsts"><label>🔗 ওপরের প্রশ্নের সাথে জোড়া (বহুপদী অংশ)</label><div class="qrow"><button class="btn" data-a="unlk:${P}">আলাদা প্রশ্ন করো</button></div></div>`;
+ const poly=!!q.st,both=!poly&&nx&&nx.lk,plainOn=!poly,polyOn=poly||both;
+ return `<div class="qsts"><label>এই প্রশ্নে কী কী থাকবে (দুটোই বা একটা)</label><div class="qalg"><button type="button" class="btn${plainOn?' p':''}" data-a="chn:${P}">${plainOn?'☑':'☐'} সাধারণ (ক খ গ ঘ)</button><button type="button" class="btn${polyOn?' p':''}" data-a="chp:${P}">${polyOn?'☑':'☐'} বহুপদী (i, ii, iii)</button></div><div class="qhint">দুটোই টিক দিলে সাধারণ প্রশ্নের ঠিক নিচে বহুপদী প্রশ্ন আলাদা নম্বরে আসবে (নিচের কার্ডে সম্পাদনা করো)।</div></div>`};
+const qUsUI=(q,P)=>{const on=q.uo||q.us||q.ul||q.uimg;if(!on)return `<div class="qrow" style="margin:6px 0"><button class="btn" data-a="usadd:${P}">📖 উদ্দীপক যোগ করো (ঐচ্ছিক)</button></div>`;
+ return `<div class="qsts"><label>📖 উদ্দীপক (ঐচ্ছিক — এই প্রশ্নের আগে বসবে)</label><input class="qpt" data-q="${P}:ul" value="${esc(q.ul||'')}" placeholder="লাইন, যেমন: নিচের অনুচ্ছেদটি পড়ে ১ নং প্রশ্নের উত্তর দাও :"><textarea class="qpt" rows="3" data-q="${P}:us" placeholder="উদ্দীপকের লেখা…">${esc(q.us||'')}</textarea>${q.uimg?`<div class="qimr"><img src="${q.uimg}"><input type="range" min="10" max="100" data-q="${P}:uiw" value="${q.uiw||50}" title="ছবির আকার"><button class="btn" data-a="uied:${P}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="urm:${P}" style="padding:4px 10px">✕</button></div>${qAl3('ual:'+P,q.uia)}<div class="qhint">ছবি ইচ্ছামতো সরাতে প্রিভিউতে ✥ চিহ্ন ধরে টানো।</div>`:`<button class="btn" data-a="uimg:${P}" style="padding:5px 11px;font-size:13px">🖼 উদ্দীপকে ছবি যোগ করো</button>`}<div class="qrow"><button class="btn" data-a="usx:${P}" style="color:var(--red)">✕ উদ্দীপক সরাও</button></div></div>`};
+const qStUI2=(s,q,P)=>q.st?qStUI(s,q,P).replace(/<div class="qrow"><button class="btn" data-a="stadd:[^]*?<\/div>$/,m=>m.replace(/<button class="btn" data-a="plof:[^<]*<\/button>/,'')):'';
 const qStUI=(s,q,P)=>q.st?`<div class="qsts"><label>বিবৃতি (i, ii, iii…)</label>${q.st.map((z,k)=>`<div class="qor"><b class="qrm">${s.sty==='bn'?qbn(k+1):ROM[k]}</b><input class="qpt" data-st="${P}:${k}" value="${esc(z)}" placeholder="বিবৃতি ${qbn(k+1)}"></div>`).join('')}<div class="qrow"><button class="btn" data-a="stadd:${P}">＋ বিবৃতি</button><button class="btn" data-a="stdel:${P}">− বিবৃতি</button><button class="btn" data-a="plof:${P}">সাধারণ MCQ করো</button></div></div>`:`<div class="qrow" style="margin:6px 0"><button class="btn" data-a="plon:${P}">🔢 বহুপদী করো (i, ii, iii)</button></div>`;
-function qQC(s,si,q,qi){
- const P=si+':'+qi,open=qoq===P;let b='';
+function qQC(s,si,q,qi,force){
+ const P=si+':'+qi,nx0=s.qs[qi+1],open=force||qoq===P||(nx0&&nx0.lk&&qoq===si+':'+(qi+1));let b='';
  if(open){
   const ta=(k,ph,rows=2)=>`<textarea class="qpt" rows="${rows}" data-q="${P}:${k}" placeholder="${ph}">${esc(q[k])}</textarea>`;
-  if(s.ty==='mcq'||s.ty==='grp'){b=ta('t','প্রশ্ন লিখুন…')+qStUI(s,q,P)+`<div class="qopr">${q.o.map((o,oi)=>`<div class="qor"><button type="button" class="qrad ${q.ans===oi?'on':''}" data-a="ans:${P}:${oi}" title="সঠিক উত্তর বেছে নাও">${B4[oi]}</button><input class="qpt" data-o="${P}:${oi}" value="${esc(o)}" placeholder="অপশন ${B4[oi]}"></div>`).join('')}</div><div class="qhint">গোল বাটনে চাপ দিলে সেটি সঠিক উত্তর (উত্তরমালার জন্য)।</div>`}
+  if(s.ty==='mcq'||s.ty==='grp'){b=qChipUI(s,q,P)+(q.lk?'':qUsUI(q,P))+ta('t','প্রশ্ন লিখুন…')+(q.lk?'':'')+qStUI2(s,q,P)+`<div class="qopr">${q.o.map((o,oi)=>`<div class="qor"><button type="button" class="qrad ${q.ans===oi?'on':''}" data-a="ans:${P}:${oi}" title="সঠিক উত্তর বেছে নাও">${B4[oi]}</button><input class="qpt" data-o="${P}:${oi}" value="${esc(o)}" placeholder="অপশন ${B4[oi]}"></div>`).join('')}</div><div class="qhint">গোল বাটনে চাপ দিলে সেটি সঠিক উত্তর (উত্তরমালার জন্য)।</div>`}
   else if(s.ty==='cq'){b=ta('t','উদ্দীপক লিখুন…',3)+q.parts.map((o,pi)=>`<div class="qpr2"><b>${B4[pi]}</b><input class="qpt" data-p="${P}:${pi}:t" value="${esc(o.t)}" placeholder="${CQH[pi]} প্রশ্ন"><input class="qpt" type="number" min="0" data-p="${P}:${pi}:m" value="${o.m}" title="নম্বর"></div><textarea class="qpt qma" rows="1" data-p="${P}:${pi}:ma" placeholder="🔑 আদর্শ উত্তর (ঐচ্ছিক)">${esc(o.ma||'')}</textarea>`).join('')}
   else if(s.ty==='match'){b=ta('t','নির্দেশনা (ঐচ্ছিক)',1)+`<div class="qfm-g" style="margin-top:8px"><div><label>বাম পাশ (প্রতি লাইনে একটি)</label>${ta('l','',4)}</div><div><label>ডান পাশ (প্রতি লাইনে একটি)</label>${ta('r','',4)}</div></div>`}
   else{b=ta('t',s.ty==='fill'?'বাক্য লিখুন, ফাঁকা জায়গায় ___ দাও':'প্রশ্ন লিখুন…',2)+(s.showMk?`<div style="margin-top:6px;max-width:220px"><label>এই প্রশ্নের নম্বর (ফাঁকা = বিভাগের)</label><input class="qpt" type="number" min="0" data-q="${P}:m" value="${q.m??''}"></div>`:'')}
@@ -5037,10 +5051,13 @@ function qQC(s,si,q,qi){
   b+=qSrcRow(P,q);
   b=`<div class="qqb">${b}<div class="qalr"><label>লেখার অ্যালাইনমেন্ট</label>${qAlg('qal',si,qi,q.al||'l',AL4)}</div><div class="qalr"><label>পেজ / কলাম ভাগ</label><div class="qal"><button type="button" class="${q.pb?'on':''}" data-a="qbrk:${si}:${qi}:pb">⤓ এখান থেকে নতুন পেজ</button>${(qx.cfg.cols>1&&!qx.cfg.indep&&qx.cfg.fill1!==false)?`<button type="button" class="${q.cb?'on':''}" data-a="qbrk:${si}:${qi}:cb">⇥ এখান থেকে নতুন কলাম</button>`:''}</div></div><div class="qimr">${im}</div></div>`;
  }
- return `<div class="qqc${open?' open':''}"><div class="qqh" data-a="qtg:${P}"><b>${qbn(qi+1)}.</b><span class="qqp">${q.pb?'⤓ ':''}${q.cb?'⇥ ':''}${esc(qPrev(s,q))}</span><span class="qqa"><button data-a="upq:${P}">↑</button><button data-a="dnq:${P}">↓</button><button data-a="dupq:${P}">⧉</button><button data-a="delq:${P}" style="color:var(--red)">🗑</button></span></div>${b}</div>`;
+ return `<div class="qqc${open?' open':''}"><div class="qqh" data-a="qtg:${P}"><b>${qbn(qi+1)}.</b><span class="qqp">${q.lk?'↳ ':''}${q.pb?'⤓ ':''}${q.cb?'⇥ ':''}${esc(qPrev(s,q))}</span><span class="qqa"><button data-a="upq:${P}">↑</button><button data-a="dnq:${P}">↓</button><button data-a="dupq:${P}">⧉</button><button data-a="delq:${P}" style="color:var(--red)">🗑</button></span></div>${b}</div>`;
 }
+const qacc={},qaccSeen={};
+function qAcc(s,si,key,ico,ttl,body,sub){const o=qacc[s.id]===key;return `<div class="qacc${o?' open':''}"><div class="qach" data-a="acc:${si}:${key}"><span class="qaci">${ico}</span><b>${ttl}</b>${sub?`<small>${esc(sub)}</small>`:''}<i>›</i></div>${o?`<div class="qacb">${body}</div>`:''}</div>`}
 function qSC(s,si){
  const m=qm(s),isc=s.ty==='cq',nm=s.ty==='mcq'||s.ty==='grp'||isc||s.ty==='match',op=qopenS===s.id;
+ if(op){if(!qacc[s.id])qacc[s.id]='a';if(qoq&&qoq!==qaccSeen[s.id]&&qoq.indexOf(si+':')===0){qacc[s.id]='f';qaccSeen[s.id]=qoq}}
  const head=`<div class="qsch" data-a="tgl:${s.id}"><span class="qty">${QTY[s.ty][0]}</span><div class="qsct"><b data-sh="${si}">${esc((s.title||'').trim()||QTY[s.ty][1])}</b><small>${QTY[s.ty][1]}${['ttl','pas','tab'].includes(s.ty)?'':` · ${qbn(s.qs.length)}টি প্রশ্ন · ${qbn(m.tot)} নম্বর`}</small></div><span class="qmv2"><button type="button" data-a="upsec:${si}"${si===0?' disabled':''} aria-label="উপরে নাও">▲</button><button type="button" data-a="dnsec:${si}"${si===qx.secs.length-1?' disabled':''} aria-label="নিচে নাও">▼</button></span><span class="qchev">›</span></div>`;
  if(!op)return `<div class="qsc">${head}</div>`;
  const rowb=`<div class="qrow"><button class="btn" data-a="upsec:${si}">↑ উপরে</button><button class="btn" data-a="dnsec:${si}">↓ নিচে</button><button class="btn" data-a="dupsec:${si}">⧉ কপি</button>${qInd(qx)?`<button class="btn" data-a="cpcol:${si}">⎘ অন্য কলামে</button>`:''}<button class="btn" data-a="delsec:${si}" style="color:var(--red)">🗑 মুছো</button></div>`;
@@ -5052,24 +5069,32 @@ function qSC(s,si){
  ${(qx.cfg.cols>1&&!qx.cfg.indep&&qx.cfg.fill1!==false)?`<label class="qck"><input type="checkbox" data-s="${si}:cb"${s.cb?' checked':''}> এই বিভাগ নতুন কলাম থেকে শুরু হবে</label>`:''}</div></div>`;
  return `<div class="qsc open">${head}<div class="qscb">
  ${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম (ফাঁকা রাখলে দেখাবে না)','যেমন: ক বিভাগ — বহুনির্বাচনি')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: সকল প্রশ্নের উত্তর দাও')}${qSS(si,'nsz','নির্দেশনার সাইজ')}<div class="w"><label>নির্দেশনার অ্যালাইনমেন্ট</label>${qAlg('sal',si,'na',s.na||'l',AL4)}</div>${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','প্রশ্নের লেখার সাইজ')}${qSS(si,'qlh','প্রশ্নের লাইনের ফাঁক')}<div class="w nsr"><label>প্রশ্নের মাঝের ফাঁক <b data-sv="${si}:qgp">${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}px</b><button type="button" class="rs" data-a="srg:${si}:qgp">↺</button></label><input type="range" data-s="${si}:qgp" min="0" max="40" value="${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}"></div><div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}
- ${isc?'':`<div><label>প্রতি প্রশ্নের নম্বর</label><input class="qpt" type="number" min="0" step="0.5" data-s="${si}:marks" value="${s.marks}"></div>`}
+${qAcc(s,si,'a','✏️','শিরোনাম ও নির্দেশনা',`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম (ফাঁকা রাখলে দেখাবে না)','যেমন: ক বিভাগ — বহুনির্বাচনি')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: সকল প্রশ্নের উত্তর দাও')}${qSS(si,'nsz','নির্দেশনার সাইজ')}<div class="w"><label>নির্দেশনার অ্যালাইনমেন্ট</label>${qAlg('sal',si,'na',s.na||'l',AL4)}</div>${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>`,(s.title||'').trim().slice(0,28))}
+${qAcc(s,si,'b','🖼','ছবি, টেবিল ও শব্দ বাক্স',`${qHimgUI(s,si)}${qHtbUI(s,si)} ${s.ty==='match'?qMatchUI(s,si):''}
+ ${s.ty!=='cq'?`<label style="font-weight:600;font-size:13px">📦 শব্দ বাক্স / Word box (ঐচ্ছিক — কমা দিয়ে শব্দ লেখো)</label><textarea class="qpt" rows="2" data-s="${si}:wb" placeholder="যেমন: but, so, because, although">${esc(s.wb||'')}</textarea>`:''}
+`)}
+${(s.ty==='mcq'||s.ty==='grp')?qAcc(s,si,'e','📖','উদ্দীপক (ঐচ্ছিক)',` ${s.ty==='mcq'?`<div class="qrow" style="margin:8px 0"><button class="btn" data-a="tgrp:${si}">🖼 কয়েকটি প্রশ্নে একই উদ্দীপক (ছবি/অনুচ্ছেদ) যোগ করো</button></div>`:s.ty==='grp'?`<div class="qrow" style="margin:8px 0"><button class="btn" data-a="ugrp:${si}">↩ অভিন্ন উদ্দীপক সরাও (সাধারণ MCQ বিভাগ)</button></div>`:''}
+ ${s.ty==='grp'?`<div class="qpn" style="margin:8px 0"><h4>🖼 অভিন্ন তথ্য (সব প্রশ্নের উপরে দেখাবে)</h4><label>উদ্দীপক লেখা (ঐচ্ছিক)</label><textarea class="qpt" rows="3" data-s="${si}:gtx" placeholder="ঐচ্ছিক — শুধু ছবি দিলেও চলবে">${esc(s.gtx||'')}</textarea>
+ <div class="qimr">${s.gimg?`<img src="${s.gimg}"><input type="range" min="10" max="100" data-s="${si}:giw" value="${s.giw||60}" title="ছবির আকার"><button class="btn" data-a="gied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmgimg:${si}" style="padding:4px 10px">✕</button>`:`<button class="btn" data-a="gimg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো (ঐচ্ছিক)</button>`}</div>
+ ${s.gimg?qAl3('gial:'+si,s.gia)+`<label class="qck"><input type="checkbox" data-s="${si}:gcapOn"${s.gcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:gcap"`,s.gcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}`:''}
+ ${qIn(`data-s="${si}:gl"`,s.gl,'নির্দেশনা লাইন','ফাঁকা = অটো: উপরের চিত্র থেকে ১২৭ ও ১২৮ নং প্রশ্নের উত্তর দাও :   ({r} = প্রশ্ন নম্বর)')}</div>`:''}
+`,s.ty==='grp'?'অভিন্ন উদ্দীপক আছে':''):''}
+${qAcc(s,si,'c','🔠','সাইজ ও ফাঁক',`<div class="qfm-g" style="padding-bottom:6px">${qSS(si,'qfs','প্রশ্নের লেখার সাইজ')}${qSS(si,'qlh','প্রশ্নের লাইনের ফাঁক')}${(s.ty==='mcq'||s.ty==='grp')?qSS(si,'ofs','অপশনের (ক খ গ ঘ) লেখার সাইজ')+qSS(si,'sfs','বিবৃতির (i, ii, iii) লেখার সাইজ'):''}<div class="w nsr"><label>প্রশ্নের মাঝের ফাঁক <b data-sv="${si}:qgp">${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}px</b><button type="button" class="rs" data-a="srg:${si}:qgp">↺</button></label><input type="range" data-s="${si}:qgp" min="0" max="40" value="${s.qgp!=null&&s.qgp!==''?s.qgp:qx.cfg.gapQ}"></div><div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}
+</div>`)}
+${qAcc(s,si,'d','🔢','নম্বর ও পেজ',`<div class="qfm-g" style="padding-bottom:6px"> ${isc?'':`<div><label>প্রতি প্রশ্নের নম্বর</label><input class="qpt" type="number" min="0" step="0.5" data-s="${si}:marks" value="${s.marks}"></div>`}
  <div><label>যেকোনো কয়টি (০ = সব)</label><input class="qpt" type="number" min="0" data-s="${si}:choose" value="${s.choose}"></div>
  ${nm?'':`<div><label>উত্তরের লাইন</label><input class="qpt" type="number" min="0" max="15" data-s="${si}:lines" value="${s.lines}"></div>`}</div>
  <label class="qck"><input type="checkbox" data-s="${si}:sm"${s.sm!==false?' checked':''}> বিভাগের মান লাইন দেখাও (মান – ১০ × ৩ = ৩০)</label>
  ${nm?'':`<label class="qck"><input type="checkbox" data-s="${si}:showMk"${s.showMk?' checked':''}> প্রতি প্রশ্নের ডানে নম্বর দেখাও</label>`}
  <div class="qfm-g" style="padding-bottom:6px"><div class="w"><label>প্রশ্নের নম্বরের ধরন</label><select class="qpt" data-s="${si}:ns">${QNS.map(o=>`<option value="${o[0]}"${(s.ns||'')===o[0]?' selected':''}>${o[1]}</option>`).join('')}</select></div>${s.ty==='match'?qIn(`data-s="${si}:hl"`,s.hl,'বাম কলামের শিরোনাম','Column A / বাম পাশ')+qIn(`data-s="${si}:hr"`,s.hr,'ডান কলামের শিরোনাম','Column B / ডান পাশ'):''}</div>
- ${s.ty!=='cq'?`<label style="font-weight:600;font-size:13px">📦 শব্দ বাক্স / Word box (ঐচ্ছিক — কমা দিয়ে শব্দ লেখো)</label><textarea class="qpt" rows="2" data-s="${si}:wb" placeholder="যেমন: but, so, because, although">${esc(s.wb||'')}</textarea>`:''}
  <label class="qck"><input type="checkbox" data-s="${si}:rs"${s.rs?' checked':''}> এই বিভাগ থেকে প্রশ্ন নম্বর আবার ১ থেকে শুরু হবে</label>
  <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এই বিভাগ নতুন পাতা থেকে শুরু হবে</label>
  ${(qx.cfg.cols>1&&!qx.cfg.indep&&qx.cfg.fill1!==false)?`<label class="qck"><input type="checkbox" data-s="${si}:cb"${s.cb?' checked':''}> এই বিভাগ নতুন কলাম থেকে শুরু হবে</label>`:''}
 ${(s.ty==='mcq'||s.ty==='grp')&&s.qs.some(q=>q.st)?`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:ld"`,s.ld,'"নিচের কোনটি সঠিক?" লাইন','ফাঁকা = নিচের কোনটি সঠিক?')}<div><label>বিবৃতির ক্রম চিহ্ন</label><select class="qpt" data-s="${si}:sty"><option value="r"${s.sty!=='bn'?' selected':''}>i, ii, iii</option><option value="bn"${s.sty==='bn'?' selected':''}>১, ২, ৩</option></select></div></div>`:''}
- ${s.ty==='grp'?`<div class="qpn" style="margin:8px 0"><h4>🖼 অভিন্ন তথ্য (সব প্রশ্নের উপরে দেখাবে)</h4><label>উদ্দীপক লেখা (ঐচ্ছিক)</label><textarea class="qpt" rows="3" data-s="${si}:gtx" placeholder="ঐচ্ছিক — শুধু ছবি দিলেও চলবে">${esc(s.gtx||'')}</textarea>
- <div class="qimr">${s.gimg?`<img src="${s.gimg}"><input type="range" min="10" max="100" data-s="${si}:giw" value="${s.giw||60}" title="ছবির আকার"><button class="btn" data-a="gied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmgimg:${si}" style="padding:4px 10px">✕</button>`:`<button class="btn" data-a="gimg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো (ঐচ্ছিক)</button>`}</div>
- ${s.gimg?qAl3('gial:'+si,s.gia)+`<label class="qck"><input type="checkbox" data-s="${si}:gcapOn"${s.gcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:gcap"`,s.gcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}`:''}
- ${qIn(`data-s="${si}:gl"`,s.gl,'নির্দেশনা লাইন','ফাঁকা = অটো: উপরের চিত্র থেকে ১২৭ ও ১২৮ নং প্রশ্নের উত্তর দাও :   ({r} = প্রশ্ন নম্বর)')}</div>`:''}
- <div style="margin-top:8px">${s.qs.map((q,qi)=>qQC(s,si,q,qi)).join('')}</div>
- <div class="qrow qadd" style="margin-top:8px"><button class="btn p" data-a="addq:${si}">＋ প্রশ্ন যোগ</button>${s.ty!=='cq'&&s.ty!=='match'?`<button class="btn" data-a="bulk:${si}">📥 একসাথে পেস্ট করো</button>`:''}</div></div></div>`;
+`)}
+${qAcc(s,si,'f','📝','প্রশ্নের তালিকা',` <div style="margin-top:8px">${s.qs.map((q,qi)=>{if(q.lk&&qi>0&&!s.qs[qi-1].lk)return '';let h=qQC(s,si,q,qi);const nx=s.qs[qi+1];if(nx&&nx.lk&&!q.lk&&qoq&&(qoq===si+':'+qi||qoq===si+':'+(qi+1))){h=h.replace(/<\/div>$/,'<div class="qnest"><div class="qhint" style="font-weight:700;margin:4px 0">↳ নিচের বহুপদী অংশ</div>'+qQC(s,si,nx,qi+1,true)+'</div></div>')}return h}).join('')}</div>
+ <div class="qrow qadd" style="margin-top:8px"><button class="btn p" data-a="addq:${si}">＋ প্রশ্ন যোগ</button>${(s.ty==='mcq'||s.ty==='grp')?`<button class="btn" data-a="addqp:${si}">＋ বহুপদী প্রশ্ন (i, ii, iii)</button>`:''}${s.ty!=='cq'&&s.ty!=='match'?`<button class="btn" data-a="bulk:${si}">📥 একসাথে পেস্ট করো</button>`:''}</div>`,qbn(s.qs.length)+'টি প্রশ্ন')}
+</div></div>`;
 }
 const SYC=[['গণিত','½ ⅓ ¼ ¾ ⅔ √ ∛ ∜ ± ∓ × ÷ ≤ ≥ ≠ ≈ ≡ ∝ ∞ % ‰ ′ ″ ° ∴ ∵ ∑ ∏ ∫ ∬ ∮ ∂ ∇ ∆ ∈ ∉ ⊂ ⊃ ⊆ ⊇ ∪ ∩ ∅ ∀ ∃ ¬ ∧ ∨ ⇒ ⇔ ℕ ℤ ℚ ℝ ℂ |x| ⌊x⌋ ⌈x⌉ ∘ ⋅ ⋯ ⋮'],
 ['গ্রিক','α β γ δ ε ζ η θ ι κ λ μ ν ξ π ρ σ τ υ φ χ ψ ω Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω'],
@@ -5083,7 +5108,7 @@ function qTabQ(){
  const nclip=qClip?qClip.length:0;
  const top=`<div class="qrow qtop"><button class="btn" data-a="find">🔎 খুঁজুন ও বদলান</button><button class="btn" data-a="alltxt">📋 সব লেখা কপি</button>${qInd(qx)?`<button class="btn" data-a="ccopy"${qx.secs.length?'':' disabled'}>⎘ সব প্রশ্ন কপি (হেডার ছাড়া)</button><button class="btn" data-a="cpaste"${nclip?'':' disabled'}>📋 পেস্ট${nclip?' ('+qbn(nclip)+'টি বিভাগ)':''}</button>`:''}</div>`;
  return `${top}${qx.secs.map(qSC).join('')||'<div class="qhint">কোনো বিভাগ নেই। নিচ থেকে যোগ করো।</div>'}
-<div class="qpn"><h4>＋ নতুন বিভাগ যোগ করো</h4><div class="qtyg">${Object.keys(QTY).map(k=>`<button class="btn" data-a="addsec:${k}">${QTY[k][0]} ${QTY[k][1]}</button>`).join('')}</div></div>`;
+<div class="qpn"><h4>＋ নতুন বিভাগ যোগ করো</h4><div class="qtyg">${Object.keys(QTY).filter(k=>k!=='poly'&&k!=='grp').map(k=>`<button class="btn" data-a="addsec:${k}">${QTY[k][0]} ${QTY[k][1]}</button>`).join('')}</div></div>`;
 }
 function qTabH(){
  const h=qx.h;
@@ -5157,7 +5182,7 @@ function qSetField(t){
   const e=document.querySelector(`[data-sh="${i}"]`);
   if(k==='title'&&e)e.textContent=(String(v).trim())||QTY[s.ty][1];
   if(['marks','choose'].includes(k)&&e){const m=qm(s);e.nextElementSibling.textContent=`${QTY[s.ty][1]} · ${qbn(s.qs.length)}টি প্রশ্ন · ${qbn(m.tot)} নম্বর`}}
- else if(D.q){const[i,j,k]=D.q.split(':');qx.secs[i].qs[j][k]=k==='iw'||k==='m'?(v===''?'':+v):v;if(k==='t'){const e=t.closest('.qqc');const pe=e&&e.querySelector('.qqp');if(pe)pe.textContent=qPrev(qx.secs[i],qx.secs[i].qs[j])}}
+ else if(D.q){const[i,j,k]=D.q.split(':');qx.secs[i].qs[j][k]=k==='iw'||k==='uiw'||k==='m'?(v===''?'':+v):v;if(k==='t'){const e=t.closest('.qqc');const pe=e&&e.querySelector('.qqp');if(pe)pe.textContent=qPrev(qx.secs[i],qx.secs[i].qs[j])}}
  else if(D.o){const[i,j,k]=D.o.split(':');qx.secs[i].qs[j].o[k]=v}
  else if(D.st){const[i,j,k]=D.st.split(':');qx.secs[i].qs[j].st[k]=v}
  else if(D.tc){const[i,r2,c2]=D.tc.split(':');qx.secs[i].tb.cells[r2][c2]=v}
@@ -5198,14 +5223,17 @@ function qAct(a,el){
   case'srg':{delete S()[y];const g=y==='qws'?0:qx.cfg.gapQ,r=document.querySelector(`[data-s="${x}:${y}"]`);if(r)r.value=g;const b=document.querySelector(`[data-sv="${x}:${y}"]`);if(b)b.textContent=g+'px';qTouch(false);return}
   case'srs':{S()[y]=100;const r=document.querySelector(`[data-s="${x}:${y}"]`);if(r)r.value=100;const b=document.querySelector(`[data-sv="${x}:${y}"]`);if(b)b.textContent='100%';qTouch(false);return}
   case'tab':{qtab=x;qTabMv=true;if(x==='p')qMpChk();qEd();scrollTo(0,0);return}
-  case'tgl':{qopenS=qopenS===x?null:x;qoq=null;qEd();qScr2('#qpfm .qsc.open');return}
+  case'acc':{const s0=S();qacc[s0.id]=qacc[s0.id]===y?'-':y;qaccSeen[s0.id]=qoq;const hk='[data-a="acc:'+x+':'+y+'"]',h0=document.querySelector(hk),t0=h0?h0.getBoundingClientRect().top:0;qEd();
+   const fix=()=>{const h=document.querySelector(hk);if(!h)return;const d=h.getBoundingClientRect().top-t0;if(Math.abs(d)<1)return;let e=h.parentElement,done=false;while(e&&e!==document.body){const o=getComputedStyle(e).overflowY;if((o==='auto'||o==='scroll')&&e.scrollHeight>e.clientHeight){e.scrollTop+=d;done=true;break}e=e.parentElement}if(!done)window.scrollBy(0,d)};
+   if(qacc[s0.id]===y)qScr2(hk);else{fix();requestAnimationFrame(fix);setTimeout(fix,60);setTimeout(fix,200)}return}
+  case'tgl':{qopenS=qopenS===x?null:x;qoq=null;if(qopenS)qacc[qopenS]='a';qEd();qScr2('#qpfm .qsc.open');return}
   case'qtg':{const P=x+':'+y;qoq=qoq===P?null:P;qEd();qScr2('#qpfm .qqc.open');return}
   case'rmhl':{LS.removeItem('trsm_hlogo');try{HLOGO=''}catch(e){}qx.cfg.hlp='none';qTouch(true);return}
   case'rmwl':{LS.removeItem('trsm_logo');try{LOGO=''}catch(e){}qx.cfg.wmt='none';qTouch(true);return}
   case'hdrdlg':{qtab='hc';qTabMv=true;qEd();scrollTo(0,0);return}
   case'pgdlg':{qtab='p';qTabMv=true;qMpChk();qEd();scrollTo(0,0);return}
   case'rs':{qx.cfg[x]=QD[x];document.querySelector(`#qpfm [data-c="${x}"]`).value=QD[x];qLbl();qSyncMp();qTouch(false);return}
-  case'addsec':{const s=mkSec(x,x==='cq'||x==='grp'?2:3);qx.secs.push(s);qopenS=s.id;qoq=(qx.secs.length-1)+':0';qTouch(true);qScr2('#qpfm .qsc.open');return}
+  case'addsec':{const s=mkSec(x,x==='cq'||x==='grp'?2:3);qx.secs.push(s);qopenS=s.id;qoq=(qx.secs.length-1)+':0';qacc[s.id]='a';qaccSeen[s.id]=qoq;qTouch(true);qScr2('#qpfm .qsc.open');return}
   case'delsec':return confirmBox('এই বিভাগ ও এর সব প্রশ্ন মুছে যাবে।',()=>{qx.secs.splice(+x,1);qopenS=null;qoq=null;qTouch(true)});
   case'upsec':if(mv(qx.secs,+x,-1))qTouch(true);return;
   case'dnsec':if(mv(qx.secs,+x,1))qTouch(true);return;
@@ -5226,6 +5254,7 @@ function qAct(a,el){
   case'htbx':{delete S().htb;qTouch(true);return}
   case'htal':{S().htba=y;qTouch(true);return}
   case'tbal':{S().tba=y;qTouch(true);return}
+  case'mbal':{S().mba=y;qTouch(true);return}
   case'cwr':{delete S().cw;qTouch(true);return}
   case'ial':{Q().ia=z;qTouch(true);return}
   case'gial':{S().gia=y;qTouch(true);return}
@@ -5239,6 +5268,26 @@ function qAct(a,el){
   case'gimg':{qimT=[+x,-1];$('#qpimg').click();return}
   case'rmgimg':{delete S().gimg;qTouch(true);return}
   case'plon':{const q=Q();q.st=['','',''];if(!q.o.some(Boolean))q.o=[...POLYO];qTouch(true);return}
+  case'usadd':{Q().uo=true;qTouch(true);return}
+  case'usx':{const q=Q();['uo','us','ul','uimg','uiw','uia','uix','uiy','ucapOn','ucap'].forEach(k=>delete q[k]);qTouch(true);return}
+  case'uimg':{qimT=[+x,+y,'u'];$('#qpimg').click();return}
+  case'urm':{const q=Q();['uimg','uix','uiy'].forEach(k=>delete q[k]);qTouch(true);return}
+  case'ual':{Q().uia=z;qTouch(true);return}
+  case'uied':{const q=Q(),rs=qScrSave();if(q.uimg)qImgEd(q.uimg,(u,a)=>{q.uimg=u;if(a)q.uia=a;qTouch(true);rs()},q.uia||'c');return}
+  case'tgrp':{const s=S();if(s.ty==='mcq'){s.ty='grp';s.giw=s.giw||60;s.gtx=s.gtx||'';s.gl=s.gl||''}qTouch(true);return}
+  case'ugrp':{const s=S();if(s.gtx||s.gimg){toast('আগে অভিন্ন উদ্দীপকের লেখা ও ছবি মুছে দাও');return}s.ty='mcq';qTouch(true);return}
+  case'addqp':{const s=S(),q=mkQ(s.ty,{pl:true});s.qs.push(q);qoq=x+':'+(s.qs.length-1);qTouch(true);return}
+  case'chp':{const s=S(),q=Q(),qs=s.qs,yy=+y;if(q.lk)return;const nx=qs[yy+1],ne=o=>o&&(String(o.t||'').trim()||(o.o||[]).some(z=>String(z).trim())||(o.st||[]).some(z=>String(z).trim()));
+   if(q.st){delete q.st}
+   else if(nx&&nx.lk){if(ne(nx)&&!confirm('বহুপদী অংশটি মুছে যাবে। চালিয়ে যাবে?'))return;qs.splice(yy+1,1)}
+   else{const n=mkQ(s.ty,{pl:true});n.lk=1;qs.splice(yy+1,0,n);qoq=x+':'+(yy+1)}
+   qTouch(true);return}
+  case'chn':{const s=S(),q=Q(),qs=s.qs,yy=+y;if(q.lk)return;const nx=qs[yy+1],ne=o=>o&&(String(o.t||'').trim()||(o.o||[]).some(z=>String(z).trim())||(o.st||[]).some(z=>String(z).trim()));
+   if(q.st){const n=mkQ(s.ty,{});qs.splice(yy,0,n);q.lk=1;qoq=x+':'+yy}
+   else if(nx&&nx.lk){if(ne(q)&&!confirm('সাধারণ অংশটি মুছে যাবে। চালিয়ে যাবে?'))return;delete nx.lk;qs.splice(yy,1);qoq=x+':'+yy}
+   else toast('অন্তত একটা ধরন থাকতে হবে — বহুপদী টিক দিয়ে তারপর সাধারণ বাদ দিতে পারো');
+   qTouch(true);return}
+  case'unlk':{delete Q().lk;qTouch(true);return}
   case'plof':{delete Q().st;qTouch(true);return}
   case'stadd':{const q=Q();if(q.st&&q.st.length<8)q.st.push('');qTouch(true);return}
   case'stdel':{const q=Q();if(q.st&&q.st.length>1)q.st.pop();qTouch(true);return}
@@ -5992,29 +6041,35 @@ const QNS=[['','কাগজের নিয়ম অনুযায়ী'],['
 const qSubS=s=>['k','kp','a','ap','r'].includes(s.ns);
 function qNumS(ns,n){if(ns==='no')return '';if(ns==='r')return (ROM[n-1]||n)+'.';const L={k:LB.bn,kp:LB.bn,a:LB.en,ap:LB.en};if(L[ns]){const l=L[ns][n-1]||n;return ns.endsWith('p')?'('+l+')':l+'.'}return qNum(ns,n)}
 function qPasEd(s,si,head,rowb){return `<div class="qsc open">${head}<div class="qscb">${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: A. Seen Comprehension')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: Read the passage and answer the questions.')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}${qSS(si,'qfs','অনুচ্ছেদের লেখার সাইজ')}${qSS(si,'qlh','অনুচ্ছেদের লাইনের ফাঁক')}<div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}${qIn(`data-s="${si}:pti"`,s.pti,'Passage-এর নিজস্ব শিরোনাম (ঐচ্ছিক)','')}</div>
- <label style="font-weight:600;font-size:13px">📖 Passage / অনুচ্ছেদের লেখা (প্রতিটি নতুন লাইন = নতুন অনুচ্ছেদ)</label><textarea class="qpt" rows="9" data-s="${si}:ptx">${esc(s.ptx||'')}</textarea>
+${qAcc(s,si,'a','✏️','শিরোনাম ও নির্দেশনা',`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: A. Seen Comprehension')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','যেমন: Read the passage and answer the questions.')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>`,(s.title||'').trim().slice(0,28))}
+${qAcc(s,si,'p','📖','অনুচ্ছেদের লেখা (Passage)',`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:pti"`,s.pti,'Passage-এর নিজস্ব শিরোনাম (ঐচ্ছিক)','')}</div> <label style="font-weight:600;font-size:13px">📖 Passage / অনুচ্ছেদের লেখা (প্রতিটি নতুন লাইন = নতুন অনুচ্ছেদ)</label><textarea class="qpt" rows="9" data-s="${si}:ptx">${esc(s.ptx||'')}</textarea>
  <label class="qck"><input type="checkbox" data-s="${si}:ppn"${s.ppn?' checked':''}> প্রতিটি অনুচ্ছেদের পাশে নম্বর দাও (1, 2, 3…)</label>
- <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label>
- <div class="qhint">এর নিচে MCQ, সংক্ষিপ্ত, সত্য/মিথ্যা, শূন্যস্থান ইত্যাদি যেকোনো বিভাগ যোগ করো — প্রশ্ন নম্বর ধারাবাহিক থাকবে।</div></div></div>`}
+`)}
+${qAcc(s,si,'b','🖼','ছবি ও টেবিল',`${qHimgUI(s,si)}${qHtbUI(s,si)}`)}
+${qAcc(s,si,'c','🔠','সাইজ ও ফাঁক',`<div class="qfm-g" style="padding-bottom:6px">${qSS(si,'qfs','অনুচ্ছেদের লেখার সাইজ')}${qSS(si,'qlh','অনুচ্ছেদের লাইনের ফাঁক')}<div class="w nsr"><label>শব্দের মাঝের ফাঁক <b data-sv="${si}:qws">${+s.qws||0}px</b><button type="button" class="rs" data-a="srg:${si}:qws">↺</button></label><input type="range" data-s="${si}:qws" min="-4" max="20" value="${+s.qws||0}"></div>${qFmUI(s,si,'x','প্রশ্নের লেখার ধরন')}</div>`)}
+${qAcc(s,si,'d','📄','পেজ',` <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label>
+ <div class="qhint">এর নিচে MCQ, সংক্ষিপ্ত, সত্য/মিথ্যা, শূন্যস্থান ইত্যাদি যেকোনো বিভাগ যোগ করো — প্রশ্ন নম্বর ধারাবাহিক থাকবে।</div>`)}
+</div></div>`}
 function qTabEd(s,si,head,rowb){const t=s.tb;return `<div class="qsc open">${head}<div class="qscb">${rowb}
- <div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: E. Information Transfer')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qHimgUI(s,si)}${qHtbUI(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>
- <div class="qtbs">${t.cells.map((row,ri)=>`<div class="qtbe" style="grid-template-columns:repeat(${t.c},minmax(78px,1fr))">${row.map((cv,ci)=>`<input class="qpt" data-tc="${si}:${ri}:${ci}" value="${esc(cv)}" placeholder="${ri===0&&s.hd!==false?'শিরোনাম':'ফাঁকা রাখো'}">`).join('')}</div>`).join('')}</div>
+${qAcc(s,si,'a','✏️','শিরোনাম ও নির্দেশনা',`<div class="qfm-g" style="padding-bottom:6px">${qIn(`data-s="${si}:title"`,s.title,'বিভাগের শিরোনাম','যেমন: E. Information Transfer')}${qSS(si,'tsz','শিরোনামের সাইজ')}<div class="w"><label>শিরোনামের অ্যালাইনমেন্ট</label>${qAlg('sal',si,'ta',s.ta||'l',AL3)}</div>${qFmUI(s,si,'t','শিরোনামের ধরন')}${qNol(s,si)}${qIn(`data-s="${si}:note"`,s.note,'নির্দেশনা (ঐচ্ছিক)','')}${qSS(si,'nsz','নির্দেশনার সাইজ')}${qFmUI(s,si,'n','নির্দেশনার ধরন')}</div>`,(s.title||'').trim().slice(0,28))}
+${qAcc(s,si,'t','▦','ছকের ঘর ও সাজসজ্জা',` <div class="qtbs">${t.cells.map((row,ri)=>`<div class="qtbe" style="grid-template-columns:repeat(${t.c},minmax(78px,1fr))">${row.map((cv,ci)=>`<input class="qpt" data-tc="${si}:${ri}:${ci}" value="${esc(cv)}" placeholder="${ri===0&&s.hd!==false?'শিরোনাম':'ফাঁকা রাখো'}">`).join('')}</div>`).join('')}</div>
  <div class="qrow" style="margin-top:6px"><button class="btn" data-a="tbr:${si}:1">＋ সারি</button><button class="btn" data-a="tbr:${si}:-1">− সারি</button><button class="btn" data-a="tbc:${si}:1">＋ কলাম</button><button class="btn" data-a="tbc:${si}:-1">− কলাম</button></div>
  <div class="qhint">যে ঘর ফাঁকা রাখবে, পরীক্ষার্থী সেটি পূরণ করবে।</div>
  <label class="qck"><input type="checkbox" data-s="${si}:hd"${s.hd!==false?' checked':''}> প্রথম সারি শিরোনাম (গাঢ়)</label>
  ${qFxUI(s,k=>`data-s="${si}:${k}"`)}
  ${qCwUI(s.cw,t.c,i=>i==='r'?`data-a="cwr:${si}"`:`data-cwi="${si}:${i}"`)}
  <div class="w"><label>↔ টেবিল পেজের কোথায় বসবে</label>${qAl3('tbal:'+si,s.tba||'l')}</div>
- <div class="w"><label>🔲 টেবিলের স্টাইল</label><div class="qalg" style="flex-wrap:wrap">${[['','সাদামাটা'],['grid','সব দিকে বর্ডার'],['stripe','ডোরাকাটা'],['hline','আড়াআড়ি লাইন']].map(([v,l])=>`<button type="button" class="btn${(s.tts||'')===v?' p':''}" data-a="tts:${si}:${v}">${l}</button>`).join('')}</div></div>
- ${s.tts?`<label class="qck"><input type="checkbox" data-s="${si}:tbd"${s.tbd!==false?' checked':''}> বর্ডার দেখাও</label><div class="w"><label>হেডার সারির রং</label><div style="display:flex;gap:8px;align-items:center"><input type="color" data-s="${si}:thc" value="${s.thc||'#eef2f7'}"><button type="button" class="btn" data-a="tts:${si}:${s.tts}:x" style="padding:4px 10px">↺ ডিফল্ট রং</button></div></div>`:''}
- <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label></div></div>`}
+ ${qTsUI(s,si)}
+`)}
+${qAcc(s,si,'b','🖼','ছবি ও টেবিল (শিরোনামের পরে)',`${qHimgUI(s,si)}${qHtbUI(s,si)}`)}
+${qAcc(s,si,'d','📄','পেজ',` <label class="qck"><input type="checkbox" data-s="${si}:pb"${s.pb?' checked':''}> এটি নতুন পাতা থেকে শুরু হবে</label>`)}
+</div></div>`}
 function qFx(s,y){const g=f=>s['f'+y+f],a=[];if(g('b')!=null)a.push('font-weight:'+(g('b')?700:400));if(g('i')!=null)a.push('font-style:'+(g('i')?'italic':'normal'));if(g('u'))a.push('text-decoration:underline');return a.join(';')}
 const qMs=(base,fx)=>{const v=String(base||'').replace(/^ style="|"$/g,''),o=[v,fx].filter(Boolean).join(';');return o?` style="${o}"`:''},
 qFmOn=(s,y,f)=>s['f'+y+f]!=null?!!s['f'+y+f]:((y==='t'&&f==='b')||(y==='n'&&f==='i')),
 qFmUI=(s,si,y,l)=>`<div class="w"><label>${l}</label><div class="qal">${[['b','<b>B</b> মোটা'],['i','<i>I</i> আঁকাবাঁকা'],['u','<u>U</u> আন্ডারলাইন']].map(v=>`<button type="button" class="${qFmOn(s,y,v[0])?'on':''}" data-a="fmt:${si}:${y}:${v[0]}">${v[1]}</button>`).join('')}</div></div>`,
 qNol=(s,si)=>`<label class="qck" style="grid-column:1/-1"><input type="checkbox" data-s="${si}:nol"${s.nol?' checked':''}> শিরোনামের নিচের দাগ বাদ দাও</label>`;
-function qSecSt(c,s,gap){const a=[];if(s.qfs&&+s.qfs!==100){a.push('--qfs:'+(c.fs*s.qfs/100).toFixed(2)+'px','font-size:'+(c.fs*s.qfs/100).toFixed(2)+'px')}if(s.qlh&&+s.qlh!==100){a.push('--qlh:'+(c.lh*s.qlh/10000).toFixed(3),'line-height:'+(c.lh*s.qlh/10000).toFixed(3))}{const fx=qFx(s,'x');if(fx)a.push(fx)}if(+s.qws)a.push('word-spacing:'+(+s.qws)+'px');if(gap&&s.qgp!=null&&s.qgp!==''&&+s.qgp!==+c.gapQ)a.push('--qgq:'+(+s.qgp)+'px');return a.join(';')}
+function qSecSt(c,s,gap){const a=[];if(s.ofs&&+s.ofs!==100)a.push('--ofs:'+(s.ofs/100).toFixed(3));if(s.sfs&&+s.sfs!==100)a.push('--sfs:'+(s.sfs/100).toFixed(3));if(s.qfs&&+s.qfs!==100){a.push('--qfs:'+(c.fs*s.qfs/100).toFixed(2)+'px','font-size:'+(c.fs*s.qfs/100).toFixed(2)+'px')}if(s.qlh&&+s.qlh!==100){a.push('--qlh:'+(c.lh*s.qlh/10000).toFixed(3),'line-height:'+(c.lh*s.qlh/10000).toFixed(3))}{const fx=qFx(s,'x');if(fx)a.push(fx)}if(+s.qws)a.push('word-spacing:'+(+s.qws)+'px');if(gap&&s.qgp!=null&&s.qgp!==''&&+s.qgp!==+c.gapQ)a.push('--qgq:'+(+s.qgp)+'px');return a.join(';')}
 function qSecHead(p,s,si,x,B){const ti=p.hs.st===false?'':(s.title||'').trim(),nt=p.hs.sn===false?'':(s.note||'').trim();
  const tz=s.tsz&&s.tsz!==100?` style="font-size:${(1.08*s.tsz/100).toFixed(3)}em"`:'',nz=s.nsz&&s.nsz!==100?` style="font-size:${(.92*s.nsz/100).toFixed(3)}em"`:'';
  let hh=(ti?`<div class="qsh${s.ta&&s.ta!=='l'?' ta-'+s.ta:''}${s.nol?' nol':''}"><span class="qst"${qMs(tz,qFx(s,'t'))}>${qf(ti)}</span></div>`:'')+(nt?`<div class="qsn"${qMs(nz,qFx(s,'n'))}>${qf(nt)}</div>`:'');
@@ -6557,13 +6612,13 @@ addEventListener('keydown',e=>{
  if(m){e.preventDefault();qTouch(false)}
 });
 root.addEventListener('keyup',e=>{const t=e.target;if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT')&&['Enter','ArrowDown','ArrowUp','Backspace'].includes(e.key))qKeep(t)});
-root.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.cwi&&qx){const[si,k]=t.dataset.cwi.split(':'),s0=qx.secs[+si];if(s0&&s0.tb){const c=s0.tb.c;s0.cw=qCwSet(s0.cw,c,+k,+t.value);qCwSync(t.closest('.w'),s0.cw);qTouch(false)}return}
+root.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.cwi&&qx){const[si,k]=t.dataset.cwi.split(':'),s0=qx.secs[+si];if(s0&&(s0.tb||s0.ty==='match')){const c=s0.tb?s0.tb.c:2;s0.cw=qCwSet(s0.cw,c,+k,+t.value);qCwSync(t.closest('.w'),s0.cw);qTouch(false)}return}
 if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT'))qKeep(t)});
 root.addEventListener('focusin',e=>{const t=e.target;if(t&&t.closest&&t.closest('#qpfm')&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT')){setTimeout(()=>qKeep(t),120);setTimeout(()=>qKeep(t),420)}});
 root.addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('.qpt')&&(t.tagName==='TEXTAREA'||(t.tagName==='INPUT'&&(!t.type||t.type==='text'))))qfocus=t});
 $('#qpimg').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f||!qimT||!qx)return;
  const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,800/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);
-  const so=qx.secs[qimT[0]],du=c.toDataURL('image/jpeg',.82);if(qimT[1]===-2){so.himg=du;so.hiw=so.hiw||50}else if(qimT[1]<0){so.gimg=du;so.giw=so.giw||60}else{const q=so.qs[qimT[1]];q.img=du;q.iw=q.iw||50}URL.revokeObjectURL(u);qTouch(true);toast('ছবি যোগ হয়েছে ✓')};im.src=u};
+  const so=qx.secs[qimT[0]],du=c.toDataURL('image/jpeg',.82);if(qimT[1]===-2){so.himg=du;so.hiw=so.hiw||50}else if(qimT[1]<0){so.gimg=du;so.giw=so.giw||60}else if(qimT[2]==='u'){const q=so.qs[qimT[1]];q.uimg=du;q.uiw=q.uiw||50}else{const q=so.qs[qimT[1]];q.img=du;q.iw=q.iw||50}URL.revokeObjectURL(u);qTouch(true);toast('ছবি যোগ হয়েছে ✓')};im.src=u};
 $('#qpfimg').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f&&qx)qFlImg(f)};
 $('#qph').onclick=()=>{if(qx){qList()}else if(qmode==='pick')qList();else showHome()};
 document.querySelectorAll('#qpseg [data-sg]').forEach(b=>b.onclick=()=>qSeg(b.dataset.sg==='1'));

@@ -1,6 +1,6 @@
 // শিক্ষক সাথী — Service Worker
 // প্রতিবার আপডেটে নিচের নম্বরটা একটা বাড়াও (v1 → v2 → v3 ...)
-const VER='v19',CACHE='shikkhok-sathi-'+VER;
+const VER='v29',CACHE='shikkhok-sathi-'+VER;
 const LOCAL=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png'];
 const CDN=['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js','https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'];
 self.addEventListener('install',e=>{e.waitUntil((async()=>{const c=await caches.open(CACHE);await Promise.all(LOCAL.map(u=>c.add(new Request(u,{cache:'reload'})).catch(()=>{})));await Promise.all(CDN.map(u=>fetch(u,{mode:'cors'}).then(r=>r.ok&&c.put(u,r)).catch(()=>{})))})())});
