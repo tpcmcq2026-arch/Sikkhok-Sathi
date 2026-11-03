@@ -4281,7 +4281,7 @@ function holSheet(d){
   if(q('#hl_back'))q('#hl_back').onclick=()=>{delete SM.hol[d];done()};
   box.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{const sn=undoPrep();delete SM.hol[b.dataset.x];smSave();holSheet(d);rA();undoShow('ছুটি মুছে ফেলা হয়েছে',sn)})})}
 /* ---------- ফি ---------- */
-const FT=['ভর্তি ফি','ক্লাস টেস্ট','সাপ্তাহিক পরীক্ষা','মাসিক পরীক্ষা','মডেল টেস্ট','বই / খাতা','অন্য'];
+const FT=['ভর্তি ফি','ক্লাস টেস্ট','সাপ্তাহিক পরীক্ষা','মাসিক পরীক্ষা','মডেল টেস্ট','বই / খাতা','বৃত্তি প্রস্তুতি মডেল টেস্ট','প্রি টেস্ট','অন্য'];
 const DT=['এতিম / দুস্থ','ভাই-বোন ছাড়','মেধা বৃত্তি','শিক্ষকের সন্তান','অন্য'];
 const feeRaw=(s,m)=>{const e=hAt(s.fh,m);if(e&&e.a!=null)return +e.a;const c=hAt(SM.cfg.ch[clsAt(s,m)],m);return c&&+c.a>0?+c.a:null};
 const feeOf=(s,m)=>feeRaw(s,m)||0;
@@ -4289,6 +4289,8 @@ const entry=(s,m)=>(SM.fee[m]||{})[s.id]||{};
 const payL=(s,m)=>entry(s,m).h||[];
 const adjL=(s,m)=>entry(s,m).x||[];
 const paidOf=(s,m)=>payL(s,m).reduce((t,x)=>t+(+x.a||0),0);
+const feeNm=x=>{const t=String(x.t||'').trim();if(!t||t==='অন্য')return String(x.n||'').trim()||'অতিরিক্ত ফি';return /ফি$/.test(t)?t:t+' ফি'};
+const chgL=(s,m)=>adjL(s,m).filter(x=>x.k==='chg'&&+x.a>0).map(x=>({a:+x.a,l:feeNm(x)}));
 const chgOf=(s,m)=>adjL(s,m).filter(x=>x.k==='chg').reduce((t,x)=>t+(+x.a||0),0);
 const disOf=(s,m)=>adjL(s,m).filter(x=>x.k==='dis').reduce((t,x)=>t+(+x.a||0),0);
 const monthDue=(s,m)=>Math.max(0,feeOf(s,m)+chgOf(s,m)-disOf(s,m));
@@ -4422,19 +4424,19 @@ const imgHead=(t,s)=>`<div style="text-align:center;margin-bottom:14px"><div sty
 function ledgerRows(s){
  const cur=ymOf(new Date()),lim=addM(cur,-35),rows=[];let x=s.s||cur;if(x<lim)x=lim;
  for(;x<=cur;x=addM(x,1)){const raw=feeRaw(s,x),p=paidOf(s,x),ch=chgOf(s,x),ds=disOf(s,x);if(raw==null&&!ch&&!p&&!ds&&x!==cur)continue;
-  rows.push({m:x,fee:feeOf(s,x),ch,ds,due:monthDue(s,x),p,rem:remOf(s,x),k:stOf(s,x)})}
+  rows.push({m:x,fee:feeOf(s,x),ch,cl:chgL(s,x),ds,due:monthDue(s,x),p,rem:remOf(s,x),k:stOf(s,x)})}
  return rows}
 const ledSt=k=>k==='paid'?'✓ পরিশোধ':k==='part'?'আংশিক':k==='due'?'বাকি':k==='free'?'ফ্রি / মওকুফ':'ফি নেই';
 function ledgerText(s){const rows=ledgerRows(s),T=a=>rows.reduce((t,r)=>t+r[a],0);
- return `${inst()}\n📒 ফির খাতা\nনাম: ${s.n} | শ্রেণি: ${bn(s.c)}${s.r?' | রোল: '+bn(s.r):''}\n\n`+rows.map(r=>`${mLabel(r.m)}: মোট ${money(r.due)}${r.ch?' (+'+money(r.ch)+' অতিরিক্ত ফি)':''}${r.ds?' (−'+money(r.ds)+' ছাড়)':''} | জমা ${money(r.p)}${r.rem?' | বাকি '+money(r.rem):' ✓'}`).join('\n')+`\n\nমোট প্রদেয়: ${money(T('due'))}\nমোট জমা: ${money(T('p'))}\n`+(T('rem')?`মোট বাকি: ${money(T('rem'))}`:'মোট বাকি: নেই ✓')}
+ return `${inst()}\n📒 ফির খাতা\nনাম: ${s.n} | শ্রেণি: ${bn(s.c)}${s.r?' | রোল: '+bn(s.r):''}\n\n`+rows.map(r=>`${mLabel(r.m)}: মোট ${money(r.due)}${r.ch?' ('+r.cl.map(c=>'+'+money(c.a)+' '+c.l).join(', ')+')':''}${r.ds?' (−'+money(r.ds)+' ছাড়)':''} | জমা ${money(r.p)}${r.rem?' | বাকি '+money(r.rem):' ✓'}`).join('\n')+`\n\nমোট প্রদেয়: ${money(T('due'))}\nমোট জমা: ${money(T('p'))}\n`+(T('rem')?`মোট বাকি: ${money(T('rem'))}`:'মোট বাকি: নেই ✓')}
 function ledgerImg(s){const rows=ledgerRows(s),T=a=>rows.reduce((t,r)=>t+r[a],0);
  return `<div style="border:3px double #0f766e;border-radius:14px;padding:22px">${imgHead('ফির খাতা',E(s.n)+' · শ্রেণি '+E(bn(s.c))+(s.r?' · রোল '+E(bn(s.r)):''))}`+
- tbl(['মাস','মোট','জমা','বাকি','অবস্থা'],rows.map(r=>[mLabel(r.m)+(r.ch||r.ds?`<div style="font-size:12px;color:#64748b">${r.ch?'+'+money(r.ch)+' অতিরিক্ত ':''}${r.ds?'−'+money(r.ds)+' ছাড়':''}</div>`:''),money(r.due),money(r.p),r.rem?`<b style="color:#b91c1c">${money(r.rem)}</b>`:'—',r.k==='paid'?'<b style="color:#15803d">✓</b>':r.k==='part'?'<b style="color:#b45309">আংশিক</b>':r.k==='due'?'<b style="color:#b91c1c">বাকি</b>':'—']).concat([['<b>মোট</b>','<b>'+money(T('due'))+'</b>','<b>'+money(T('p'))+'</b>','<b style="color:#b91c1c">'+money(T('rem'))+'</b>','']]))+`</div>`}
+ tbl(['মাস','মোট','জমা','বাকি','অবস্থা'],rows.map(r=>[mLabel(r.m)+(r.ch||r.ds?`<div style="font-size:12px;color:#64748b">${r.ch?r.cl.map(c=>'+'+money(c.a)+' '+E(c.l)).join(', ')+' ':''}${r.ds?'−'+money(r.ds)+' ছাড়':''}</div>`:''),money(r.due),money(r.p),r.rem?`<b style="color:#b91c1c">${money(r.rem)}</b>`:'—',r.k==='paid'?'<b style="color:#15803d">✓</b>':r.k==='part'?'<b style="color:#b45309">আংশিক</b>':r.k==='due'?'<b style="color:#b91c1c">বাকি</b>':'—']).concat([['<b>মোট</b>','<b>'+money(T('due'))+'</b>','<b>'+money(T('p'))+'</b>','<b style="color:#b91c1c">'+money(T('rem'))+'</b>','']]))+`</div>`}
 function ledgerSheet(id){
  const s=SM.st.find(x=>x.id===id);if(!s)return;const rows=ledgerRows(s),T=a=>rows.reduce((t,r)=>t+r[a],0);
  sheet(`<h3>📒 ফির খাতা</h3><p class="sub">${E(s.n)} · শ্রেণি ${E(bn(s.c))}${s.r?' · রোল '+E(bn(s.r)):''}${s.g?' · '+E(s.g):''}</p>
  <div class="sm-tl"><div><b>${money(T('due'))}</b><small>মোট প্রদেয়</small></div><div><b style="color:#16a34a">${money(T('p'))}</b><small>মোট জমা</small></div><div><b style="color:${T('rem')?'#dc2626':'#16a34a'}">${money(T('rem'))}</b><small>মোট বাকি</small></div></div>
- ${rows.length?rows.slice().reverse().map(r=>`<div class="sm-row" data-m="${r.m}"><div class="sm-nm"><b>${mLabel(r.m)}</b><small>মোট ${money(r.due)}${r.ch?` <span style="color:#d97706">(+${money(r.ch)})</span>`:''}${r.ds?` <span style="color:#16a34a">(−${money(r.ds)} ছাড়)</span>`:''} · জমা ${money(r.p)}</small></div><span class="sm-pl ${r.k==='paid'?'g':r.k==='part'?'y':r.k==='due'?'r':'n'}">${r.k==='due'||r.k==='part'?money(r.rem)+' বাকি':ledSt(r.k)}</span></div>`).join(''):'<div class="sm-emp"><i>📒</i><b>এখনো কোনো হিসাব নেই</b>আগে মাসিক ফি সেট করো।</div>'}
+ ${rows.length?rows.slice().reverse().map(r=>`<div class="sm-row" data-m="${r.m}"><div class="sm-nm"><b>${mLabel(r.m)}</b><small>মোট ${money(r.due)}${r.ch?` <span style="color:#d97706">(${r.cl.map(c=>'+'+money(c.a)+' '+E(c.l)).join(', ')})</span>`:''}${r.ds?` <span style="color:#16a34a">(−${money(r.ds)} ছাড়)</span>`:''} · জমা ${money(r.p)}</small></div><span class="sm-pl ${r.k==='paid'?'g':r.k==='part'?'y':r.k==='due'?'r':'n'}">${r.k==='due'||r.k==='part'?money(r.rem)+' বাকি':ledSt(r.k)}</span></div>`).join(''):'<div class="sm-emp"><i>📒</i><b>এখনো কোনো হিসাব নেই</b>আগে মাসিক ফি সেট করো।</div>'}
  ${rows.length?`<div class="sm-two" style="margin-top:6px"><button class="btn p" id="lg_wa">💬 অভিভাবককে পাঠাও</button><button class="btn" id="lg_img">🖼 ছবি বানাও</button></div><p class="sub" style="margin:0;font-size:12px">কোনো মাসে চাপ দিলে ওই মাসের পেমেন্ট খুলবে।</p>`:''}`,box=>{
   box.querySelectorAll('.sm-row[data-m]').forEach(r=>r.onclick=()=>{V.F.m=r.dataset.m;paySheet(id)});
   const w=box.querySelector('#lg_wa');if(w){w.onclick=()=>openWa(s.p,ledgerText(s));box.querySelector('#lg_img').onclick=()=>shot(ledgerImg(s),'ledger-'+msSafe(s.n))}})}
@@ -7080,7 +7082,7 @@ function clsBody(S){
  return `<div class="x2cs">${chip(S.cls==='*','data-a="cls" data-v="*"','সব শ্রেণি')}${cl.map(([c,n])=>chip(S.cls===c,`data-a="cls" data-v="${E(c)}"`,`${E(bn(c))} <b>${bn(n)}</b>`)).join('')}</div>${bs.length>1?`<div class="x2l">ব্যাচ</div><div class="x2cs">${chip(S.bt==='*','data-a="bt" data-v="*"','সব ব্যাচ')}${bs.map(([k,n])=>chip(S.bt===k,`data-a="bt" data-v="${E(k)}"`,`${k==='_'?'ব্যাচ নেই':E(k)} <b>${bn(n)}</b>`)).join('')}</div>`:''}`}
 function stuSec(S){
  const l=stuList(S),n=l.filter(s=>!S.off[s.id]).length;
- return sec('stu','👥','শিক্ষার্থী, শ্রেণি ও ব্যাচ',`${clsBody(S)}<div class="x2l">👥 শিক্ষার্থী</div><div class="x2cs" style="margin-bottom:10px"><button type="button" class="x2bt s" data-a="all">✔ সবাই</button><button type="button" class="x2bt s" data-a="none">✖ কেউ না</button>${S===A?`<div style="flex:1 1 230px;min-width:0">${szRg('নাম, রোল, শ্রেণি, ব্যাচের সাইজ','nm',60,180)}</div>`:''}</div>
+ return sec('stu','👥','শিক্ষার্থী, শ্রেণি ও ব্যাচ',`${clsBody(S)}<div class="x2l">👥 শিক্ষার্থী</div><div class="x2cs" style="margin-bottom:10px"><button type="button" class="x2bt s" data-a="all">✔ সবাই</button><button type="button" class="x2bt s" data-a="none">✖ কেউ না</button>${S===A?`<div style="flex:1 1 230px;min-width:0">${szRg('লেখার সাইজ','nm',60,180)}</div>`:''}</div>
 <div class="x2sl">${l.map(s=>`<label class="x2sr"><input type="checkbox" data-a="chk" data-id="${E(s.id)}"${S.off[s.id]?'':' checked'}><div class="nm">${E(s.n)}<small>রোল ${s.r?E(bn(s.r)):'—'} · শ্রেণি ${E(bn(s.c))}${s.b?' · '+E(s.b):''}</small></div><button type="button" class="x2ph" data-a="ph" data-id="${E(s.id)}" title="ছবি যোগ করো">${X.ph[s.id]?`<img src="${X.ph[s.id]}">`:'📷'}</button></label>`).join('')||'<div class="x2em">এই শ্রেণিতে কেউ নেই</div>'}</div>
 <p class="x2hint">📷 ছবি একবার যোগ করলে প্রবেশপত্র ও রিপোর্ট দুটোতেই ব্যবহার হবে। ছবি শুধু এই ফোনেই থাকে।</p>`,{open:false,em:bn(n)+'/'+bn(l.length)+' জন'})}
 function thumbOf(kind,v,ref,dd){
