@@ -1762,7 +1762,7 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 .x2pi{transform-origin:0 0;position:absolute;left:0;top:0}
 .x2em{text-align:center;color:var(--mut);padding:22px 10px;font-size:13.5px}
 .x2sl{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:12px}
-.x2sr{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer}
+.x2sr,.x2ph{-webkit-tap-highlight-color:transparent}.x2sr{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer}
 .x2sr:last-child{border-bottom:0}
 .x2sr input{width:18px;height:18px;accent-color:var(--ac);flex:none}
 .x2sr .nm{flex:1;min-width:0;font-size:14px;line-height:1.3}.x2sr .nm small{display:block;color:var(--mut);font-size:11.5px}
@@ -6736,7 +6736,7 @@ const NOW=new Date(),CUR=ymOf(NOW);
 const cp=o=>JSON.parse(JSON.stringify(o));
 
 /* ---------- ডিফল্ট সেটিংস ---------- */
-const AD={tpl:'classic',ac:'#0F6E56',lay:2,ttl:'প্রবেশপত্র',ex:'অর্ধবার্ষিক পরীক্ষা',yr:bn(NOW.getFullYear()),cls:'',bt:'*',time:'সকাল ১০টা – দুপুর ১২টা',venue:'',exe:'',sz:{ttl:100,rul:100},
+const AD={tpl:'classic',ac:'#0F6E56',lay:2,ttl:'প্রবেশপত্র',ex:'অর্ধবার্ষিক পরীক্ষা',yr:bn(NOW.getFullYear()),cls:'',bt:'*',time:'সকাল ১০টা – দুপুর ১২টা',venue:'',exe:'',sz:{ttl:100,rul:100,nm:100},
  rows:[{d:'',s:'',t:''},{d:'',s:'',t:''},{d:'',s:'',t:''}],rowsBy:{},
  tg:{photo:1,tbl:1,rule:1,sig:1,qr:0,fee:0,logo:1,batch:1,guard:0,serial:0,cut:1,seat:0,centre:0},
  rules:'১. পরীক্ষা শুরুর ১৫ মিনিট আগে উপস্থিত হতে হবে।\n২. এই প্রবেশপত্র সাথে আনা বাধ্যতামূলক।\n৩. মোবাইল ফোন ও অনুচিত উপকরণ আনা নিষেধ।',sl:'পরীক্ষার্থী',sr:'পরিচালক',off:{},rsm:'r',or:'p',fill:0,cc:'',sp:'',lg:'bn',fn:'auto',mg:26,gp:12,cr:'d',ft:{tx:'',te:'',al:'c',sz:100,y:0},wm:{t:'none',tx:'',op:10,od:7,sz:100,rt:-30,x:0,y:0}};
@@ -6874,14 +6874,14 @@ function acCard(s,S,idx,fs){
  const tm=r=>tmF(S,r.t||S.time||'');
  const ro=s.r?Nn(s.r):'—',inst=instNL(S);
  const ttl=(S.ttl||'প্রবেশপত্র')==='প্রবেশপত্র'||S.ttl==='Admit Card'?sx(S,'প্রবেশপত্র','Admit Card'):S.ttl;
- const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100;
+ const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100,nk=+(S.sz&&S.sz.nm)||100;
  const mny=n=>nvOf(S)?en(money(n)):money(n);
  return `<div class="xc t-${E(S.tpl)}" style="${tint(S.ac)}${S.cr==='s'?';border-radius:0':S.cr==='r'?';border-radius:1.1em':''}${fs?';font-size:'+fs+'px':''}${fontCss(S)}">${wmHTML(S,'xc')}
 <div class="xbs">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
 <div class="xh">${lg?`<img class="xl" src="${lg}">`:''}<div class="xhn"><b>${E(inst[0])}</b><small>${E(inst[1])}</small></div><i class="xrb">${T('roll')}<b>${E(ro)}</b></i></div>
 <div class="xt"${tk!==100?` style="font-size:${tk/100}em"`:''}><span>${E(ttl)}${exT||yr?' — '+E((exT+' '+yr).trim()):''}</span></div>
 ${(g.seat||g.centre||S.tpl==='hall')?`<div class="xsn">${(g.seat||S.tpl==='hall')?`<span>${T('seat')}<b>${E(seatNo(s,S,idx))}</b></span>`:''}${(g.centre||S.tpl==='hall')?`<span>${T('centre')}<b>${E(S.cc?Nn(S.cc):'—')}</b></span>`:''}</div>`:''}
-<div class="xm"><div class="xf">
+<div class="xm"><div class="xf"${nk!==100?` style="font-size:${(.95*nk/100).toFixed(3)}em"`:''}>
 <div>${T('name')}: <b>${E(snm(S,s))}</b></div>
 <div>${T('roll')}: <b>${E(ro)}</b> &nbsp; ${T('cls')}: <b>${E(Nn(s.c))}</b>${g.batch&&s.b?` &nbsp; ${T('batch')}: <b>${E(btn_(S,s))}</b>`:''}</div>
 ${g.guard&&s.g?`<div>${T('guard')}: <b>${E(gdn_(S,s))}</b></div>`:''}
@@ -7080,7 +7080,7 @@ function clsBody(S){
  return `<div class="x2cs">${chip(S.cls==='*','data-a="cls" data-v="*"','সব শ্রেণি')}${cl.map(([c,n])=>chip(S.cls===c,`data-a="cls" data-v="${E(c)}"`,`${E(bn(c))} <b>${bn(n)}</b>`)).join('')}</div>${bs.length>1?`<div class="x2l">ব্যাচ</div><div class="x2cs">${chip(S.bt==='*','data-a="bt" data-v="*"','সব ব্যাচ')}${bs.map(([k,n])=>chip(S.bt===k,`data-a="bt" data-v="${E(k)}"`,`${k==='_'?'ব্যাচ নেই':E(k)} <b>${bn(n)}</b>`)).join('')}</div>`:''}`}
 function stuSec(S){
  const l=stuList(S),n=l.filter(s=>!S.off[s.id]).length;
- return sec('stu','👥','শিক্ষার্থী, শ্রেণি ও ব্যাচ',`${clsBody(S)}<div class="x2l">👥 শিক্ষার্থী</div><div class="x2cs" style="margin-bottom:10px"><button type="button" class="x2bt s" data-a="all">✔ সবাই</button><button type="button" class="x2bt s" data-a="none">✖ কেউ না</button></div>
+ return sec('stu','👥','শিক্ষার্থী, শ্রেণি ও ব্যাচ',`${clsBody(S)}<div class="x2l">👥 শিক্ষার্থী</div><div class="x2cs" style="margin-bottom:10px"><button type="button" class="x2bt s" data-a="all">✔ সবাই</button><button type="button" class="x2bt s" data-a="none">✖ কেউ না</button>${S===A?`<div style="flex:1 1 230px;min-width:0">${szRg('নাম, রোল, শ্রেণি, ব্যাচের সাইজ','nm',60,180)}</div>`:''}</div>
 <div class="x2sl">${l.map(s=>`<label class="x2sr"><input type="checkbox" data-a="chk" data-id="${E(s.id)}"${S.off[s.id]?'':' checked'}><div class="nm">${E(s.n)}<small>রোল ${s.r?E(bn(s.r)):'—'} · শ্রেণি ${E(bn(s.c))}${s.b?' · '+E(s.b):''}</small></div><button type="button" class="x2ph" data-a="ph" data-id="${E(s.id)}" title="ছবি যোগ করো">${X.ph[s.id]?`<img src="${X.ph[s.id]}">`:'📷'}</button></label>`).join('')||'<div class="x2em">এই শ্রেণিতে কেউ নেই</div>'}</div>
 <p class="x2hint">📷 ছবি একবার যোগ করলে প্রবেশপত্র ও রিপোর্ট দুটোতেই ব্যবহার হবে। ছবি শুধু এই ফোনেই থাকে।</p>`,{open:false,em:bn(n)+'/'+bn(l.length)+' জন'})}
 function thumbOf(kind,v,ref,dd){
@@ -7281,7 +7281,7 @@ function onClick(e){
  if(a==='zm'){let i=ZS.indexOf(PZ[MODE]);if(i<0)i=3;if(v==='0')PZ[MODE]=1;else PZ[MODE]=ZS[clamp(i+(v==='+'?1:-1),0,ZS.length-1)];pvScale();return}
  if(a==='or'){S.or=v;xs();pvRender();rebuild();return}
  if(a==='chk'){S.off[t.dataset.id]=t.checked?0:1;if(t.checked)delete S.off[t.dataset.id];xs();const l=stuList(S),x=Q('.x2sh em',t.closest('.x2s'));if(x)x.textContent=bn(l.filter(z=>!S.off[z.id]).length)+'/'+bn(l.length)+' জন';pvLazy();return}
- if(a==='ph'){e.preventDefault();const id=t.dataset.id,pick=()=>{$('#x2f')._id=id;$('#x2f').click()};
+ if(a==='ph'){e.preventDefault();try{t.blur();document.activeElement&&document.activeElement.blur()}catch(x){}const id=t.dataset.id,pick=()=>{$('#x2f')._id=id;$('#x2f').click()};
   if(!X.ph[id]){pick();return}
   $('#dbox').innerHTML=`<h3 style="margin:0 0 10px;font-size:17px">শিক্ষার্থীর ছবি</h3><div style="text-align:center;margin:0 0 14px"><img src="${X.ph[id]}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:2px solid var(--line)"></div><div class="bar" style="justify-content:center;margin:0;flex-wrap:wrap"><button class="btn" id="phc">বাতিল</button><button class="btn" id="phn">🖼️ বদলাও</button><button class="btn p" id="phd" style="background:#dc2626;border-color:#dc2626;color:#fff">🗑️ মুছে ফেলো</button></div>`;
   $('#dlg').classList.remove('hide');$('#phc').onclick=closeDlg;$('#phn').onclick=()=>{closeDlg();pick()};$('#phd').onclick=()=>{delete X.ph[id];closeDlg();xf();rebuild();toast('ছবি মুছে গেছে ✓')};return}
