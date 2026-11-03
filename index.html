@@ -6738,7 +6738,7 @@ const NOW=new Date(),CUR=ymOf(NOW);
 const cp=o=>JSON.parse(JSON.stringify(o));
 
 /* ---------- ডিফল্ট সেটিংস ---------- */
-const AD={tpl:'classic',ac:'#0F6E56',lay:2,ttl:'প্রবেশপত্র',ex:'অর্ধবার্ষিক পরীক্ষা',yr:bn(NOW.getFullYear()),cls:'',bt:'*',time:'সকাল ১০টা – দুপুর ১২টা',venue:'',exe:'',sz:{ttl:100,rul:100,nm:100},
+const AD={tpl:'classic',ac:'#0F6E56',lay:2,ttl:'প্রবেশপত্র',ex:'অর্ধবার্ষিক পরীক্ষা',yr:bn(NOW.getFullYear()),cls:'',bt:'*',time:'সকাল ১০টা – দুপুর ১২টা',venue:'',exe:'',sz:{ttl:100,rul:100,nm:100,sg:100},
  rows:[{d:'',s:'',t:''},{d:'',s:'',t:''},{d:'',s:'',t:''}],rowsBy:{},
  tg:{photo:1,tbl:1,rule:1,sig:1,qr:0,fee:0,logo:1,batch:1,guard:0,serial:0,cut:1,seat:0,centre:0},
  rules:'১. পরীক্ষা শুরুর ১৫ মিনিট আগে উপস্থিত হতে হবে।\n২. এই প্রবেশপত্র সাথে আনা বাধ্যতামূলক।\n৩. মোবাইল ফোন ও অনুচিত উপকরণ আনা নিষেধ।',sl:'পরীক্ষার্থী',sr:'পরিচালক',off:{},rsm:'r',or:'p',fill:0,cc:'',sp:'',lg:'bn',fn:'auto',mg:26,gp:12,cr:'d',ft:{tx:'',te:'',al:'c',sz:100,y:0},wm:{t:'none',tx:'',op:10,od:7,sz:100,rt:-30,x:0,y:0}};
@@ -6876,7 +6876,7 @@ function acCard(s,S,idx,fs){
  const tm=r=>tmF(S,r.t||S.time||'');
  const ro=s.r?Nn(s.r):'—',inst=instNL(S);
  const ttl=(S.ttl||'প্রবেশপত্র')==='প্রবেশপত্র'||S.ttl==='Admit Card'?sx(S,'প্রবেশপত্র','Admit Card'):S.ttl;
- const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100,nk=+(S.sz&&S.sz.nm)||100;
+ const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100,nk=+(S.sz&&S.sz.nm)||100,sgk=+(S.sz&&S.sz.sg)||100,sgs=sgk!==100?` style="font-size:${(sgk/100).toFixed(3)}em"`:'';
  const mny=n=>nvOf(S)?en(money(n)):money(n);
  return `<div class="xc t-${E(S.tpl)}" style="${tint(S.ac)}${S.cr==='s'?';border-radius:0':S.cr==='r'?';border-radius:1.1em':''}${fs?';font-size:'+fs+'px':''}${fontCss(S)}">${wmHTML(S,'xc')}
 <div class="xbs">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
@@ -6894,7 +6894,7 @@ ${g.qr?`<div class="xq">${c39('TPC-'+s.c+'-'+(s.r||idx+1))}<small>${T('roll')} $
 ${due>0?`<div class="xw">${T('duefee')} ${mny(due)} — ${T('payb')}</div>`:''}
 ${g.tbl&&rows.length?`<table class="xs"><tr><th>${T('date')}</th><th>${T('subj')}</th><th>${T('time')}</th></tr>${rows.map(r=>`<tr><td>${E(dShortL(S,r.d))}</td><td>${E(subL(S,r.s))}</td><td>${E(tm(r))}</td></tr>`).join('')}</table>`:''}
 ${g.rule&&String(S.rules||'').trim()?`<div class="xr"${rk!==100?` style="font-size:${(.76*rk/100).toFixed(3)}em"`:''}>${E(rulesL(S))}</div>`:''}
-${g.sig?`<div class="xg"><span>${E(sigL(S,S.sl))}</span><span>${E(sigL(S,S.sr))}</span></div>`:''}
+${g.sig?`<div class="xg"><span${sgs}>${E(sigL(S,S.sl))}</span><span${sgs}>${E(sigL(S,S.sr))}</span></div>`:''}
 ${ftH(S,'xft')}
 </div>`}
 
@@ -7138,7 +7138,7 @@ function ftBlk(S){const f=S.ft,D=(S===A?AD:RD).ft,en_=lgOf(S)==='en';
 const szRg=(l,k,mn,mx)=>{const d=AD.sz[k],v=(A.sz&&A.sz[k])||d;return `<div class="x2rg"><span>${l}<em>ডিফল্ট ${bn(d)}%</em></span><input type="range" min="${mn}" max="${mx}" value="${v}" data-f="sz.${k}" style="--d:${(d-mn)/(mx-mn)*100}%"><b>${bn(v)}%</b><button type="button" class="x2rs" data-a="szrs" data-v="${k}"${+v===+d?' disabled':''} title="ডিফল্টে ফেরাও">↺</button></div>`};
 function rsSec(){
  const own=X.rs.map((r,i)=>`<span class="x2c own"><button type="button" data-a="rsap" data-v="o${i}">⭐ ${E(r.n)}</button><button type="button" data-a="rsdl" data-v="${i}" aria-label="মুছো">✕</button></span>`).join('');
- return sec('rules','📋','নির্দেশনা ও স্বাক্ষর',`<div class="x2l" style="margin-top:0">📚 তৈরি নির্দেশনা সেট (${bn(RS.length)}টি) — ট্যাপ করলে বসে যাবে</div><div class="x2cs">${own}${RS.map((r,i)=>chip(false,`data-a="rsap" data-v="${i}"`,E(r[0]))).join('')}</div><div class="x2cs" style="margin-top:10px">${chip(A.rsm!=='a','data-a="rsm" data-v="r"','বদলে বসাও')}${chip(A.rsm==='a','data-a="rsm" data-v="a"','নিচে যোগ করো')}</div><div class="x2f" style="margin-top:12px"><label>নির্দেশনা (প্রতি লাইনে একটি — নিজের মতো বদলানো যাবে)</label><textarea class="x2ta" data-f="rules">${E(A.rules)}</textarea></div><button type="button" class="x2bt s" data-a="rssv">⭐ এই নির্দেশনা নিজের সেট হিসেবে সেভ করো</button><div style="margin-top:10px">${szRg('নির্দেশনার লেখার সাইজ','rul',50,200)}</div><div class="x2f2" style="margin-top:14px"><div><label>বাম স্বাক্ষর</label><input class="x2i" data-f="sl" value="${E(A.sl)}"></div><div><label>ডান স্বাক্ষর</label><input class="x2i" data-f="sr" value="${E(A.sr)}"></div></div>${ftBlk(A)}`,{open:false})}
+ return sec('rules','📋','নির্দেশনা ও স্বাক্ষর',`<div class="x2l" style="margin-top:0">📚 তৈরি নির্দেশনা সেট (${bn(RS.length)}টি) — ট্যাপ করলে বসে যাবে</div><div class="x2cs">${own}${RS.map((r,i)=>chip(false,`data-a="rsap" data-v="${i}"`,E(r[0]))).join('')}</div><div class="x2cs" style="margin-top:10px">${chip(A.rsm!=='a','data-a="rsm" data-v="r"','বদলে বসাও')}${chip(A.rsm==='a','data-a="rsm" data-v="a"','নিচে যোগ করো')}</div><div class="x2f" style="margin-top:12px"><label>নির্দেশনা (প্রতি লাইনে একটি — নিজের মতো বদলানো যাবে)</label><textarea class="x2ta" data-f="rules">${E(A.rules)}</textarea></div><button type="button" class="x2bt s" data-a="rssv">⭐ এই নির্দেশনা নিজের সেট হিসেবে সেভ করো</button><div style="margin-top:10px">${szRg('নির্দেশনার লেখার সাইজ','rul',50,200)}</div><div class="x2f2" style="margin-top:14px"><div><label>বাম স্বাক্ষর</label><input class="x2i" data-f="sl" value="${E(A.sl)}"></div><div><label>ডান স্বাক্ষর</label><input class="x2i" data-f="sr" value="${E(A.sr)}"></div></div><div style="margin-top:8px">${szRg('বাম ও ডান স্বাক্ষর সাইজ','sg',50,200)}</div>${ftBlk(A)}`,{open:false})}
 const LAYS=[1,2,4,6,8];
 const layIcon=(n,or)=>{const L=LAYM[or==='l'?'l':'p'][n];return `<span class="x2li${or==='l'?' l':''}" style="grid-template-columns:repeat(${L[0]},1fr);grid-template-rows:repeat(${L[1]},1fr)">${'<b></b>'.repeat(n)}</span>`};
 const MGS=[[14,'ছোট (৪ মিমি)'],[26,'মাঝারি (৭ মিমি)'],[44,'বড় (১২ মিমি)']],GPS=[[6,'কম'],[12,'মাঝারি'],[22,'বেশি']],CRS=[['s','চৌকো'],['d','ডিফল্ট'],['r','বেশি গোল']];
