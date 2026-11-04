@@ -7278,12 +7278,20 @@ function tplBody(kind){
 function tplGal(kind){
  const S=kind==='ac'?A:P,list=kind==='ac'?ACT:RPT,ref=refStu(kind),dd=kind==='rp'?(ref?rpData(ref,S):SAMPLE_D()):null;
  return `<div class="x2g" data-g="tpl${kind}">${list.map(([id,nm])=>{const v=Object.assign({},S,{tpl:id,or:'p'});
-  return `<button type="button" class="x2gi${kind==='rp'?' rg':''}${S.tpl===id?' on':''}" data-a="tpl" data-v="${id}"><div class="bx">${thumbOf(kind,v,ref,dd)}</div><span>${nm}</span></button>`}).join('')}</div>`}
+  return `<button type="button" class="x2gi${kind==='rp'?' rg':''}${S.tpl===id?' on':''}" data-a="tpl" data-v="${id}"><div class="bx"></div><span>${nm}</span></button>`}).join('')}</div>`}
+let thGen=0;
+function thFill(kind){const gen=++thGen,host=$(kind==='ac'?'#x2ab':'#x2rb'),g=host&&Q('[data-g=tpl'+kind+']',host);if(!g)return;
+ const S=kind==='ac'?A:P,ref=refStu(kind),dd=kind==='rp'?(ref?rpData(ref,S):SAMPLE_D()):null,bs=[...g.children],sel=Math.max(0,bs.findIndex(b=>b.classList.contains('on')));
+ const ord=bs.map((b,i)=>[Math.abs(i-sel),b]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);let i=0;
+ const step=()=>{if(gen!==thGen||!g.isConnected)return;const t0=performance.now();
+  do{const b=ord[i++],v=Object.assign({},S,{tpl:b.dataset.v,or:'p'});b.firstElementChild.innerHTML=thumbOf(kind,v,ref,dd)}while(i<ord.length&&performance.now()-t0<8);
+  if(i<ord.length)setTimeout(step,0)};step()}
 function ttGal(S){
  const base=tint(S.ac),mk=(id,nm,pv)=>`<button type="button" class="${(S.tst||'')===id?'on':''}" data-a="tst" data-v="${id}"><div class="pv"><div class="xc" style="${base}">${pv}</div></div><span class="n">${nm}</span></button>`;
  const t=S.lg==='en'?'Admit Card':'প্রবেশপত্র',sb=S.lg==='en'?'Half-Yearly Exam 2026':'অর্ধবার্ষিক পরীক্ষা ২০২৬';
  return `<div class="x2l">🏷 শিরোনামের ধরন</div><div class="x2sub">ডানে-বামে সোয়াইপ করে দেখো। "একসাথে" হলে শিরোনাম ও পরীক্ষার নাম এক লাইনে থাকে; অন্যগুলোতে শিরোনাম আলাদা ডিজাইনে, নিচে পরীক্ষার নাম ও সাল।</div><div class="x2tt x2g" data-g="tst">${mk('','একসাথে (এখনকার)',`<div class="xt"><span>${t} — ${sb}</span></div>`)}${TST.map(([id,nm])=>mk(id,nm,ttHTML(id,t,sb,100))).join('')}</div>`}
-function tplSec(list,S,cur,kind){return sec('tpl'+kind,'🖼','ডিজাইন ও রং',tplBody(kind),{em:bn(list.length)+'টি · '+E(tname(list,cur))+(kind==='ac'&&S.tst?' · শিরোনাম: '+E((TST.find(q=>q[0]===S.tst)||['',''])[1]):'')})}
+const tplEm=kind=>{const S=kind==='ac'?A:P,list=kind==='ac'?ACT:RPT;return bn(list.length)+'টি · '+tname(list,S.tpl)+(kind==='ac'&&S.tst?' · শিরোনাম: '+(TST.find(q=>q[0]===S.tst)||['',''])[1]:'')};
+function tplSec(list,S,cur,kind){return sec('tpl'+kind,'🖼','ডিজাইন ও রং',tplBody(kind),{em:E(tplEm(kind))})}
 function gSave(host){const o={};QA('.x2g[data-g]',host).forEach(g=>o[g.dataset.g]=g.scrollLeft);return o}
 function selG(g){const on=Q('.x2gi.on,.x2sd.df',g);if(on)g.scrollLeft=Math.max(0,on.offsetLeft-(g.clientWidth-on.offsetWidth)/2)}
 function gRest(host,o){QA('.x2g[data-g]',host).forEach(g=>{const v=o[g.dataset.g];if(v!=null&&v>0)g.scrollLeft=v;else selG(g)})}
@@ -7351,7 +7359,7 @@ ${A.tst?`<div style="margin-top:12px">${szRg('পরীক্ষার নাম
  sec('rows','🗓','পরীক্ষার রুটিন',`<div class="x2l" style="margin-top:0">রুটিন কোন শ্রেণির জন্য</div><div class="x2cs" style="margin-bottom:10px">${chip(A.cls==='*','data-a="cls" data-v="*"','সব শ্রেণি (সাধারণ)')}${cl.map(([c])=>chip(A.cls===c,`data-a="cls" data-v="${E(c)}"`,'শ্রেণি '+E(bn(c)))).join('')}</div>${rowsKey(A)&&!rowsRef(A).length?`<div class="x2warn">এই শ্রেণির রুটিন এখনো লেখা হয়নি — নিচে ＋ বিষয় যোগ করে লেখো${A.rows.some(r=>r.d||r.s)?'<br><button type="button" class="x2bt s" data-a="rcp" style="margin-top:8px">📋 সাধারণ রুটিন থেকে কপি করো</button>':''}</div>`:''}${rows}<div class="x2cs" style="margin-top:8px"><button type="button" class="x2bt s" data-a="radd">＋ বিষয় যোগ</button><button type="button" class="x2bt s" data-a="rimp">📥 রুটিন থেকে নাও</button><button type="button" class="x2bt s" data-a="rclr">🧹 খালি করো</button></div><p class="x2hint">${rowsKey(A)?'এই রুটিন শুধু শ্রেণি '+E(bn(A.cls))+'-এর কার্ডে বসবে। ':'সব শ্রেণি বাছা থাকলে প্রতিটি কার্ডে তার শ্রেণির নিজের রুটিন বসে; নিজের রুটিন না থাকলে এই সাধারণ রুটিন বসে। '}বিষয়ের পাশের সময় ফাঁকা রাখলে ওপরের “সাধারণ সময়” বসবে।</p>`,{em:(rowsKey(A)?'শ্রেণি '+bn(A.cls)+' · ':'')+bn(rowsRef(A).filter(r=>r.d||r.s).length)+'টি বিষয়'})+
  rsSec()+sec('tg','☑','কী কী থাকবে',`<div class="x2cs">${toggles(A,[['photo','ছবির ঘর'],['tbl','পরীক্ষার রুটিন'],['rule','নির্দেশনা'],['sig','স্বাক্ষর'],['qr','রোল বারকোড'],['fee','ফি বাকি থাকলে সতর্কবার্তা'],['logo','লোগো'],['batch','ব্যাচ'],['school','স্কুল'],['guard','অভিভাবকের নাম'],['serial','কার্ড নম্বর'],['seat','আসন নম্বর'],['centre','কেন্দ্র কোড'],['cut','কাটার দাগ']])}</div>`)+
  pgSec()+tplSec(ACT,A,A.tpl,'ac')+wmSec(A);
-  gRest(host,gs);acSum();if(y)scrollTo(0,y)}
+  gRest(host,gs);thFill('ac');acSum();if(y)scrollTo(0,y)}
 function acSum(){const hs=Q('#x2hs',$('#x2a'));if(!hs)return;const l=stuSel(A);hs.textContent=l.length?`${bn(l.length)} জন · ${bn(acPageN(l,A))}টি A4 পাতা · ডিজাইন: ${tname(ACT,A.tpl)}`:'কেউ বাছা নেই'}
 
 /* ---------- রিপোর্ট এডিটর ---------- */
@@ -7379,7 +7387,7 @@ function rpBuild(){
 <div class="x2l">হাজিরা ও ফি সাজানো</div><div class="x2cs">${chip(P.cols===1,'data-a="cols" data-v="1"','এক কলাম')}${chip(P.cols===2,'data-a="cols" data-v="2"','পাশাপাশি (২ কলাম)')}</div>
 <div class="x2l">⚠ অনুপস্থিতির সতর্কতা — টানা কয়দিন অনুপস্থিত থাকলে হাইলাইট</div><div class="x2cs">${chip(!P.ab.on,'data-a="aboff"','বন্ধ')}${[2,3,4,5].map(n=>chip(P.ab.on&&P.ab.n===n,`data-a="abn" data-v="${n}"`,'টানা '+bn(n)+' দিন')).join('')}</div>`)+
  pgRSec()+tplSec(RPT,P,P.tpl,'rp')+wmSec(P);
- gRest(host,gs);rpSum();if(y)scrollTo(0,y)}
+ gRest(host,gs);thFill('rp');rpSum();if(y)scrollTo(0,y)}
 function rpSum(){const hs=Q('#x2hs',$('#x2r'));if(!hs)return;const l=stuSel(P);hs.textContent=l.length?`${bn(l.length)} জন · ${perLabel(P)} · ডিজাইন: ${tname(RPT,P.tpl)}`:'কেউ বাছা নেই'}
 
 /* ---------- প্রিভিউ পাতা ---------- */
@@ -7459,7 +7467,7 @@ function onClick(e){
  const t=e.target.closest('[data-a]');if(!t){hideMenu();return}const a=t.dataset.a,v=t.dataset.v,S=cur();
  if(a!=='mo')hideMenu();
  if(X.lk[MODE]&&!FREE.includes(a))return toast('🔒 লক করা আছে — ⋮ মেনু থেকে আনলক করো');
- if(a==='fold'){const s=t.closest('.x2s'),was=s.classList.contains('open');QA('.x2s.open',s.parentNode).forEach(o=>o.classList.remove('open'));if(!was){s.classList.add('open');X.open[MODE]=v;if(v==='tplac'||v==='tplrp'){const b=Q('.x2sb',s);b.innerHTML=tplBody(v.slice(3));selG(Q('.x2g',b)||b)}else if(v==='sda'||v==='sdr'){const b=Q('.x2sb',s);b.innerHTML=sdBody(v.slice(2));const g=Q('.x2g',b);if(g)selG(g)}setTimeout(()=>{const y=s.getBoundingClientRect().top+scrollY-64;scrollTo({top:Math.max(0,y),behavior:'smooth'})},60)}else X.open[MODE]='';xs();return}
+ if(a==='fold'){const s=t.closest('.x2s'),was=s.classList.contains('open');QA('.x2s.open',s.parentNode).forEach(o=>o.classList.remove('open'));if(!was){s.classList.add('open');X.open[MODE]=v;if(v==='tplac'||v==='tplrp'){const b=Q('.x2sb',s);b.innerHTML=tplBody(v.slice(3));selG(Q('.x2g',b)||b);thFill(v.slice(3))}else if(v==='sda'||v==='sdr'){const b=Q('.x2sb',s);b.innerHTML=sdBody(v.slice(2));const g=Q('.x2g',b);if(g)selG(g)}setTimeout(()=>{const y=s.getBoundingClientRect().top+scrollY-64;scrollTo({top:Math.max(0,y),behavior:'smooth'})},60)}else X.open[MODE]='';xs();return}
  if(a==='nsv')return saveDz();
  if(a==='ndl')return dlPop();
  if(a==='npv')return togglePv();
@@ -7477,7 +7485,12 @@ function onClick(e){
  if(a==='goS'){x2Close();try{window.smDbg.smOpen('S')}catch(x){}return}
  if(a==='cls'){S.cls=v;S.bt='*';ai=ap=ri=0}
  else if(a==='bt'){S.bt=v;ai=ap=ri=0}
- else if(a==='tpl'){S.tpl=v}
+ else if(a==='tpl'||(a==='tst'&&!!S.tst===!!v)||a==='ac'){const kd=S===A?'ac':'rp',hs=$(MODE==='a'?'#x2ab':'#x2rb');
+  if(a==='tpl'){S.tpl=v;QA('[data-g=tpl'+kd+'] .x2gi',hs).forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+  else if(a==='tst'){S.tst=v;QA('.x2tt button',hs).forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+  else{S.ac=v;QA('.x2sw[data-v]',hs).forEach(b=>b.classList.toggle('on',b.dataset.v===v));const cu=Q('.x2sw.cu',hs);if(cu){cu.classList.remove('on');const ci=Q('input',cu);if(ci)ci.value=hex(v)}}
+  const em=Q('[data-sec=tpl'+kd+'] .x2sh em',hs);if(em)em.textContent=tplEm(kd);
+  xs();pvLazy();if(a!=='tpl')rebuildGaLazy();return}
  else if(a==='tst'){S.tst=v}
  else if(a==='ac'){S.ac=v}
  else if(a==='tg'){S.tg[v]=S.tg[v]?0:1;t.classList.toggle('on',!!S.tg[v]);xs();pvLazy();rebuildGaLazy();return}
@@ -7539,7 +7552,7 @@ function onClick(e){
  else if(a==='fn'){S.fn=v}
  else return;
  xs();afterCh()}
-function rebuildGallery(){const host=$(MODE==='a'?'#x2ab':'#x2rb'),kind=MODE==='a'?'ac':'rp',b=Q('[data-sec=tpl'+kind+'] .x2sb',host);if(!b||!b.parentNode.classList.contains('open'))return;const gw=Q('.x2gw',b);if(!gw)return;const gs=gSave(host);gw.innerHTML=tplGal(kind);gRest(host,gs)}
+function rebuildGallery(){const host=$(MODE==='a'?'#x2ab':'#x2rb'),kind=MODE==='a'?'ac':'rp',b=Q('[data-sec=tpl'+kind+'] .x2sb',host);if(!b||!b.parentNode.classList.contains('open'))return;const tw=Q('.x2tw',b);if(tw&&kind==='ac'){const gs=gSave(host);tw.innerHTML=ttGal(A);gRest(host,gs)}thFill(kind)}
 function onInput(e){
  const t=e.target,S=cur();
  if(t.dataset.r!=null){rowsRef(S)[+t.dataset.r][t.dataset.k]=t.value;xs();pvLazy();return}
