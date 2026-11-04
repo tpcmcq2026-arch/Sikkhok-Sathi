@@ -469,6 +469,26 @@ header.top #ins{position:absolute;right:10px;top:10px;padding:5px 12px;font-size
 .hc{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;cursor:pointer}
 .hc i{font-style:normal;font-size:28px;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;flex:none}
 .hc b{display:block;font-size:18px}.hc span{color:var(--mut);font-size:14px}.hc u{margin-left:auto;color:var(--mut);text-decoration:none;font-size:22px}
+#home:not(.hide){display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+#home>.ht,#home>div[style],#home>#smTd,#home>.sm-lb{grid-column:1/-1}
+#home>#smTd:empty{display:none}
+#home>.ht{margin:2px 0 0}
+#home>div[style]{margin:0!important}
+#home>div[style]:not(:has(#ins2:not(.hide))){display:none}
+#home .sm-lb{margin:8px 6px 0}
+#home .hc{position:relative;flex-direction:column;align-items:flex-start;gap:8px;margin:0;padding:12px;border-radius:18px;min-width:0;background:var(--card);background:linear-gradient(160deg,color-mix(in srgb,var(--c,#888) 16%,var(--card)),var(--card) 72%);border-color:var(--line);border-color:color-mix(in srgb,var(--c,#888) 38%,var(--line))}
+#home .hc i{width:44px;height:44px;font-size:22px;border-radius:13px;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+#home .hc b{font-size:15px;line-height:1.25}
+#home .hc span{display:block;font-size:11.5px;line-height:1.3;margin-top:1px}
+#home .hc u{position:absolute;right:12px;top:8px;margin:0}
+#home .hh{background:linear-gradient(120deg,#0f766e,#1d4ed8);border-radius:20px;padding:14px 14px 12px;color:#fff;box-shadow:var(--sh)}
+#home .hh .r1{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#home .hh b{display:block;font-size:17px;line-height:1.25}
+#home .hh small{display:block;color:rgba(255,255,255,.85);font-size:12px;margin-top:2px}
+#home .hh .hb{flex:none;background:#fff;color:#0f766e;border:0;border-radius:20px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+#home .hh .r2{display:flex;gap:8px;margin-top:11px}
+#home .hh .hch{flex:1;min-width:0;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.17);color:#fff;border:0;border-radius:12px;padding:7px 9px;font:inherit;font-size:12px;line-height:1.3;text-align:left;cursor:pointer}
+#home .hh .hch.sm-bk{box-shadow:inset 0 0 0 2px #fbbf24}
 header.top #hb{position:absolute;left:8px;top:10px;padding:5px 10px;font-size:13px;background:#ffffff26;color:#fff;border:0;border-radius:999px;cursor:pointer}
 #nt .nth,#st .nth{background:linear-gradient(90deg,#10233f,#0f4450);color:#fff;display:flex;align-items:center;gap:8px;padding:10px 12px;position:sticky;top:0;z-index:20}#nt .nth b,#st .nth b{margin-right:auto;font-size:17px}
 #nt .nth button,#st .nth button{background:#ffffff26;color:#fff;border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
@@ -2440,11 +2460,11 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 <main id="main"></main>
 <nav id="tb"><button data-t="dash"><i>🏠</i><span>Dashboard</span></button><button data-t="results"><i>📋</i><span>Results</span></button><button class="fab" data-t="new"><i>＋</i><span>New</span></button><button data-t="set"><i>⚙️</i><span>Settings</span></button><button class="thm"><i data-ti>🌙</i><span>Theme</span></button></nav></div>
 <div id="home" class="hide"><div class="ht"><div><h1>📋 শিক্ষক সাথী</h1><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div style="text-align:center;margin:-8px 0 14px"><button id="ins2" class="btn p s hide">⬇ ইনস্টল</button></div>
-<div id="smTd"></div>
-<button class="hc" data-h="res"><i style="background:#dbeafe">📊</i><div><b>রেজাল্ট শিট</b><span>পরীক্ষার ফলাফল শিট তৈরি করুন</span></div><u>›</u></button>
-<button class="hc" data-h="nt"><i style="background:#4ca152">📣</i><div><b>নোটিশ</b><span>স্কুল/কলেজের নোটিশ তৈরি করুন</span></div><u>›</u></button>
-<button class="hc" data-h="rt"><i style="background:linear-gradient(135deg,#7c3aed,#0f766e)">🗓</i><div><b>রুটিন</b><span>পরীক্ষা ও ক্লাসের রুটিন তৈরি করুন</span></div><u>›</u></button>
-<button class="hc" data-h="qp"><i style="background:linear-gradient(135deg,#e11d48,#f97316)">📝</i><div><b>প্রশ্নপত্র</b><span>MCQ, সৃজনশীল, সংক্ষিপ্ত প্রশ্নপত্র তৈরি করুন</span></div><u>›</u></button><div class="sm-lb">ক্লাস ম্যানেজমেন্ট</div><button class="hc" data-sm="S"><i style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">👥</i><div><b>শিক্ষার্থী</b><span>নাম, শ্রেণি, রোল ও অভিভাবকের নম্বর</span></div><u>›</u></button><button class="hc" data-sm="A"><i style="background:linear-gradient(135deg,#10b981,#0f766e)">✅</i><div><b>হাজিরা খাতা</b><span>প্রতিদিনের হাজিরা ও মাসিক রিপোর্ট</span></div><u>›</u></button><button class="hc" data-sm="F"><i style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</i><div><b>ফি / বেতন</b><span>মাসিক ফি আদায় ও বাকির তাগাদা</span></div><u>›</u></button><button class="hc" data-sm="D"><i style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">📖</i><div><b>ক্লাস ডায়েরি</b><span>পড়া ও বাড়ির কাজ — অভিভাবককে পাঠাও</span></div><u>›</u></button><div class="sm-lb">প্রবেশপত্র ও রিপোর্ট</div><button class="hc" data-x2="a"><i style="background:linear-gradient(135deg,#0ea5e9,#0f766e)">🪪</i><div><b>প্রবেশপত্র</b><span>সব ছাত্রের প্রবেশপত্র একসাথে প্রিন্ট — ২৮টি ডিজাইন</span></div><u>›</u></button><button class="hc" data-x2="r"><i style="background:linear-gradient(135deg,#f59e0b,#ea580c)">📑</i><div><b>প্রগতি রিপোর্ট</b><span>হাজিরা, ফি ও রেজাল্ট এক পাতায় — অভিভাবককে পাঠাও</span></div><u>›</u></button><div class="sm-lb">নিরাপত্তা</div><button class="hc" id="smBk" data-sm="B"><i style="background:linear-gradient(135deg,#64748b,#334155)">☁️</i><div><b>ব্যাকআপ ও রিস্টোর</b><span id="smBkS">ডেটা নিরাপদ রাখো</span></div><u>›</u></button></div>
+<div id="smTd"></div><div class="sm-lb">প্রধান টুল</div>
+<button class="hc" data-h="res" style="--c:#3b82f6"><i style="background:#dbeafe">📊</i><div><b>রেজাল্ট শিট</b><span>ফলাফল শিট তৈরি</span></div><u>›</u></button>
+<button class="hc" data-h="nt" style="--c:#4ca152"><i style="background:#4ca152">📣</i><div><b>নোটিশ</b><span>স্কুল/কোচিং নোটিশ</span></div><u>›</u></button>
+<button class="hc" data-h="rt" style="--c:#7c3aed"><i style="background:linear-gradient(135deg,#7c3aed,#0f766e)">🗓</i><div><b>রুটিন</b><span>পরীক্ষা ও ক্লাসের রুটিন</span></div><u>›</u></button>
+<button class="hc" data-h="qp" style="--c:#f43f5e"><i style="background:linear-gradient(135deg,#e11d48,#f97316)">📝</i><div><b>প্রশ্নপত্র</b><span>MCQ, সৃজনশীল, সংক্ষিপ্ত</span></div><u>›</u></button><div class="sm-lb">ক্লাস ম্যানেজমেন্ট</div><button class="hc" data-sm="S" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">👥</i><div><b>শিক্ষার্থী</b><span>নাম, শ্রেণি, রোল</span></div><u>›</u></button><button class="hc" data-sm="A" style="--c:#10b981"><i style="background:linear-gradient(135deg,#10b981,#0f766e)">✅</i><div><b>হাজিরা খাতা</b><span>দৈনিক ও মাসিক</span></div><u>›</u></button><button class="hc" data-sm="F" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</i><div><b>ফি / বেতন</b><span>আদায় ও বাকি</span></div><u>›</u></button><button class="hc" data-sm="D" style="--c:#8b5cf6"><i style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">📖</i><div><b>ক্লাস ডায়েরি</b><span>পড়া ও বাড়ির কাজ</span></div><u>›</u></button><div class="sm-lb">প্রবেশপত্র ও রিপোর্ট</div><button class="hc" data-x2="a" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#0f766e)">🪪</i><div><b>প্রবেশপত্র</b><span>সব ছাত্রের একসাথে প্রিন্ট</span></div><u>›</u></button><button class="hc" data-x2="r" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#ea580c)">📑</i><div><b>প্রগতি রিপোর্ট</b><span>অভিভাবকের জন্য</span></div><u>›</u></button></div>
 <div id="nt" class="hide"><div class="nth"><button id="nth">← Back</button><div style="text-align:center;line-height:1.3"><b id="ntt">নোটিশ</b><small style="display:block;font-size:12px;color:#aab6cc;font-weight:400">Created By: Md Tawfik Ahammed</small></div><span></span></div><div id="ntbody"></div>
 <button id="nmore" class="hide">⋮</button><div id="nmm" class="hide"><button id="nund">↶ Undo</button><button id="nred">↷ Redo</button><button id="nlk">🔒 Lock Notice</button><button id="nsvt">⭐ টেমপ্লেট হিসেবে সেভ</button></div>
 <nav id="ntb"></nav></div>
@@ -4729,7 +4749,7 @@ function dHwSend(e){
 /* ---------- হোমে ফিরলে আগের জায়গাতেই থাকা ---------- */
 (function(){
  let homeY=0;window.__homeRestore=false;
- document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#home .hc, #home .sm-tile');if(t){homeY=window.pageYOffset||document.documentElement.scrollTop||0;window.__homeRestore=true}},true);
+ document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#home .hc, #home .sm-tile, #home .hh [data-sm]');if(t){homeY=window.pageYOffset||document.documentElement.scrollTop||0;window.__homeRestore=true}},true);
  new MutationObserver(()=>{const h=$('#home');if(h&&!h.classList.contains('hide')&&window.__homeRestore){window.__homeRestore=false;const y=homeY;[0,50,150,400].forEach(ms=>setTimeout(()=>window.scrollTo(0,y),ms))}}).observe($('#home'),{attributes:true,attributeFilter:['class']});
 })();
 /* ---------- ব্যাকআপ ---------- */
@@ -4764,9 +4784,13 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 function smHome(){
  const T=todayS(),act=actv(),td=$('#smTd'),m=ymOf(new Date());
- if(td){if(act.length){const day=SM.att[T]||{};let taken=0,pres=0,ex=0;act.forEach(s=>{const k=day[s.id];if(k){taken++;if(k==='p'||k==='l')pres++;if(k==='e')ex++}});
+ if(td){const dt=new Date(),dl=bn(dt.getDate())+' '+MO[dt.getMonth()];let ti='আজ '+WDN[dt.getDay()],sb=dl,bt='হাজিরা নাও',bk='A',fee='';
+  if(act.length){const day=SM.att[T]||{};let taken=0,pres=0,ex=0;act.forEach(s=>{const k=day[s.id];if(k){taken++;if(k==='p'||k==='l')pres++;if(k==='e')ex++}});
   const l=act.filter(s=>(s.s||'')<=m),exp=l.reduce((t,s)=>t+monthDue(s,m),0),due=l.reduce((t,s)=>t+remOf(s,m),0),nd=l.filter(s=>remOf(s,m)>0).length,nf=l.filter(s=>stOf(s,m)==='nofee').length;
-  td.innerHTML=`<div class="sm-td"><button class="sm-tile" data-sm="A"><i style="background:linear-gradient(135deg,#10b981,#0f766e)">✅</i><div><b>${taken?'আজ '+bn(pres)+'/'+bn(act.length-ex)+' উপস্থিত':'আজকের হাজিরা বাকি'}</b><small>${WDN[new Date().getDay()]}</small></div></button><button class="sm-tile" data-sm="F"><i style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</i><div><b>${exp||!nf?(due?money(due)+' বাকি':'সব আদায় ✓'):'ফি সেট করো'}</b><small>${exp&&nd?bn(nd)+' জন · ':''}${MO[new Date().getMonth()]}</small></div></button></div>`}else td.innerHTML=''}
+  if(taken){ti='আজ '+bn(pres)+'/'+bn(act.length-ex)+' উপস্থিত';sb=WDN[dt.getDay()]+' · '+dl;bt='দেখো'}else sb=dl+' · হাজিরা বাকি';
+  fee=`<button type="button" class="hch" data-sm="F">💰 <span>${exp||!nf?(due?money(due)+' বাকি'+(nd?' ('+bn(nd)+' জন)':''):'সব আদায় ✓'):'ফি সেট করো'} · ${MO[dt.getMonth()]}</span></button>`}
+  else{bt='শিক্ষার্থী যোগ করো';bk='S'}
+  td.innerHTML=`<div class="hh"><div class="r1"><div><b>${ti}</b><small>${sb}</small></div><button type="button" class="hb" data-sm="${bk}">${bt} →</button></div><div class="r2">${fee}<button type="button" class="hch" id="smBk" data-sm="B">☁️ <span id="smBkS">ব্যাকআপ</span></button></div></div>`}
  const i=bkInfo(),s=$('#smBkS'),c=$('#smBk');if(s)s.textContent=i.txt+(i.warn?' — এখনই নাও':'');if(c)c.classList.toggle('sm-bk',i.warn)}
 
 /* ---------- ইভেন্ট ---------- */
@@ -7033,7 +7057,7 @@ function acCard(s,S,idx,fs){
  const tm=r=>tmF(S,r.t||S.time||'');
  const ro=s.r?Nn(s.r):'—',inst=instNL(S);
  const ttl=(S.ttl||'প্রবেশপত্র')==='প্রবেশপত্র'||S.ttl==='Admit Card'?sx(S,'প্রবেশপত্র','Admit Card'):S.ttl;
- const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100,nk=+(S.sz&&S.sz.nm)||100,sgk=+(S.sz&&S.sz.sg)||100,ik=+(S.sz&&S.sz.in)||100,ak=+(S.sz&&S.sz.ad)||100,scIn=(S.or==='l'&&[1,4].includes(+S.lay))||(S.or!=='l'&&+S.lay===2),sgs=sgk!==100?` style="font-size:${(sgk/100).toFixed(3)}em"`:'';
+ const exT=(lgOf(S)==='en'&&String(S.exe||'').trim())?String(S.exe).trim():exL(S,S.ex),yr=S.yr?Nn(S.yr):'',tk=+(S.sz&&S.sz.ttl)||100,rk=+(S.sz&&S.sz.rul)||100,nk=+(S.sz&&S.sz.nm)||100,sgk=+(S.sz&&S.sz.sg)||100,ik=+(S.sz&&S.sz.in)||100,ak=+(S.sz&&S.sz.ad)||100,scIn=(S.or==='l'&&[1,4].includes(+S.lay))||(S.or!=='l'&&[2,8].includes(+S.lay)),sgs=sgk!==100?` style="font-size:${(sgk/100).toFixed(3)}em"`:'';
  const mny=n=>nvOf(S)?en(money(n)):money(n);
  return `<div class="xc t-${E(S.tpl)}" style="${tint(S.ac)}${S.cr==='s'?';border-radius:0':S.cr==='r'?';border-radius:1.1em':''}${fs?';font-size:'+fs+'px':''}${fontCss(S)}">${wmHTML(S,'xc')}
 <div class="xbs">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
