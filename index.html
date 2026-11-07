@@ -1417,6 +1417,34 @@ html[data-mode=dark] .sm-pl.g{color:#6fdc9c}html[data-mode=dark] .sm-pl.y{color:
 @keyframes smcd{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 
 .sm-hw{border-top:1px solid var(--line);padding:9px 0}.sm-hw:first-child{border-top:0}
+
+/* QR স্ক্যান */
+.nz-seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--sh);margin-bottom:12px}
+.nz-seg button{border:0;border-radius:999px;padding:12px 6px;font:inherit;font-weight:700;font-size:15.5px;background:transparent;color:inherit;cursor:pointer}
+.nz-seg button.on.i{background:linear-gradient(135deg,#10b981,#0d9488);color:#fff;box-shadow:0 4px 12px rgba(16,185,129,.35)}
+.nz-seg button.on.o{background:linear-gradient(135deg,#f97316,#e11d48);color:#fff;box-shadow:0 4px 12px rgba(244,63,94,.35)}
+.nz-cam{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0b1220,#1e293b);aspect-ratio:4/3;margin-bottom:10px;box-shadow:var(--sh)}
+.nz-cam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.nz-fr{position:absolute;inset:16% 20%;border:3px solid rgba(255,255,255,.9);border-radius:20px;box-shadow:0 0 0 999px rgba(0,0,0,.3);overflow:hidden}
+.nz-fr:after{content:"";position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#22d3ee,transparent);animation:nzsc 1.8s ease-in-out infinite}
+@keyframes nzsc{0%{top:4%}50%{top:94%}100%{top:4%}}
+.nz-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#cbd5e1;font-size:14px;text-align:center;padding:16px}
+.nz-ph i{font-style:normal;font-size:44px;line-height:1}.nz-ph b{font-size:18px;color:#fff}
+.nz-res{display:flex;gap:12px;align-items:center;border-radius:18px;padding:12px 14px;margin-bottom:10px;color:#fff;animation:smfd .18s}
+.nz-res>i{font-style:normal;font-size:34px}.nz-res .sm-av{width:56px;height:56px;border-radius:50%}
+.nz-res b{display:block;font-size:18px;line-height:1.25}.nz-res small{display:block;font-size:12.5px;opacity:.92;line-height:1.45}.nz-res em{display:block;font-style:normal;font-weight:700;font-size:17px;margin:2px 0}
+.nz-res.ok{background:linear-gradient(135deg,#10b981,#0d9488)}.nz-res.late{background:linear-gradient(135deg,#f59e0b,#ea580c)}.nz-res.out{background:linear-gradient(135deg,#6366f1,#7c3aed)}.nz-res.dup{background:linear-gradient(135deg,#64748b,#475569)}.nz-res.bad{background:linear-gradient(135deg,#ef4444,#be123c)}
+.nz-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:2px 0 14px}.nz-tools .btn{padding:10px 4px;border-radius:14px;font-size:13px;white-space:normal;line-height:1.3}
+.nz-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.nz-sum div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 4px;text-align:center;box-shadow:var(--sh)}.nz-sum b{display:block;font-size:22px;line-height:1.1}.nz-sum small{color:var(--mut);font-size:12px}.nz-sum .w b{color:#ea580c}
+.nz-r{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:11px 12px;margin-bottom:10px;box-shadow:var(--sh)}
+.nz-h{display:flex;gap:12px;align-items:center}.nz-h .sm-nm{flex:1;min-width:0}.nz-h .sm-av{width:46px;height:46px}
+.nz-l{font-weight:700}.nz-l.ok{color:#059669}.nz-l.late{color:#ea580c}.nz-l.out{color:#6366f1}
+.nz-x{flex:none;border:0;background:transparent;color:var(--mut);font-size:16px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+.nz-bs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.nz-wa{border:0;border-radius:14px;padding:11px 8px;font:inherit;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,#22c55e,#15803d);cursor:pointer;box-shadow:0 3px 8px rgba(34,197,94,.3)}
+.nz-wa.dn{background:var(--card);color:#15803d;border:1.5px solid #86efac;box-shadow:none}
+.nz-bt b{font-size:15.5px}.nz-tm{display:flex;gap:10px;margin-top:8px}.nz-tm label{flex:1;font-size:12.5px;color:var(--mut);display:block}.nz-tm input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font:inherit;font-size:16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg,var(--card));color:var(--ink)}
 </style>
 <style id="qpcss">
 /* ===== প্রশ্নপত্র (qp) ===== */
@@ -2510,7 +2538,7 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 <button class="hc" data-h="res" style="--c:#3b82f6"><i style="background:#dbeafe">📊</i><div><b>রেজাল্ট শিট</b><span>ফলাফল শিট তৈরি</span></div><u>›</u></button>
 <button class="hc" data-h="nt" style="--c:#4ca152"><i style="background:#4ca152">📣</i><div><b>নোটিশ</b><span>স্কুল/কোচিং নোটিশ</span></div><u>›</u></button>
 <button class="hc" data-h="rt" style="--c:#7c3aed"><i style="background:linear-gradient(135deg,#7c3aed,#0f766e)">🗓</i><div><b>রুটিন</b><span>পরীক্ষা ও ক্লাসের রুটিন</span></div><u>›</u></button>
-<button class="hc" data-h="qp" style="--c:#f43f5e"><i style="background:linear-gradient(135deg,#e11d48,#f97316)">📝</i><div><b>প্রশ্নপত্র</b><span>MCQ, সৃজনশীল, সংক্ষিপ্ত</span></div><u>›</u></button><div class="sm-lb">ক্লাস ম্যানেজমেন্ট</div><button class="hc" data-sm="S" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">👥</i><div><b>শিক্ষার্থী</b><span>নাম, শ্রেণি, রোল</span></div><u>›</u></button><button class="hc" data-sm="A" style="--c:#10b981"><i style="background:linear-gradient(135deg,#10b981,#0f766e)">✅</i><div><b>হাজিরা খাতা</b><span>দৈনিক ও মাসিক</span></div><u>›</u></button><button class="hc" data-sm="F" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</i><div><b>ফি / বেতন</b><span>আদায় ও বাকি</span></div><u>›</u></button><button class="hc" data-sm="D" style="--c:#8b5cf6"><i style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">📖</i><div><b>ক্লাস ডায়েরি</b><span>পড়া ও বাড়ির কাজ</span></div><u>›</u></button><button class="hc" data-sm="W" style="--c:#ef4444"><i style="background:linear-gradient(135deg,#ef4444,#f97316)">🚨</i><div><b>নজরদারি</b><span>ঝুঁকিতে থাকা শিক্ষার্থী</span></div><u>›</u></button><div class="sm-lb">প্রবেশপত্র ও রিপোর্ট</div><button class="hc" data-x2="a" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#0f766e)">🪪</i><div><b>প্রবেশপত্র</b><span>সব ছাত্রের একসাথে প্রিন্ট</span></div><u>›</u></button><button class="hc" data-x2="r" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#ea580c)">📑</i><div><b>প্রগতি রিপোর্ট</b><span>অভিভাবকের জন্য</span></div><u>›</u></button><button class="hc" data-sm="Q" style="--c:#14b8a6"><i style="background:linear-gradient(135deg,#14b8a6,#6366f1)">💺</i><div><b>সিট প্ল্যান</b><span>আসন বিন্যাস ও রোল শিট</span></div><u>›</u></button></div>
+<button class="hc" data-h="qp" style="--c:#f43f5e"><i style="background:linear-gradient(135deg,#e11d48,#f97316)">📝</i><div><b>প্রশ্নপত্র</b><span>MCQ, সৃজনশীল, সংক্ষিপ্ত</span></div><u>›</u></button><div class="sm-lb">ক্লাস ম্যানেজমেন্ট</div><button class="hc" data-sm="S" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">👥</i><div><b>শিক্ষার্থী</b><span>নাম, শ্রেণি, রোল</span></div><u>›</u></button><button class="hc" data-sm="A" style="--c:#10b981"><i style="background:linear-gradient(135deg,#10b981,#0f766e)">✅</i><div><b>হাজিরা খাতা</b><span>দৈনিক ও মাসিক</span></div><u>›</u></button><button class="hc" data-sm="N" style="--c:#06b6d4"><i style="background:linear-gradient(135deg,#06b6d4,#2563eb)">📷</i><div><b>QR স্ক্যান</b><span>আসা-যাওয়া ও অভিভাবকের বার্তা</span></div><u>›</u></button><button class="hc" data-sm="F" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</i><div><b>ফি / বেতন</b><span>আদায় ও বাকি</span></div><u>›</u></button><button class="hc" data-sm="D" style="--c:#8b5cf6"><i style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">📖</i><div><b>ক্লাস ডায়েরি</b><span>পড়া ও বাড়ির কাজ</span></div><u>›</u></button><button class="hc" data-sm="W" style="--c:#ef4444"><i style="background:linear-gradient(135deg,#ef4444,#f97316)">🚨</i><div><b>নজরদারি</b><span>ঝুঁকিতে থাকা শিক্ষার্থী</span></div><u>›</u></button><div class="sm-lb">প্রবেশপত্র ও রিপোর্ট</div><button class="hc" data-x2="a" style="--c:#0ea5e9"><i style="background:linear-gradient(135deg,#0ea5e9,#0f766e)">🪪</i><div><b>প্রবেশপত্র</b><span>সব ছাত্রের একসাথে প্রিন্ট</span></div><u>›</u></button><button class="hc" data-x2="r" style="--c:#f59e0b"><i style="background:linear-gradient(135deg,#f59e0b,#ea580c)">📑</i><div><b>প্রগতি রিপোর্ট</b><span>অভিভাবকের জন্য</span></div><u>›</u></button><button class="hc" data-sm="Q" style="--c:#14b8a6"><i style="background:linear-gradient(135deg,#14b8a6,#6366f1)">💺</i><div><b>সিট প্ল্যান</b><span>আসন বিন্যাস ও রোল শিট</span></div><u>›</u></button></div>
 <div id="nt" class="hide"><div class="nth"><button id="nth">← Back</button><div style="text-align:center;line-height:1.3"><b id="ntt">নোটিশ</b><small style="display:block;font-size:12px;color:#aab6cc;font-weight:400">Created By: Md Tawfik Ahammed</small></div><span></span></div><div id="ntbody"></div>
 <button id="nmore" class="hide">⋮</button><div id="nmm" class="hide"><button id="nund">↶ Undo</button><button id="nred">↷ Redo</button><button id="nlk">🔒 Lock Notice</button><button id="nsvt">⭐ টেমপ্লেট হিসেবে সেভ</button></div>
 <nav id="ntb"></nav></div>
@@ -2521,6 +2549,7 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 <div id="smF" class="hide smx"><div class="rth"><button class="sm-back">← হোম</button><div class="rtt1"><b>ফি / বেতন</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="sm-w" id="smFb"></div></div>
 <div id="smD" class="hide smx"><div class="rth"><button class="sm-back">← হোম</button><div class="rtt1"><b>ক্লাস ডায়েরি</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="sm-w" id="smDb"></div></div>
 <div id="smW" class="hide smx"><div class="rth"><button class="sm-back">← হোম</button><div class="rtt1"><b>নজরদারি</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="sm-w" id="smWb"></div></div>
+<div id="smN" class="hide smx"><div class="rth"><button class="sm-back">← হোম</button><div class="rtt1"><b>QR স্ক্যান</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="sm-w" id="smNb"></div></div>
 <div id="smQ" class="hide smx"><div class="rth"><button class="sm-back">← হোম</button><div class="rtt1"><b>সিট প্ল্যান</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="sm-w" id="smQb"></div></div>
 <div id="x2a" class="hide x2v"><div class="rth"><button class="x2b">← হোম</button><div class="rtt1"><b>প্রবেশপত্র</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="x2w" id="x2ab"></div><div class="x2pvw" id="x2ap"></div><nav class="x2nb" id="x2aa"></nav><button type="button" class="x2mo" data-a="mo">⋮</button><div class="x2mm hide"><button type="button" data-a="undo">↶ Undo</button><button type="button" data-a="redo">↷ Redo</button><button type="button" data-a="lock">🔒 Lock</button></div></div>
 <div id="x2r" class="hide x2v"><div class="rth"><button class="x2b">← হোম</button><div class="rtt1"><b>প্রগতি রিপোর্ট</b><small>Created By: Md Tawfik Ahammed</small></div><button class="thm"><span data-ti>🌙</span></button></div><div class="x2w" id="x2rb"></div><div class="x2pvw" id="x2rp"></div><nav class="x2nb" id="x2ra"></nav><button type="button" class="x2mo" data-a="mo">⋮</button><div class="x2mm hide"><button type="button" data-a="undo">↶ Undo</button><button type="button" data-a="redo">↷ Redo</button><button type="button" data-a="lock">🔒 Lock</button></div></div>
@@ -4286,12 +4315,12 @@ function syncRos(cls){if(SM.cfg.nosync)return;try{const o=ROS();(Array.isArray(c
 /* ---------- শিট / ডায়ালগ ---------- */
 const closeSheet=()=>{document.querySelectorAll('.sm-ov').forEach(x=>x.remove());document.body.style.overflow=''};
 function sheet(html,mount){closeSheet();const o=document.createElement('div');o.className='sm-ov';o.innerHTML='<div class="sm-sh"><i class="sm-grab"></i>'+html+'</div>';o.addEventListener('mousedown',e=>{o._d=e.target===o});o.addEventListener('click',e=>{if(e.target===o&&o._d!==false)closeSheet()});document.body.appendChild(o);document.body.style.overflow='hidden';if(mount)mount(o.firstChild,o);return o.firstChild}
-const VW={S:'#smS',A:'#smA',F:'#smF',D:'#smD',W:'#smW',Q:'#smQ'};
+const VW={S:'#smS',A:'#smA',F:'#smF',D:'#smD',W:'#smW',Q:'#smQ',N:'#smN'};
 const V={S:{c:'*',b:'*',q:'',f:'act'},A:{c:null,b:'*',d:todayS(),tab:0,mo:ymOf(new Date()),sort:'roll',open:null},F:{c:'*',b:'*',m:ymOf(new Date()),f:'all',sent:{}},D:{d:todayS(),c:null,b:'*',pt:'p'},W:{f:'*',c:'*',q:'',z:false},Q:{p:null}};
 function hideAll(){Object.values(VW).forEach(s=>$(s).classList.add('hide'));closeSheet()}
 function smOpen(k){hideAll();$('#home').classList.add('hide');$(VW[k]).classList.remove('hide');document.body.classList.remove('in-ed');scrollTo(0,0);render(k)}
 function smClose(){hideAll();$('#home').classList.remove('hide');if(!window.__homeRestore)scrollTo(0,0);smHome()}
-function render(k){({S:rS,A:rA,F:rF,D:rD,W:rW,Q:rQ})[k]()}
+function render(k){({S:rS,A:rA,F:rF,D:rD,W:rW,Q:rQ,N:rN})[k]()}
 const chips=(list,cur,attr,all)=>'<div class="sm-chs">'+(all?`<button class="sm-ch${cur==='*'?' on':''}" ${attr}="*">সব</button>`:'')+list.map(([c,n])=>`<button class="sm-ch${cur===c?' on':''}" ${attr}="${E(c)}">${E(bn(c))}${n!=null?` <b>${bn(n)}</b>`:''}</button>`).join('')+'</div>';
 /* ---------- শিক্ষার্থী ---------- */
 const emptyStu=()=>`<div class="sm-emp"><i>👥</i><b>এখনো কোনো শিক্ষার্থী নেই</b>আগে শিক্ষার্থীদের তালিকা বানাও — তারপর হাজিরা ও ফি নিজে থেকে চলবে।<br><button class="btn p" data-a="goS">শিক্ষার্থী যোগ করো</button></div>`;
@@ -5342,9 +5371,247 @@ new MutationObserver(()=>{if(!$('#home').classList.contains('hide'))smHome()}).o
 smHome();
 window.smGuardian=(cls,name)=>{const c=cnorm(cls),n=String(name||'').trim(),s=SM.st.find(x=>x.c===c&&x.n===n&&x.a!==0)||SM.st.find(x=>x.n===n&&x.a!==0);return s?{phone:s.p||'',guardian:s.g||''}:null};
 window.smGSheet=(title,items)=>{const dn={};sheet(`<h3>${E(title)}</h3><p class="sub">প্রতিটা অভিভাবকের WhatsApp আলাদা করে খুলবে। নম্বর না থাকলে নিজে কন্ট্যাক্ট বেছে নিতে হবে।</p>${items.map((x,i)=>`<div class="sm-hi" style="border-top:0"><span><b>${E(x.n)}</b><br><small style="color:var(--mut)">${x.p?E(bn(x.p)):'নম্বর নেই — প্রোফাইলে যোগ করো'}</small></span><button class="btn s p" style="color:#fff" data-i="${i}">পাঠাও</button></div>`).join('')}`,box=>{box.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const x=items[+b.dataset.i];b.textContent='✓ আবার';openWa(x.p,x.msg)})})};
+/* ===== QR স্ক্যান: আসা-যাওয়া, দেরির হিসাব ও অভিভাবককে বার্তা + আইডি কার্ড ===== */
+const QRM=(()=>{
+const EXP=[],LOG=[];{let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=285}for(let i=255;i<512;i++)EXP[i]=EXP[i-255]}
+const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+const rsGen=n=>{let g=[1];for(let i=0;i<n;i++){const h=new Array(g.length+1).fill(0);g.forEach((c,j)=>{h[j]^=c;h[j+1]^=mul(c,EXP[i])});g=h}return g};
+const rsRem=(d,n)=>{const g=rsGen(n),r=new Array(n).fill(0);d.forEach(b=>{const f=b^r[0];r.shift();r.push(0);if(f)for(let i=0;i<n;i++)r[i]^=mul(g[i+1],f)});return r};
+const TB=[null,[10,[[1,16]]],[16,[[1,28]]],[26,[[1,44]]],[18,[[2,32]]],[24,[[2,43]]],[16,[[4,27]]]],AP=[0,0,18,22,26,30,34];
+const MF=[(i,j)=>(i+j)%2===0,i=>i%2===0,(i,j)=>j%3===0,(i,j)=>(i+j)%3===0,(i,j)=>(Math.floor(i/2)+Math.floor(j/3))%2===0,(i,j)=>(i*j)%2+(i*j)%3===0,(i,j)=>((i*j)%2+(i*j)%3)%2===0,(i,j)=>((i*j)%3+(i+j)%2)%2===0];
+function make(txt){
+ const by=Array.from(new TextEncoder().encode(txt));let v=1;
+ for(;v<=6;v++){const cap=TB[v][1].reduce((a,[n,k])=>a+n*k,0);if(by.length+2<=cap)break}
+ if(v>6)throw new Error('qr too long');
+ const [ec,bl]=TB[v],cap=bl.reduce((a,[n,k])=>a+n*k,0),bits=[],put=(x,l)=>{for(let i=l-1;i>=0;i--)bits.push((x>>i)&1)};
+ put(4,4);put(by.length,8);by.forEach(b=>put(b,8));
+ for(let i=0;i<4&&bits.length<cap*8;i++)bits.push(0);while(bits.length%8)bits.push(0);
+ const data=[];for(let i=0;i<bits.length;i+=8){let x=0;for(let j=0;j<8;j++)x=x*2+bits[i+j];data.push(x)}
+ for(let p=0;data.length<cap;p++)data.push(p%2?0x11:0xEC);
+ const blocks=[];let o=0;bl.forEach(([n,k])=>{for(let i=0;i<n;i++){blocks.push(data.slice(o,o+k));o+=k}});
+ const ecs=blocks.map(b=>rsRem(b,ec)),out=[],mx=Math.max(...blocks.map(b=>b.length));
+ for(let i=0;i<mx;i++)blocks.forEach(b=>{if(i<b.length)out.push(b[i])});for(let i=0;i<ec;i++)ecs.forEach(e=>out.push(e[i]));
+ const N=17+4*v,M=Array.from({length:N},()=>new Array(N).fill(0)),F=Array.from({length:N},()=>new Array(N).fill(0));
+ const set=(r,c,x)=>{if(r>=0&&c>=0&&r<N&&c<N){M[r][c]=x?1:0;F[r][c]=1}};
+ const fnd=(r,c)=>{for(let i=-1;i<=7;i++)for(let j=-1;j<=7;j++){const on=i>=0&&i<=6&&j>=0&&j<=6&&(i===0||i===6||j===0||j===6||(i>=2&&i<=4&&j>=2&&j<=4));set(r+i,c+j,on)}};
+ fnd(0,0);fnd(0,N-7);fnd(N-7,0);
+ for(let i=8;i<N-8;i++){set(6,i,i%2===0);set(i,6,i%2===0)}
+ if(v>=2){const p=AP[v];for(let i=-2;i<=2;i++)for(let j=-2;j<=2;j++)set(p+i,p+j,Math.max(Math.abs(i),Math.abs(j))!==1)}
+ set(N-8,8,1);
+ for(let i=0;i<9;i++){if(!F[8][i])set(8,i,0);if(!F[i][8])set(i,8,0)}
+ for(let i=0;i<8;i++){if(!F[8][N-1-i])set(8,N-1-i,0);if(!F[N-1-i][8])set(N-1-i,8,0)}
+ const bo=[];out.forEach(b=>{for(let i=7;i>=0;i--)bo.push((b>>i)&1)});
+ let bi=0,up=true;
+ for(let c=N-1;c>0;c-=2){if(c===6)c--;for(let k=0;k<N;k++){const r=up?N-1-k:k;for(let d=0;d<2;d++){const cc=c-d;if(!F[r][cc]){M[r][cc]=bi<bo.length?bo[bi]:0;bi++}}}up=!up}
+ const fmt=m=>{let r=m<<10;for(let i=14;i>=10;i--)if((r>>i)&1)r^=0x537<<(i-10);return((m<<10)|r)^0x5412};
+ const putF=(Q,m)=>{const b=fmt(m);for(let i=0;i<15;i++){const x=(b>>i)&1;
+  if(i<6)Q[i][8]=x;else if(i<8)Q[i+1][8]=x;else Q[N-15+i][8]=x;
+  if(i<8)Q[8][N-i-1]=x;else if(i<9)Q[8][15-i]=x;else Q[8][14-i]=x}};
+ const P1=[1,0,1,1,1,0,1,0,0,0,0],P2=[0,0,0,0,1,0,1,1,1,0,1];
+ const pen=Q=>{let p=0,dk=0;
+  for(let a=0;a<2;a++)for(let i=0;i<N;i++){let run=1;for(let j=1;j<N;j++){const x=a?Q[j][i]:Q[i][j],y=a?Q[j-1][i]:Q[i][j-1];if(x===y)run++;else{if(run>=5)p+=run-2;run=1}}if(run>=5)p+=run-2}
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++){dk+=Q[i][j];if(i<N-1&&j<N-1&&Q[i][j]===Q[i][j+1]&&Q[i][j]===Q[i+1][j]&&Q[i][j]===Q[i+1][j+1])p+=3}
+  for(let a=0;a<2;a++)for(let i=0;i<N;i++)for(let j=0;j<=N-11;j++){let m1=1,m2=1;for(let k=0;k<11;k++){const x=a?Q[j+k][i]:Q[i][j+k];if(x!==P1[k])m1=0;if(x!==P2[k])m2=0}if(m1||m2)p+=40}
+  p+=Math.floor(Math.abs(dk*100/(N*N)-50)/5)*10;return p};
+ let best=null,bp=1e9;
+ for(let m=0;m<8;m++){const Q=M.map(r=>r.slice());for(let i=0;i<N;i++)for(let j=0;j<N;j++)if(!F[i][j]&&MF[m](i,j))Q[i][j]^=1;putF(Q,m);const p=pen(Q);if(p<bp){bp=p;best=Q}}
+ return best}
+return {make}})();
+const qrURL=(txt,px)=>{const m=QRM.make(txt),n=m.length,q=1,sc=Math.max(2,Math.ceil((px||240)/(n+q*2))),S=(n+q*2)*sc,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,S,S);g.fillStyle='#000';for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(m[r][k])g.fillRect((k+q)*sc,(r+q)*sc,sc,sc);return c.toDataURL('image/png')};
+const qrTxt=s=>'TPC:'+s.id;
+
+/* ---------- সেটিংস ---------- */
+SM.cfg.bt=SM.cfg.bt&&typeof SM.cfg.bt==='object'&&!Array.isArray(SM.cfg.bt)?SM.cfg.bt:{};
+SM.cfg.sc=SM.cfg.sc&&typeof SM.cfg.sc==='object'&&!Array.isArray(SM.cfg.sc)?SM.cfg.sc:{};
+SM.cfg.sm=SM.cfg.sm&&typeof SM.cfg.sm==='object'?SM.cfg.sm:{};
+{const lim=addD(todayS(),-400);Object.keys(SM.cfg.sc).forEach(d=>{if(d<lim)delete SM.cfg.sc[d]})}
+V.N={m:'i',d:todayS()};
+const NZ_MSG={a:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {সময়}-এ {প্রতিষ্ঠান}-এ পৌঁছেছে। ✅',l:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {মিনিট} মিনিট দেরিতে ({সময়}-এ) {প্রতিষ্ঠান}-এ পৌঁছেছে। আগামীতে সময়মতো পাঠানোর অনুরোধ রইল।',o:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {সময়}-এ {প্রতিষ্ঠান}-এর ক্লাস শেষ করে বের হয়েছে।'};
+const nzIn=()=>SM.cfg.sn||'তৌফিক প্রাইভেট সেন্টার',nzAd=()=>SM.cfg.sa==null?'সাহেবনগর, গাংনী, মেহেরপুর':SM.cfg.sa;
+const nzGr=()=>Math.max(0,Math.min(120,+SM.cfg.sg||0));
+const p2=n=>String(n).padStart(2,'0'),nowHM=()=>{const d=new Date();return p2(d.getHours())+':'+p2(d.getMinutes())};
+const hm2m=t=>{const a=String(t||'').split(':');return (+a[0]||0)*60+(+a[1]||0)};
+const tl=t=>{if(!t)return '';const [h,m]=t.split(':').map(Number),pr=h<4?'রাত':h<12?'সকাল':h<15?'দুপুর':h<18?'বিকাল':h<20?'সন্ধ্যা':'রাত';return pr+' '+bn(h%12||12)+':'+bn(p2(m))};
+const nzBt=s=>SM.cfg.bt[bkey(s)||'_']||{};
+const nzMsg=(s,r,k)=>{const t=(SM.cfg.sm&&SM.cfg.sm[k])||NZ_MSG[k];return t.replace(/\{নাম\}/g,s.n).replace(/\{সময়\}/g,tl(k==='o'?r.o:r.i)).replace(/\{মিনিট\}/g,bn(r.l||0)).replace(/\{ব্যাচ\}/g,s.b||'').replace(/\{প্রতিষ্ঠান\}/g,nzIn())};
+let NPH=null;const nzPh=()=>{if(NPH)return NPH;try{const x=JSON.parse(localStorage.getItem('trsm_x2')||'{}');NPH=(x&&x.ph)||{}}catch(e){NPH={}}setTimeout(()=>{NPH=null},4000);return NPH};
+const nzAv=s=>{const p=nzPh()[s.id];return p?`<img class="sm-av" src="${p}" alt="" style="object-fit:cover;background:#e2e8f0">`:av(s)};
+
+/* ---------- স্ক্যানের হিসাব ---------- */
+function scanDo(raw,mode,at){
+ let id=String(raw||'').trim();if(id.slice(0,4)!=='TPC:')return {k:'bad'};id=id.slice(4);
+ const s=SM.st.find(x=>x.id===id);if(!s)return {k:'bad'};if(s.a===0)return {k:'off',s};
+ const T=todayS(),day=SM.cfg.sc[T]=SM.cfg.sc[T]||{},old=day[s.id],now=at||nowHM();
+ if(mode==='o'){
+  if(old&&old.o)return {k:'dup',s,r:old,m:'o'};
+  const r=old||(day[s.id]={i:'',l:0,o:'',wi:0,wo:0});r.o=now;r.t=Date.now();smSave();
+  return {k:'out',s,r,noIn:!r.i}}
+ if(old&&old.i)return {k:'dup',s,r:old,m:'i'};
+ const bt=nzBt(s),late=bt.s?Math.max(0,hm2m(now)-hm2m(bt.s)):0,lm=late>nzGr()?late:0;
+ const att=SM.att[T]=SM.att[T]||{},r=old||(day[s.id]={i:'',l:0,o:'',wi:0,wo:0});
+ r.i=now;r.l=lm;r.pa=att[s.id]||'';r.t=Date.now();att[s.id]=lm?'l':'p';smSave();
+ return {k:lm?'late':'ok',s,r,noBt:!bt.s}}
+function scanDel(id,d){const day=SM.cfg.sc[d];if(!day||!day[id])return;const r=day[id],snap=JSON.stringify(r),pa=r.pa,had=!!r.i;
+ delete day[id];if(!Object.keys(day).length)delete SM.cfg.sc[d];
+ if(had&&SM.att[d]){if(pa)SM.att[d][id]=pa;else delete SM.att[d][id];if(!Object.keys(SM.att[d]).length)delete SM.att[d]}
+ smSave();rN();
+ miniUndo('স্ক্যান রেকর্ড মুছে ফেলা হয়েছে',()=>{SM.cfg.sc[d]=SM.cfg.sc[d]||{};SM.cfg.sc[d][id]=JSON.parse(snap);if(had){SM.att[d]=SM.att[d]||{};SM.att[d][id]=JSON.parse(snap).l?'l':'p'}smSave();rN()})}
+
+/* ---------- ক্যামেরা ---------- */
+let CAM=null,nzCtx=null;
+const nzBeep=k=>{try{nzCtx=nzCtx||new (window.AudioContext||window.webkitAudioContext)();const c=nzCtx,pl=(f,t,d)=>{const o=c.createOscillator(),g=c.createGain();o.frequency.value=f;o.type='sine';g.gain.value=.18;o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+d)};
+ if(k==='ok'||k==='out')pl(880,0,.12);else if(k==='late')pl(660,0,.12),pl(660,.16,.12);else pl(220,0,.18),pl(180,.22,.22)}catch(e){}
+ try{navigator.vibrate&&navigator.vibrate(k==='ok'||k==='out'?60:k==='late'?[60,60,60]:[200])}catch(e){}};
+const loadJsQR=()=>new Promise((res,rej)=>{if(window.jsQR)return res();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';s.onload=()=>window.jsQR?res():rej();s.onerror=rej;document.head.appendChild(s)});
+function camUI(on){const b=$('#smNb');if(!b)return;const p=b.querySelector('.nz-ph'),t=b.querySelector('[data-a="cam"]');if(p)p.style.display=on?'none':'';const f=b.querySelector('.nz-fr');if(f)f.style.display=on?'':'none';if(t){t.textContent=on?'⏹ ক্যামেরা বন্ধ করো':'📷 ক্যামেরা চালু করো';t.classList.toggle('p',!on)}}
+function camStop(){if(CAM){clearInterval(CAM.t);try{CAM.st.getTracks().forEach(t=>t.stop())}catch(e){}CAM=null}const v=$('#nzV');if(v)v.srcObject=null;camUI(0)}
+async function camStart(){
+ if(CAM)return;const v=$('#nzV');if(!v)return;
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return toast('এই ব্রাউজারে ক্যামেরা চলবে না — Chrome ব্যবহার করো');
+ try{
+  const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});
+  v.srcObject=st;await v.play();
+  let det=null;if('BarcodeDetector' in window){try{det=new BarcodeDetector({formats:['qr_code']})}catch(e){}}
+  if(!det){try{await loadJsQR()}catch(e){st.getTracks().forEach(t=>t.stop());v.srcObject=null;return toast('QR পড়ার জন্য একবার ইন্টারনেট লাগবে')}}
+  CAM={st,det,busy:0,last:'',lt:0,cv:document.createElement('canvas')};CAM.t=setInterval(camTick,170);camUI(1)
+ }catch(e){toast(e&&e.name==='NotAllowedError'?'ক্যামেরার অনুমতি দিতে হবে (ব্রাউজারের সেটিংয়ে)':'ক্যামেরা চালু করা যায়নি')}}
+async function camTick(){
+ const v=$('#nzV');if(!CAM||CAM.busy||!v||v.readyState<2||!v.videoWidth)return;CAM.busy=1;let txt='';
+ try{
+  if(CAM.det){const r=await CAM.det.detect(v);if(r&&r[0])txt=r[0].rawValue}
+  else if(window.jsQR){const w=v.videoWidth,h=v.videoHeight,k=Math.min(1,640/w),cw=Math.round(w*k),ch=Math.round(h*k),c=CAM.cv;c.width=cw;c.height=ch;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(v,0,0,cw,ch);const q=jsQR(g.getImageData(0,0,cw,ch).data,cw,ch,{inversionAttempts:'dontInvert'});if(q)txt=q.data}
+ }catch(e){}
+ if(CAM){CAM.busy=0;if(txt){const n=Date.now();if(txt===CAM.last&&n-CAM.lt<4000)return;CAM.last=txt;CAM.lt=n;nzGo(txt)}}}
+function nzGo(raw){const r=scanDo(raw,V.N.m);nzBeep(r.k);nzRes(r);nzList()}
+let nzT;
+function nzRes(r){const b=$('#nzRes');if(!b)return;clearTimeout(nzT);
+ if(r.k==='bad'){b.innerHTML=`<div class="nz-res bad"><i>❌</i><div><b>এই QR চেনা যাচ্ছে না</b><small>এটা এই অ্যাপের আইডি কার্ড নয়</small></div></div>`}
+ else if(r.k==='off'){b.innerHTML=`<div class="nz-res bad">${nzAv(r.s)}<div><b>${E(r.s.n)}</b><small>এই শিক্ষার্থী এখন তালিকায় নেই (বন্ধ করা)</small></div></div>`}
+ else{const s=r.s,m=r.k==='dup'?r.m:(r.k==='out'?'o':'i'),t=m==='o'?r.r.o:r.r.i;let cl,big,sm=`শ্রেণি ${bn(s.c)}${s.r?' · রোল '+bn(s.r):''}${s.b?' · '+s.b:''}`;
+  if(r.k==='ok'){cl='ok';big='✅ সময়মতো এসেছে'}else if(r.k==='late'){cl='late';big='⏰ '+bn(r.r.l)+' মিনিট লেট'}else if(r.k==='out'){cl='out';big='👋 ছুটি হয়েছে'}else{cl='dup';big='⚠ আগেই স্ক্যান হয়েছে'}
+  let ex=r.k==='dup'?(m==='o'?'ছুটির স্ক্যান হয়েছিল ':'আসার স্ক্যান হয়েছিল ')+tl(t)+' — আবার গোনা হয়নি':tl(t);
+  if(r.noIn)ex+=' · (আসার স্ক্যান ছিল না)';if(r.noBt)ex+=' · ব্যাচের সময় সেট নেই, দেরি হিসাব হয়নি';
+  b.innerHTML=`<div class="nz-res ${cl}">${nzAv(s)}<div><b>${E(s.n)}</b><small>${E(sm)}</small><em>${big}</em><small>${E(ex)}</small></div></div>`}
+ nzT=setTimeout(()=>{if(b)b.innerHTML=''},6000)}
+
+/* ---------- পাতা ---------- */
+function rN(){
+ const b=$('#smNb');if(!b)return;const v=V.N,T=todayS(),today=v.d===T;
+ if(!actv().length){b.innerHTML=emptyStu();return}
+ camStop();
+ b.innerHTML=`<div class="nz-top"><div class="nz-seg"><button class="i${v.m==='i'?' on':''}" data-a="md" data-v="i">🟢 আসা</button><button class="o${v.m==='o'?' on':''}" data-a="md" data-v="o">🔴 ছুটি</button></div></div>`+
+ (today?`<div class="nz-cam"><video id="nzV" playsinline muted autoplay></video><div class="nz-fr" style="display:none"></div><div class="nz-ph"><i>📷</i><b>${v.m==='i'?'আসার':'ছুটির'} স্ক্যান</b><span>ক্যামেরা চালু করে ছাত্রের আইডি কার্ডের QR দেখাও</span></div></div>
+ <div id="nzRes"></div><div class="sm-two"><button class="btn p" data-a="cam">📷 ক্যামেরা চালু করো</button><button class="btn" data-a="man">✍️ হাতে বসাও</button></div>`:`<div class="sm-emp" style="padding:14px"><i>📅</i><b>${dLabel(v.d)}-এর তালিকা</b>আগের দিনের তালিকা দেখছ। স্ক্যান করতে আজকের দিনে ফেরো।<br><button class="btn p" data-a="tod" style="margin-top:8px">আজকে ফেরো</button></div>`)+
+ `<div class="nz-tools"><button class="btn" data-a="bt">⏱ ব্যাচের সময়</button><button class="btn" data-a="cd">🪪 আইডি কার্ড</button><button class="btn" data-a="ms">✏️ বার্তার লেখা</button></div><div id="nzList"></div>`;
+ nzList()}
+function nzList(){
+ const b=$('#nzList');if(!b)return;const v=V.N,T=todayS(),day=SM.cfg.sc[v.d]||{},ids=Object.keys(day).filter(id=>SM.st.some(s=>s.id===id));
+ const rows=ids.map(id=>({s:SM.st.find(s=>s.id===id),r:day[id]})).sort((a,c)=>(c.r.t||0)-(a.r.t||0));
+ let ci=0,lt=0,co=0,pend=0;rows.forEach(({s,r})=>{if(r.i){ci++;if(r.l)lt++;if(!r.wi&&s.p)pend++}if(r.o){co++;if(!r.wo&&s.p)pend++}});
+ const nav=`<div class="sm-dh" style="margin:0 0 8px"><div><b>${WDN[pIso(v.d).getDay()]}${v.d===T?' · আজ':''}</b><small>${dLabel(v.d)}</small></div><div style="display:flex;gap:6px"><button class="sm-nv" data-a="dp" aria-label="আগের দিন">‹</button><button class="sm-nv" data-a="dn" ${v.d>=T?'disabled':''} aria-label="পরের দিন">›</button></div></div>`;
+ const hero=`<div class="nz-sum"><div><b>${bn(ci)}</b><small>এসেছে</small></div><div class="${lt?'w':''}"><b>${bn(lt)}</b><small>লেট</small></div><div><b>${bn(co)}</b><small>ছুটি</small></div><div class="${pend?'w':''}"><b>${bn(pend)}</b><small>বার্তা বাকি</small></div></div>`;
+ const btn=(s,r,k)=>{const sent=k==='o'?r.wo:r.wi,lb=k==='o'?'ছুটির বার্তা':(r.l?'দেরির বার্তা':'আসার বার্তা');return `<button class="nz-wa${sent?' dn':''}" data-a="${k==='o'?'wo':'wi'}" data-id="${E(s.id)}">${sent?'✓ পাঠানো হয়েছে · আবার':'📲 '+lb}</button>`};
+ b.innerHTML=nav+hero+(rows.length?rows.map(({s,r})=>`<div class="nz-r"><div class="nz-h">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small>
+  ${r.i?`<small class="nz-l ${r.l?'late':'ok'}">${r.l?'⏰ '+bn(r.l)+' মিনিট লেট':'✅ সময়মতো'} · ${tl(r.i)}</small>`:''}${r.o?`<small class="nz-l out">👋 ছুটি · ${tl(r.o)}</small>`:''}</div><button class="nz-x" data-a="rm" data-id="${E(s.id)}" aria-label="মুছো">✕</button></div>
+  <div class="nz-bs">${r.i?btn(s,r,'i'):''}${r.o?btn(s,r,'o'):''}</div>${s.p?'':'<small style="color:#dc2626">⚠ অভিভাবকের নম্বর নেই — WhatsApp-এ নিজে কন্ট্যাক্ট বাছতে হবে</small>'}</div>`).join(''):`<div class="sm-emp" style="padding:18px"><i>📋</i><b>এখনো কেউ স্ক্যান করেনি</b>স্ক্যান করলে এখানে নামের তালিকা হবে।</div>`)}
+
+wire('#smNb',{
+ md:t=>{V.N.m=t.dataset.v;const wasOn=!!CAM;rN();if(wasOn)camStart()},
+ cam:()=>{CAM?camStop():camStart()},
+ man:()=>nzMan(),tod:()=>{V.N.d=todayS();rN()},
+ dp:()=>{V.N.d=addD(V.N.d,-1);rN()},dn:()=>{if(V.N.d<todayS()){V.N.d=addD(V.N.d,1);rN()}},
+ bt:()=>nzBtSheet(),cd:()=>cdSheet(),ms:()=>nzMsSheet(),
+ wi:t=>nzSend(t.dataset.id,'i'),wo:t=>nzSend(t.dataset.id,'o'),
+ rm:t=>{const s=SM.st.find(x=>x.id===t.dataset.id);if(!s)return;confirmBox(`<b>${E(s.n)}</b>-এর স্ক্যান রেকর্ড মুছবে? হাজিরাও আগের অবস্থায় ফিরবে। (৯ সেকেন্ডের মধ্যে ফিরিয়ে আনতে পারবে)`,()=>scanDel(s.id,V.N.d),'মুছো')}
+});
+function nzSend(id,k){const s=SM.st.find(x=>x.id===id),r=((SM.cfg.sc[V.N.d]||{})[id]);if(!s||!r)return;
+ const kind=k==='o'?'o':(r.l?'l':'a');openWa(s.p,nzMsg(s,r,kind));if(k==='o')r.wo=1;else r.wi=1;smSave();nzList()}
+
+/* ---------- হাতে বসাও ---------- */
+function nzMan(){const m=V.N.m;sheet(`<h3>✍️ হাতে ${m==='i'?'আসা':'ছুটি'} বসাও</h3><p class="sub">কার্ড না আনলে নাম খুঁজে বসাও — এখনকার সময় ধরা হবে</p><input id="nm_q" class="wk-q" placeholder="🔍 নাম বা রোল" autocomplete="off"><div id="nm_l" style="max-height:48vh;overflow:auto"></div>`,box=>{
+ const q=box.querySelector('#nm_q'),h=box.querySelector('#nm_l'),T=todayS(),go=()=>{const t=q.value.trim(),l=actv().filter(s=>!t||s.n.includes(t)||String(s.r)===en(t)).sort((a,c)=>a.n.localeCompare(c.n,'bn')).slice(0,60);
+  h.innerHTML=l.map(s=>{const r=(SM.cfg.sc[T]||{})[s.id],dn=r&&(m==='i'?r.i:r.o);return `<div class="sm-row" data-id="${E(s.id)}">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small></div>${dn?`<span class="sm-pl g">✓ ${tl(m==='i'?r.i:r.o)}</span>`:'<span class="sm-pl" style="background:var(--ac);color:#fff">বসাও</span>'}</div>`}).join('')||'<div class="sub">কেউ নেই</div>';
+  h.querySelectorAll('[data-id]').forEach(e=>e.onclick=()=>{const s=SM.st.find(x=>x.id===e.dataset.id);closeSheet();const r=scanDo(qrTxt(s),V.N.m);nzBeep(r.k);nzRes(r);nzList()})};q.oninput=go;go()})}
+
+/* ---------- ব্যাচের সময় ---------- */
+function nzBtSheet(){const bs=bList('*');
+ sheet(`<h3>⏱ ব্যাচের সময়</h3><p class="sub">প্রতি ব্যাচের শুরু ও শেষের সময় দাও। শুরুর পর যত মিনিট দেরি, অ্যাপ নিজেই হিসাব করবে।</p>
+ ${bs.map(([k,n])=>{const t=SM.cfg.bt[k]||{};return `<div class="sm-card nz-bt"><b>${k==='_'?'ব্যাচ ঠিক করা নেই':E(k)} <small style="color:var(--mut);font-weight:400">${bn(n)} জন</small></b><div class="nz-tm"><label>শুরু<input type="time" data-k="${E(k)}" data-f="s" value="${E(t.s||'')}"></label><label>শেষ<input type="time" data-k="${E(k)}" data-f="e" value="${E(t.e||'')}"></label></div></div>`}).join('')}
+ <div class="sm-card"><b>দেরি ধরার সীমা</b><div class="nz-tm" style="margin-top:8px"><label style="flex:1">শুরুর পর কত মিনিট পর্যন্ত লেট ধরা হবে না<input type="number" id="bt_g" min="0" max="120" value="${nzGr()}" inputmode="numeric"></label></div><small style="color:var(--mut)">০ দিলে এক মিনিট দেরিতেও "১ মিনিট লেট" দেখাবে</small></div>
+ <button class="btn p" id="bt_ok" style="width:100%">✓ ঠিক আছে</button>`,box=>{
+  box.querySelectorAll('input[type=time]').forEach(i=>i.onchange=()=>{const k=i.dataset.k;SM.cfg.bt[k]=SM.cfg.bt[k]||{};if(i.value)SM.cfg.bt[k][i.dataset.f]=i.value;else delete SM.cfg.bt[k][i.dataset.f];smSave()});
+  box.querySelector('#bt_g').onchange=e=>{SM.cfg.sg=Math.max(0,Math.min(120,Math.round(+e.target.value||0)));e.target.value=SM.cfg.sg;smSave()};
+  box.querySelector('#bt_ok').onclick=()=>{closeSheet();toast('সেভ হয়েছে ✓')}})}
+
+/* ---------- বার্তার লেখা ---------- */
+function nzMsSheet(){const f=[['a','✅ সময়মতো এলে'],['l','⏰ দেরিতে এলে'],['o','👋 ছুটির সময়']];
+ sheet(`<h3>✏️ বার্তার লেখা</h3><p class="sub">এই জায়গাগুলো নিজে বসে যাবে: <b>{নাম}</b> <b>{সময়}</b> <b>{মিনিট}</b> <b>{ব্যাচ}</b> <b>{প্রতিষ্ঠান}</b></p>
+ <div class="sm-f"><label>প্রতিষ্ঠানের নাম</label><input id="ms_n" value="${E(nzIn())}"></div><div class="sm-f"><label>কার্ডের ঠিকানা</label><input id="ms_a" value="${E(nzAd())}"></div>
+ ${f.map(([k,l])=>`<div class="sm-f"><label>${l}</label><textarea id="ms_${k}" rows="4" style="width:100%;font:inherit;padding:10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit">${E((SM.cfg.sm&&SM.cfg.sm[k])||NZ_MSG[k])}</textarea></div>`).join('')}
+ <div class="sm-two"><button class="btn" id="ms_r">↺ আগের লেখা</button><button class="btn p" id="ms_ok">✓ সেভ</button></div>`,box=>{
+  box.querySelector('#ms_r').onclick=()=>{f.forEach(([k])=>box.querySelector('#ms_'+k).value=NZ_MSG[k]);box.querySelector('#ms_n').value='তৌফিক প্রাইভেট সেন্টার';box.querySelector('#ms_a').value='সাহেবনগর, গাংনী, মেহেরপুর'};
+  box.querySelector('#ms_ok').onclick=()=>{SM.cfg.sn=box.querySelector('#ms_n').value.trim()||'তৌফিক প্রাইভেট সেন্টার';SM.cfg.sa=box.querySelector('#ms_a').value.trim();f.forEach(([k])=>{const v=box.querySelector('#ms_'+k).value.trim();if(v&&v!==NZ_MSG[k])SM.cfg.sm[k]=v;else delete SM.cfg.sm[k]});smSave();closeSheet();toast('সেভ হয়েছে ✓')}})}
+
+/* ---------- আইডি কার্ড ---------- */
+const CD={d:'c',ac:'#0f766e',c:'*',b:'*'},CDA=['#0f766e','#2563eb','#7c3aed','#e11d48','#ea580c','#0f172a'],CDD=[['c','ক্লাসিক'],['m','আধুনিক'],['s','সরল']];
+const shade=(h,k)=>{const n=parseInt(h.slice(1),16),f=x=>Math.max(0,Math.min(255,Math.round(x+(k<0?x*k:(255-x)*k))));return 'rgb('+f(n>>16)+','+f((n>>8)&255)+','+f(n&255)+')'};
+function cdCard(s){
+ const a=CD.ac,dk=shade(a,-.38),q=qrURL(qrTxt(s),240),ph=nzPh()[s.id],ini=E(Array.from(s.n)[0]||'?'),nm=E(s.n),nl=s.n.length>22?13:s.n.length>16?15:17;
+ const pic=(w,h,r)=>ph?`<img src="${ph}" style="width:${w}px;height:${h}px;object-fit:cover;border-radius:${r};display:block;background:#e2e8f0">`:`<div style="width:${w}px;height:${h}px;border-radius:${r};background:linear-gradient(135deg,${a},${dk});color:#fff;display:flex;align-items:center;justify-content:center;font-size:${Math.round(w*.42)}px;font-weight:700">${ini}</div>`;
+ const info=`<div style="font-size:11.5px;line-height:1.55;color:#334155">শ্রেণি: <b>${E(bn(s.c))}</b>${s.r?' &nbsp;·&nbsp; রোল: <b>'+E(bn(s.r))+'</b>':''}${s.b?'<br>ব্যাচ: <b>'+E(s.b)+'</b>':''}</div>`;
+ const box='width:310px;height:195px;box-sizing:border-box;position:relative;overflow:hidden;border-radius:12px;font-family:\'Hind Siliguri\',\'Noto Sans Bengali\',sans-serif;';
+ const qb=sz=>`<div style="background:#fff;padding:4px;border-radius:8px;line-height:0"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`;
+ if(CD.d==='m')return `<div style="${box}background:linear-gradient(135deg,${dk},${a});color:#fff"><div style="position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08)"></div><div style="position:absolute;left:-30px;bottom:-50px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.07)"></div>
+ <div style="position:relative;padding:13px 14px 0;font-size:13.5px;font-weight:700;letter-spacing:.2px">${E(nzIn())}</div><div style="position:relative;padding:0 14px;font-size:9.5px;opacity:.85">${E(nzAd())}</div>
+ <div style="position:absolute;left:14px;top:50px;display:flex;gap:11px;align-items:center">${pic(64,64,'50%').replace('<img','<img').replace(/style="/,'style="border:3px solid rgba(255,255,255,.9);')}<div style="max-width:118px"><div style="font-size:${nl}px;font-weight:700;line-height:1.25">${nm}</div><div style="font-size:11px;line-height:1.5;opacity:.95;margin-top:3px">শ্রেণি: ${E(bn(s.c))}${s.r?' · রোল: '+E(bn(s.r)):''}${s.b?'<br>ব্যাচ: '+E(s.b):''}</div></div></div>
+ <div style="position:absolute;right:14px;top:50px;text-align:center">${qb(76)}</div><div style="position:absolute;left:0;right:0;bottom:0;padding:6px 14px;background:rgba(0,0,0,.22);font-size:9.5px;display:flex;justify-content:space-between"><span>ছাত্র পরিচয়পত্র</span><span>QR স্ক্যান করে হাজিরা</span></div></div>`;
+ if(CD.d==='s')return `<div style="${box}background:#fff;border:1.5px solid ${a};color:#0f172a"><div style="position:absolute;left:0;top:0;bottom:0;width:9px;background:${a}"></div>
+ <div style="position:absolute;left:22px;top:11px;right:12px"><div style="font-size:13.5px;font-weight:700;color:${a}">${E(nzIn())}</div><div style="font-size:9.5px;color:#64748b">${E(nzAd())}</div><div style="height:1px;background:#e2e8f0;margin-top:6px"></div></div>
+ <div style="position:absolute;left:22px;top:58px;display:flex;gap:10px;align-items:flex-start">${pic(60,72,'8px')}<div style="max-width:120px"><div style="font-size:${nl}px;font-weight:700;line-height:1.25;margin-bottom:3px">${nm}</div>${info}</div></div>
+ <div style="position:absolute;right:12px;top:58px">${qb(78).replace('padding:4px','padding:3px;border:1px solid #e2e8f0')}</div><div style="position:absolute;right:12px;bottom:9px;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র</div></div>`;
+ return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="background:linear-gradient(135deg,${dk},${a});color:#fff;text-align:center;padding:9px 10px 7px"><div style="font-size:14px;font-weight:700">${E(nzIn())}</div><div style="font-size:9.5px;opacity:.9">${E(nzAd())}</div></div>
+ <div style="position:absolute;left:14px;top:68px;display:flex;gap:11px;align-items:flex-start">${pic(66,82,'9px')}<div style="max-width:124px"><div style="font-size:${nl}px;font-weight:700;line-height:1.25;margin-bottom:3px">${nm}</div>${info}</div></div>
+ <div style="position:absolute;right:14px;top:66px;text-align:center">${qb(84).replace('padding:4px','padding:3px;border:1px solid #cbd5e1')}</div><div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${a};color:#fff;text-align:center;font-size:9.5px;line-height:17px">ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা</div></div>`}
+const cdList=()=>inClsAt(CD.c==='*'?'*':CD.c,CD.b,ymOf(new Date()));
+const cdPages=l=>{const pg=[];for(let i=0;i<l.length;i+=10)pg.push(`<div data-pw="708" style="width:708px;display:grid;grid-template-columns:310px 310px;justify-content:center;column-gap:14px;row-gap:10px">${l.slice(i,i+10).map(cdCard).join('')}</div>`);return pg};
+async function cdOne(s){const h=document.createElement('div');h.style.cssText='position:fixed;left:-9999px;top:0;width:310px;height:195px;background:transparent';h.innerHTML=cdCard(s);document.body.appendChild(h);
+ try{if(typeof html2canvas!=='function')throw 0;try{await document.fonts.ready}catch(e){}const c=await html2canvas(h,{scale:4,backgroundColor:null}),bl=await new Promise(r=>c.toBlob(r,'image/png')),n='id-card-'+msSafe(s.n),f=new File([bl],n+'.png',{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:n})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=n+'.png';a.click();toast('ছবি সেভ হয়েছে ✓')}}
+ catch(e){toast('ছবি বানাতে ইন্টারনেট দরকার')}finally{h.remove()}}
+function cdSheet(){
+ sheet(`<h3>🪪 আইডি কার্ড</h3><p class="sub">প্রতিটি কার্ডে ছাত্রের নিজের QR থাকবে। A4-এ ১০টা করে, আসল কার্ডের মাপে (৮৫.৬×৫৪ মি.মি.) ছাপা হবে।</p>
+ <div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div>
+ <div id="cd_pw" style="margin:6px 0 10px"></div><div id="cd_n" class="sub" style="margin:0 0 8px"></div>
+ <div class="sm-two"><button class="btn p" id="cd_pdf">📄 PDF</button><button class="btn" id="cd_img">🖼 ছবি</button><button class="btn" id="cd_vw">👁 পাতা দেখো</button><button class="btn" id="cd_one">👤 একজনের কার্ড</button></div>`,box=>{
+  const cls=[...new Set(actv().map(s=>s.c))].sort((a,b)=>String(a).localeCompare(String(b),'bn',{numeric:true}));
+  const draw=()=>{
+   box.querySelector('#cd_d').innerHTML=CDD.map(([k,n])=>`<button class="sm-ch${CD.d===k?' on':''}" data-d="${k}">${n}</button>`).join('');
+   box.querySelector('#cd_a').innerHTML=CDA.map(c=>`<button class="sm-ch${CD.ac===c?' on':''}" data-ac="${c}" style="background:${c};width:36px;height:36px;padding:0;border-radius:50%;${CD.ac===c?'outline:3px solid var(--ink);outline-offset:2px':''}" aria-label="রং"></button>`).join('');
+   box.querySelector('#cd_c').innerHTML=`<button class="sm-ch${CD.c==='*'?' on':''}" data-c="*">সব শ্রেণি</button>`+cls.map(c=>`<button class="sm-ch${CD.c===c?' on':''}" data-c="${E(c)}">শ্রেণি ${E(bn(c))}</button>`).join('');
+   const bs=CD.c==='*'?[]:bList(CD.c);if(CD.c!=='*'&&CD.b!=='*'&&!bs.some(x=>x[0]===CD.b))CD.b='*';
+   box.querySelector('#cd_b').innerHTML=bs.length>1?`<button class="sm-ch${CD.b==='*'?' on':''}" data-b="*">সব ব্যাচ</button>`+bs.map(([k])=>`<button class="sm-ch${CD.b===k?' on':''}" data-b="${E(k)}">${k==='_'?'ব্যাচ নেই':E(k)}</button>`).join(''):'';
+   const l=cdList(),pw=box.querySelector('#cd_pw');
+   if(l.length){const w=Math.max(200,pw.clientWidth||300),k=Math.min(1,(w-4)/310);pw.style.height=Math.round(195*k)+'px';pw.innerHTML=`<div style="transform:scale(${k});transform-origin:0 0;width:310px;pointer-events:none">${cdCard(l[0])}</div>`}else{pw.style.height='';pw.innerHTML='<div class="sm-emp" style="padding:14px"><b>এই বাছাইয়ে কেউ নেই</b></div>'}
+   box.querySelector('#cd_n').textContent=l.length?bn(l.length)+' জনের কার্ড · '+bn(Math.ceil(l.length/10))+' পাতা (নমুনা: '+l[0].n+')':'';
+   ['#cd_pdf','#cd_img','#cd_vw'].forEach(i=>box.querySelector(i).disabled=!l.length)};
+  box.onclick=e=>{const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b]');if(!t||!box.contains(t))return;if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*'}else CD.b=t.dataset.b;draw()};
+  box.querySelector('#cd_pdf').onclick=()=>spPdf(cdPages(cdList()),'id-cards');
+  box.querySelector('#cd_img').onclick=()=>shotMany(cdPages(cdList()),'id-cards');
+  box.querySelector('#cd_vw').onclick=()=>spPagesSheet(cdPages(cdList()),'🪪 আইডি কার্ডের পাতা','A4-এ ১০টা করে');
+  box.querySelector('#cd_one').onclick=()=>cdPick();
+  draw()})}
+function cdPick(){const l0=cdList();sheet(`<h3>👤 একজনের কার্ড</h3><p class="sub">নাম বেছে কার্ডের ছবি বানাও</p><input id="cp_q" class="wk-q" placeholder="🔍 নাম বা রোল" autocomplete="off"><div id="cp_l" style="max-height:48vh;overflow:auto"></div>`,box=>{
+ const q=box.querySelector('#cp_q'),h=box.querySelector('#cp_l'),go=()=>{const t=q.value.trim(),l=l0.filter(s=>!t||s.n.includes(t)||String(s.r)===en(t)).slice(0,60);
+  h.innerHTML=l.map(s=>`<div class="sm-row" data-id="${E(s.id)}">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small></div><span class="sm-pl g">ছবি ›</span></div>`).join('')||'<div class="sub">কেউ নেই</div>';
+  h.querySelectorAll('[data-id]').forEach(e=>e.onclick=()=>{const s=SM.st.find(x=>x.id===e.dataset.id);closeSheet();toast('কার্ড বানানো হচ্ছে…');cdOne(s)})};q.oninput=go;go()})}
+
+/* ক্যামেরা: পাতা ছাড়লে বা অ্যাপ লুকালে বন্ধ */
+new MutationObserver(()=>{if($('#smN').classList.contains('hide'))camStop()}).observe($('#smN'),{attributes:true,attributeFilter:['class']});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)camStop()});
+
 window.smOpenWa=openWa;
 window.smApi={SM:()=>SM,diary:()=>SM.diary,bn,en,MO,WDS,money,mLabel,ymOf,addM,iso,todayS,pIso,dLabel,clsList,bList,inCls,clsAt,clsDays,monthDue,paidOf,remOf,dueBefore,totDue,stOf,openWa};
-window.smDbg={SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
+window.smDbg={QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
 })();
 
 </script>
