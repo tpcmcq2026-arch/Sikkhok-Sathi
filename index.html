@@ -5427,7 +5427,7 @@ SM.cfg.sm=SM.cfg.sm&&typeof SM.cfg.sm==='object'?SM.cfg.sm:{};
 {const lim=addD(todayS(),-400);Object.keys(SM.cfg.sc).forEach(d=>{if(d<lim)delete SM.cfg.sc[d]})}
 V.N={m:'i',d:todayS()};
 const NZ_MSG={a:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {সময়}-এ {প্রতিষ্ঠান}-এ পৌঁছেছে। ✅',l:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {মিনিট} মিনিট দেরিতে ({সময়}-এ) {প্রতিষ্ঠান}-এ পৌঁছেছে। আগামীতে সময়মতো পাঠানোর অনুরোধ রইল।',o:'আসসালামু আলাইকুম। আপনার সন্তান {নাম} আজ {সময়}-এ {প্রতিষ্ঠান}-এর ক্লাস শেষ করে বের হয়েছে।'};
-const nzIn=()=>SM.cfg.sn||'তৌফিক প্রাইভেট সেন্টার',nzAd=()=>SM.cfg.sa==null?'সাহেবনগর, গাংনী, মেহেরপুর':SM.cfg.sa;
+const nzIn=()=>SM.cfg.sn||'তৌফিক প্রাইভেট সেন্টার',nzAd=()=>SM.cfg.sa==null?'সাহেবনগর হাজ্বী মার্কেট':SM.cfg.sa;
 const nzGr=()=>Math.max(0,Math.min(120,+SM.cfg.sg||0));
 const p2=n=>String(n).padStart(2,'0'),nowHM=()=>{const d=new Date();return p2(d.getHours())+':'+p2(d.getMinutes())};
 const hm2m=t=>{const a=String(t||'').split(':');return (+a[0]||0)*60+(+a[1]||0)};
@@ -5516,7 +5516,7 @@ function nzList(){
   <div class="nz-bs">${r.i?btn(s,r,'i'):''}${r.o?btn(s,r,'o'):''}</div>${s.p?'':'<small style="color:#dc2626">⚠ অভিভাবকের নম্বর নেই — WhatsApp-এ নিজে কন্ট্যাক্ট বাছতে হবে</small>'}</div>`).join(''):`<div class="sm-emp" style="padding:18px"><i>📋</i><b>এখনো কেউ স্ক্যান করেনি</b>স্ক্যান করলে এখানে নামের তালিকা হবে।</div>`)}
 
 wire('#smNb',{
- md:t=>{V.N.m=t.dataset.v;const wasOn=!!CAM;rN();if(wasOn)camStart()},
+ goS,md:t=>{V.N.m=t.dataset.v;const wasOn=!!CAM;rN();if(wasOn)camStart()},
  cam:()=>{CAM?camStop():camStart()},
  man:()=>nzMan(),tod:()=>{V.N.d=todayS();rN()},
  dp:()=>{V.N.d=addD(V.N.d,-1);rN()},dn:()=>{if(V.N.d<todayS()){V.N.d=addD(V.N.d,1);rN()}},
@@ -5549,116 +5549,181 @@ function nzMsSheet(){const f=[['a','✅ সময়মতো এলে'],['l','
  <div class="sm-f"><label>প্রতিষ্ঠানের নাম</label><input id="ms_n" value="${E(nzIn())}"></div><div class="sm-f"><label>কার্ডের ঠিকানা</label><input id="ms_a" value="${E(nzAd())}"></div>
  ${f.map(([k,l])=>`<div class="sm-f"><label>${l}</label><textarea id="ms_${k}" rows="4" style="width:100%;font:inherit;padding:10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit">${E((SM.cfg.sm&&SM.cfg.sm[k])||NZ_MSG[k])}</textarea></div>`).join('')}
  <div class="sm-two"><button class="btn" id="ms_r">↺ আগের লেখা</button><button class="btn p" id="ms_ok">✓ সেভ</button></div>`,box=>{
-  box.querySelector('#ms_r').onclick=()=>{f.forEach(([k])=>box.querySelector('#ms_'+k).value=NZ_MSG[k]);box.querySelector('#ms_n').value='তৌফিক প্রাইভেট সেন্টার';box.querySelector('#ms_a').value='সাহেবনগর, গাংনী, মেহেরপুর'};
+  box.querySelector('#ms_r').onclick=()=>{f.forEach(([k])=>box.querySelector('#ms_'+k).value=NZ_MSG[k]);box.querySelector('#ms_n').value='তৌফিক প্রাইভেট সেন্টার';box.querySelector('#ms_a').value='সাহেবনগর হাজ্বী মার্কেট'};
   box.querySelector('#ms_ok').onclick=()=>{SM.cfg.sn=box.querySelector('#ms_n').value.trim()||'তৌফিক প্রাইভেট সেন্টার';SM.cfg.sa=box.querySelector('#ms_a').value.trim();f.forEach(([k])=>{const v=box.querySelector('#ms_'+k).value.trim();if(v&&v!==NZ_MSG[k])SM.cfg.sm[k]=v;else delete SM.cfg.sm[k]});smSave();closeSheet();toast('সেভ হয়েছে ✓')}})}
 
 /* ---------- আইডি কার্ড ---------- */
-const CD={d:'v1',ac:'#0f766e',c:'*',b:'*',p:1,o:'v'},CDA=['#0f766e','#2563eb','#7c3aed','#e11d48','#ea580c','#0f172a'],CDV=[['v1','লম্বা ক্লাসিক'],['v2','লম্বা আধুনিক'],['v3','লম্বা নাম-কেন্দ্রিক'],['v4','লম্বা ডার্ক গোল্ড'],['v5','লম্বা তির্যক'],['v6','লম্বা দুই-রঙা']],CDD=[['c','ক্লাসিক'],['m','আধুনিক'],['s','সরল'],['n','নাম-কেন্দ্রিক'],['k','টিকেট'],['b','বড় QR'],['d','ডার্ক গোল্ড'],['y','তির্যক']];
+const CD={d:'v1',ac:'#0f766e',c:'*',b:'*',p:1,o:'v',n:10,s:'d'},CDA=['#0f766e','#2563eb','#7c3aed','#e11d48','#ea580c','#0f172a'];
+const CDV=[['v1','লম্বা ক্লাসিক'],['v2','লম্বা আধুনিক'],['v3','লম্বা নাম-কেন্দ্রিক'],['v4','লম্বা ডার্ক গোল্ড'],['v5','লম্বা তির্যক'],['v6','লম্বা দুই-রঙা']],CDD=[['c','ক্লাসিক'],['m','আধুনিক'],['s','সরল'],['n','নাম-কেন্দ্রিক'],['k','টিকেট'],['b','বড় QR'],['d','ডার্ক গোল্ড'],['y','তির্যক']];
+const CDQ=['আজকের পরিশ্রম, আগামীর সাফল্য।','জ্ঞানই শক্তি, শিক্ষাই আলো।','স্বপ্ন দেখো, নিরলস চেষ্টা করো।','সময়ের মূল্য দাও, সফলতা আসবেই।','পড়ো, শেখো, এগিয়ে যাও।','সৎ থাকো, শ্রম করো, বড় হও।'];
+if(SM.cfg.sa==='সাহেবনগর, গাংনী, মেহেরপুর')delete SM.cfg.sa;
 const shade=(h,k)=>{const n=parseInt(h.slice(1),16),f=x=>Math.max(0,Math.min(255,Math.round(x+(k<0?x*k:(255-x)*k))));return 'rgb('+f(n>>16)+','+f((n>>8)&255)+','+f(n&255)+')'};
-function cdCardV(s){
- const a=CD.ac,dk=shade(a,-.38),q=qrURL(qrTxt(s),240),pho=nzPh()[s.id],D=CD.d,wp=(D==='v1'||D==='v2')&&CD.p&&pho,nm=E(s.n),L=s.n.length,nsz=L>24?12.5:L>18?14:L>12?16:18;
- const box=`width:195px;height:310px;box-sizing:border-box;position:relative;overflow:hidden;border-radius:12px;font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;`;
- const slot=(bd,bg)=>`<div style="position:absolute;left:50%;margin-left:-22px;top:9px;width:44px;height:9px;border-radius:5px;background:${bg||'#fff'};border:1.5px solid ${bd||'#94a3b8'};z-index:3"></div>`;
- const qb=(sz,x)=>`<div style="background:#fff;padding:3px;border-radius:8px;line-height:0;flex:none;${x||''}"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`;
- const name=(c,sz)=>`<div style="font-size:${sz||nsz}px;font-weight:700;line-height:1.25;margin-bottom:3px;color:${c||'#0f172a'};word-break:break-word;text-align:center">${nm}</div>`;
- const meta=(col,sz)=>`<div style="display:flex;flex-wrap:wrap;justify-content:center;column-gap:11px;row-gap:0;font-size:${sz||11.5}px;line-height:1.5;color:${col||'#334155'}"><span style="white-space:nowrap">শ্রেণি: <b>${E(bn(s.c))}</b></span>${s.r?`<span style="white-space:nowrap">রোল: <b>${E(bn(s.r))}</b></span>`:''}${s.b?`<span style="white-space:nowrap;flex-basis:100%;text-align:center">ব্যাচ: <b>${E(s.b)}</b></span>`:''}</div>`;
- const pill=(t,bg,c)=>`<span style="white-space:nowrap;background:${bg};color:${c};border-radius:999px;padding:1px 10px;font-size:11px;font-weight:700;line-height:1.6">${t}</span>`;
- const pills=(bg,c,tc)=>`<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:3px">${pill('শ্রেণি '+E(bn(s.c)),bg,c)}${s.r?pill('রোল '+E(bn(s.r)),bg,c):''}</div>${s.b?`<div style="font-size:11px;text-align:center;color:${tc||'#334155'}">ব্যাচ: <b>${E(s.b)}</b></div>`:''}`;
- const col='position:absolute;left:10px;right:10px;display:flex;flex-direction:column;align-items:center;';
- const pic=(w,bd)=>`<img src="${pho}" style="width:${w}px;height:${w}px;object-fit:cover;border-radius:50%;display:block;flex:none;background:#e2e8f0;border:3px solid ${bd}">`;
- if(D==='v2')return `<div style="${box}background:linear-gradient(170deg,${a},${dk});color:#fff"><div style="position:absolute;right:-50px;top:40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08)"></div><div style="position:absolute;left:-40px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.07)"></div>${slot('rgba(255,255,255,.7)','rgba(0,0,0,.25)')}
- <div style="${col}top:26px;text-align:center"><div style="font-size:13px;font-weight:700;line-height:1.3">${E(nzIn())}</div>${wp?'<div style="height:8px"></div>':`<div style="font-size:9px;opacity:.85;margin-bottom:14px">${E(nzAd())}</div>`}${wp?pic(56,'rgba(255,255,255,.9)'):''}<div style="margin-top:${wp?5:0}px">${name('#fff')}${meta('rgba(255,255,255,.95)',11)}</div></div>
- <div style="position:absolute;left:0;right:0;bottom:24px;display:flex;justify-content:center">${qb(wp?76:104)}</div><div style="position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:9px;opacity:.9">ছাত্র পরিচয়পত্র · QR স্ক্যান করো</div></div>`;
- if(D==='v3')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="height:56px;background:linear-gradient(135deg,${dk},${a})"></div>${slot('#94a3b8','#fff')}
- <div style="position:absolute;left:10px;right:10px;top:22px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.3;padding-top:10px">${E(nzIn())}</div></div>
- <div style="${col}top:70px">${name('#0f172a',nsz+1)}${pills(a,'#fff')}</div>
- <div style="position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center">${qb(112,'border:2px solid '+a+';')}</div><div style="position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:9px;color:#64748b">${E(nzAd())}</div></div>`;
- if(D==='v4'){const gd=shade(a,.62),bg=shade(a,-.82);return `<div style="${box}background:linear-gradient(160deg,${bg},${shade(a,-.6)});border:1.5px solid ${gd};color:#fff">${slot(gd,'rgba(0,0,0,.35)')}
- <div style="${col}top:26px;text-align:center"><div style="font-size:13.5px;font-weight:700;color:${gd};line-height:1.3">${E(nzIn())}</div><div style="width:60px;height:1.5px;background:${gd};margin:5px 0 12px"></div>${name('#fff',nsz+1)}${meta('rgba(255,255,255,.88)',11.5)}</div>
- <div style="position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center">${qb(104,'border:2px solid '+gd+';')}</div><div style="position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:9px;letter-spacing:.5px;color:${gd}">ছাত্র পরিচয়পত্র</div></div>`}
- if(D==='v5')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="position:absolute;left:-50px;top:-100px;width:300px;height:190px;background:linear-gradient(135deg,${dk},${a});transform:rotate(-12deg);border-radius:30px"></div><div style="position:absolute;right:-70px;bottom:-90px;width:200px;height:170px;background:${shade(a,.82)};transform:rotate(-12deg);border-radius:26px"></div>${slot('rgba(255,255,255,.8)','rgba(0,0,0,.2)')}
- <div style="position:absolute;left:10px;right:10px;top:26px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.3">${E(nzIn())}</div><div style="font-size:9px;opacity:.9">${E(nzAd())}</div></div>
- <div style="${col}top:116px">${name('#0f172a',nsz)}${meta()}</div>
- <div style="position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center">${qb(92,'box-shadow:0 2px 8px rgba(0,0,0,.25);')}</div><div style="position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:9px;color:#475569;font-weight:700">ছাত্র পরিচয়পত্র</div></div>`;
- if(D==='v6')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a">${slot('#94a3b8','#fff')}
- <div style="position:absolute;left:10px;right:10px;top:24px;text-align:center"><div style="font-size:12.5px;font-weight:700;color:${a};line-height:1.3">${E(nzIn())}</div><div style="font-size:9px;color:#64748b">${E(nzAd())}</div></div>
- <div style="${col}top:62px">${name('#0f172a',nsz+1)}${meta()}</div>
- <div style="position:absolute;left:0;right:0;bottom:0;height:128px;background:linear-gradient(160deg,${a},${dk});border-radius:34px 34px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">${qb(92)}<span style="font-size:9.5px;color:#fff;font-weight:700">QR স্ক্যান করো · ছাত্র পরিচয়পত্র</span></div></div>`;
- return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="height:${wp?70:74}px;background:linear-gradient(135deg,${dk},${a})"></div>${slot('#94a3b8','#fff')}
- <div style="position:absolute;left:8px;right:8px;top:26px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.3">${E(nzIn())}</div>${wp?'':`<div style="font-size:9px;opacity:.9">${E(nzAd())}</div>`}</div>
- <div style="${col}top:${wp?46:84}px">${wp?pic(60,'#fff'):''}<div style="margin-top:${wp?5:0}px">${name('#0f172a',nsz)}${meta()}</div></div>
- <div style="position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center">${qb(wp?76:100,'border:1px solid #cbd5e1;')}</div><div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${a};color:#fff;text-align:center;font-size:9px;line-height:17px">ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা</div></div>`}
-function cdCard(s){
- if(CD.o==='v')return cdCardV(s);
- const a=CD.ac,dk=shade(a,-.38),q=qrURL(qrTxt(s),240),pho=nzPh()[s.id],D=CD.d,wp=(D==='c'||D==='m'||D==='s')&&CD.p&&pho,nm=E(s.n),L=s.n.length,nsz=L>24?13:L>18?15:L>12?17:19;
- const box=`width:310px;height:195px;box-sizing:border-box;position:relative;overflow:hidden;border-radius:12px;font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;`;
+const cdFc=()=>{const L=rcFnList(),f=L.find(x=>x.id===(SM.cfg.cdf||'nsb'));return (f&&f.id!=='auto'?f:L.find(x=>x.id==='nsb')).css};
+const cdPhone=()=>SM.cfg.sph||'01839402951',cdQt=()=>SM.cfg.sq||CDQ[0];
+const cdFmt=p=>{const d=String(p||'').replace(/\D/g,'');return d.length===11?bn(d.slice(0,5)+'-'+d.slice(5)):bn(String(p||''))};
+const cdFit=(t,avail,mx,mn)=>{let r=mn;try{const c=cdFit.c||(cdFit.c=document.createElement('canvas').getContext('2d'));c.font='700 100px '+cdFc();r=avail/(c.measureText(t).width/100)*.95}catch(e){}return {z:Math.max(mn,Math.min(mx,r)),wrap:r<mn}};
+const gl=(s,col,sz,jc,x)=>[s.g?['অভিভাবক',E(s.g)]:null,s.p?['মোবাইল',cdFmt(s.p)]:null].filter(Boolean).map(([k,v])=>`<div style="display:flex;gap:4px;justify-content:${jc||'flex-start'};font-size:${sz||10.5}px;line-height:1.5;color:${col||'#334155'};${x||''}"><span style="white-space:nowrap;opacity:.78">${k}:</span><b style="min-width:0;word-break:break-word">${v}</b></div>`).join('');
+const cdDim=()=>CD.o==='v'?[195,310]:[310,195],cdCols=()=>CD.o==='v'?3:2,cdPerOpts=()=>CD.o==='v'?[6,9]:[6,8,10];
+const cdPer=()=>{const o=cdPerOpts();return o.includes(CD.n)?CD.n:o[o.length-1]};
+const cdBox=()=>`box-sizing:border-box;position:relative;overflow:hidden;border-radius:12px;font-family:${cdFc()};`;
+const cdQB=(q,sz,x)=>`<div style="background:#fff;padding:3px;border-radius:8px;line-height:0;flex:none;${x||''}"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`;
+
+/* সামনের দিক — আড়াআড়ি */
+function cdCardH(s){
+ const a=CD.ac,dk=shade(a,-.38),q=qrURL(qrTxt(s),240),pho=nzPh()[s.id],D=CD.d,wp=(D==='c'||D==='m'||D==='s')&&CD.p&&pho,nm=E(s.n),L=s.n.length,nsz=L>24?13:L>18?15:L>12?17:19,IN=E(nzIn()),AD=E(nzAd());
+ const box=`width:310px;height:195px;${cdBox()}`,qs=wp?74:84;
  const pic=(w,h,r,x)=>`<img src="${pho}" style="width:${w}px;height:${h}px;object-fit:cover;border-radius:${r};display:block;flex:none;background:#e2e8f0;${x||''}">`;
- const qb=(sz,x)=>`<div style="background:#fff;padding:3px;border-radius:8px;line-height:0;flex:none;${x||''}"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`;
- const name=(c,sz)=>`<div style="font-size:${sz||nsz}px;font-weight:700;line-height:1.25;margin-bottom:4px;color:${c||'#0f172a'};word-break:break-word">${nm}</div>`;
- const meta=(col,sz)=>`<div style="display:flex;flex-wrap:wrap;column-gap:12px;row-gap:1px;font-size:${sz||11.5}px;line-height:1.55;color:${col||'#334155'}"><span style="white-space:nowrap">শ্রেণি: <b>${E(bn(s.c))}</b></span>${s.r?`<span style="white-space:nowrap">রোল: <b>${E(bn(s.r))}</b></span>`:''}${s.b?`<span style="white-space:nowrap;flex-basis:100%">ব্যাচ: <b>${E(s.b)}</b></span>`:''}</div>`;
+ const name=(c,sz)=>`<div style="font-size:${sz||nsz}px;font-weight:700;line-height:1.25;margin-bottom:3px;color:${c||'#0f172a'};word-break:break-word">${nm}</div>`;
+ const meta=(col,sz)=>`<div style="display:flex;flex-wrap:wrap;column-gap:11px;row-gap:0;font-size:${sz||11.5}px;line-height:1.5;color:${col||'#334155'}"><span style="white-space:nowrap">শ্রেণি: <b>${E(bn(s.c))}</b></span>${s.r?`<span style="white-space:nowrap">রোল: <b>${E(bn(s.r))}</b></span>`:''}${s.b?`<span style="white-space:nowrap;flex-basis:100%">ব্যাচ: <b>${E(s.b)}</b></span>`:''}</div>`;
  const pill=(t,bg,c)=>`<span style="white-space:nowrap;background:${bg};color:${c};border-radius:999px;padding:1px 10px;font-size:11px;font-weight:700;line-height:1.6">${t}</span>`;
- const pills=(bg,c)=>`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px">${pill('শ্রেণি '+E(bn(s.c)),bg,c)}${s.r?pill('রোল '+E(bn(s.r)),bg,c):''}</div>${s.b?`<div style="font-size:11px;color:inherit;opacity:.85">ব্যাচ: <b>${E(s.b)}</b></div>`:''}`;
+ const pills=(bg,c)=>`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:3px">${pill('শ্রেণি '+E(bn(s.c)),bg,c)}${s.r?pill('রোল '+E(bn(s.r)),bg,c):''}</div>${s.b?`<div style="font-size:11px;line-height:1.5">ব্যাচ: <b>${E(s.b)}</b></div>`:''}`;
  const fl='position:absolute;left:14px;right:14px;display:flex;gap:11px;align-items:center;';
  if(D==='m')return `<div style="${box}background:linear-gradient(135deg,${dk},${a});color:#fff"><div style="position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08)"></div><div style="position:absolute;left:-30px;bottom:-50px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.07)"></div>
- <div style="position:absolute;left:14px;top:12px;font-size:13.5px;font-weight:700">${E(nzIn())}</div><div style="position:absolute;left:14px;top:30px;font-size:9.5px;opacity:.85">${E(nzAd())}</div>
- <div style="${fl}top:50px;bottom:28px">${wp?pic(64,64,'50%','border:3px solid rgba(255,255,255,.9);'):''}<div style="flex:1;min-width:0">${name('#fff')}${meta('rgba(255,255,255,.95)',11)}</div>${qb(78)}</div>
+ <div style="position:absolute;left:14px;top:11px;font-size:13.5px;font-weight:700">${IN}</div><div style="position:absolute;left:14px;top:29px;font-size:9.5px;opacity:.85">${AD}</div>
+ <div style="${fl}top:46px;bottom:26px">${wp?pic(58,58,'50%','border:3px solid rgba(255,255,255,.9);'):''}<div style="flex:1;min-width:0">${name('#fff',nsz-1)}${meta('rgba(255,255,255,.95)',10.5)}${gl(s,'rgba(255,255,255,.95)',10)}</div>${cdQB(q,qs-6)}</div>
  <div style="position:absolute;left:0;right:0;bottom:0;padding:6px 14px;background:rgba(0,0,0,.22);font-size:9.5px;display:flex;justify-content:space-between"><span>ছাত্র পরিচয়পত্র</span><span>QR স্ক্যান করে হাজিরা</span></div></div>`;
  if(D==='s')return `<div style="${box}background:#fff;border:1.5px solid ${a};color:#0f172a"><div style="position:absolute;left:0;top:0;bottom:0;width:9px;background:${a}"></div>
- <div style="position:absolute;left:22px;top:11px;right:12px"><div style="font-size:13.5px;font-weight:700;color:${a}">${E(nzIn())}</div><div style="font-size:9.5px;color:#64748b">${E(nzAd())}</div><div style="height:1px;background:#e2e8f0;margin-top:6px"></div></div>
- <div style="position:absolute;left:22px;right:12px;top:58px;bottom:22px;display:flex;gap:10px;align-items:center">${wp?pic(60,72,'8px'):''}<div style="flex:1;min-width:0">${name()}${meta()}</div>${qb(80,'border:1px solid #e2e8f0;')}</div><div style="position:absolute;right:12px;bottom:7px;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র</div></div>`;
+ <div style="position:absolute;left:22px;top:10px;right:12px"><div style="font-size:13.5px;font-weight:700;color:${a}">${IN}</div><div style="font-size:9.5px;color:#64748b">${AD}</div><div style="height:1px;background:#e2e8f0;margin-top:5px"></div></div>
+ <div style="position:absolute;left:22px;right:12px;top:56px;bottom:20px;display:flex;gap:10px;align-items:center">${wp?pic(54,66,'8px'):''}<div style="flex:1;min-width:0">${name('#0f172a',nsz-1)}${meta('#334155',10.5)}${gl(s,'#334155',10)}</div>${cdQB(q,qs-4,'border:1px solid #e2e8f0;')}</div><div style="position:absolute;right:12px;bottom:6px;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র</div></div>`;
  if(D==='n')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="height:7px;background:linear-gradient(90deg,${dk},${a})"></div>
- <div style="position:absolute;left:16px;right:16px;top:15px;display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:13px;color:${a}">${E(nzIn())}</b><span style="font-size:9px;color:#64748b">${E(nzAd())}</span></div>
- <div style="position:absolute;left:16px;right:16px;top:44px;bottom:12px;display:flex;gap:14px;align-items:center">${qb(108,'border:2px solid '+a+';')}<div style="flex:1;min-width:0">${name('#0f172a',nsz+1)}${pills(a,'#fff')}</div></div></div>`;
+ <div style="position:absolute;left:16px;right:16px;top:14px;display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:13px;color:${a}">${IN}</b><span style="font-size:9px;color:#64748b">${AD}</span></div>
+ <div style="position:absolute;left:16px;right:16px;top:42px;bottom:12px;display:flex;gap:14px;align-items:center">${cdQB(q,104,'border:2px solid '+a+';')}<div style="flex:1;min-width:0">${name('#0f172a',nsz)}${pills(a,'#fff')}${gl(s,'#334155',10.5)}</div></div></div>`;
  if(D==='k')return `<div style="${box}background:#fff;border:1.5px solid #cbd5e1;color:#0f172a"><div style="position:absolute;left:0;top:0;bottom:0;width:8px;background:${a}"></div>
- <div style="position:absolute;left:20px;top:12px;width:186px"><div style="font-size:9.5px;letter-spacing:.5px;color:${a};font-weight:700">ছাত্র পরিচয়পত্র</div><div style="font-size:13px;font-weight:700;color:#334155;line-height:1.3">${E(nzIn())}</div></div>
- <div style="position:absolute;left:20px;top:58px;width:186px;bottom:12px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz)}${meta()}</div>
+ <div style="position:absolute;left:20px;top:9px;width:186px"><div style="font-size:9px;letter-spacing:.5px;color:${a};font-weight:700">ছাত্র পরিচয়পত্র</div><div style="font-size:13px;font-weight:700;color:#334155;line-height:1.25">${IN}</div><div style="font-size:9px;color:#64748b">${AD}</div></div>
+ <div style="position:absolute;left:20px;top:56px;width:186px;bottom:10px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz-1)}${meta('#334155',10.5)}${gl(s,'#334155',10)}</div>
  <div style="position:absolute;left:218px;top:-10px;bottom:-10px;border-left:2px dashed #94a3b8"></div><div style="position:absolute;left:210px;top:-9px;width:18px;height:18px;border-radius:50%;background:#fff;border:1.5px solid #cbd5e1"></div><div style="position:absolute;left:210px;bottom:-9px;width:18px;height:18px;border-radius:50%;background:#fff;border:1.5px solid #cbd5e1"></div>
- <div style="position:absolute;left:220px;right:0;top:0;bottom:0;background:${shade(a,.9)};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">${qb(72,'border:1px solid '+shade(a,.6)+';')}<span style="font-size:9.5px;font-weight:700;color:${a}">স্ক্যান করো</span></div></div>`;
- if(D==='b')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="position:absolute;left:0;top:0;bottom:0;width:128px;background:linear-gradient(160deg,${a},${dk});display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">${qb(108)}<span style="font-size:10px;color:#fff;font-weight:700">QR স্ক্যান করো</span></div>
- <div style="position:absolute;left:142px;right:12px;top:12px"><div style="font-size:12px;font-weight:700;color:${a};line-height:1.3">${E(nzIn())}</div><div style="font-size:9px;color:#64748b">${E(nzAd())}</div></div>
- <div style="position:absolute;left:142px;right:12px;top:52px;bottom:26px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz-1)}${meta()}</div><div style="position:absolute;left:142px;right:12px;bottom:8px;border-top:1px solid #e2e8f0;padding-top:3px;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র</div></div>`;
+ <div style="position:absolute;left:220px;right:0;top:0;bottom:0;background:${shade(a,.9)};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">${cdQB(q,72,'border:1px solid '+shade(a,.6)+';')}<span style="font-size:9.5px;font-weight:700;color:${a}">স্ক্যান করো</span></div></div>`;
+ if(D==='b')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="position:absolute;left:0;top:0;bottom:0;width:128px;background:linear-gradient(160deg,${a},${dk});display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">${cdQB(q,108)}<span style="font-size:10px;color:#fff;font-weight:700">QR স্ক্যান করো</span></div>
+ <div style="position:absolute;left:140px;right:10px;top:10px"><div style="font-size:12px;font-weight:700;color:${a};line-height:1.3">${IN}</div><div style="font-size:9px;color:#64748b">${AD}</div></div>
+ <div style="position:absolute;left:140px;right:10px;top:46px;bottom:24px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz-2)}${meta('#334155',10.5)}${gl(s,'#334155',10)}</div><div style="position:absolute;left:140px;right:10px;bottom:7px;border-top:1px solid #e2e8f0;padding-top:3px;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র</div></div>`;
  if(D==='d'){const gd=shade(a,.62),bg=shade(a,-.82);return `<div style="${box}background:linear-gradient(135deg,${bg},${shade(a,-.6)});border:1.5px solid ${gd};color:#fff">
- <div style="position:absolute;left:0;right:0;top:11px;text-align:center"><div style="font-size:14px;font-weight:700;color:${gd}">${E(nzIn())}</div><div style="width:70px;height:1.5px;background:${gd};margin:4px auto 0"></div></div>
- <div style="position:absolute;left:16px;right:16px;top:50px;bottom:26px;display:flex;gap:12px;align-items:center"><div style="flex:1;min-width:0">${name('#fff')}${meta('rgba(255,255,255,.85)',11.5)}</div>${qb(84,'border:2px solid '+gd+';')}</div>
- <div style="position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:9px;letter-spacing:.6px;color:${gd}">ছাত্র পরিচয়পত্র · ${E(nzAd())}</div></div>`}
+ <div style="position:absolute;left:0;right:0;top:10px;text-align:center"><div style="font-size:14px;font-weight:700;color:${gd}">${IN}</div><div style="width:70px;height:1.5px;background:${gd};margin:4px auto 0"></div></div>
+ <div style="position:absolute;left:16px;right:16px;top:46px;bottom:24px;display:flex;gap:12px;align-items:center"><div style="flex:1;min-width:0">${name('#fff',nsz-1)}${meta('rgba(255,255,255,.88)',10.5)}${gl(s,'rgba(255,255,255,.9)',10)}</div>${cdQB(q,84,'border:2px solid '+gd+';')}</div>
+ <div style="position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:9px;letter-spacing:.4px;color:${gd}">ছাত্র পরিচয়পত্র · ${AD}</div></div>`}
  if(D==='y')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="position:absolute;right:-70px;top:-80px;width:210px;height:210px;background:linear-gradient(135deg,${dk},${a});transform:rotate(28deg);border-radius:26px"></div><div style="position:absolute;left:-60px;bottom:-100px;width:170px;height:170px;background:${shade(a,.82)};transform:rotate(28deg);border-radius:22px"></div>
- <div style="position:absolute;left:16px;top:13px;width:170px"><div style="font-size:13px;font-weight:700;color:${a};line-height:1.3">${E(nzIn())}</div><div style="font-size:9px;color:#64748b">${E(nzAd())}</div></div>
- <div style="position:absolute;left:16px;top:56px;width:176px;bottom:14px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz)}${meta()}</div>
- <div style="position:absolute;right:16px;top:44px">${qb(96,'box-shadow:0 2px 8px rgba(0,0,0,.25);')}</div><div style="position:absolute;right:16px;bottom:9px;font-size:9px;color:#64748b;font-weight:700">ছাত্র পরিচয়পত্র</div></div>`;
- return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="background:linear-gradient(135deg,${dk},${a});color:#fff;text-align:center;padding:9px 10px 7px"><div style="font-size:14px;font-weight:700">${E(nzIn())}</div><div style="font-size:9.5px;opacity:.9">${E(nzAd())}</div></div>
- <div style="position:absolute;left:14px;right:14px;top:60px;bottom:24px;display:flex;gap:11px;align-items:center">${wp?pic(66,82,'9px'):''}<div style="flex:1;min-width:0">${name()}${meta()}</div>${qb(84,'border:1px solid #cbd5e1;')}</div><div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${a};color:#fff;text-align:center;font-size:9.5px;line-height:17px">ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা</div></div>`}
+ <div style="position:absolute;left:16px;top:12px;width:170px"><div style="font-size:13px;font-weight:700;color:${a};line-height:1.3">${IN}</div><div style="font-size:9px;color:#64748b">${AD}</div></div>
+ <div style="position:absolute;left:16px;top:50px;width:178px;bottom:12px;display:flex;flex-direction:column;justify-content:center">${name('#0f172a',nsz-1)}${meta('#334155',10.5)}${gl(s,'#334155',10)}</div>
+ <div style="position:absolute;right:16px;top:44px">${cdQB(q,92,'box-shadow:0 2px 8px rgba(0,0,0,.25);')}</div><div style="position:absolute;right:16px;bottom:8px;font-size:9px;color:#64748b;font-weight:700">ছাত্র পরিচয়পত্র</div></div>`;
+ return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="background:linear-gradient(135deg,${dk},${a});color:#fff;text-align:center;padding:8px 10px 6px"><div style="font-size:14px;font-weight:700">${IN}</div><div style="font-size:9.5px;opacity:.9">${AD}</div></div>
+ <div style="position:absolute;left:14px;right:14px;top:56px;bottom:22px;display:flex;gap:10px;align-items:center">${wp?pic(58,72,'9px'):''}<div style="flex:1;min-width:0">${name('#0f172a',nsz-1)}${meta('#334155',10.5)}${gl(s,'#334155',10)}</div>${cdQB(q,qs,'border:1px solid #cbd5e1;')}</div><div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${a};color:#fff;text-align:center;font-size:9.5px;line-height:17px">ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা</div></div>`}
+
+/* সামনের দিক — লম্বা (গলায় ঝোলানো) */
+function cdCardV(s){
+ const a=CD.ac,dk=shade(a,-.38),q=qrURL(qrTxt(s),240),pho=nzPh()[s.id],D=CD.d,wp=(D==='v1'||D==='v2')&&CD.p&&pho,nm=E(s.n),L=s.n.length,nsz=L>24?12.5:L>18?14:L>12?15.5:17,IN=E(nzIn()),AD=E(nzAd());
+ const box=`width:195px;height:310px;${cdBox()}`;
+ const slot=(bd,bg)=>`<div style="position:absolute;left:50%;margin-left:-22px;top:9px;width:44px;height:9px;border-radius:5px;background:${bg||'#fff'};border:1.5px solid ${bd||'#94a3b8'};z-index:3"></div>`;
+ const name=(c,sz)=>`<div style="font-size:${sz||nsz}px;font-weight:700;line-height:1.25;margin-bottom:3px;color:${c||'#0f172a'};word-break:break-word;text-align:center">${nm}</div>`;
+ const meta=(col,sz)=>`<div style="display:flex;flex-wrap:wrap;justify-content:center;column-gap:10px;row-gap:0;font-size:${sz||11}px;line-height:1.5;color:${col||'#334155'}"><span style="white-space:nowrap">শ্রেণি: <b>${E(bn(s.c))}</b></span>${s.r?`<span style="white-space:nowrap">রোল: <b>${E(bn(s.r))}</b></span>`:''}${s.b?`<span style="white-space:nowrap">ব্যাচ: <b>${E(s.b)}</b></span>`:''}</div>`;
+ const pill=(t,bg,c)=>`<span style="white-space:nowrap;background:${bg};color:${c};border-radius:999px;padding:1px 10px;font-size:11px;font-weight:700;line-height:1.6">${t}</span>`;
+ const pills=(bg,c,tc)=>`<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:2px">${pill('শ্রেণি '+E(bn(s.c)),bg,c)}${s.r?pill('রোল '+E(bn(s.r)),bg,c):''}</div>${s.b?`<div style="font-size:10.5px;text-align:center;color:${tc||'#334155'}">ব্যাচ: <b>${E(s.b)}</b></div>`:''}`;
+ const col='position:absolute;left:10px;right:10px;display:flex;flex-direction:column;align-items:center;';
+ const pic=(w,bd)=>`<img src="${pho}" style="width:${w}px;height:${w}px;object-fit:cover;border-radius:50%;display:block;flex:none;background:#e2e8f0;border:3px solid ${bd}">`;
+ const G=(c)=>gl(s,c,10,'center');
+ if(D==='v2')return `<div style="${box}background:linear-gradient(170deg,${a},${dk});color:#fff"><div style="position:absolute;right:-50px;top:40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08)"></div><div style="position:absolute;left:-40px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.07)"></div>${slot('rgba(255,255,255,.7)','rgba(0,0,0,.25)')}
+ <div style="${col}top:25px;text-align:center"><div style="font-size:13px;font-weight:700;line-height:1.3">${IN}</div><div style="font-size:9px;opacity:.88;margin-bottom:${wp?5:10}px">${AD}</div>${wp?pic(50,'rgba(255,255,255,.9)'):''}<div style="margin-top:${wp?4:0}px">${name('#fff',wp?nsz-1:nsz)}${meta('rgba(255,255,255,.95)',10.5)}${G('rgba(255,255,255,.95)')}</div></div>
+ <div style="position:absolute;left:0;right:0;bottom:23px;display:flex;justify-content:center">${cdQB(q,wp?66:92)}</div><div style="position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:9px;opacity:.92">ছাত্র পরিচয়পত্র · QR স্ক্যান করো</div></div>`;
+ if(D==='v3')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="height:62px;background:linear-gradient(135deg,${dk},${a})"></div>${slot('#94a3b8','#fff')}
+ <div style="position:absolute;left:8px;right:8px;top:24px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.25">${IN}</div><div style="font-size:9px;opacity:.9">${AD}</div></div>
+ <div style="${col}top:72px">${name('#0f172a',nsz)}${pills(a,'#fff')}<div style="margin-top:2px">${G('#334155')}</div></div>
+ <div style="position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center">${cdQB(q,90,'border:2px solid '+a+';')}</div><div style="position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:9px;color:#64748b">ছাত্র পরিচয়পত্র · QR স্ক্যান করো</div></div>`;
+ if(D==='v4'){const gd=shade(a,.62),bg=shade(a,-.82);return `<div style="${box}background:linear-gradient(160deg,${bg},${shade(a,-.6)});border:1.5px solid ${gd};color:#fff">${slot(gd,'rgba(0,0,0,.35)')}
+ <div style="${col}top:25px;text-align:center"><div style="font-size:13.5px;font-weight:700;color:${gd};line-height:1.3">${IN}</div><div style="font-size:9px;color:${gd};opacity:.85">${AD}</div><div style="width:60px;height:1.5px;background:${gd};margin:5px 0 9px"></div>${name('#fff',nsz)}${meta('rgba(255,255,255,.88)',10.5)}${G('rgba(255,255,255,.9)')}</div>
+ <div style="position:absolute;left:0;right:0;bottom:24px;display:flex;justify-content:center">${cdQB(q,90,'border:2px solid '+gd+';')}</div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:9px;letter-spacing:.5px;color:${gd}">ছাত্র পরিচয়পত্র</div></div>`}
+ if(D==='v5')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="position:absolute;left:-50px;top:-110px;width:300px;height:190px;background:linear-gradient(135deg,${dk},${a});transform:rotate(-12deg);border-radius:30px"></div><div style="position:absolute;right:-70px;bottom:-90px;width:200px;height:170px;background:${shade(a,.82)};transform:rotate(-12deg);border-radius:26px"></div>${slot('rgba(255,255,255,.8)','rgba(0,0,0,.2)')}
+ <div style="position:absolute;left:10px;right:10px;top:25px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.25">${IN}</div><div style="font-size:9px;opacity:.9">${AD}</div></div>
+ <div style="${col}top:94px">${name('#0f172a',nsz)}${meta('#334155',10.5)}${G('#334155')}</div>
+ <div style="position:absolute;left:0;right:0;bottom:19px;display:flex;justify-content:center">${cdQB(q,80,'box-shadow:0 2px 8px rgba(0,0,0,.25);')}</div><div style="position:absolute;left:0;right:0;bottom:4px;text-align:center;font-size:9px;color:#475569;font-weight:700">ছাত্র পরিচয়পত্র</div></div>`;
+ if(D==='v6')return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a">${slot('#94a3b8','#fff')}
+ <div style="position:absolute;left:10px;right:10px;top:24px;text-align:center"><div style="font-size:12.5px;font-weight:700;color:${a};line-height:1.3">${IN}</div><div style="font-size:9px;color:#64748b">${AD}</div></div>
+ <div style="${col}top:60px">${name('#0f172a',nsz)}${meta('#334155',10.5)}${G('#334155')}</div>
+ <div style="position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(160deg,${a},${dk});border-radius:34px 34px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">${cdQB(q,84)}<span style="font-size:9.5px;color:#fff;font-weight:700">QR স্ক্যান করো · ছাত্র পরিচয়পত্র</span></div></div>`;
+ return `<div style="${box}background:#fff;border:1px solid #cbd5e1;color:#0f172a"><div style="height:${wp?80:76}px;background:linear-gradient(135deg,${dk},${a})"></div>${slot('#94a3b8','#fff')}
+ <div style="position:absolute;left:8px;right:8px;top:25px;text-align:center;color:#fff"><div style="font-size:12.5px;font-weight:700;line-height:1.25">${IN}</div><div style="font-size:9px;opacity:.9">${AD}</div></div>
+ <div style="${col}top:${wp?56:84}px">${wp?pic(50,'#fff'):''}<div style="margin-top:${wp?4:0}px">${name('#0f172a',wp?nsz-1:nsz)}${meta('#334155',10.5)}${G('#334155')}</div></div>
+ <div style="position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center">${cdQB(q,wp?66:90,'border:1px solid #cbd5e1;')}</div><div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${a};color:#fff;text-align:center;font-size:9px;line-height:17px">ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা</div></div>`}
+const cdCard=s=>CD.o==='v'?cdCardV(s):cdCardH(s);
+
+/* পেছনের দিক (সবার একই) */
+function cdBack(){
+ const a=CD.ac,dk=shade(a,-.38),V=CD.o==='v',dark=['m','d','v2','v4'].includes(CD.d),IN=E(nzIn()),AD=E(nzAd()),PH=cdFmt(cdPhone()),qt=cdQt(),f=cdFit(qt,V?150:262,V?12:12.5,V?8.5:9.5);
+ const W=V?195:310,H=V?310:195,box=`width:${W}px;height:${H}px;${cdBox()}`;
+ const gd=shade(a,.62),bg1=dark?shade(a,-.82):'#fff',tx=dark?'#fff':'#0f172a',mu=dark?'rgba(255,255,255,.72)':'#64748b',ac=dark?gd:a;
+ const slot=V?`<div style="position:absolute;left:50%;margin-left:-22px;top:9px;width:44px;height:9px;border-radius:5px;background:${dark?'rgba(0,0,0,.35)':'#fff'};border:1.5px solid ${dark?gd:'#94a3b8'};z-index:3"></div>`:'';
+ const head=dark?`<div style="text-align:center;padding:${V?'27px':'9px'} 8px 0"><div style="font-size:${V?13:14}px;font-weight:700;color:${gd};line-height:1.3">কার্ডটি পেলে অনুগ্রহ করে জানান</div><div style="font-size:9.5px;color:${gd};opacity:.85">হারিয়ে গেলে নিচের নম্বরে যোগাযোগ করুন</div><div style="width:60px;height:1.5px;background:${gd};margin:5px auto 0"></div></div>`
+ :`<div style="background:linear-gradient(135deg,${dk},${a});color:#fff;text-align:center;padding:${V?'26px':'8px'} 8px ${V?'10px':'6px'}"><div style="font-size:${V?13:14}px;font-weight:700;line-height:1.3">কার্ডটি পেলে অনুগ্রহ করে জানান</div><div style="font-size:9.5px;opacity:.92">হারিয়ে গেলে নিচের নম্বরে যোগাযোগ করুন</div></div>`;
+ const info=`<div style="position:absolute;left:10px;right:10px;top:${V?112:53}px;text-align:center"><div style="font-size:10.5px;color:${mu};line-height:1.3">যোগাযোগ</div><div style="font-size:${V?21:20}px;font-weight:700;color:${ac};line-height:1.35">${PH}</div><div style="font-size:${V?13:12.5}px;font-weight:700;margin-top:${V?8:3}px;color:${tx}">${IN}</div><div style="font-size:10.5px;color:${mu}">${AD}</div></div>`;
+ const msg=`<div style="position:absolute;left:${V?10:14}px;right:${V?10:14}px;bottom:${V?30:24}px;border-radius:12px;background:${dark?'rgba(255,255,255,.12)':'#ecfdf5'};border:1px solid ${dark?'rgba(255,255,255,.25)':'#a7f3d0'};padding:${V?'8px 5px':'5px 6px'};text-align:center;font-size:${f.z.toFixed(1)}px;font-weight:700;color:${dark?'#fff':'#065f46'};line-height:1.4;white-space:${f.wrap?'normal':'nowrap'}">${E(qt)}</div>`;
+ const ft=`<div style="position:absolute;left:0;right:0;bottom:0;height:17px;background:${dark?'rgba(0,0,0,.3)':a};color:${dark?gd:'#fff'};text-align:center;font-size:9px;line-height:17px">এই কার্ড অন্য কেউ ব্যবহার করতে পারবে না</div>`;
+ return `<div style="${box}background:${dark?`linear-gradient(${V?170:135}deg,${bg1},${shade(a,-.6)})`:bg1};border:${dark?'1.5px solid '+gd:'1px solid #cbd5e1'};color:${tx}">${slot}${head}${info}${msg}${ft}</div>`}
+
+/* পাতা সাজানো */
 const cdList=()=>inClsAt(CD.c==='*'?'*':CD.c,CD.b,ymOf(new Date()));
-const cdPer=()=>CD.o==='v'?9:10,cdDim=()=>CD.o==='v'?[195,310]:[310,195];
-const cdPages=l=>{const pg=[],n=cdPer(),[w]=cdDim();for(let i=0;i<l.length;i+=n)pg.push(`<div data-pw="708" style="width:708px;display:grid;grid-template-columns:repeat(${CD.o==='v'?3:2},${w}px);justify-content:center;column-gap:14px;row-gap:10px">${l.slice(i,i+n).map(cdCard).join('')}</div>`);return pg};
-async function cdOne(s){const h=document.createElement('div');h.style.cssText='position:fixed;left:-9999px;top:0;width:'+cdDim()[0]+'px;height:'+cdDim()[1]+'px;background:transparent';h.innerHTML=cdCard(s);document.body.appendChild(h);
- try{if(typeof html2canvas!=='function')throw 0;try{await document.fonts.ready}catch(e){}const c=await html2canvas(h,{scale:4,backgroundColor:null}),bl=await new Promise(r=>c.toBlob(r,'image/png')),n='id-card-'+msSafe(s.n),f=new File([bl],n+'.png',{type:'image/png'});
-  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:n})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=n+'.png';a.click();toast('ছবি সেভ হয়েছে ✓')}}
- catch(e){toast('ছবি বানাতে ইন্টারনেট দরকার')}finally{h.remove()}}
+const cdPages=l=>{const pg=[],n=cdPer(),cols=cdCols(),[w,h]=cdDim(),side=CD.s||'f',grid=c=>`<div data-pw="708" style="width:708px;display:grid;grid-template-columns:repeat(${cols},${w}px);justify-content:center;column-gap:14px;row-gap:10px">${c.join('')}</div>`;
+ for(let i=0;i<l.length;i+=n){const ch=l.slice(i,i+n);
+  if(side!=='b')pg.push(grid(ch.map(cdCard)));
+  if(side!=='f'){const bk=cdBack(),cells=[];for(let r=0;r*cols<ch.length;r++){const row=[];for(let c=0;c<cols;c++)row.push(r*cols+c<ch.length?bk:`<div style="width:${w}px;height:${h}px"></div>`);cells.push(...row.reverse())}pg.push(grid(cells))}}
+ return pg};
+const cdNPg=l=>Math.ceil(l.length/cdPer())*(CD.s==='d'?2:1);
+async function cdSave(htmls,names){const [w,h]=cdDim(),fs=[];
+ for(let k=0;k<htmls.length;k++){const x=document.createElement('div');x.style.cssText=`position:fixed;left:-9999px;top:0;width:${w}px;height:${h}px;background:transparent`;x.innerHTML=htmls[k];document.body.appendChild(x);
+  try{const c=await html2canvas(x,{scale:4,backgroundColor:null}),bl=await new Promise(r=>c.toBlob(r,'image/png'));fs.push(new File([bl],names[k]+'.png',{type:'image/png'}))}finally{x.remove()}}
+ if(navigator.canShare&&navigator.canShare({files:fs})){try{await navigator.share({files:fs,title:names[0]})}catch(e){}}
+ else fs.forEach(f=>{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;a.click()})}
+async function cdOne(s){
+ try{if(typeof html2canvas!=='function')throw 0;try{await document.fonts.ready}catch(e){}
+  const n='id-card-'+msSafe(s.n),side=CD.s||'f',H=[],N=[];if(side!=='b'){H.push(cdCard(s));N.push(n+'-front')}if(side!=='f'){H.push(cdBack());N.push(n+'-back')}
+  await cdSave(H,N);if(!(navigator.canShare))toast('ছবি সেভ হয়েছে ✓')}
+ catch(e){toast('ছবি বানাতে ইন্টারনেট দরকার')}}
+
+/* পেছনের লেখা ও যোগাযোগ */
+function cdBackSheet(done){
+ sheet(`<h3>✏️ পেছনের লেখা ও যোগাযোগ</h3><p class="sub">কার্ডের পেছনে এগুলো ছাপা হবে</p>
+ <div class="sm-f"><label>যোগাযোগের মোবাইল নম্বর</label><input id="bk_p" type="tel" inputmode="numeric" value="${E(cdPhone())}" maxlength="14"></div>
+ <div class="sm-f"><label>প্রতিষ্ঠানের নাম</label><input id="bk_n" value="${E(nzIn())}"></div><div class="sm-f"><label>ঠিকানা</label><input id="bk_a" value="${E(nzAd())}"></div>
+ <div class="sm-lb">অনুপ্রেরণার বার্তা (একটা বেছে নাও বা নিজে লেখো)</div><div style="display:flex;flex-direction:column;gap:7px;margin-bottom:8px" id="bk_q">${CDQ.map(t=>`<button type="button" class="sm-ch${cdQt()===t?' on':''}" data-q="${E(t)}" style="text-align:left;white-space:normal;border-radius:14px">${E(t)}</button>`).join('')}</div>
+ <div class="sm-f"><label>নিজের বার্তা</label><input id="bk_t" value="${E(cdQt())}" maxlength="60"></div>
+ <div class="sm-two"><button class="btn" id="bk_r">↺ আগের লেখা</button><button class="btn p" id="bk_ok">✓ সেভ</button></div>`,box=>{
+  const t=box.querySelector('#bk_t');
+  box.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{t.value=b.dataset.q;box.querySelectorAll('[data-q]').forEach(x=>x.classList.toggle('on',x===b))});
+  box.querySelector('#bk_r').onclick=()=>{box.querySelector('#bk_p').value='01839402951';box.querySelector('#bk_n').value='তৌফিক প্রাইভেট সেন্টার';box.querySelector('#bk_a').value='সাহেবনগর হাজ্বী মার্কেট';t.value=CDQ[0]};
+  box.querySelector('#bk_ok').onclick=()=>{const p=en(box.querySelector('#bk_p').value.trim()).replace(/[^\d+]/g,'');SM.cfg.sph=p&&p!=='01839402951'?p:undefined;if(!SM.cfg.sph)delete SM.cfg.sph;
+   SM.cfg.sn=box.querySelector('#bk_n').value.trim()||'তৌফিক প্রাইভেট সেন্টার';SM.cfg.sa=box.querySelector('#bk_a').value.trim();const q=t.value.trim();if(q&&q!==CDQ[0])SM.cfg.sq=q;else delete SM.cfg.sq;smSave();closeSheet();toast('সেভ হয়েছে ✓');if(done)done()}})}
+
+/* আইডি কার্ড পাতা */
 function cdSheet(){
  sheet(`<h3>🪪 আইডি কার্ড</h3><p class="sub" id="cd_sub"></p>
- <div class="sm-lb">কার্ডের ধরন</div><div class="sm-chs" id="cd_o"></div><div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div id="cd_ph"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div>
- <div id="cd_pw" style="margin:6px 0 10px"></div><div id="cd_n" class="sub" style="margin:0 0 8px"></div>
+ <div class="sm-lb">কার্ডের ধরন</div><div class="sm-chs" id="cd_o"></div><div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div id="cd_ph"></div><div class="sm-lb">🔤 ফন্ট</div><div class="rc-fr" id="cd_fn" style="max-height:150px"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div>
+ <div id="cd_pw" style="margin:8px 0 4px;display:flex;gap:12px;flex-wrap:wrap"></div><div id="cd_n" class="sub" style="margin:4px 0 8px"></div>
+ <div class="sm-lb">ছাপা</div><div class="sm-chs" id="cd_s"></div><div class="sm-lb">A4-এ কয়টা কার্ড</div><div class="sm-chs" id="cd_k"></div>
+ <button class="btn" id="cd_bk" style="width:100%;margin:6px 0 10px">✏️ পেছনের লেখা ও যোগাযোগ নম্বর বদলাও</button>
  <div class="sm-two"><button class="btn p" id="cd_pdf">📄 PDF</button><button class="btn" id="cd_img">🖼 ছবি</button><button class="btn" id="cd_vw">👁 পাতা দেখো</button><button class="btn" id="cd_one">👤 একজনের কার্ড</button></div>`,box=>{
-  const cls=[...new Set(actv().map(s=>s.c))].sort((a,b)=>String(a).localeCompare(String(b),'bn',{numeric:true}));
+  const cls=[...new Set(actv().map(s=>s.c))].sort((a,b)=>String(a).localeCompare(String(b),'bn',{numeric:true})),Q=x=>box.querySelector(x);
   const draw=()=>{
    const ds=CD.o==='v'?CDV:CDD;if(!ds.some(x=>x[0]===CD.d))CD.d=ds[0][0];
-   box.querySelector('#cd_sub').textContent=CD.o==='v'?'গলায় ঝোলানোর লম্বা কার্ড — আসল মাপ ৫৪×৮৫.৬ মি.মি.। A4-এ ৯টা করে ছাপা হবে (ওপরের ফুটোর দাগ কেটে ফিতা লাগাও)।':'আড়াআড়ি কার্ড — আসল মাপ ৮৫.৬×৫৪ মি.মি.। A4-এ ১০টা করে ছাপা হবে।';
-   box.querySelector('#cd_o').innerHTML=`<button class="sm-ch${CD.o==='v'?' on':''}" data-o="v">লম্বা — গলায় ঝোলানো</button><button class="sm-ch${CD.o==='h'?' on':''}" data-o="h">আড়াআড়ি</button>`;
-   box.querySelector('#cd_d').innerHTML=ds.map(([k,n])=>`<button class="sm-ch${CD.d===k?' on':''}" data-d="${k}">${n}</button>`).join('');
-   box.querySelector('#cd_ph').innerHTML=['c','m','s','v1','v2'].includes(CD.d)?`<div class="sm-lb">ছবি</div><div class="sm-chs"><button class="sm-ch${CD.p?' on':''}" data-p="1">ছবি থাকলে দেখাও</button><button class="sm-ch${CD.p?'':' on'}" data-p="0">ছবি ছাড়া</button></div>`:`<p class="sub" style="margin:0 0 8px">এই ডিজাইনে ছবি নেই — শুধু নাম ও QR</p>`;
-   box.querySelector('#cd_a').innerHTML=CDA.map(c=>`<button class="sm-ch${CD.ac===c?' on':''}" data-ac="${c}" style="background:${c};width:36px;height:36px;padding:0;border-radius:50%;${CD.ac===c?'outline:3px solid var(--ink);outline-offset:2px':''}" aria-label="রং"></button>`).join('');
-   box.querySelector('#cd_c').innerHTML=`<button class="sm-ch${CD.c==='*'?' on':''}" data-c="*">সব শ্রেণি</button>`+cls.map(c=>`<button class="sm-ch${CD.c===c?' on':''}" data-c="${E(c)}">শ্রেণি ${E(bn(c))}</button>`).join('');
+   Q('#cd_sub').textContent=CD.o==='v'?'গলায় ঝোলানোর লম্বা কার্ড — আসল মাপ ৫৪×৮৫.৬ মি.মি.। ওপরের ফুটোর দাগে পাঞ্চ করে ফিতা লাগাও।':'আড়াআড়ি কার্ড — আসল মাপ ৮৫.৬×৫৪ মি.মি.।';
+   Q('#cd_o').innerHTML=`<button class="sm-ch${CD.o==='v'?' on':''}" data-o="v">লম্বা — গলায় ঝোলানো</button><button class="sm-ch${CD.o==='h'?' on':''}" data-o="h">আড়াআড়ি</button>`;
+   Q('#cd_d').innerHTML=ds.map(([k,n])=>`<button class="sm-ch${CD.d===k?' on':''}" data-d="${k}">${n}</button>`).join('');
+   Q('#cd_ph').innerHTML=['c','m','s','v1','v2'].includes(CD.d)?`<div class="sm-lb">ছবি</div><div class="sm-chs"><button class="sm-ch${CD.p?' on':''}" data-p="1">ছবি থাকলে দেখাও</button><button class="sm-ch${CD.p?'':' on'}" data-p="0">ছবি ছাড়া</button></div>`:`<p class="sub" style="margin:0 0 8px">এই ডিজাইনে ছবি নেই — শুধু নাম ও QR</p>`;
+   Q('#cd_a').innerHTML=CDA.map(c=>`<button class="sm-ch${CD.ac===c?' on':''}" data-ac="${c}" style="background:${c};width:36px;height:36px;padding:0;border-radius:50%;${CD.ac===c?'outline:3px solid var(--ink);outline-offset:2px':''}" aria-label="রং"></button>`).join('');
+   const fo=Q('#cd_fn'),ft=fo.scrollTop;fo.innerHTML=rcFnList().filter(f=>f.id!=='auto').map(f=>`<button type="button" class="rc-fb${(SM.cfg.cdf||'nsb')===f.id?' on':''}" data-f="${f.id}" style="font-family:${f.css}">${E(f.n)}</button>`).join('');fo.scrollTop=ft;
+   Q('#cd_c').innerHTML=`<button class="sm-ch${CD.c==='*'?' on':''}" data-c="*">সব শ্রেণি</button>`+cls.map(c=>`<button class="sm-ch${CD.c===c?' on':''}" data-c="${E(c)}">শ্রেণি ${E(bn(c))}</button>`).join('');
    const bs=CD.c==='*'?[]:bList(CD.c);if(CD.c!=='*'&&CD.b!=='*'&&!bs.some(x=>x[0]===CD.b))CD.b='*';
-   box.querySelector('#cd_b').innerHTML=bs.length>1?`<button class="sm-ch${CD.b==='*'?' on':''}" data-b="*">সব ব্যাচ</button>`+bs.map(([k])=>`<button class="sm-ch${CD.b===k?' on':''}" data-b="${E(k)}">${k==='_'?'ব্যাচ নেই':E(k)}</button>`).join(''):'';
-   const l=cdList(),pw=box.querySelector('#cd_pw');
-   if(l.length){const [cw,ch]=cdDim(),w=Math.max(200,pw.clientWidth||300),k=Math.min(CD.o==='v'?.78:1,(w-4)/cw);pw.style.height=Math.round(ch*k)+'px';pw.innerHTML=`<div style="transform:scale(${k});transform-origin:0 0;width:${cw}px;pointer-events:none">${cdCard(l[0])}</div>`}else{pw.style.height='';pw.innerHTML='<div class="sm-emp" style="padding:14px"><b>এই বাছাইয়ে কেউ নেই</b></div>'}
-   box.querySelector('#cd_n').textContent=l.length?bn(l.length)+' জনের কার্ড · '+bn(Math.ceil(l.length/cdPer()))+' পাতা (নমুনা: '+l[0].n+')':'';
-   ['#cd_pdf','#cd_img','#cd_vw'].forEach(i=>box.querySelector(i).disabled=!l.length)};
-  box.onclick=e=>{const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b],[data-p],[data-o]');if(!t||!box.contains(t))return;if(t.dataset.o)CD.o=t.dataset.o;else if(t.dataset.p!==undefined)CD.p=+t.dataset.p;else if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*'}else CD.b=t.dataset.b;draw()};
-  box.querySelector('#cd_pdf').onclick=()=>spPdf(cdPages(cdList()),'id-cards');
-  box.querySelector('#cd_img').onclick=()=>shotMany(cdPages(cdList()),'id-cards');
-  box.querySelector('#cd_vw').onclick=()=>spPagesSheet(cdPages(cdList()),'🪪 আইডি কার্ডের পাতা','A4-এ '+bn(cdPer())+'টা করে');
-  box.querySelector('#cd_one').onclick=()=>cdPick();
+   Q('#cd_b').innerHTML=bs.length>1?`<button class="sm-ch${CD.b==='*'?' on':''}" data-b="*">সব ব্যাচ</button>`+bs.map(([k])=>`<button class="sm-ch${CD.b===k?' on':''}" data-b="${E(k)}">${k==='_'?'ব্যাচ নেই':E(k)}</button>`).join(''):'';
+   Q('#cd_s').innerHTML=[['f','শুধু সামনে'],['b','শুধু পেছনে'],['d','সামনে + পেছনে (দুই পাশে)']].map(([k,n])=>`<button class="sm-ch${CD.s===k?' on':''}" data-s="${k}">${n}</button>`).join('');
+   Q('#cd_k').innerHTML=cdPerOpts().map(n=>`<button class="sm-ch${cdPer()===n?' on':''}" data-k="${n}">${bn(n)}টা${CD.o==='v'?' ('+bn(3)+'×'+bn(n/3)+')':' ('+bn(2)+'×'+bn(n/2)+')'}</button>`).join('');
+   const l=cdList(),pw=Q('#cd_pw'),[cw,ch]=cdDim(),W=Math.max(220,pw.clientWidth||320),both=CD.o==='v',k=both?Math.min(.8,(W-12)/2/cw):Math.min(1,(W-4)/cw);
+   if(l.length){const one=(h,t)=>`<div><div style="font-size:11px;color:var(--mut);margin:0 0 3px">${t}</div><div style="width:${Math.round(cw*k)}px;height:${Math.round(ch*k)}px"><div style="transform:scale(${k});transform-origin:0 0;width:${cw}px;pointer-events:none">${h}</div></div></div>`;
+    pw.innerHTML=(CD.s!=='b'?one(cdCard(l[0]),'সামনে'):'')+(CD.s!=='f'?one(cdBack(),'পেছনে'):'')}else pw.innerHTML='<div class="sm-emp" style="padding:14px;width:100%"><b>এই বাছাইয়ে কেউ নেই</b></div>';
+   Q('#cd_n').textContent=l.length?bn(l.length)+' জনের কার্ড · '+bn(cdNPg(l))+' পাতা (নমুনা: '+l[0].n+')':'';
+   ['#cd_pdf','#cd_img','#cd_vw'].forEach(i=>Q(i).disabled=!l.length)};
+  box.onclick=e=>{const fb=e.target.closest('#cd_fn .rc-fb');if(fb){SM.cfg.cdf=fb.dataset.f;smSave();draw();return}
+   const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b],[data-p],[data-o],[data-s],[data-k]');if(!t||!box.contains(t))return;
+   if(t.dataset.o)CD.o=t.dataset.o;else if(t.dataset.p!==undefined)CD.p=+t.dataset.p;else if(t.dataset.s)CD.s=t.dataset.s;else if(t.dataset.k)CD.n=+t.dataset.k;else if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*'}else CD.b=t.dataset.b;draw()};
+  Q('#cd_bk').onclick=()=>cdBackSheet(()=>cdSheet());
+  Q('#cd_pdf').onclick=()=>spPdf(cdPages(cdList()),'id-cards');
+  Q('#cd_img').onclick=()=>shotMany(cdPages(cdList()),'id-cards');
+  Q('#cd_vw').onclick=()=>spPagesSheet(cdPages(cdList()),'🪪 আইডি কার্ডের পাতা',({f:'শুধু সামনে',b:'শুধু পেছনে',d:'সামনে-পেছনে পর পর (দুই পাশে ছাপার জন্য)'})[CD.s]+' · A4-এ '+bn(cdPer())+'টা');
+  Q('#cd_one').onclick=()=>cdPick();
   draw()})}
 function cdPick(){const l0=cdList();sheet(`<h3>👤 একজনের কার্ড</h3><p class="sub">নাম বেছে কার্ডের ছবি বানাও</p><input id="cp_q" class="wk-q" placeholder="🔍 নাম বা রোল" autocomplete="off"><div id="cp_l" style="max-height:48vh;overflow:auto"></div>`,box=>{
  const q=box.querySelector('#cp_q'),h=box.querySelector('#cp_l'),go=()=>{const t=q.value.trim(),l=l0.filter(s=>!t||s.n.includes(t)||String(s.r)===en(t)).slice(0,60);
@@ -5671,7 +5736,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)camStop()})
 
 window.smOpenWa=openWa;
 window.smApi={SM:()=>SM,diary:()=>SM.diary,bn,en,MO,WDS,money,mLabel,ymOf,addM,iso,todayS,pIso,dLabel,clsList,bList,inCls,clsAt,clsDays,monthDue,paidOf,remOf,dueBefore,totDue,stOf,openWa};
-window.smDbg={cdPages,cdPer,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
+window.smDbg={cdBack,cdBackSheet,cdPages,cdPer,cdNPg,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
 })();
 
 </script>
