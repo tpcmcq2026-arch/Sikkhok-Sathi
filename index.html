@@ -1446,6 +1446,12 @@ html[data-mode=dark] .sm-pl.g{color:#6fdc9c}html[data-mode=dark] .sm-pl.y{color:
 .nz-wa.dn{background:var(--card);color:#15803d;border:1.5px solid #86efac;box-shadow:none}
 .nz-bt b{font-size:15.5px}.nz-tm{display:flex;gap:10px;margin-top:8px}.nz-tm label{flex:1;font-size:12.5px;color:var(--mut);display:block}.nz-tm input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:10px;font:inherit;font-size:16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg,var(--card));color:var(--ink)}
 .nz-cb{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}.nz-cb summary{cursor:pointer;font-weight:700;font-size:13px}.nz-cr{margin-top:10px}.nz-cr>b{font-size:13px}
+#rp_l,#rm_l{margin-bottom:12px}.nz-tools.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:-6px}.nz-all{width:100%;margin:0 0 12px;padding:13px;font-size:15px}.nz-all small{opacity:.85;font-weight:400}
+.al-pg{height:7px;border-radius:7px;background:rgba(127,127,127,.25);overflow:hidden}.al-pg i{display:block;height:100%;background:var(--ac);border-radius:7px;transition:width .3s}
+.al-k{display:inline-block;padding:3px 11px;border-radius:99px;font-size:12px;font-weight:700;margin:10px 0 6px}.al-k.a{background:#dcfce7;color:#166534}.al-k.l{background:#fef3c7;color:#92400e}.al-k.o{background:#e0e7ff;color:#3730a3}
+.al-msg{white-space:pre-wrap;background:rgba(127,127,127,.13);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.6}.al-go{width:100%;padding:15px;font-size:16.5px;margin:12px 0 8px}.al-h{display:block;color:var(--mut);margin-top:8px;line-height:1.5}
+.rp-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 2px;border-bottom:1px solid var(--line)}.rp-r>b{font-size:14px}.rp-r>small{color:var(--mut);flex:1}.rp-r .sm-nm{flex:1;min-width:140px}.rp-c{display:flex;gap:5px;flex-wrap:wrap}
+.rp-p{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}.rp-p.g{background:#dcfce7;color:#166534}.rp-p.w{background:#fef3c7;color:#92400e}.rp-p.r{background:#fee2e2;color:#991b1b}
 </style>
 <style id="qpcss">
 /* ===== প্রশ্নপত্র (qp) ===== */
@@ -3210,7 +3216,7 @@ const RPSZ=['zNm','zAd','zSl','zTt','zEn','zCh','zNh','zNb','zSn','zSd','fz'],RP
 function rsheet(r){const E=x=>dgt(esc(x),r.dg),c=r.col||'#0f766e',c1=rMix(c,.3,1),L=r.or==='l',lgM0=r.hlg&&r.hlg!=='none'?r.hlg:'',lg=lgM0&&HLOGO?HLOGO:'',lgM=lg?lgM0:'',lgZ=Math.min(160,Math.max(40,+r.lgs||92)),lgX=Math.min(250,Math.max(-250,+r.lgdx||0)),lgY=Math.min(80,Math.max(-80,+r.lgdy||0)),li=(k,ex)=>`<div class="rlg" style="${ex||''}width:${lgZ}px;height:${lgZ}px;transform:translate(${k*lgX}px,${lgY}px)"><img src="${lg}"></div>`,tlr=r.tln&&TLT[r.tln]?`<div class="rds" style="${TLT[r.tln][1]==='ar'?"font-family:'Amiri','BnDigits',serif;font-size:23px;line-height:1.5":'font-size:16px;font-weight:600'};margin:0 0 4px">${TLT[r.tln][0]}</div>`:'',wl=LS.getItem('trsm_rtlogo')||LS.getItem('trsm_logo')||'',inst=r.inst||DEF.inst,addr=r.addr||DEF.addr,fam=r.ff||'Hind Siliguri',hf=r.hf||fam,W=L?1122:794,isx=r.ty==='ex',G=RTH.some(t=>t[0]===r.th)?r.th:'aurora';
 let n=0,tbl='';const chips=[];
 const z=k=>(+(r[k]??RPD[k])||RPD[k])/100,gp=k=>+(r[k]??RPD[k])||0,px=v=>Math.round(v*10)/10,sp=d=>d>0?`<div style="height:${d}px;flex:none"></div>`:d<0?`<div style="height:0;margin-top:${d}px;flex:none"></div>`:'';
-if(r.cl)chips.push(['শ্রেণি: '+r.cl,'zCh']);if(r.ss)chips.push(['সেশন: '+r.ss,'zCh']);
+if(r.cl)chips.push(['শ্রেণি: '+r.cl,'zCh']);if(r.shk)chips.push(['শাখা: '+r.shk,'zCh']);if(r.bch)chips.push(['ব্যাচ: '+r.bch,'zCh']);if(r.ss)chips.push(['সেশন: '+r.ss,'zCh']);
 if(isx){const rows=rExRows(r),anyT=rows.some(x=>x.t),gt=rTr(rTm(r.t1),rTm(r.t2),r.tf),hs=['ক্র.','তারিখ','বার','বিষয়'].concat(anyT?['সময়']:[],r.sc?['শ্রেণি']:[],r.sr?['কক্ষ']:[]);n=rows.length;if(!anyT&&gt)chips.push(['সময়: '+gt,'zCh']);
 tbl=`<table class="rtb"><thead><tr>${hs.map((h,i)=>`<th${i===0?' style="width:56px"':''}>${h}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map((x,k)=>`<tr><td>${E(k+1)}</td><td>${E(rDd(x.d))}</td><td>${E(rWd(x.d))}</td><td class="rsub">${E(x.s)}</td>${anyT?`<td>${E(x.t||gt)}</td>`:''}${r.sc?`<td>${E(x.c)}</td>`:''}${r.sr?`<td>${E(x.rm)}</td>`:''}</tr>`).join(''):`<tr><td colspan="${hs.length}" style="padding:36px;color:#98a1b3">বিষয় ও তারিখ যোগ করলে এখানে দেখা যাবে</td></tr>`}</tbody></table>`}
 else{const ds=ORD.filter(d=>(r.days||[]).includes(d)),np=Math.max(1,Math.min(10,+r.np||1)),{p,br}=rPt(r),bk=(+r.bk>0&&br)?+r.bk:0,tf=r.tf==='24'?'24':'bn';n=ds.length;
@@ -3380,7 +3386,7 @@ SR=(k,l,a,b,u)=>`<div class="w nsr"><div style="display:flex;align-items:center;
 NF0=[['','লেখার ফন্টের মতো']].concat(NF);
 return`<div class="rt-fm">
 <details class="nsec"><summary>🏫 প্রতিষ্ঠান</summary><div class="nfg">${F('inst','প্রতিষ্ঠানের নাম','text','w',DEF.inst)}${S('hf','প্রতিষ্ঠানের নামের ফন্ট',NF0,'w')}${F('addr','ঠিকানা','text','w',DEF.addr)}${S('af','ঠিকানার ফন্ট',NF0,'w')}${F('sl','শ্লোগান / স্থাপিত সন (ঐচ্ছিক)','text','w')}${S('ff','লেখার ফন্ট',NF,'w')}</div></details>
-<details class="nsec" open><summary>📝 রুটিনের তথ্য</summary><div class="nfg">${F('title','শিরোনাম','text','w')}${ex?F('en','পরীক্ষার নাম','text','w','যেমন: অর্ধ-বার্ষিক পরীক্ষা ২০২৬'):''}${F('cl','শ্রেণি','text','','যেমন: অষ্টম')}${F('ss','সেশন / সাল','text','','যেমন: ২০২৬')}${F('dt','তারিখ','date','w')}${S('dg','সংখ্যা',[['en','ইংরেজি (0-9)'],['bn','বাংলা (০-৯)']],'w')}</div></details>
+<details class="nsec" open><summary>📝 রুটিনের তথ্য</summary><div class="nfg">${F('title','শিরোনাম','text','w')}${ex?F('en','পরীক্ষার নাম','text','w','যেমন: অর্ধ-বার্ষিক পরীক্ষা ২০২৬'):''}${F('cl','শ্রেণি','text','','যেমন: অষ্টম')}${F('ss','সেশন / সাল','text','','যেমন: ২০২৬')}${F('shk','শাখা (ঐচ্ছিক)','text','','যেমন: ক')}${F('bch','ব্যাচ (ঐচ্ছিক)','text','','যেমন: সকাল')}${F('dt','তারিখ','date','w')}${S('dg','সংখ্যা',[['en','ইংরেজি (0-9)'],['bn','বাংলা (০-৯)']],'w')}</div></details>
 ${ex?`<details class="nsec"><summary>📅 পরীক্ষার তালিকা</summary><div class="nfg"><div class="w"><small style="color:var(--mut)">তারিখ বাছলে বার নিজে বসবে। সব পরীক্ষার সময় এক হলে একবারই দেখাবে।</small></div>${F('t1','শুরুর সময়','time')}${F('t2','শেষের সময়','time')}${S('tf','সময়ের ধরন',[['bn','সকাল ১০:০০'],['ap','10:00 AM'],['24','২৪ ঘণ্টা']],'w')}<div class="w rt-ckr">${K('sort','তারিখ অনুযায়ী সাজাও')}${K('sc','শ্রেণি কলাম')}${K('sr','কক্ষ কলাম')}</div><div class="w" id="rrows"></div><div class="w rt-two"><button type="button" class="btn p" data-ra="add">＋ সারি যোগ</button><button type="button" class="btn" data-ra="add5">＋ ৫টা সারি</button></div></div></details>`
 :`<details class="nsec"><summary>🗓 বার ও পিরিয়ড</summary><div class="nfg"><div class="w"><label>কোন কোন দিন ক্লাস</label><div class="rt-chips" id="rdays" style="flex-wrap:wrap"></div></div><div class="nfg w" id="rcfg" style="padding:0"></div></div></details><details class="nsec" open><summary>📚 পিরিয়ডের বিষয়</summary><div class="nfg"><div class="w" id="rcells"></div></div></details>`}
 <details class="nsec"><summary>📌 নির্দেশনা / নোট</summary><div class="nfg"><div class="w"><label>প্রতি লাইনে একটা (নম্বর নিজে বসবে)</label><textarea data-rk="notes" rows="4" placeholder="যেমন: পরীক্ষা শুরুর ১৫ মিনিট আগে উপস্থিত থাকতে হবে।"></textarea></div>${SR('zNh','“নির্দেশনা” লেখাটার সাইজ',50,200,'%')}${SR('zNb','নিয়মগুলোর লেখার সাইজ',50,200,'%')}</div></details>
@@ -5514,7 +5520,7 @@ function rN(){
  b.innerHTML=`<div class="nz-top"><div class="nz-seg"><button class="i${v.m==='i'?' on':''}" data-a="md" data-v="i">🟢 আসা</button><button class="o${v.m==='o'?' on':''}" data-a="md" data-v="o">🔴 ছুটি</button></div></div>`+
  (today?`<div class="nz-cam"><video id="nzV" playsinline muted autoplay></video><div class="nz-fr" style="display:none"></div><div class="nz-ph"><i>📷</i><b>${v.m==='i'?'আসার':'ছুটির'} স্ক্যান</b><span>ক্যামেরা চালু করে ছাত্রের আইডি কার্ডের QR দেখাও</span></div></div>
  <div id="nzRes"></div><div class="sm-two"><button class="btn p" data-a="cam">📷 ক্যামেরা চালু করো</button><button class="btn" data-a="man">✍️ হাতে বসাও</button></div>`:`<div class="sm-emp" style="padding:14px"><i>📅</i><b>${dLabel(v.d)}-এর তালিকা</b>আগের দিনের তালিকা দেখছ। স্ক্যান করতে আজকের দিনে ফেরো।<br><button class="btn p" data-a="tod" style="margin-top:8px">আজকে ফেরো</button></div>`)+
- `<div class="nz-tools"><button class="btn" data-a="bt">⏱ ব্যাচের সময়</button><button class="btn" data-a="cd">🪪 আইডি কার্ড</button><button class="btn" data-a="ms">✏️ বার্তার লেখা</button></div><div id="nzList"></div>`;
+ `<div class="nz-tools"><button class="btn" data-a="bt">⏱ ব্যাচের সময়</button><button class="btn" data-a="cd">🪪 আইডি কার্ড</button><button class="btn" data-a="ms">✏️ বার্তার লেখা</button></div><div class="nz-tools two"><button class="btn" data-a="rp">📊 দৈনিক রিপোর্ট</button><button class="btn" data-a="mr">🗓 মাসিক লেট রিপোর্ট</button></div><div id="nzList"></div>`;
  nzList()}
 function nzList(){
  const b=$('#nzList');if(!b)return;const v=V.N,T=todayS(),day=SM.cfg.sc[v.d]||{},ids=Object.keys(day).filter(id=>SM.st.some(s=>s.id===id));
@@ -5523,7 +5529,7 @@ function nzList(){
  const nav=`<div class="sm-dh" style="margin:0 0 8px"><div><b>${WDN[pIso(v.d).getDay()]}${v.d===T?' · আজ':''}</b><small>${dLabel(v.d)}</small></div><div style="display:flex;gap:6px"><button class="sm-nv" data-a="dp" aria-label="আগের দিন">‹</button><button class="sm-nv" data-a="dn" ${v.d>=T?'disabled':''} aria-label="পরের দিন">›</button></div></div>`;
  const hero=`<div class="nz-sum"><div><b>${bn(ci)}</b><small>এসেছে</small></div><div class="${lt?'w':''}"><b>${bn(lt)}</b><small>লেট</small></div><div><b>${bn(co)}</b><small>ছুটি</small></div><div class="${pend?'w':''}"><b>${bn(pend)}</b><small>বার্তা বাকি</small></div></div>`;
  const btn=(s,r,k)=>{const sent=k==='o'?r.wo:r.wi,lb=k==='o'?'ছুটির বার্তা':(r.l?'দেরির বার্তা':'আসার বার্তা');return `<button class="nz-wa${sent?' dn':''}" data-a="${k==='o'?'wo':'wi'}" data-id="${E(s.id)}">${sent?'✓ পাঠানো হয়েছে · আবার':'📲 '+lb}</button>`};
- b.innerHTML=nav+hero+(rows.length?rows.map(({s,r})=>`<div class="nz-r"><div class="nz-h">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${E(shL(s))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small>
+ b.innerHTML=nav+hero+(pend?`<button class="btn p nz-all" data-a="all">📨 সবাইকে বার্তা — ${bn(pend)}টি বাকি <small>(একটার পর একটা)</small></button>`:'')+(rows.length?rows.map(({s,r})=>`<div class="nz-r"><div class="nz-h">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${E(shL(s))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small>
   ${r.i?`<small class="nz-l ${r.l?'late':'ok'}">${r.l?'⏰ '+bn(r.l)+' মিনিট লেট':'✅ সময়মতো'} · ${tl(r.i)}</small>`:''}${r.o?`<small class="nz-l out">👋 ছুটি · ${tl(r.o)}</small>`:''}</div><button class="nz-x" data-a="rm" data-id="${E(s.id)}" aria-label="মুছো">✕</button></div>
   <div class="nz-bs">${r.i?btn(s,r,'i'):''}${r.o?btn(s,r,'o'):''}</div>${s.p?'':'<small style="color:#dc2626">⚠ অভিভাবকের নম্বর নেই — WhatsApp-এ নিজে কন্ট্যাক্ট বাছতে হবে</small>'}</div>`).join(''):`<div class="sm-emp" style="padding:18px"><i>📋</i><b>এখনো কেউ স্ক্যান করেনি</b>স্ক্যান করলে এখানে নামের তালিকা হবে।</div>`)}
 
@@ -5532,12 +5538,119 @@ wire('#smNb',{
  cam:()=>{CAM?camStop():camStart()},
  man:()=>nzMan(),tod:()=>{V.N.d=todayS();rN()},
  dp:()=>{V.N.d=addD(V.N.d,-1);rN()},dn:()=>{if(V.N.d<todayS()){V.N.d=addD(V.N.d,1);rN()}},
- bt:()=>nzBtSheet(),cd:()=>cdSheet(),ms:()=>nzMsSheet(),
+ bt:()=>nzBtSheet(),cd:()=>cdSheet(),ms:()=>nzMsSheet(),all:()=>nzAllSheet(),rp:()=>nzDaySheet(),mr:()=>nzMonSheet(),
  wi:t=>nzSend(t.dataset.id,'i'),wo:t=>nzSend(t.dataset.id,'o'),
  rm:t=>{const s=SM.st.find(x=>x.id===t.dataset.id);if(!s)return;confirmBox(`<b>${E(s.n)}</b>-এর স্ক্যান রেকর্ড মুছবে? হাজিরাও আগের অবস্থায় ফিরবে। (৯ সেকেন্ডের মধ্যে ফিরিয়ে আনতে পারবে)`,()=>scanDel(s.id,V.N.d),'মুছো')}
 });
 function nzSend(id,k){const s=SM.st.find(x=>x.id===id),r=((SM.cfg.sc[V.N.d]||{})[id]);if(!s||!r)return;
  const kind=k==='o'?'o':(r.l?'l':'a');openWa(s.p,nzMsg(s,r,kind));if(k==='o')r.wo=1;else r.wi=1;smSave();nzList()}
+
+/* ---------- সবাইকে বার্তা (একটার পর একটা) ---------- */
+function nzQueue(d){const day=SM.cfg.sc[d]||{},q=[];Object.keys(day).forEach(id=>{const s=SM.st.find(x=>x.id===id),r=day[id];if(!s||!s.p)return;if(r.i&&!r.wi)q.push({id,k:'i',t:r.i});if(r.o&&!r.wo)q.push({id,k:'o',t:r.o})});return q.sort((a,b)=>String(a.t).localeCompare(String(b.t)))}
+function nzAllSheet(){
+ const d=V.N.d,Q=nzQueue(d);if(!Q.length)return toast('পাঠানোর মতো বার্তা বাকি নেই');
+ let i=0,sent=0,skip=0;
+ sheet(`<div id="al_b"></div>`,box=>{const b=box.querySelector('#al_b');
+  const draw=()=>{
+   if(i>=Q.length){b.innerHTML=`<div class="sm-emp" style="padding:22px"><i>🎉</i><b>সব শেষ!</b>${bn(sent)} জনের বার্তা পাঠানো হয়েছে${skip?' · '+bn(skip)+' জন বাদ রাখা হয়েছে':''}</div><button class="btn p" id="al_x" style="width:100%">ঠিক আছে</button>`;b.querySelector('#al_x').onclick=closeSheet;return}
+   const it=Q[i],s=SM.st.find(x=>x.id===it.id),r=(SM.cfg.sc[d]||{})[it.id],kind=it.k==='o'?'o':(r.l?'l':'a'),msg=nzMsg(s,r,kind),lb={a:'✅ আসার বার্তা',l:'⏰ দেরির বার্তা',o:'👋 ছুটির বার্তা'}[kind];
+   b.innerHTML=`<h3>📨 সবাইকে বার্তা</h3><div class="al-pg"><i style="width:${Math.round(i/Q.length*100)}%"></i></div><p class="sub" style="margin:6px 0 10px">${bn(i+1)} / ${bn(Q.length)} জন${sent?' · পাঠানো '+bn(sent):''}${skip?' · বাদ '+bn(skip):''}</p>
+   <div class="sm-card"><div class="nz-h">${nzAv(s)}<div class="sm-nm"><b>${E(s.n)}</b><small>শ্রেণি ${E(bn(s.c))}${E(shL(s))}${s.r?' · রোল '+E(bn(s.r)):''}${s.b?' · '+E(s.b):''}</small><small>📞 ${E(bn(s.p))}</small></div></div><span class="al-k ${kind}">${lb}</span><div class="al-msg">${E(msg)}</div></div>
+   <button class="btn p al-go" id="al_s">📲 WhatsApp-এ পাঠাও</button>
+   <div class="sm-two"><button class="btn" id="al_n">পরের জন ›</button><button class="btn" id="al_x">থামো</button></div>
+   <small class="al-h">WhatsApp খুলবে — সেখানে শুধু সেন্ড চাপো, তারপর এই অ্যাপে ফিরে এসো। পরের জনের বার্তা তৈরি থাকবে।</small>`;
+   b.querySelector('#al_s').onclick=()=>{openWa(s.p,msg);if(it.k==='o')r.wo=1;else r.wi=1;smSave();sent++;i++;nzList();draw()};
+   b.querySelector('#al_n').onclick=()=>{skip++;i++;draw()};
+   b.querySelector('#al_x').onclick=closeSheet};
+  draw()})}
+
+/* ---------- রিপোর্ট: সাধারণ অংশ ---------- */
+const rpAc=()=>CD.ac||'#0f766e',rpWd=d=>WDN[pIso(d).getDay()];
+const rpSort=(a,b)=>cmpC(a.c,b.c)||(a.sh||'').localeCompare(b.sh||'','bn')||((+a.r||9999)-(+b.r||9999))||a.n.localeCompare(b.n,'bn');
+const rpCl=s=>'শ্রেণি '+bn(s.c)+shL(s);
+function rpFlow(units,cap1,capN){const pg=[[]];let h=0,cap=cap1;units.forEach(u=>{if(h+u.h+(u.keep?34:0)>cap&&pg[pg.length-1].length){pg.push([]);h=0;cap=capN}pg[pg.length-1].push(u.x);h+=u.h});return pg}
+const rpHead=(ttl,sub)=>{const ac=rpAc();return `<div style="background:linear-gradient(135deg,${shade(ac,-.4)},${ac});color:#fff;padding:22px 28px 18px"><div style="font-size:25px;font-weight:700;line-height:1.25">${E(nzIn())}</div><div style="font-size:12.5px;opacity:.9">${E(nzAd())}</div><div style="margin-top:12px;font-size:19px;font-weight:700">${ttl}</div><div style="font-size:13.5px;opacity:.95;margin-top:2px">${sub}</div></div>`};
+const rpMini=(ttl,sub)=>{const ac=rpAc();return `<div style="background:${ac};color:#fff;padding:12px 28px;display:flex;justify-content:space-between;font-size:14px;font-weight:700"><span>${E(nzIn())} — ${ttl}</span><span style="font-weight:400;font-size:12.5px">${sub}</span></div>`};
+const rpTile=(v,l,c)=>`<div style="flex:1;border:1.5px solid ${c}33;background:${c}12;border-radius:14px;padding:12px 6px;text-align:center"><div style="font-size:34px;font-weight:700;color:${c};line-height:1.15">${v}</div><div style="font-size:12.5px;color:#475569;margin-top:2px">${l}</div></div>`;
+const rpTitle=(t,c)=>({h:44,keep:1,x:`<div style="margin:12px 28px 6px;font-size:16px;font-weight:700;color:${c};border-bottom:2px solid ${c}33;padding-bottom:5px">${t}</div>`});
+const rpPageWrap=(h,n,t,foot)=>`<div data-pw="708" style="width:708px;height:1023px;position:relative;overflow:hidden;background:#fff;color:#0f172a;border:2px solid ${rpAc()};border-radius:14px;box-sizing:border-box">${h}<div style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:11px;color:#94a3b8">${foot} · পাতা ${bn(n)}/${bn(t)}</div></div>`;
+
+/* ---------- আজকের (দিনের) রিপোর্ট ---------- */
+const RPD={b:'*'};
+function nzDayData(d,bf){
+ const sc=SM.cfg.sc[d]||{},at=SM.att[d]||{},list=inClsAt('*',bf||'*',d.slice(0,7)).sort(rpSort),F=[],L=[],A=[],X=[];let tot=0,tn=0,mx=0,ot=0;
+ list.forEach(s=>{const r=sc[s.id],a=at[s.id],pres=!!(r&&r.i)||a==='p'||a==='l',late=!!(r&&r.l>0)||a==='l',m=(r&&r.l)||0;
+  if(pres){F.push(s);if(late){L.push({s,m,t:r&&r.i});if(m){tot+=m;tn++;mx=Math.max(mx,m)}}else ot++}else if(a==='e')X.push(s);else A.push(s)});
+ return {d,list,come:F,late:L,absent:A,exc:X,ot,avg:tn?Math.round(tot/tn):0,mx}}
+function nzDayPages(D,bl){
+ const ac=rpAc(),n=D.list.length,pc=x=>n?Math.round(x*100/n):0,W='#fff';
+ const sub=`${rpWd(D.d)} · ${dLabel(D.d)}${bl?' · '+E(bl):''}`;
+ const wp=Math.max(0,pc(D.ot)),lp=pc(D.late.length),ap=Math.max(0,100-wp-lp);
+ const top=rpHead('📊 দৈনিক হাজিরা রিপোর্ট',sub)+`<div style="display:flex;gap:10px;padding:18px 28px 6px">${rpTile(bn(D.come.length),'এসেছে','#059669')}${rpTile(bn(D.late.length),'লেট','#d97706')}${rpTile(bn(D.absent.length),'আসেনি','#dc2626')}${rpTile(bn(D.avg)+'<span style="font-size:15px"> মি.</span>','গড় দেরি','#2563eb')}</div>
+ <div style="padding:10px 28px 4px"><div style="display:flex;height:16px;border-radius:9px;overflow:hidden;background:#e2e8f0"><i style="width:${wp}%;background:#059669"></i><i style="width:${lp}%;background:#d97706"></i><i style="width:${ap}%;background:#dc2626"></i></div>
+ <div style="display:flex;justify-content:space-between;font-size:12px;color:#475569;margin-top:6px"><span>🟢 সময়মতো ${bn(D.ot)}</span><span>🟠 লেট ${bn(D.late.length)}</span><span>🔴 আসেনি ${bn(D.absent.length)}</span></div>
+ <div style="margin-top:10px;font-size:13px;color:#334155;background:#f8fafc;border-radius:10px;padding:8px 12px;line-height:1.7">মোট শিক্ষার্থী <b>${bn(n)}</b> জন · উপস্থিতি <b>${bn(pc(D.come.length))}%</b>${D.late.length&&D.mx?` · সবচেয়ে বেশি দেরি <b>${bn(D.mx)}</b> মিনিট`:''}${D.exc.length?` · ছুটি নিয়েছে <b>${bn(D.exc.length)}</b> জন`:''}</div></div>`;
+ const U=[];
+ if(D.late.length){U.push(rpTitle('⏰ লেটে আসা — '+bn(D.late.length)+' জন','#d97706'));D.late.forEach((o,i)=>U.push({h:31,x:`<div style="display:flex;align-items:center;gap:10px;padding:0 28px;height:31px;border-bottom:1px solid #f1f5f9;font-size:14.5px"><b style="width:26px;color:#94a3b8;font-weight:600">${bn(i+1)}</b><span style="flex:1;font-weight:600">${E(o.s.n)}</span><span style="color:#64748b;font-size:12.5px">${rpCl(o.s)}</span><span style="color:#64748b;font-size:12.5px;width:78px;text-align:right">${o.t?tl(o.t):''}</span><span style="color:#d97706;font-weight:700;width:84px;text-align:right">${o.m?bn(o.m)+' মিনিট':'লেট'}</span></div>`}))}
+ if(D.absent.length){U.push(rpTitle('🚫 আসেনি — '+bn(D.absent.length)+' জন','#dc2626'));for(let i=0;i<D.absent.length;i+=2){const c=k=>{const s=D.absent[k];return s?`<div style="flex:1;min-width:0;display:flex;gap:6px;align-items:baseline"><b style="color:#94a3b8;font-weight:600;width:24px">${bn(k+1)}</b><span style="font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(s.n)}</span><span style="color:#64748b;font-size:11.5px;white-space:nowrap">${bn(s.c)}${E(shL(s))}</span></div>`:'<div style="flex:1"></div>'};U.push({h:30,x:`<div style="display:flex;gap:14px;padding:0 28px;height:30px;align-items:center;border-bottom:1px solid #f1f5f9">${c(i)}${c(i+1)}</div>`})}}
+ if(!D.list.length)U.push({h:60,x:'<div style="padding:30px;text-align:center;color:#64748b">এই বাছাইয়ে কোনো শিক্ষার্থী নেই</div>'});
+ else if(!D.late.length&&!D.absent.length)U.push({h:60,x:'<div style="padding:26px;text-align:center;color:#059669;font-weight:700;font-size:16px">🎉 সবাই সময়মতো এসেছে!</div>'});
+ const pg=rpFlow(U,1023-250-300-30,1023-50-40),foot=`${E(nzIn())} · ${dLabel(D.d)}`;
+ return pg.map((u,i)=>rpPageWrap((i?rpMini('দৈনিক হাজিরা রিপোর্ট',dLabel(D.d)):top)+u.join(''),i+1,pg.length,foot))}
+function nzDaySheet(){
+ const d=V.N.d,bs=bList('*'),go=()=>{};
+ sheet(`<h3>📊 দৈনিক রিপোর্ট</h3><p class="sub">${rpWd(d)} · ${dLabel(d)} — কার্ড/PDF করে নিজের কাছে রাখো</p><div class="sm-chs" id="rp_b"></div><div class="nz-sum" id="rp_s"></div><div id="rp_l"></div>
+ <div class="sm-two"><button class="btn p" id="rp_pdf">📄 PDF</button><button class="btn" id="rp_img">🖼 ছবি</button></div><button class="btn" id="rp_vw" style="width:100%;margin-top:8px">👁 পাতা দেখো</button>`,box=>{
+  const Q=x=>box.querySelector(x),bl=()=>RPD.b==='*'?'':(RPD.b==='_'?'ব্যাচ নেই':RPD.b);
+  const draw=()=>{if(RPD.b!=='*'&&!bs.some(x=>x[0]===RPD.b))RPD.b='*';const D=nzDayData(d,RPD.b);
+   Q('#rp_b').innerHTML=bs.length>1?`<button class="sm-ch${RPD.b==='*'?' on':''}" data-b="*">সব ব্যাচ</button>`+bs.map(([k])=>`<button class="sm-ch${RPD.b===k?' on':''}" data-b="${E(k)}">${k==='_'?'ব্যাচ নেই':E(k)}</button>`).join(''):'';
+   Q('#rp_s').innerHTML=`<div><b>${bn(D.come.length)}</b><small>এসেছে</small></div><div class="${D.late.length?'w':''}"><b>${bn(D.late.length)}</b><small>লেট</small></div><div class="${D.absent.length?'w':''}"><b>${bn(D.absent.length)}</b><small>আসেনি</small></div><div><b>${bn(D.avg)}</b><small>গড় দেরি (মি.)</small></div>`;
+   Q('#rp_l').innerHTML=D.late.length?`<div class="sm-lb">⏰ লেটে আসা</div>`+D.late.slice(0,8).map(o=>`<div class="rp-r"><b>${E(o.s.n)}</b><small>${E(rpCl(o.s))}</small><span class="rp-p w">${o.m?bn(o.m)+' মিনিট':'লেট'}</span></div>`).join('')+(D.late.length>8?`<small style="color:var(--mut)">… আরো ${bn(D.late.length-8)} জন (রিপোর্টে সবাই আছে)</small>`:''):'';
+   ['#rp_pdf','#rp_img','#rp_vw'].forEach(i=>Q(i).disabled=!D.list.length)};
+  box.onclick=e=>{const t=e.target.closest('[data-b]');if(t&&box.contains(t)){RPD.b=t.dataset.b;draw()}};
+  const pages=()=>nzDayPages(nzDayData(d,RPD.b),bl());
+  Q('#rp_pdf').onclick=()=>spPdf(pages(),'daily-report-'+d);
+  Q('#rp_img').onclick=()=>shotMany(pages(),'daily-report-'+d);
+  Q('#rp_vw').onclick=()=>spPagesSheet(pages(),'📊 দৈনিক রিপোর্ট',dLabel(d),()=>nzDaySheet());
+  draw()})}
+
+/* ---------- মাসিক লেট ও অনুপস্থিতির রিপোর্ট ---------- */
+const RPM={m:ymOf(new Date()),c:'*',t:'late'};
+function nzMonData(m,cls){
+ const sc=SM.cfg.sc||{},list=inClsAt(cls||'*','*',m).sort(rpSort),dates=Object.keys(SM.att).filter(d=>d.startsWith(m)).concat(Object.keys(sc).filter(d=>d.startsWith(m)&&!SM.att[d])).filter(d=>!SM.hol[d]).sort(),grp={};
+ const rows=list.map(s=>{const c=clsAt(s,m),gk=c+'|'+(s.b||'')+'|'+(s.sh||'');
+  if(!grp[gk]){const ids=inClsAt(c,(s.b||'_')+(s.sh?'\u0001'+s.sh:''),m).map(x=>x.id);grp[gk]=dates.filter(d=>takenOn(d,ids)||ids.some(i=>sc[d]&&sc[d][i]))}
+  let pr=0,lt=0,lm=0,ab=0,ex=0;grp[gk].forEach(d=>{const a=(SM.att[d]||{})[s.id],r=(sc[d]||{})[s.id],p=!!(r&&r.i)||a==='p'||a==='l';if(p){pr++;if((r&&r.l>0)||a==='l'){lt++;lm+=(r&&r.l)||0}}else if(a==='e')ex++;else ab++});
+  return {s,days:grp[gk].length,pr,lt,lm,ab,ex}});
+ return {m,rows,tl:rows.reduce((a,r)=>a+r.lt,0),ta:rows.reduce((a,r)=>a+r.ab,0),nl:rows.filter(r=>r.lt>0).length,na:rows.filter(r=>r.ab>0).length}}
+const nzMonRows=(D,t)=>t==='late'?D.rows.filter(r=>r.lt>0).sort((a,b)=>b.lt-a.lt||b.lm-a.lm):t==='abs'?D.rows.filter(r=>r.ab>0).sort((a,b)=>b.ab-a.ab):D.rows;
+function nzMonPages(D,t,cl){
+ const ac=rpAc(),rows=nzMonRows(D,t),ttl={late:'⏰ মাসিক লেট রিপোর্ট',abs:'🚫 মাসিক অনুপস্থিতির রিপোর্ট',all:'🗓 মাসিক হাজিরা ও লেট রিপোর্ট'}[t],sub=`${mLabel(D.m)}${cl&&cl!=='*'?' · শ্রেণি '+bn(cl):''}`;
+ const top=rpHead(ttl,sub)+`<div style="display:flex;gap:10px;padding:18px 28px 8px">${rpTile(bn(D.rows.length),'শিক্ষার্থী','#2563eb')}${rpTile(bn(D.nl),'লেট করেছে (জন)','#d97706')}${rpTile(bn(D.tl),'মোট লেট (দিন)','#b45309')}${rpTile(bn(D.ta),'মোট আসেনি (দিন)','#dc2626')}</div>`;
+ const th=`<div style="display:flex;align-items:center;gap:6px;padding:0 28px;height:34px;background:${ac}15;border-top:1.5px solid ${ac};border-bottom:1.5px solid ${ac};font-size:12.5px;font-weight:700;color:#334155"><span style="width:28px">ক্র.</span><span style="flex:1">নাম</span><span style="width:84px">শ্রেণি</span><span style="width:50px;text-align:center">উপস্থিত</span><span style="width:46px;text-align:center;color:#b45309">লেট</span><span style="width:60px;text-align:center;color:#b45309">লেট মি.</span><span style="width:50px;text-align:center;color:#dc2626">আসেনি</span></div>`;
+ const U=rows.map((r,i)=>({h:30,x:`<div style="display:flex;align-items:center;gap:6px;padding:0 28px;height:30px;border-bottom:1px solid #f1f5f9;font-size:13.5px;${i%2?'background:#f8fafc':''}"><span style="width:28px;color:#94a3b8">${bn(i+1)}</span><span style="flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(r.s.n)}</span><span style="width:84px;color:#64748b;font-size:12px;white-space:nowrap">${bn(r.s.c)}${E(shL(r.s))}${r.s.r?' · '+bn(r.s.r):''}</span><span style="width:50px;text-align:center">${bn(r.pr)}/${bn(r.days)}</span><span style="width:46px;text-align:center;font-weight:700;color:${r.lt?'#b45309':'#cbd5e1'}">${r.lt?bn(r.lt):'—'}</span><span style="width:60px;text-align:center;color:${r.lm?'#b45309':'#cbd5e1'}">${r.lm?bn(r.lm):'—'}</span><span style="width:50px;text-align:center;font-weight:700;color:${r.ab?'#dc2626':'#cbd5e1'}">${r.ab?bn(r.ab):'—'}</span></div>`}));
+ if(!U.length)U.push({h:60,x:`<div style="padding:30px;text-align:center;color:#059669;font-weight:700;font-size:16px">${t==='late'?'🎉 এই মাসে কেউ লেট করেনি':t==='abs'?'🎉 এই মাসে কেউ অনুপস্থিত থাকেনি':'কোনো তথ্য নেই'}</div>`});
+ const pg=rpFlow(U,1023-250-150-60,1023-50-40-60),foot=`${E(nzIn())} · ${mLabel(D.m)}`;
+ return pg.map((u,i)=>rpPageWrap((i?rpMini('মাসিক রিপোর্ট',mLabel(D.m)):top)+(rows.length?th:'')+u.join(''),i+1,pg.length,foot))}
+function nzMonSheet(){
+ const cls=clsList(actv());
+ sheet(`<h3>🗓 মাসিক লেট রিপোর্ট</h3><p class="sub">কে কতদিন লেট করেছে, কতদিন আসেনি — অভিভাবক সভায় কাজে লাগবে</p><div class="sm-dh" style="margin:0 0 8px"><div><b id="rm_t"></b></div><div style="display:flex;gap:6px"><button class="sm-nv" id="rm_p" aria-label="আগের মাস">‹</button><button class="sm-nv" id="rm_n" aria-label="পরের মাস">›</button></div></div>
+ <div class="sm-chs" id="rm_c"></div><div class="sm-chs" id="rm_k"></div><div class="nz-sum" id="rm_s"></div><div id="rm_l"></div>
+ <div class="sm-two"><button class="btn p" id="rm_pdf">📄 PDF</button><button class="btn" id="rm_img">🖼 ছবি</button></div><button class="btn" id="rm_vw" style="width:100%;margin-top:8px">👁 পাতা দেখো</button>`,box=>{
+  const Q=x=>box.querySelector(x),cy=ymOf(new Date());
+  const draw=()=>{if(RPM.c!=='*'&&!cls.some(x=>x[0]===RPM.c))RPM.c='*';const D=nzMonData(RPM.m,RPM.c),R=nzMonRows(D,RPM.t);
+   Q('#rm_t').textContent=mLabel(RPM.m);Q('#rm_n').disabled=RPM.m>=cy;
+   Q('#rm_c').innerHTML=`<button class="sm-ch${RPM.c==='*'?' on':''}" data-c="*">সব শ্রেণি</button>`+cls.map(([c])=>`<button class="sm-ch${RPM.c===c?' on':''}" data-c="${E(c)}">শ্রেণি ${E(bn(c))}</button>`).join('');
+   Q('#rm_k').innerHTML=[['late','⏰ লেটে আসা ('+bn(D.nl)+')'],['abs','🚫 আসেনি ('+bn(D.na)+')'],['all','📋 সবাই']].map(([k,n])=>`<button class="sm-ch${RPM.t===k?' on':''}" data-t="${k}">${n}</button>`).join('');
+   Q('#rm_s').innerHTML=`<div><b>${bn(D.rows.length)}</b><small>শিক্ষার্থী</small></div><div class="${D.nl?'w':''}"><b>${bn(D.nl)}</b><small>লেট করেছে</small></div><div><b>${bn(D.tl)}</b><small>মোট লেট দিন</small></div><div class="${D.ta?'w':''}"><b>${bn(D.ta)}</b><small>মোট আসেনি</small></div>`;
+   Q('#rm_l').innerHTML=R.length?R.slice(0,60).map(r=>`<div class="rp-r"><div class="sm-nm"><b>${E(r.s.n)}</b><small>${E(rpCl(r.s))}${r.s.b?' · '+E(r.s.b):''}</small></div><div class="rp-c"><span class="rp-p g">✅ ${bn(r.pr)}/${bn(r.days)}</span>${r.lt?`<span class="rp-p w">⏰ ${bn(r.lt)} দিন${r.lm?' · '+bn(r.lm)+' মি.':''}</span>`:''}${r.ab?`<span class="rp-p r">🚫 ${bn(r.ab)} দিন</span>`:''}</div></div>`).join('')+(R.length>60?`<small style="color:var(--mut)">… আরো ${bn(R.length-60)} জন (রিপোর্টে সবাই আছে)</small>`:''):`<div class="sm-emp" style="padding:16px"><i>🎉</i><b>${RPM.t==='late'?'এই মাসে কেউ লেট করেনি':RPM.t==='abs'?'এই মাসে কেউ অনুপস্থিত থাকেনি':'কোনো তথ্য নেই'}</b></div>`;
+   ['#rm_pdf','#rm_img','#rm_vw'].forEach(i=>Q(i).disabled=!R.length)};
+  Q('#rm_p').onclick=()=>{RPM.m=addM(RPM.m,-1);draw()};Q('#rm_n').onclick=()=>{if(RPM.m<cy){RPM.m=addM(RPM.m,1);draw()}};
+  box.onclick=e=>{const t=e.target.closest('[data-c],[data-t]');if(!t||!box.contains(t))return;if(t.dataset.c!==undefined)RPM.c=t.dataset.c;else RPM.t=t.dataset.t;draw()};
+  const pages=()=>nzMonPages(nzMonData(RPM.m,RPM.c),RPM.t,RPM.c),nm=()=>'monthly-'+RPM.t+'-'+RPM.m;
+  Q('#rm_pdf').onclick=()=>spPdf(pages(),nm());Q('#rm_img').onclick=()=>shotMany(pages(),nm());
+  Q('#rm_vw').onclick=()=>spPagesSheet(pages(),'🗓 মাসিক রিপোর্ট',mLabel(RPM.m),()=>nzMonSheet());
+  draw()})}
 
 /* ---------- হাতে বসাও ---------- */
 function nzMan(){const m=V.N.m;sheet(`<h3>✍️ হাতে ${m==='i'?'আসা':'ছুটি'} বসাও</h3><p class="sub">কার্ড না আনলে নাম খুঁজে বসাও — এখনকার সময় ধরা হবে</p><input id="nm_q" class="wk-q" placeholder="🔍 নাম বা রোল" autocomplete="off"><div id="nm_l" style="max-height:48vh;overflow:auto"></div>`,box=>{
@@ -5567,7 +5680,7 @@ function nzMsSheet(){const f=[['a','✅ সময়মতো এলে'],['l','
   box.querySelector('#ms_ok').onclick=()=>{SM.cfg.sn=box.querySelector('#ms_n').value.trim()||'তৌফিক প্রাইভেট সেন্টার';SM.cfg.sa=box.querySelector('#ms_a').value.trim();f.forEach(([k])=>{const v=box.querySelector('#ms_'+k).value.trim();if(v&&v!==NZ_MSG[k])SM.cfg.sm[k]=v;else delete SM.cfg.sm[k]});smSave();closeSheet();toast('সেভ হয়েছে ✓')}})}
 
 /* ---------- আইডি কার্ড ---------- */
-const CD={d:'v1',ac:'#0f766e',c:'*',b:'*',sh:'*',p:1,o:'v',n:10,s:'d'},CDA=['#0f766e','#2563eb','#7c3aed','#e11d48','#ea580c','#0f172a'];
+const CD={d:'v1',ac:'#0f766e',c:'*',b:'*',sh:'*',qs:'m',p:1,o:'v',n:10,s:'d'},CDA=['#0f766e','#2563eb','#7c3aed','#e11d48','#ea580c','#0f172a'];
 const CDV=[['v1','লম্বা ক্লাসিক'],['v2','লম্বা আধুনিক'],['v3','লম্বা নাম-কেন্দ্রিক'],['v4','লম্বা ডার্ক গোল্ড'],['v5','লম্বা তির্যক'],['v6','লম্বা দুই-রঙা'],['v7','ছবি: বড় ছবি'],['v8','ছবি: গোল রঙিন'],['v9','ছবি: ডার্ক গোল্ড'],['v10','ছবি: ফ্রেম'],['v11','ছবি: নিচে QR']],CDD=[['c','ক্লাসিক'],['m','আধুনিক'],['s','সরল'],['n','নাম-কেন্দ্রিক'],['k','টিকেট'],['b','বড় QR'],['d','ডার্ক গোল্ড'],['y','তির্যক'],['p1','ছবি: বাঁয়ে বড়'],['p2','ছবি: ডার্ক গোল্ড'],['p3','ছবি: ব্যান্ডে'],['p4','ছবি: ফ্রেম'],['p5','ছবি: বৃত্ত']];
 const CDQ=['আজকের পরিশ্রম, আগামীর সাফল্য।','জ্ঞানই শক্তি, শিক্ষাই আলো।','স্বপ্ন দেখো, নিরলস চেষ্টা করো।','সময়ের মূল্য দাও, সফলতা আসবেই।','পড়ো, শেখো, এগিয়ে যাও।','সৎ থাকো, শ্রম করো, বড় হও।'];
 if(SM.cfg.sa==='সাহেবনগর, গাংনী, মেহেরপুর')delete SM.cfg.sa;
@@ -5582,7 +5695,8 @@ const gl=(s,col,sz,jc,x)=>[s.g?['অভিভাবক',E(s.g)]:null,s.p?['ম�
 const cdDim=()=>CD.o==='v'?[195,310]:[310,195],cdCols=()=>CD.o==='v'?3:2,cdPerOpts=()=>CD.o==='v'?[6,9]:[6,8,10];
 const cdPer=()=>{const o=cdPerOpts();return o.includes(CD.n)?CD.n:o[o.length-1]};
 const cdBox=()=>`box-sizing:border-box;position:relative;overflow:hidden;border-radius:12px;font-family:${cdFc()};`;
-const cdQB=(q,sz,x)=>`<div style="background:#fff;padding:3px;border-radius:8px;line-height:0;flex:none;${x||''}"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`;
+const cdQB=(q,sz,x)=>{sz=Math.round(sz*(CD.qs==='l'?(QF[CD.d]||QL):1));return `<div style="background:#fff;padding:3px;border-radius:8px;line-height:0;flex:none;${x||''}"><img src="${q}" style="width:${sz}px;height:${sz}px;image-rendering:pixelated;display:block"></div>`};
+const QL=1.22,QF={k:1.08,p1:1.12,p2:1.06,p3:1.08,p5:1.06,v5:1.04,v6:1,v11:1.04,y:1.1};
 
 /* সামনের দিক — আড়াআড়ি */
 function cdCardH(s){
@@ -5736,7 +5850,7 @@ function cdBackSheet(done){
 let CDSC=0;
 function cdSheet(keep){
  sheet(`<h3>🪪 আইডি কার্ড</h3><p class="sub" id="cd_sub"></p>
- <div class="sm-lb">কার্ডের ধরন</div><div class="sm-chs" id="cd_o"></div><div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div id="cd_ph"></div><div class="sm-lb">🔤 ফন্ট</div><div class="rc-fr" id="cd_fn" style="max-height:150px"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div><div class="sm-chs" id="cd_h"></div>
+ <div class="sm-lb">কার্ডের ধরন</div><div class="sm-chs" id="cd_o"></div><div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div id="cd_ph"></div><div class="sm-lb">🔳 QR-এর মাপ</div><div class="sm-chs" id="cd_q"></div><p class="sub" id="cd_qs" style="margin:0 0 8px"></p><div class="sm-lb">🔤 ফন্ট</div><div class="rc-fr" id="cd_fn" style="max-height:150px"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div><div class="sm-chs" id="cd_h"></div>
  <div id="cd_pw" style="margin:8px 0 4px;display:flex;gap:12px;flex-wrap:wrap"></div><div id="cd_n" class="sub" style="margin:4px 0 8px"></div>
  <div class="sm-lb">ছাপা</div><div class="sm-chs" id="cd_s"></div><div class="sm-lb">A4-এ কয়টা কার্ড</div><div class="sm-chs" id="cd_k"></div>
  <button class="btn" id="cd_bk" style="width:100%;margin:6px 0 10px">✏️ পেছনের লেখা ও যোগাযোগ নম্বর বদলাও</button>
@@ -5748,6 +5862,8 @@ function cdSheet(keep){
    Q('#cd_o').innerHTML=`<button class="sm-ch${CD.o==='v'?' on':''}" data-o="v">লম্বা — গলায় ঝোলানো</button><button class="sm-ch${CD.o==='h'?' on':''}" data-o="h">আড়াআড়ি</button>`;
    Q('#cd_d').innerHTML=ds.map(([k,n])=>`<button class="sm-ch${CD.d===k?' on':''}" data-d="${k}">${n}</button>`).join('');
    Q('#cd_ph').innerHTML=PHD.includes(CD.d)?`<div class="sm-lb">ছবি</div><div class="sm-chs"><button class="sm-ch${CD.p?' on':''}" data-p="1">ছবি থাকলে দেখাও</button><button class="sm-ch${CD.p?'':' on'}" data-p="0">ছবি ছাড়া (ছায়া-ছবি)</button></div><p class="sub" style="margin:0 0 8px">${CD.p?'যার ছবি আছে তার ছবি বসবে, যার নেই তার ছায়া-ছবি।':'সবার কার্ডে ছায়া-ছবি থাকবে — ছাপার পর আসল ছবি আঠা দিয়ে লাগাতে পারো।'}</p>`:`<p class="sub" style="margin:0 0 8px">এই ডিজাইনে ছবি নেই — শুধু নাম ও QR</p>`;
+   Q('#cd_q').innerHTML=[['m','মাঝারি'],['l','বড় (দূর থেকেও সহজে স্ক্যান)']].map(([k,n])=>`<button class="sm-ch${CD.qs===k?' on':''}" data-q="${k}">${n}</button>`).join('');
+   Q('#cd_qs').textContent=CD.qs==='l'?'বড় QR প্রায় ২০% বড় হবে — ফোন একটু দূর থেকেও পড়তে পারবে। লেখা ও ছবির জায়গা একটু কমতে পারে।':'মাঝারি — ছবি/লেখার সাথে ভারসাম্য রেখে সাজানো; ফোন কাছে (১০–১৫ সেমি) ধরলে ভালো পড়ে।';
    Q('#cd_a').innerHTML=CDA.map(c=>`<button class="sm-ch${CD.ac===c?' on':''}" data-ac="${c}" style="background:${c};width:36px;height:36px;padding:0;border-radius:50%;${CD.ac===c?'outline:3px solid var(--ink);outline-offset:2px':''}" aria-label="রং"></button>`).join('');
    const fo=Q('#cd_fn'),ft=fo.scrollTop;fo.innerHTML=rcFnList().filter(f=>f.id!=='auto').map(f=>`<button type="button" class="rc-fb${(SM.cfg.cdf||'nsb')===f.id?' on':''}" data-f="${f.id}" style="font-family:${f.css}">${E(f.n)}</button>`).join('');fo.scrollTop=ft;
    Q('#cd_c').innerHTML=`<button class="sm-ch${CD.c==='*'?' on':''}" data-c="*">সব শ্রেণি</button>`+cls.map(c=>`<button class="sm-ch${CD.c===c?' on':''}" data-c="${E(c)}">শ্রেণি ${E(bn(c))}</button>`).join('');
@@ -5763,8 +5879,8 @@ function cdSheet(keep){
    Q('#cd_n').textContent=l.length?bn(l.length)+' জনের কার্ড · '+bn(cdNPg(l))+' পাতা (নমুনা: '+l[0].n+')':'';
    ['#cd_pdf','#cd_img','#cd_vw'].forEach(i=>Q(i).disabled=!l.length)};
   box.onclick=e=>{const fb=e.target.closest('#cd_fn .rc-fb');if(fb){SM.cfg.cdf=fb.dataset.f;smSave();draw();return}
-   const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b],[data-h],[data-p],[data-o],[data-s],[data-k]');if(!t||!box.contains(t))return;
-   if(t.dataset.o)CD.o=t.dataset.o;else if(t.dataset.p!==undefined)CD.p=+t.dataset.p;else if(t.dataset.s)CD.s=t.dataset.s;else if(t.dataset.k)CD.n=+t.dataset.k;else if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*';CD.sh='*'}else if(t.dataset.h!==undefined)CD.sh=t.dataset.h;else CD.b=t.dataset.b;draw()};
+   const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b],[data-h],[data-p],[data-q],[data-o],[data-s],[data-k]');if(!t||!box.contains(t))return;
+   if(t.dataset.o)CD.o=t.dataset.o;else if(t.dataset.p!==undefined)CD.p=+t.dataset.p;else if(t.dataset.q!==undefined)CD.qs=t.dataset.q;else if(t.dataset.s)CD.s=t.dataset.s;else if(t.dataset.k)CD.n=+t.dataset.k;else if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*';CD.sh='*'}else if(t.dataset.h!==undefined)CD.sh=t.dataset.h;else CD.b=t.dataset.b;draw()};
   Q('#cd_bk').onclick=()=>cdBackSheet(()=>cdSheet(true));
   Q('#cd_pdf').onclick=()=>spPdf(cdPages(cdList()),'id-cards');
   Q('#cd_img').onclick=()=>shotMany(cdPages(cdList()),'id-cards');
@@ -5782,7 +5898,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)camStop()})
 
 window.smOpenWa=openWa;
 window.smApi={SM:()=>SM,diary:()=>SM.diary,bn,en,MO,WDS,money,mLabel,ymOf,addM,iso,todayS,pIso,dLabel,clsList,bList,inCls,clsAt,clsDays,monthDue,paidOf,remOf,dueBefore,totDue,stOf,openWa};
-window.smDbg={cdBack,cdBackSheet,cdPages,cdPer,cdNPg,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
+window.smDbg={nzAllSheet,nzQueue,nzDayData,nzDayPages,nzDaySheet,nzMonData,nzMonPages,nzMonSheet,RPM,cdBack,cdBackSheet,cdPages,cdPer,cdNPg,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
 })();
 
 </script>
