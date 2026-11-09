@@ -5115,6 +5115,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v103',d:'৮ নভেম্বর ২০২৬',t:['দৈনিক ও মাসিক রিপোর্টে প্রথম পাতা এখন পুরো ভরে, তারপর পরের পাতায় যায় (আগে নিচে অনেকটা জায়গা ফাঁকা থেকে যেত)']},
 {v:'v102',d:'৮ নভেম্বর ২০২৬',t:['🆕 নতুন আপডেটে কী যোগ হলো তা দেখানোর পপআপ','নতুন আপডেট এলে প্রথমবার খুললে এই পপআপ আসবে']},
 {v:'v100',d:'৮ নভেম্বর ২০২৬',t:['🖨️ দৈনিক ও মাসিক রিপোর্টে "সাদা-কালো প্রিন্ট" অপশন, কালি বাঁচে ও প্রিন্ট পরিষ্কার হয়']},
 {v:'v99',d:'৮ নভেম্বর ২০২৬',t:['দৈনিক ও মাসিক রিপোর্টের উপরের হেডার এখন মাঝখানে']},
@@ -5618,6 +5619,7 @@ function nzAllSheet(){
 
 /* ---------- রিপোর্ট: সাধারণ অংশ ---------- */
 const rpBw=()=>!!SM.cfg.rpbw;
+const rpH=h=>{const d=document.createElement('div');d.style.cssText='position:absolute;left:-9999px;top:0;width:704px;visibility:hidden';d.innerHTML=h;document.body.appendChild(d);const x=d.offsetHeight;d.remove();return x};
 const rpBWf=h=>{const lum=x=>{const n=parseInt(x,16);return .3*(n>>16)+.59*((n>>8)&255)+.11*(n&255)};
  return h.replace(/(background(?:-color)?:\s*)#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?/g,(m,a,c,al)=>al?a+'#f0f0f0':(lum(c)>=235?m:lum(c)>=190?a+'#f0f0f0':m))
   .replace(/(border[a-z-]*:[^;"']*?)#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?/g,(m,a,c,al)=>al?a+'#777':(lum(c)>=225?a+'#d4d4d4':a+'#333'))
@@ -5654,7 +5656,7 @@ function nzDayPages(D,bl){
  if(D.absent.length){U.push(rpTitle('🚫 আসেনি — '+bn(D.absent.length)+' জন','#dc2626'));for(let i=0;i<D.absent.length;i+=2){const c=k=>{const s=D.absent[k];return s?`<div style="flex:1;min-width:0;display:flex;gap:6px;align-items:baseline"><b style="color:#94a3b8;font-weight:600;width:24px">${bn(k+1)}</b><span style="font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(s.n)}</span><span style="color:#64748b;font-size:11.5px;white-space:nowrap">${bn(s.c)}${E(shL(s))}</span></div>`:'<div style="flex:1"></div>'};U.push({h:30,x:`<div style="display:flex;gap:14px;padding:0 28px;height:30px;align-items:center;border-bottom:1px solid #f1f5f9">${c(i)}${c(i+1)}</div>`})}}
  if(!D.list.length)U.push({h:60,x:'<div style="padding:30px;text-align:center;color:#64748b">এই বাছাইয়ে কোনো শিক্ষার্থী নেই</div>'});
  else if(!D.late.length&&!D.absent.length)U.push({h:60,x:'<div style="padding:26px;text-align:center;color:#059669;font-weight:700;font-size:16px">🎉 সবাই সময়মতো এসেছে!</div>'});
- const pg=rpFlow(U,1023-250-300-30,1023-50-40),foot=`${E(nzIn())} · ${dLabel(D.d)}`;
+ const pg=rpFlow(U,1023-6-rpH(top)-36,1023-6-rpH(rpMini('দৈনিক হাজিরা রিপোর্ট',dLabel(D.d)))-36),foot=`${E(nzIn())} · ${dLabel(D.d)}`;
  return pg.map((u,i)=>rpPageWrap((i?rpMini('দৈনিক হাজিরা রিপোর্ট',dLabel(D.d)):top)+u.join(''),i+1,pg.length,foot))}
 function nzDaySheet(){
  const d=V.N.d,bs=bList('*'),go=()=>{};
@@ -5690,7 +5692,7 @@ function nzMonPages(D,t,cl){
  const th=`<div style="display:flex;align-items:center;gap:6px;padding:0 28px;height:34px;background:${ac}15;border-top:1.5px solid ${ac};border-bottom:1.5px solid ${ac};font-size:12.5px;font-weight:700;color:#334155"><span style="width:28px">ক্র.</span><span style="flex:1">নাম</span><span style="width:84px">শ্রেণি</span><span style="width:50px;text-align:center">উপস্থিত</span><span style="width:46px;text-align:center;color:#b45309">লেট</span><span style="width:60px;text-align:center;color:#b45309">লেট মি.</span><span style="width:50px;text-align:center;color:#dc2626">আসেনি</span></div>`;
  const U=rows.map((r,i)=>({h:30,x:`<div style="display:flex;align-items:center;gap:6px;padding:0 28px;height:30px;border-bottom:1px solid #f1f5f9;font-size:13.5px;${i%2?'background:#f8fafc':''}"><span style="width:28px;color:#94a3b8">${bn(i+1)}</span><span style="flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(r.s.n)}</span><span style="width:84px;color:#64748b;font-size:12px;white-space:nowrap">${bn(r.s.c)}${E(shL(r.s))}${r.s.r?' · '+bn(r.s.r):''}</span><span style="width:50px;text-align:center">${bn(r.pr)}/${bn(r.days)}</span><span style="width:46px;text-align:center;font-weight:700;color:${r.lt?'#b45309':'#cbd5e1'}">${r.lt?bn(r.lt):'—'}</span><span style="width:60px;text-align:center;color:${r.lm?'#b45309':'#cbd5e1'}">${r.lm?bn(r.lm):'—'}</span><span style="width:50px;text-align:center;font-weight:700;color:${r.ab?'#dc2626':'#cbd5e1'}">${r.ab?bn(r.ab):'—'}</span></div>`}));
  if(!U.length)U.push({h:60,x:`<div style="padding:30px;text-align:center;color:#059669;font-weight:700;font-size:16px">${t==='late'?'🎉 এই মাসে কেউ লেট করেনি':t==='abs'?'🎉 এই মাসে কেউ অনুপস্থিত থাকেনি':'কোনো তথ্য নেই'}</div>`});
- const pg=rpFlow(U,1023-250-150-60,1023-50-40-60),foot=`${E(nzIn())} · ${mLabel(D.m)}`;
+ const pg=rpFlow(U,1023-6-rpH(top+(rows.length?th:''))-36,1023-6-rpH(rpMini('মাসিক রিপোর্ট',mLabel(D.m))+(rows.length?th:''))-36),foot=`${E(nzIn())} · ${mLabel(D.m)}`;
  return pg.map((u,i)=>rpPageWrap((i?rpMini('মাসিক রিপোর্ট',mLabel(D.m)):top)+(rows.length?th:'')+u.join(''),i+1,pg.length,foot))}
 function nzMonSheet(){
  const cls=clsList(actv());
