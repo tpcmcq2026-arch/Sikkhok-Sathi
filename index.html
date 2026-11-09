@@ -1285,6 +1285,7 @@ html[data-mode=dark] .rtgp{background:#0a0f19}
 .smx .rth .sm-back{justify-self:start}
 .sm-w{max-width:640px;margin:0 auto;padding:14px 14px 120px}
 .sm-lb{font-size:12.5px;color:var(--mut);font-weight:700;letter-spacing:.3px;margin:4px 6px 10px}
+.cd-ac{border:1.5px solid var(--line);border-radius:14px;margin:0 0 8px;background:var(--card);overflow:hidden}.cd-ah{display:flex;align-items:center;gap:8px;width:100%;padding:12px 14px;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}.cd-ah b{font-size:14.5px;flex:none}.cd-ah small{flex:1;min-width:0;color:var(--mut);font-size:12.5px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cd-ah i{font-style:normal;color:var(--mut);transition:transform .2s}.cd-ac.on .cd-ah i{transform:rotate(90deg)}.cd-ab{display:none;padding:2px 12px 10px}.cd-ac.on .cd-ab{display:block}
 .sm-hero{position:relative;overflow:hidden;border-radius:24px;padding:18px 18px 16px;color:#fff;background:linear-gradient(135deg,var(--hd,#0f4450) 0%,var(--ac) 130%);box-shadow:0 12px 30px rgba(var(--acr,15,118,110),.30);margin-bottom:14px}
 .sm-hero:before,.sm-hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
 .sm-hero:before{width:170px;height:170px;right:-50px;top:-70px}.sm-hero:after{width:110px;height:110px;right:50px;bottom:-60px}
@@ -5115,6 +5116,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v108',d:'৯ নভেম্বর ২০২৬',t:['🪪 আইডি কার্ডের পাতা ছোট হলো: অপশনগুলো ভাগ করা, একটা খুললে আগেরটা নিজে বন্ধ হয় (ওপরে কার্ডের নমুনা সবসময় দেখা যায়)','🎨 নতুন ৬টা ডিজাইনের লেখা বড় ও পরিষ্কার, ফাঁকা জায়গা ভরা, নিচে "QR স্ক্যান করে হাজিরা" লেখা যোগ']},
 {v:'v107',d:'৯ নভেম্বর ২০২৬',t:['🟢 ব্যাচের সময়ের আগে স্ক্যান করলে এখন "২০ মিনিট আগে এসেছে" দেখায়, রেকর্ডে থাকে এবং অভিভাবকের জন্য আলাদা "আগে আসার বার্তা" যায় (বার্তার লেখা বদলানো যায়)','📊 দৈনিক রিপোর্টে "আগে আসা" তালিকা, মাসিক রিপোর্টে "আগে" কলাম','⚠️ ব্যাচ শুরুর ৩০ মিনিটের বেশি আগে স্ক্যান করলে অ্যাপ জিজ্ঞেস করে "এখনই রেকর্ড করবে?" — ভুল স্ক্যান আটকাতে','🐞 "বার্তার লেখা" পাতার ভুল ঠিক: "সময়মতো এলে" ঘরে লিখলে ঠিকানা সেভ হয়ে যেত, বার্তা সেভ হতো না। এখন দুটোই আলাদা সেভ হয়']},
 {v:'v105',d:'৯ নভেম্বর ২০২৬',t:['🪪 আইডি কার্ডে ৬টা নতুন ডিজাইন: রিবন, কোণাকুনি ব্যানার, ব্র্যাকেট ফ্রেম, ফর্মাল, ঢেউ, কোণাকুনি রঙ — লম্বা ও আড়াআড়ি দুই রকমেই (আগের সব ডিজাইন আগের মতোই আছে)','⬛ নতুন ডিজাইনে "সাদা-কালো প্রিন্ট" অপশন — সামনে ও পেছন দুই দিকেই; ছবি ও QR (মাঝারি/বড়) আগের মতো কাজ করে']},
 {v:'v104',d:'৯ নভেম্বর ২০২৬',t:['🖼 আইডি কার্ডের পেছনে হালকা লোগো (ওয়াটারমার্ক): একবার লোগো দিলে সব কার্ডে বসে, ঘনত্ব ও মাপ ঠিক করা যায়, দেখাও/লুকাও করা যায়']},
@@ -5776,47 +5778,55 @@ const CDN=[['n1','রিবন'],['n2','কোণাকুনি ব্যান
 const cdIsN=()=>CDN.some(x=>x[0]===CD.d),cdBwOn=()=>!!CD.bw&&cdIsN();
 function cdNew(s){
  const V=CD.o==='v',BW=cdBwOn(),D=CD.d,a=BW?'#000':CD.ac,q=qrURL(qrTxt(s),240),pho=nzPh()[s.id],ps=CD.p&&pho?pho:cdAv(),IN=E(nzIn()),AD=E(nzAd()),L=s.n.length;
- const P=BW?{a:'#000',d:'#000',l:'#f0f0f0',t:'#000',m:'#333',inv:'#000',bd:'#000'}:{a,d:shade(a,-.4),l:shade(a,.88),t:'#0f172a',m:'#475569',inv:'#fff',bd:a};
- const nsz=V?(L>24?11.5:L>18?13:L>12?14.5:15.5):(L>24?11.5:L>18?12.5:L>12?14:15.5),W=V?195:310,H=V?310:195;
- const circ=D==='n2'||D==='n5',pw=circ?66:V?66:56,phh=circ?66:V?74:62;
- const ph=(ex)=>`<img src="${ps}" style="width:${pw}px;height:${phh}px;object-fit:cover;border-radius:${circ?'50%':D==='n4'?'6px':'12px'};border:2px solid ${P.bd};display:block;flex:none;background:#e2e8f0;${ex||''}">`;
+ const P=BW?{a:'#000',d:'#000',l:'#f0f0f0',t:'#000',m:'#333'}:{a,d:shade(a,-.4),l:shade(a,.88),t:'#0f172a',m:'#475569'};
+ const nsz=V?(L>24?11.5:L>18?13:L>12?15:17):(L>24?12:L>18?13.5:L>12?15:17),W=V?195:310,H=V?310:195;
+ const circ=D==='n2'||D==='n5',pw=circ?(V?62:58):(V?60:56),phh=circ?(V?62:58):(V?68:64);
+ const ph=ex=>`<img src="${ps}" style="width:${pw}px;height:${phh}px;object-fit:cover;border-radius:${circ?'50%':D==='n4'?'6px':'12px'};border:2px solid ${BW?'#000':a};display:block;flex:none;background:#e2e8f0;${ex||''}">`;
  const ring=(D==='n5'||D==='n6')?`border-color:#fff;box-shadow:0 0 0 2px ${BW?'#000':a};`:'';
- const rowsA=[s.r?['রোল',bn(s.r)]:null,s.g?['অভিভাবক',s.g]:null,['শ্রেণি',bn(s.c)+shL(s)],s.b?['ব্যাচ',s.b]:null,s.p?['মোবাইল',cdFmt(s.p)]:null].filter(Boolean);
- const rows=(fs,ls)=>rowsA.map(([k,v])=>`<div style="display:flex;gap:3px;font-size:${fs}px;line-height:1.5;color:${P.t}"><span style="width:${ls}px;color:${P.m};flex:none">${k}</span><span style="flex:none">:</span><b style="font-weight:600;min-width:0;${k==='মোবাইল'?'white-space:nowrap':'word-break:break-word'}">${E(v)}</b></div>`).join('');
- const nm=(al,sz)=>`<div style="font-size:${sz||nsz}px;font-weight:700;color:${BW?'#000':a};text-align:${al};line-height:1.25;word-break:break-word">${E(s.n)}</div>`;
- const inst=(al,sz,col)=>`<div style="text-align:${al};line-height:1.25;${col?'color:'+col:''}"><div style="font-size:${sz||11.5}px;font-weight:700;${col?'':'color:'+P.t}">${IN}</div><div style="font-size:8.5px;${col?'opacity:.9':'color:'+P.m}">${AD}</div></div>`;
- const qsz=V?64:70,qb=cdQB(q,qsz,BW?'border:1.5px solid #000;':'border:1px solid #cbd5e1;');
- const frame=`position:absolute;left:0;top:0;width:${W}px;height:${H}px;`;
- let bg='',hd='',HT=0,PT=0,fr=false;
+ const cls=E(bn(s.c))+E(shL(s));
+ const nm=al=>`<div style="font-size:${nsz}px;font-weight:700;color:${BW?'#000':a};text-align:${al};line-height:1.25;word-break:break-word">${E(s.n)}</div>`;
+ const inst=(al,sz)=>`<div style="text-align:${al};line-height:1.25"><div style="font-size:${sz||12}px;font-weight:700;color:${P.t}">${IN}</div><div style="font-size:9px;color:${P.m}">${AD}</div></div>`;
+ const qb=cdQB(q,V?62:68,BW?'border:1.5px solid #000;':'border:1px solid #cbd5e1;');
+ /* লেখা */
+ const sp=(k,v)=>`<span style="white-space:nowrap">${k}: <b>${v}</b></span>`;
+ const metaV=`<div style="display:flex;flex-wrap:wrap;justify-content:center;column-gap:9px;font-size:11.5px;line-height:1.5;color:${P.t}">${sp('শ্রেণি',cls)}${s.r?sp('রোল',E(bn(s.r))):''}${s.b?sp('ব্যাচ',E(s.b)):''}</div>`;
+ const glV=[s.g?['অভিভাবক',E(s.g)]:null,s.p?['মোবাইল',cdFmt(s.p)]:null].filter(Boolean).map(([k,v])=>`<div style="font-size:11px;line-height:1.5;color:${P.t};text-align:center;word-break:break-word">${k}: <b>${v}</b></div>`).join('');
+ const rowsA=[s.r?['রোল',E(bn(s.r))]:null,s.g?['অভিভাবক',E(s.g)]:null,['শ্রেণি',cls+(s.b?' · '+E(s.b):'')],s.p?['মোবাইল',cdFmt(s.p)]:null].filter(Boolean);
+ const rowsH=rowsA.map(([k,v])=>`<div style="display:flex;gap:3px;font-size:11px;line-height:1.5;color:${P.t}"><span style="width:42px;color:${P.m};flex:none">${k}</span><span style="flex:none">:</span><b style="font-weight:600;min-width:0;${k==='মোবাইল'?'white-space:nowrap':'word-break:break-word'}">${v}</b></div>`).join('');
+ const brk=(inner,pad)=>`<div style="position:relative;border:2px solid ${a};border-right:none;border-radius:10px 0 0 10px;padding:${pad};margin-top:3px"><i style="position:absolute;right:-1px;top:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i><i style="position:absolute;right:-1px;bottom:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i>${inner}</div>`;
+ /* নিচের লেখা */
+ const FTX='ছাত্র পরিচয়পত্র · QR স্ক্যান করে হাজিরা';
+ const strip=(bg,col)=>`<div style="position:absolute;left:0;right:0;bottom:0;height:16px;line-height:16px;text-align:center;font-size:9px;${BW?'background:#fff;color:#000;border-top:1.5px solid #000':'background:'+bg+';color:'+col}">${FTX}</div>`;
+ const line=`<div style="position:absolute;left:0;right:0;bottom:0;height:16px;line-height:16px;text-align:center;font-size:9px;color:${BW?'#000':P.m};border-top:1px solid ${BW?'#000':shade(a,.6)}">${FTX}</div>`;
+ let bg='',hd='',PT=0,ft='',FB=20;
  if(D==='n1'){
-  const rb=`<div style="position:relative;margin:0 ${V?14:18}px;height:24px;text-align:center;font-size:12px;font-weight:700;line-height:24px;${BW?'background:#fff;color:#000;border-top:2px solid #000;border-bottom:2px solid #000':'background:'+a+';color:#fff'}">শিক্ষার্থী পরিচয়পত্র<i style="position:absolute;left:0;top:0;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:9px solid #fff"></i><i style="position:absolute;right:0;top:0;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-right:9px solid #fff"></i></div>`;
-  hd=`<div style="padding:${V?10:8}px 6px 0">${inst('center')}</div><div style="margin-top:6px">${rb}</div>`;HT=V?70:66;PT=HT+6;
-  bg=`<div style="position:absolute;left:0;right:0;bottom:0;height:7px;${BW?'background:#fff;border-top:2px solid #000':'background:'+a}"></div>`}
+  const rb=`<div style="position:relative;margin:0 ${V?14:18}px;height:24px;text-align:center;font-size:12.5px;font-weight:700;line-height:24px;${BW?'background:#fff;color:#000;border-top:2px solid #000;border-bottom:2px solid #000':'background:'+a+';color:#fff'}">শিক্ষার্থী পরিচয়পত্র<i style="position:absolute;left:0;top:0;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:9px solid #fff"></i><i style="position:absolute;right:0;top:0;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-right:9px solid #fff"></i></div>`;
+  hd=`<div style="padding:${V?9:6}px 6px 0">${inst('center')}</div><div style="margin-top:5px">${rb}</div>`;PT=V?72:66;ft=strip(a,'#fff')}
  else if(D==='n2'){
-  const bn2=`<div style="display:inline-block;transform:skewX(-14deg);padding:4px 22px;font-size:12px;font-weight:700;${BW?'background:#eee;color:#000;border:2px solid #000;box-shadow:4px 4px 0 #000':'background:'+a+';color:#fff;box-shadow:5px 5px 0 '+P.d}"><span style="display:inline-block;transform:skewX(14deg)">শিক্ষার্থী পরিচিতি</span></div>`;
+  const bn2=`<div style="display:inline-block;transform:skewX(-14deg);padding:3px 22px;font-size:12.5px;font-weight:700;${BW?'background:#eee;color:#000;border:2px solid #000;box-shadow:4px 4px 0 #000':'background:'+a+';color:#fff;box-shadow:5px 5px 0 '+P.d}"><span style="display:inline-block;transform:skewX(14deg)">শিক্ষার্থী পরিচিতি</span></div>`;
   bg=BW?'':`<div style="position:absolute;left:0;top:0;width:${W}px;height:${H}px;background:linear-gradient(160deg,${P.l},#fff 60%)"></div>`;
-  hd=`<div style="position:relative;padding:${V?12:8}px 6px 0">${inst('center')}</div><div style="position:relative;text-align:center;margin-top:${V?10:8}px;padding-right:5px">${bn2}</div>`;HT=V?86:76;PT=HT+4}
+  hd=`<div style="position:relative;padding:${V?9:6}px 6px 0">${inst('center')}</div><div style="position:relative;text-align:center;margin-top:${V?7:6}px;padding-right:5px">${bn2}</div>`;PT=V?80:72;ft=line}
  else if(D==='n3'){
-  hd=`<div style="padding:7px 6px 6px;text-align:center;${BW?'background:#fff;color:#000;border-bottom:2.5px solid #000':'background:'+a+';color:#fff'}"><div style="font-size:11.5px;font-weight:700">${IN}</div><div style="font-size:8.5px;opacity:.9">শিক্ষার্থী পরিচিতি</div></div>`;HT=42;PT=HT+8;fr=true}
+  hd=`<div style="padding:7px 6px 6px;text-align:center;${BW?'background:#fff;color:#000;border-bottom:2.5px solid #000':'background:'+a+';color:#fff'}"><div style="font-size:12px;font-weight:700">${IN}</div><div style="font-size:9px;opacity:.9">শিক্ষার্থী পরিচিতি</div></div>`;PT=V?48:50;ft=strip(a,'#fff')}
  else if(D==='n4'){
   bg=`<div style="position:absolute;left:5px;top:5px;right:5px;bottom:5px;border:3px double ${BW?'#000':a};border-radius:8px"></div>`;
-  hd=`<div style="position:relative;padding:11px 10px 0">${inst('center',11)}<div style="text-align:center;margin-top:4px"><span style="font-size:11px;font-weight:700;color:${BW?'#000':a};letter-spacing:.3px">❖ শিক্ষার্থী পরিচয়পত্র ❖</span></div></div>`;HT=62;PT=HT+4}
+  hd=`<div style="position:relative;padding:11px 10px 0">${inst('center',11.5)}<div style="text-align:center;margin-top:3px"><span style="font-size:11.5px;font-weight:700;color:${BW?'#000':a};letter-spacing:.3px">❖ শিক্ষার্থী পরিচয়পত্র ❖</span></div></div>`;PT=V?64:62;FB=24;
+  ft=`<div style="position:absolute;left:10px;right:10px;bottom:9px;height:13px;line-height:13px;text-align:center;font-size:8.5px;color:${BW?'#000':P.m}">${FTX}</div>`}
  else if(D==='n5'){
-  const h=V?64:52;
-  hd=`<div style="height:${h}px;border-radius:0 0 60% 60% / 0 0 26px 26px;text-align:center;padding-top:8px;box-sizing:border-box;${BW?'background:#fff;color:#000;border-bottom:2.5px solid #000':'background:linear-gradient(135deg,'+P.d+','+a+');color:#fff'}"><div style="font-size:11.5px;font-weight:700">${IN}</div><div style="font-size:8.5px;opacity:.9">${AD}</div></div>`;HT=h;PT=h-20}
+  const h=V?62:50;
+  hd=`<div style="height:${h}px;border-radius:0 0 60% 60% / 0 0 26px 26px;text-align:center;padding-top:7px;box-sizing:border-box;${BW?'background:#fff;color:#000;border-bottom:2.5px solid #000':'background:linear-gradient(135deg,'+P.d+','+a+');color:#fff'}"><div style="font-size:12px;font-weight:700">${IN}</div><div style="font-size:9px;opacity:.9">${AD}</div></div>`;PT=V?h-22:h+4;ft=strip(a,'#fff')}
  else{
-  const h=V?118:72;
+  const h=V?112:50;
   bg=`<div style="position:absolute;left:0;top:0;width:${W}px;height:${h}px;${BW?'background:#eee;border-bottom:2.5px solid #000':'background:linear-gradient(160deg,'+a+' 58%,'+P.l+' 58.4%)'}"></div>`;
-  hd=`<div style="position:relative;padding:${V?11:8}px 6px 0;text-align:center;color:${BW?'#000':'#fff'}"><div style="font-size:11.5px;font-weight:700">${IN}</div><div style="font-size:8.5px;opacity:.9">শিক্ষার্থী পরিচয়পত্র</div></div>`;HT=V?46:44;PT=V?49:h-30}
+  hd=`<div style="position:relative;padding:${V?10:7}px 6px 0;text-align:center;color:${BW?'#000':'#fff'}"><div style="font-size:12px;font-weight:700">${IN}</div><div style="font-size:9px;opacity:.9">শিক্ষার্থী পরিচয়পত্র</div></div>`;PT=V?46:h+4;ft=strip(P.d,'#fff')}
  let body;
  if(V){
-  const nT=PT+phh+5,zT=nT+(L>18?34:22),zH=H-zT-(D==='n4'?12:D==='n1'?12:8);
-  const rw=fr?`<div style="position:relative;border:2px solid ${a};border-right:none;border-radius:10px 0 0 10px;padding:4px 4px 4px 7px;margin-left:8px"><i style="position:absolute;right:-1px;top:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i><i style="position:absolute;right:-1px;bottom:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i>${rows(9,32)}</div>`:`<div style="padding-left:9px">${rows(9.2,31)}</div>`;
-  body=`<div style="position:absolute;left:0;right:0;top:${PT}px;display:flex;justify-content:center">${ph(ring)}</div><div style="position:absolute;left:8px;right:8px;top:${nT}px">${nm('center')}</div><div style="position:absolute;left:0;top:${zT}px;width:${W}px;height:${zH}px;display:flex;align-items:center;gap:4px"><div style="flex:1;min-width:0">${rw}</div><div style="margin-right:${D==='n4'?12:8}px;flex:none">${qb}</div></div>`}
+  const txt=D==='n3'?`${nm('center')}${brk(`<div style="text-align:center">${metaV}${glV}</div>`,'3px 6px 3px 8px').replace('margin-top:3px','margin:3px 0 0 14px')}`:`${nm('center')}${metaV}${glV}`;
+  body=`<div style="position:absolute;left:0;right:0;top:${PT}px;bottom:${FB}px;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly"><div style="flex:none">${ph(ring)}</div><div style="width:100%;box-sizing:border-box;padding:0 8px;flex:none">${txt}</div><div style="flex:none">${qb}</div></div>`}
  else{
-  const fo=D==='n4'?14:12,rw=fr?`<div style="position:relative;border:2px solid ${a};border-right:none;border-radius:10px 0 0 10px;padding:3px 4px 3px 7px;margin-top:3px"><i style="position:absolute;right:-1px;top:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i><i style="position:absolute;right:-1px;bottom:-5px;width:8px;height:8px;border-radius:50%;border:2px solid ${a};background:#fff"></i>${rows(9.2,36)}</div>`:`<div style="margin-top:3px">${rows(9.6,38)}</div>`;
-  body=`<div style="position:absolute;left:${fo}px;right:${fo}px;top:${PT}px;bottom:${D==='n4'?12:10}px;display:flex;gap:8px;align-items:flex-start"><div style="flex:none">${ph(ring)}</div><div style="flex:1;min-width:0;padding-top:${D==='n5'?20:D==='n6'?30:2}px">${nm('left')}${rw}</div><div style="flex:none;align-self:flex-end;margin-bottom:2px">${qb}</div></div>`}
- return `<div style="width:${W}px;height:${H}px;${cdBox()}background:#fff;border:${BW?'2px solid #000':'1px solid #cbd5e1'};color:${P.t}">${bg}${hd}${body}</div>`}
+  const fo=D==='n4'?16:12,txt=D==='n3'?`${nm('left')}${brk(rowsH,'3px 4px 3px 7px')}`:`${nm('left')}<div style="margin-top:2px">${rowsH}</div>`;
+  body=`<div style="position:absolute;left:${fo}px;right:${fo}px;top:${PT}px;bottom:${FB}px;display:flex;gap:9px;align-items:center"><div style="flex:none">${ph(ring)}</div><div style="flex:1;min-width:0">${txt}</div><div style="flex:none">${qb}</div></div>`}
+ return `<div style="width:${W}px;height:${H}px;${cdBox()}background:#fff;border:${BW?'2px solid #000':'1px solid #cbd5e1'};color:${P.t}">${bg}${hd}${body}${ft}</div>`}
 
 /* সামনের দিক — আড়াআড়ি */
 function cdCardH(s){
@@ -5995,11 +6005,10 @@ function cdBackSheet(done){
 
 /* আইডি কার্ড পাতা */
 let CDSC=0;
+let CDOP='d';
 function cdSheet(keep){
  sheet(`<h3>🪪 আইডি কার্ড</h3><p class="sub" id="cd_sub"></p>
- <div class="sm-lb">কার্ডের ধরন</div><div class="sm-chs" id="cd_o"></div><div class="sm-lb">ডিজাইন</div><div class="sm-chs" id="cd_d"></div><div class="sm-lb">রং</div><div class="sm-chs" id="cd_a"></div><div id="cd_bw"></div><div id="cd_ph"></div><div class="sm-lb">🔳 QR-এর মাপ</div><div class="sm-chs" id="cd_q"></div><p class="sub" id="cd_qs" style="margin:0 0 8px"></p><div class="sm-lb">🔤 ফন্ট</div><div class="rc-fr" id="cd_fn" style="max-height:150px"></div><div class="sm-lb">কাদের কার্ড</div><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div><div class="sm-chs" id="cd_h"></div>
- <div id="cd_pw" style="margin:8px 0 4px;display:flex;gap:12px;flex-wrap:wrap"></div><div id="cd_n" class="sub" style="margin:4px 0 8px"></div>
- <div class="sm-lb">ছাপা</div><div class="sm-chs" id="cd_s"></div><div class="sm-lb">A4-এ কয়টা কার্ড</div><div class="sm-chs" id="cd_k"></div>
+ <div id="cd_pw" style="margin:4px 0 4px;display:flex;gap:12px;flex-wrap:wrap"></div><div id="cd_n" class="sub" style="margin:4px 0 10px"></div><div class="cd-ac" id="cs_o"><button type="button" class="cd-ah" data-sec="o"><b>🪪 কার্ডের ধরন</b><small id="cv_o"></small><i>›</i></button><div class="cd-ab"><div class="sm-chs" id="cd_o"></div></div></div><div class="cd-ac" id="cs_d"><button type="button" class="cd-ah" data-sec="d"><b>🎨 ডিজাইন</b><small id="cv_d"></small><i>›</i></button><div class="cd-ab"><div class="sm-chs" id="cd_d"></div></div></div><div class="cd-ac" id="cs_a"><button type="button" class="cd-ah" data-sec="a"><b>🌈 রং ও ছাপার ধরন</b><small id="cv_a"></small><i>›</i></button><div class="cd-ab"><div class="sm-chs" id="cd_a"></div><div id="cd_bw"></div></div></div><div class="cd-ac" id="cs_p"><button type="button" class="cd-ah" data-sec="p"><b>🖼 ছবি</b><small id="cv_p"></small><i>›</i></button><div class="cd-ab"><div id="cd_ph"></div></div></div><div class="cd-ac" id="cs_q"><button type="button" class="cd-ah" data-sec="q"><b>🔳 QR-এর মাপ</b><small id="cv_q"></small><i>›</i></button><div class="cd-ab"><div class="sm-chs" id="cd_q"></div><p class="sub" id="cd_qs" style="margin:0 0 4px"></p></div></div><div class="cd-ac" id="cs_f"><button type="button" class="cd-ah" data-sec="f"><b>🔤 ফন্ট</b><small id="cv_f"></small><i>›</i></button><div class="cd-ab"><div class="rc-fr" id="cd_fn" style="max-height:150px"></div></div></div><div class="cd-ac" id="cs_c"><button type="button" class="cd-ah" data-sec="c"><b>👥 কাদের কার্ড</b><small id="cv_c"></small><i>›</i></button><div class="cd-ab"><div class="sm-chs" id="cd_c"></div><div class="sm-chs" id="cd_b"></div><div class="sm-chs" id="cd_h"></div></div></div><div class="cd-ac" id="cs_s"><button type="button" class="cd-ah" data-sec="s"><b>🖨 ছাপা ও পাতা</b><small id="cv_s"></small><i>›</i></button><div class="cd-ab"><div class="sm-lb">ছাপা</div><div class="sm-chs" id="cd_s"></div><div class="sm-lb">A4-এ কয়টা কার্ড</div><div class="sm-chs" id="cd_k"></div></div></div>
  <button class="btn" id="cd_bk" style="width:100%;margin:6px 0 8px">✏️ পেছনের লেখা ও যোগাযোগ নম্বর বদলাও</button>
  <button class="btn" id="cd_lg" style="width:100%;margin:0 0 10px">🖼 পেছনে লোগো ${cdLgOn()?'(চালু)':''}</button>
  <div class="sm-two"><button class="btn p" id="cd_pdf">📄 PDF</button><button class="btn" id="cd_img">🖼 ছবি</button><button class="btn" id="cd_vw">👁 পাতা দেখো</button><button class="btn" id="cd_one">👤 একজনের কার্ড</button></div>`,box=>{
@@ -6026,8 +6035,16 @@ function cdSheet(keep){
    if(l.length){const one=(h,t)=>`<div><div style="font-size:11px;color:var(--mut);margin:0 0 3px">${t}</div><div style="width:${Math.round(cw*k)}px;height:${Math.round(ch*k)}px"><div style="transform:scale(${k});transform-origin:0 0;width:${cw}px;pointer-events:none">${h}</div></div></div>`;
     pw.innerHTML=(CD.s!=='b'?one(cdCard(l[0]),'সামনে'):'')+(CD.s!=='f'?one(cdBack(),'পেছনে'):'')}else pw.innerHTML='<div class="sm-emp" style="padding:14px;width:100%"><b>এই বাছাইয়ে কেউ নেই</b></div>';
    Q('#cd_n').textContent=l.length?bn(l.length)+' জনের কার্ড · '+bn(cdNPg(l))+' পাতা (নমুনা: '+l[0].n+')':'';
+   const fn=rcFnList().find(f=>f.id===(SM.cfg.cdf||'nsb')),V2=(k,h)=>{const e=Q('#cv_'+k);if(e)e.innerHTML=h};
+   V2('o',CD.o==='v'?'লম্বা — গলায় ঝোলানো':'আড়াআড়ি');V2('d',E((ds.find(x=>x[0]===CD.d)||[0,''])[1]));
+   V2('a',`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${CD.ac};vertical-align:-1px"></span>${cdIsN()&&CD.bw?' · সাদা-কালো প্রিন্ট':''}`);
+   V2('p',PHD.includes(CD.d)?(CD.p?'ছবি থাকলে দেখাও':'ছায়া-ছবি'):'এই ডিজাইনে ছবি নেই');V2('q',CD.qs==='l'?'বড়':'মাঝারি');V2('f',E(fn?fn.n:''));
+   V2('c',(CD.c==='*'?'সব শ্রেণি':'শ্রেণি '+E(bn(CD.c)))+(CD.c!=='*'&&CD.b!=='*'?' · '+(CD.b==='_'?'ব্যাচ নেই':E(CD.b)):'')+(CD.c!=='*'&&CD.sh!=='*'?' · '+(CD.sh==='_'?'শাখা নেই':'শাখা '+E(CD.sh)):''));
+   V2('s',({f:'শুধু সামনে',b:'শুধু পেছনে',d:'সামনে + পেছনে'})[CD.s]+' · A4-এ '+bn(cdPer())+'টা');
+   box.querySelectorAll('.cd-ac').forEach(e=>e.classList.toggle('on',e.id==='cs_'+CDOP));
    ['#cd_pdf','#cd_img','#cd_vw'].forEach(i=>Q(i).disabled=!l.length)};
   box.onclick=e=>{const fb=e.target.closest('#cd_fn .rc-fb');if(fb){SM.cfg.cdf=fb.dataset.f;smSave();draw();return}
+   const ah=e.target.closest('.cd-ah');if(ah&&box.contains(ah)){CDOP=CDOP===ah.dataset.sec?'':ah.dataset.sec;box.querySelectorAll('.cd-ac').forEach(x=>x.classList.toggle('on',x.id==='cs_'+CDOP));if(CDOP){const sc=document.getElementById('cs_'+CDOP);setTimeout(()=>{try{const r=sc.getBoundingClientRect(),br=box.getBoundingClientRect();if(r.top<br.top+60||r.bottom>br.bottom)box.scrollTop+=r.top-br.top-90}catch(x){}},30)}return}
    const t=e.target.closest('[data-d],[data-ac],[data-c],[data-b],[data-h],[data-p],[data-q],[data-o],[data-s],[data-k],[data-bw]');if(!t||!box.contains(t))return;
    if(t.dataset.o)CD.o=t.dataset.o;else if(t.dataset.bw!==undefined)CD.bw=+t.dataset.bw;else if(t.dataset.p!==undefined)CD.p=+t.dataset.p;else if(t.dataset.q!==undefined)CD.qs=t.dataset.q;else if(t.dataset.s)CD.s=t.dataset.s;else if(t.dataset.k)CD.n=+t.dataset.k;else if(t.dataset.d)CD.d=t.dataset.d;else if(t.dataset.ac)CD.ac=t.dataset.ac;else if(t.dataset.c!==undefined){CD.c=t.dataset.c;CD.b='*';CD.sh='*'}else if(t.dataset.h!==undefined)CD.sh=t.dataset.h;else CD.b=t.dataset.b;draw()};
   Q('#cd_bk').onclick=()=>cdBackSheet(()=>cdSheet(true));Q('#cd_lg').onclick=()=>cdLogoSheet(()=>cdSheet(true));
