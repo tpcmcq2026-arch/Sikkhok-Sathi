@@ -1428,6 +1428,7 @@ html[data-mode=dark] .sm-pl.g{color:#6fdc9c}html[data-mode=dark] .sm-pl.y{color:
 .nz-seg button.on.o{background:linear-gradient(135deg,#f97316,#e11d48);color:#fff;box-shadow:0 4px 12px rgba(244,63,94,.35)}
 .nz-cam{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0b1220,#1e293b);aspect-ratio:4/3;margin-bottom:10px;box-shadow:var(--sh)}
 .nz-cam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.nz-fl{position:absolute;right:10px;top:10px;z-index:3;width:44px;height:44px;border:0;border-radius:50%;font-size:21px;line-height:44px;padding:0;background:rgba(0,0,0,.55);color:#fff;cursor:pointer}.nz-fl.on{background:#f59e0b}
 .nz-fr{position:absolute;inset:16% 20%;border:3px solid rgba(255,255,255,.9);border-radius:20px;box-shadow:0 0 0 999px rgba(0,0,0,.3);overflow:hidden}
 .nz-fr:after{content:"";position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#22d3ee,transparent);animation:nzsc 1.8s ease-in-out infinite}
 @keyframes nzsc{0%{top:4%}50%{top:94%}100%{top:4%}}
@@ -5116,6 +5117,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v113',d:'৯ নভেম্বর ২০২৬',t:['⚡ QR স্ক্যান আরও দ্রুত: ক্যামেরা এখন প্রায় ০.১ সেকেন্ডে পরপর খোঁজে, আগের খোঁজা শেষ হলেই পরেরটা শুরু','🔦 অন্ধকারে ফ্ল্যাশ বোতাম — ক্যামেরার ডান-ওপরে; যে ফোনে ব্রাউজার টর্চ চালাতে দেয় শুধু সেখানে দেখা যায়। ক্যামেরা বন্ধ করলে ফ্ল্যাশ নিজে নিভে যায়']},
 {v:'v112',d:'৯ নভেম্বর ২০২৬',t:['🏫 সিট প্ল্যানের পাতা ছোট হলো: অপশনগুলো ভাগ করা, একটা খুললে আগেরটা বন্ধ হয়; অপশন বদলালে পাতা ওপরে লাফায় না','🪪 QR ট্যাবে নতুন ৬টা লম্বা আইডি ডিজাইনে ফিতা-ছিদ্রের চিহ্ন যোগ']},
 {v:'v111',d:'৯ নভেম্বর ২০২৬',t:['🏫 সিট প্ল্যানে নতুন "সাদা-কালো প্রিন্ট" অপশন (কাগজের দিকের নিচে) — হলের নকশা, দরজার তালিকা, সারাংশ ও স্লিপ সাদা-কালো হয়','📄 "একাধিক কক্ষ এক পাতায়" এখন হলের নকশা ও দরজার তালিকাতেও খাটে: পাতা ভরে তারপর পরের পাতা; কক্ষ পুরো না আঁটলে পুরো কক্ষ পরের পাতায়','📋 আসন তালিকার রোল/নাম/আসন লেখা এখন ঠিক মাঝখানে']},
 {v:'v110',d:'৯ নভেম্বর ২০২৬',t:['🪪 ব্র্যাকেট ফ্রেম ডিজাইনে (লম্বা) ফ্রেম ও লেখা এখন ঠিক মাঝখানে']},
@@ -5579,7 +5581,7 @@ const nzBeep=k=>{try{nzCtx=nzCtx||new (window.AudioContext||window.webkitAudioCo
  try{navigator.vibrate&&navigator.vibrate(k==='ok'||k==='out'?60:k==='late'?[60,60,60]:[200])}catch(e){}};
 const loadJsQR=()=>new Promise((res,rej)=>{if(window.jsQR)return res();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js';s.onload=()=>window.jsQR?res():rej();s.onerror=rej;document.head.appendChild(s)});
 function camUI(on){const b=$('#smNb');if(!b)return;const p=b.querySelector('.nz-ph'),t=b.querySelector('[data-a="cam"]');if(p)p.style.display=on?'none':'';const f=b.querySelector('.nz-fr');if(f)f.style.display=on?'':'none';if(t){t.textContent=on?'⏹ ক্যামেরা বন্ধ করো':'📷 ক্যামেরা চালু করো';t.classList.toggle('p',!on)}}
-function camStop(){if(CAM){clearInterval(CAM.t);try{CAM.st.getTracks().forEach(t=>t.stop())}catch(e){}CAM=null}const v=$('#nzV');if(v)v.srcObject=null;camUI(0)}
+function camStop(){const fb=document.querySelector('.nz-fl');if(fb)fb.remove();if(CAM){clearTimeout(CAM.t);try{CAM.st.getTracks().forEach(t=>t.stop())}catch(e){}CAM=null}const v=$('#nzV');if(v)v.srcObject=null;camUI(0)}
 async function camStart(){
  if(CAM)return;const v=$('#nzV');if(!v)return;
  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return toast('এই ব্রাউজারে ক্যামেরা চলবে না — Chrome ব্যবহার করো');
@@ -5588,8 +5590,10 @@ async function camStart(){
   v.srcObject=st;await v.play();
   let det=null;if('BarcodeDetector' in window){try{det=new BarcodeDetector({formats:['qr_code']})}catch(e){}}
   if(!det){try{await loadJsQR()}catch(e){st.getTracks().forEach(t=>t.stop());v.srcObject=null;return toast('QR পড়ার জন্য একবার ইন্টারনেট লাগবে')}}
-  CAM={st,det,busy:0,last:'',lt:0,cv:document.createElement('canvas')};CAM.t=setInterval(camTick,170);camUI(1)
+  CAM={st,det,busy:0,last:'',lt:0,cv:document.createElement('canvas')};CAM.t=setTimeout(camLoop,0);camUI(1);camFlash(st)
  }catch(e){toast(e&&e.name==='NotAllowedError'?'ক্যামেরার অনুমতি দিতে হবে (ব্রাউজারের সেটিংয়ে)':'ক্যামেরা চালু করা যায়নি')}}
+async function camLoop(){if(!CAM)return;const t0=Date.now();await camTick();if(CAM)CAM.t=setTimeout(camLoop,Math.max(25,100-(Date.now()-t0)))}
+function camFlash(st){try{const tr=st.getVideoTracks()[0],cp=tr&&tr.getCapabilities?tr.getCapabilities():{},cam=document.querySelector('.nz-cam');if(!cp||!cp.torch||!cam||cam.querySelector('.nz-fl'))return;const b=document.createElement('button');b.type='button';b.className='nz-fl';b.textContent='🔦';b.setAttribute('aria-label','ফ্ল্যাশ');let on=false;b.onclick=async()=>{try{await tr.applyConstraints({advanced:[{torch:!on}]});on=!on;b.classList.toggle('on',on)}catch(e){toast('এই ফোনে ফ্ল্যাশ চালানো গেল না')}};cam.appendChild(b)}catch(e){}}
 async function camTick(){
  const v=$('#nzV');if(!CAM||CAM.busy||!v||v.readyState<2||!v.videoWidth)return;CAM.busy=1;let txt='';
  try{
