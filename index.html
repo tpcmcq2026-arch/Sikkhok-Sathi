@@ -4384,6 +4384,7 @@ function stSheet(id){
  <div class="sm-f"><label>অভিভাবকের ইংরেজি নাম (ঐচ্ছিক)</label><input id="sf_ge" value="${E(s?s.ge||'':'')}" autocomplete="off" placeholder="যেমন: Abdul Karim" style="direction:ltr"></div>
  <div class="sm-f"><label>অভিভাবকের মোবাইল (WhatsApp)</label><input id="sf_p" type="tel" inputmode="tel" value="${E(s?s.p||'':'')}" placeholder="০১৭XXXXXXXX"></div>
 <details class="sm-card" id="sf_mr" style="padding:10px 12px;margin-bottom:12px"><summary style="font-weight:600;cursor:pointer">➕ ভর্তি ফরমের আরও তথ্য (ঐচ্ছিক)</summary><div style="margin-top:10px">
+ <div class="sm-f"><label>ফরম নং</label><input id="sf_fn" value="${E(s?s.fn||'':'')}" placeholder="যেমন: ২০২৬/০৪৭"></div>
  <div class="sm-g2"><div class="sm-f"><label>জন্ম তারিখ</label><input id="sf_dob" value="${E(s?s.dob||'':'')}" placeholder="যেমন: ১২/০৫/২০১২"></div><div class="sm-f"><label>রক্তের গ্রুপ</label><input id="sf_bg" value="${E(s?s.bg||'':'')}" placeholder="যেমন: B+" style="direction:ltr"></div></div>
  <div class="sm-g2"><div class="sm-f"><label>লিঙ্গ</label><select id="sf_sx"><option value="">—</option><option${s&&s.sx==='ছেলে'?' selected':''}>ছেলে</option><option${s&&s.sx==='মেয়ে'?' selected':''}>মেয়ে</option></select></div><div class="sm-f"><label>ধর্ম</label><input id="sf_rl" value="${E(s?s.rl||'':'')}" placeholder="যেমন: ইসলাম"></div></div>
  <div class="sm-f"><label>মাতার নাম</label><input id="sf_mn" value="${E(s?s.mn||'':'')}" autocomplete="off"></div>
@@ -4393,6 +4394,14 @@ function stSheet(id){
  <div class="sm-sw${isFree?' on':''}" id="sf_free" style="margin:10px 0 0"><span>ফ্রি শিক্ষার্থী (ফি লাগবে না)</span><u></u></div><p class="sub" style="margin:8px 0 0;font-size:12px">ফাঁকা রাখলে শ্রেণির ফি চলবে। ফি বদলালে আগের মাসের হিসাব বদলাবে না।</p></div>
  <div class="sm-g2"><div class="sm-f"><label>ভর্তির মাস</label><input id="sf_s" type="month" value="${E((s&&s.s)||ymOf(new Date()))}"></div><div class="sm-f"><label>নোট</label><input id="sf_o" value="${E(s?s.o||'':'')}" autocomplete="off"></div></div>
  <div class="sm-btns"><button class="btn p" id="sf_ok">${s?'সংরক্ষণ':'যোগ করো'}</button></div>
+ <details class="sm-card" id="sf_as" style="padding:10px 12px;margin:8px 0 0"><summary style="font-weight:600;cursor:pointer">🏫 ফরমের লোগো ও ওয়াটারমার্ক</summary><div style="margin-top:10px">
+ <div class="sm-g2"><div class="sm-f"><label>হেডারে লোগো</label><select id="sf_alp"><option value="none">নেই</option><option value="left">নামের বামে</option><option value="top">নামের উপরে</option></select></div><div class="sm-f"><label>&nbsp;</label><div style="display:flex;gap:8px"><label class="btn p" style="cursor:pointer;margin:0">📁 লোগো<input type="file" id="sf_alf" accept="image/*" hidden></label><button type="button" class="btn" id="sf_alr">সরান</button></div></div></div>
+ <div id="sf_alg">${afSld('sf_asz','লোগোর সাইজ',30,200,(SM.cfg.af||{}).ls||90,1,'px')}${afSld('sf_asx','বাম ↔ ডান',-300,300,(SM.cfg.af||{}).lx||0,2,'px')}${afSld('sf_asy','উপর ↔ নিচ',-100,100,(SM.cfg.af||{}).ly||0,2,'px')}</div>
+ <div class="sm-lb" style="margin-top:12px;border-top:1px dashed var(--line);padding-top:10px">💧 ওয়াটারমার্ক</div>
+ <div class="sm-f"><label>ধরন</label><select id="sf_awm"><option value="none">নেই</option><option value="name">প্রতিষ্ঠানের নাম</option><option value="logo">লোগো</option><option value="text">নিজের লেখা</option></select></div>
+ <div id="sf_awg"><div class="sm-f" id="sf_awt_w"><label>লেখা</label><input id="sf_awt"></div><div class="sm-f" id="sf_awl_w"><label>ওয়াটারমার্কের লোগো <span style="font-weight:400">(হেডারের লোগো থেকে আলাদা)</span></label><div style="display:flex;gap:8px;align-items:center"><label class="btn p" style="cursor:pointer;margin:0">📁 লোগো<input type="file" id="sf_awf" accept="image/*" hidden></label><button type="button" class="btn" id="sf_awr">সরান</button><span class="sub" id="sf_aws"></span></div></div>
+ ${afSld('sf_awo','গাঢ়ত্ব',2,40,(SM.cfg.af||{}).wo||8,1,'%')}${afSld('sf_aws2','সাইজ',30,200,(SM.cfg.af||{}).ws||100,5,'%')}${afSld('sf_awx','বাম ↔ ডান',-400,400,(SM.cfg.af||{}).wx||0,5,'px')}${afSld('sf_awy','উপর ↔ নিচ',-500,500,(SM.cfg.af||{}).wy||0,5,'px')}</div>
+ </div></details>
  <div class="sm-two" style="margin:8px 0 0"><button class="btn" id="sf_af">📝 ভর্তি ফরম ছাপো</button><button class="btn" id="sf_ab">📄 ফাঁকা ফরম</button></div>
  ${s?`<div class="sm-btns" style="margin-top:8px"><button class="btn" id="sf_lg">📒 ফির খাতা</button></div><div class="sm-btns" style="margin-top:8px"><button class="btn" id="sf_off">${s.a===0?'আবার সক্রিয় করো':'নিষ্ক্রিয় করো'}</button><button class="btn d" id="sf_del">মুছে ফেলো</button></div>`:''}`,(box)=>{
   const q=x=>box.querySelector(x),ci=q('#sf_c');let free=isFree;
@@ -4400,8 +4409,18 @@ function stSheet(id){
   box.querySelectorAll('#sf_bq button').forEach(b=>b.onclick=()=>q('#sf_b').value=b.dataset.b);
   const shq=()=>{const c=cnorm(ci.value),l=[...new Set(SM.st.filter(x=>x.sh&&(!c||cnorm(x.c)===c)).map(x=>x.sh))].sort((a,b)=>a.localeCompare(b,'bn'));q('#sf_shq').innerHTML=l.map(h=>`<button type="button" data-h="${E(h)}">${E(h)}</button>`).join('');q('#sf_shq').querySelectorAll('button').forEach(b=>b.onclick=()=>q('#sf_sh').value=b.dataset.h)};
   shq();ci.addEventListener('input',shq);box.querySelectorAll('#sf_qc button').forEach(b=>b.addEventListener('click',shq));
-  const afv=()=>{const g=k=>q('#sf_'+k).value.trim(),m=cnorm(ci.value),fv=free?'ফ্রি':(+en(g('f')).replace(/\D/g,'')||(s?feeOf(s,ymOf(new Date())):0)||0);return {n:g('n'),e:g('e'),dob:g('dob'),bg:g('bg'),sx:q('#sf_sx').value,rl:g('rl'),sc:g('sc'),c:bn(m||''),r:g('r')?bn(en(g('r'))):(!s&&m?bn(nextRoll(m)):(s&&s.r?bn(s.r):'')),b:g('b'),g:g('g'),gj:g('gj'),mn:g('mn'),p:bn(g('p')),em:bn(g('em')),ad:g('ad'),fee:fv==='ফ্রি'?'ফ্রি':(fv?bn(fv)+' টাকা':'')}};
-  q('#sf_af').onclick=()=>afPrint(afv(),true);q('#sf_ab').onclick=()=>afPrint({},false);
+const AFC=Object.assign({},SM.cfg.af||{});let aft=null;const afsv=()=>{clearTimeout(aft);aft=setTimeout(()=>{SM.cfg.af=AFC;smSave()},500)};
+  q('#sf_alp').value=AFC.lp||'none';q('#sf_awm').value=AFC.wm||'none';q('#sf_awt').value=AFC.wt||'';
+  const avis=()=>{q('#sf_alg').style.display=q('#sf_alp').value==='none'?'none':'';q('#sf_awg').style.display=q('#sf_awm').value==='none'?'none':'';q('#sf_awt_w').style.display=q('#sf_awm').value==='text'?'':'none';q('#sf_awl_w').style.display=q('#sf_awm').value==='logo'?'':'none';q('#sf_aws').textContent=afWl()?'✓ লোগো আছে':'লোগো নেই'};avis();
+  q('#sf_alp').onchange=()=>{AFC.lp=q('#sf_alp').value;avis();afsv()};q('#sf_awm').onchange=()=>{AFC.wm=q('#sf_awm').value;avis();afsv()};q('#sf_awt').oninput=()=>{AFC.wt=q('#sf_awt').value;afsv()};
+  const AFS={sf_asz:['ls',90],sf_asx:['lx',0],sf_asy:['ly',0],sf_awo:['wo',8],sf_aws2:['ws',100],sf_awx:['wx',0],sf_awy:['wy',0]};
+  Object.keys(AFS).forEach(id=>{q('#'+id).oninput=()=>{AFC[AFS[id][0]]=+q('#'+id).value;q('#'+id+'_v').textContent=q('#'+id).value;afsv()}});
+  box.querySelectorAll('[data-ars]').forEach(b=>b.onclick=()=>{const id=b.dataset.ars;delete AFC[AFS[id][0]];q('#'+id).value=AFS[id][1];q('#'+id+'_v').textContent=AFS[id][1];afsv()});
+  const afUp=(inp,key,after)=>{q(inp).onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);try{LS.setItem(key,c.toDataURL('image/png'))}catch(x){return toast('ছবি বড়')}URL.revokeObjectURL(u);after();avis();toast('লোগো যোগ হয়েছে ✓')};im.src=u}};
+  afUp('#sf_alf','trsm_aflogo',()=>{if(q('#sf_alp').value==='none'){q('#sf_alp').value='left';AFC.lp='left';avis();afsv()}});afUp('#sf_awf','trsm_afwm',()=>{});
+  q('#sf_alr').onclick=()=>{try{LS.removeItem('trsm_aflogo')}catch(x){}AFC.lp='none';q('#sf_alp').value='none';avis();afsv();toast('লোগো সরানো হয়েছে')};q('#sf_awr').onclick=()=>{try{LS.removeItem('trsm_afwm')}catch(x){}avis();toast('ওয়াটারমার্কের লোগো সরানো হয়েছে')};
+  const afv=()=>{const g=k=>q('#sf_'+k).value.trim(),m=cnorm(ci.value),fv=free?'ফ্রি':(+en(g('f')).replace(/\D/g,'')||(s?feeOf(s,ymOf(new Date())):0)||0);return {fn:g('fn'),n:g('n'),e:g('e'),dob:g('dob'),bg:g('bg'),sx:q('#sf_sx').value,rl:g('rl'),sc:g('sc'),c:bn(m||''),r:g('r')?bn(en(g('r'))):(!s&&m?bn(nextRoll(m)):(s&&s.r?bn(s.r):'')),b:g('b'),g:g('g'),gj:g('gj'),mn:g('mn'),p:bn(g('p')),em:bn(g('em')),ad:g('ad'),fee:fv==='ফ্রি'?'ফ্রি':(fv?bn(fv)+' টাকা':'')}};
+  q('#sf_af').onclick=()=>{SM.cfg.af=AFC;afPrint(afv(),true)};q('#sf_ab').onclick=()=>{SM.cfg.af=AFC;afPrint({fn:q('#sf_fn').value.trim()},false)};
   q('#sf_free').onclick=()=>{free=!free;q('#sf_free').classList.toggle('on',free);q('#sf_f').disabled=free};
   if(!s)q('#sf_r').placeholder=bn(nextRoll(cnorm(ci.value)));
   setTimeout(()=>{if(!s)q('#sf_n').focus()},120);
@@ -4409,7 +4428,7 @@ function stSheet(id){
    const n=q('#sf_n').value.trim(),c=cnorm(ci.value);if(!n)return toast('নাম লেখো');if(!c)return toast('শ্রেণি লেখো');
    if(SM.st.some(x=>x.id!==(s&&s.id)&&x.c===c&&x.n===n&&x.a!==0))return toast('এই শ্রেণিতে এই নামে আগেই আছে');
    const r=en(q('#sf_r').value).replace(/\D/g,'')||(s&&s.c===c&&s.r?s.r:String(nextRoll(c))),since=q('#sf_s').value||ymOf(new Date());
-   const o={id:s?s.id:uid(),n,e:q('#sf_e').value.trim(),be:q('#sf_be').value.trim(),sc:q('#sf_sc').value.trim(),se:q('#sf_se').value.trim(),ge:q('#sf_ge').value.trim(),c,r,b:q('#sf_b').value.trim(),sh:q('#sf_sh').value.trim(),g:q('#sf_g').value.trim(),p:q('#sf_p').value.trim(),s:since,o:q('#sf_o').value.trim(),dob:q('#sf_dob').value.trim(),bg:q('#sf_bg').value.trim(),sx:q('#sf_sx').value,rl:q('#sf_rl').value.trim(),mn:q('#sf_mn').value.trim(),gj:q('#sf_gj').value.trim(),em:q('#sf_em').value.trim(),ad:q('#sf_ad').value.trim(),a:s?s.a:1,fh:s?(s.fh||[]):[],pc:s?(s.pc||[]):[]};
+   const o={id:s?s.id:uid(),n,e:q('#sf_e').value.trim(),be:q('#sf_be').value.trim(),sc:q('#sf_sc').value.trim(),se:q('#sf_se').value.trim(),ge:q('#sf_ge').value.trim(),c,r,b:q('#sf_b').value.trim(),sh:q('#sf_sh').value.trim(),g:q('#sf_g').value.trim(),p:q('#sf_p').value.trim(),s:since,o:q('#sf_o').value.trim(),fn:q('#sf_fn').value.trim(),dob:q('#sf_dob').value.trim(),bg:q('#sf_bg').value.trim(),sx:q('#sf_sx').value,rl:q('#sf_rl').value.trim(),mn:q('#sf_mn').value.trim(),gj:q('#sf_gj').value.trim(),em:q('#sf_em').value.trim(),ad:q('#sf_ad').value.trim(),a:s?s.a:1,fh:s?(s.fh||[]):[],pc:s?(s.pc||[]):[]};
    const nv=free?0:(+en(q('#sf_f').value).replace(/\D/g,'')||null),ovn=s?(()=>{const e=hAt(s.fh,curY);return e&&e.a!=null?+e.a:null})():null;
    if(nv!==ovn){const from=(q('#sf_fm').value)||(s?curY:since);o.fh=setHist(o.fh,from,nv)}
    if(s){const oc=s.c;if(oc!==c){o.pc=(o.pc||[]).concat([{c:oc,y:ymOf(new Date())}])}Object.assign(s,o);syncRos([c,oc])}else{SM.st.push(o);syncRos(c)}
@@ -4792,29 +4811,34 @@ const CFCSS=`.cfx{--fh:'Noto Serif Bengali','Hind Siliguri',serif;--fm:'Hind Sil
 .cfx.d12 .e3{left:59.52px;top:59.52px;right:59.52px;bottom:59.52px;border:1.68px solid var(--m)}
 .cfx.d12 .cf-wm{position:absolute;left:50%;top:50%;width:516.58px;height:516.58px;margin:-258.29px 0 0 -258.29px;opacity:.08;z-index:1}
 .cfx.d12 .cf-ttl{border-top:2.81px solid var(--m);border-bottom:2.81px solid var(--m);padding:2.25px 44.92px}
-`,AFCSS=`.afx{position:relative;overflow:hidden;width:794px;height:1123px;background:#fff;color:#111;font-family:'Hind Siliguri',sans-serif;font-size:15.48px;padding:33.35px 39.7px;box-sizing:border-box}
+`,AFCSS=`.afx{position:relative;overflow:hidden;width:794px;height:1123px;background:#fff;color:#000;font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;font-size:15.48px;padding:33.35px 39.7px;box-sizing:border-box;display:flex;flex-direction:column}
 .afx *{box-sizing:border-box}
-.afx .af-fr{position:absolute;left:15.88px;top:15.88px;right:15.88px;bottom:15.88px;border:2.78px solid #0f766e}
-.afx .af-h{display:flex;align-items:center;gap:19.85px;border-bottom:3.97px solid #0f766e;padding-bottom:15.88px}
-.afx .af-t{flex:1;text-align:center}
-.afx .af-t h2{font:800 36.52px/1.25 'Noto Serif Bengali','Hind Siliguri',serif;color:#0f766e;margin:0}
-.afx .af-t p{font-size:13.5px;color:#555;margin:1.59px 0 0}
-.afx .af-ph{flex:none;width:134.98px;height:158.8px;border:2.38px dashed #777;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12.7px;color:#777;line-height:1.4}
-.afx .af-tt{margin:11.12px auto 7.94px;width:max-content;background:#0f766e;color:#fff;font:700 23.82px/1.4 'Hind Siliguri',sans-serif;padding:3.18px 55.58px;border-radius:39.7px}
-.afx .af-m{display:flex;justify-content:space-between;font-size:13.9px;margin-bottom:9.53px}
-.afx .af-sh{background:#e6f4f2;border-left:7.94px solid #0f766e;padding:2.38px 15.88px;font-weight:700;font-size:16.67px;color:#0f4c47;margin:10.32px 0 7.94px}
+.afx .af-fr{position:absolute;left:15.88px;top:15.88px;right:15.88px;bottom:15.88px;border:2.78px solid #000;z-index:0}
+.afx .af-c{flex:1 1 auto;min-height:0;position:relative;z-index:2}
+.afx .af-h{display:flex;align-items:center;gap:11.91px;border-bottom:3.97px solid #000;padding-bottom:15.88px}
+.afx .af-hl,.afx .af-hr{flex:none;width:134.98px;display:flex;align-items:center;justify-content:flex-start}
+.afx .af-hr{justify-content:flex-end}
+.afx .af-lg{display:block;object-fit:contain;position:relative}
+.afx .af-t{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center}
+.afx .af-t h2{font:800 34.94px/1.25 'Noto Serif Bengali','Noto Sans Bengali',serif;color:#000;margin:0}
+.afx .af-t p{font-size:14.29px;color:#000;margin:1.59px 0 0}
+.afx .af-ph{width:134.98px;height:158.8px;border:2.38px dashed #000;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12.7px;color:#000;line-height:1.4}
+.afx .af-tt{margin:11.12px auto 7.94px;width:max-content;background:#000;color:#fff;font:700 23.82px/1.4 'Noto Sans Bengali',sans-serif;padding:3.18px 55.58px;border-radius:39.7px}
+.afx .af-m{display:flex;justify-content:space-between;font-size:14.29px;margin-bottom:9.53px}
+.afx .af-sh{background:#e8e8e8;border-left:7.94px solid #000;padding:2.38px 15.88px;font-weight:700;font-size:16.67px;color:#000;margin:10.32px 0 7.94px}
 .afx .af-g{display:flex;flex-wrap:wrap;gap:7.15px 23.82px}
 .afx .af-g .af-fl{width:calc(50% - 11.91px)}
 .afx .af-g .af-full{width:100%}
 .afx .af-fl{display:flex;align-items:flex-end;gap:7.94px;min-height:30.17px}
-.afx .af-l{white-space:nowrap;font-weight:600;color:#333}
-.afx .af-v{flex:1;border-bottom:1.59px dotted #555;min-height:25.41px;padding:0 4.76px;color:#0b3d91;font-weight:500}
+.afx .af-l{white-space:nowrap;font-weight:600;color:#000}
+.afx .af-v{flex:1;border-bottom:1.59px dotted #000;min-height:25.41px;padding:0 4.76px;color:#000;font-weight:600}
 .afx .af-cb{display:inline-flex;align-items:center;gap:3.97px;margin-right:11.12px}
-.afx .af-cb i{display:inline-block;width:15.88px;height:15.88px;border:1.99px solid #333;border-radius:2.38px;font-style:normal;font-size:13.5px;line-height:11.91px;text-align:center;color:#0b3d91}
-.afx ol{font-size:13.9px;line-height:1.65;color:#333;padding-left:31.76px;margin:0}
-.afx .af-o{border:1.99px dashed #777;padding:4.76px 15.88px;margin-top:9.53px;font-size:13.5px;color:#444;display:flex;gap:23.82px;justify-content:space-between}
-.afx .af-s{position:absolute;left:39.7px;right:39.7px;bottom:36.52px;display:flex;justify-content:space-between;font-size:13.5px;text-align:center}
-.afx .af-s div{width:206.44px;border-top:1.59px solid #333;padding-top:3.97px;font-weight:600}
+.afx .af-cb i{display:inline-block;width:15.88px;height:15.88px;border:1.99px solid #000;border-radius:2.38px;font-style:normal;font-size:13.5px;line-height:11.91px;text-align:center;color:#000}
+.afx ol{font-size:14.29px;line-height:1.65;color:#000;padding-left:31.76px;margin:0}
+.afx .af-o{border:1.99px dashed #000;padding:4.76px 15.88px;margin-top:9.53px;font-size:13.5px;color:#000;display:flex;gap:23.82px;justify-content:space-between}
+.afx .af-s{position:relative;z-index:2;flex:none;margin-top:11.91px;display:flex;justify-content:space-between;font-size:13.5px;text-align:center}
+.afx .af-s div{width:206.44px;border-top:1.59px solid #000;padding-top:3.97px;font-weight:600}
+.afx .af-wmk{position:absolute;left:50%;top:50%;z-index:1;pointer-events:none;white-space:nowrap;font-family:'Noto Serif Bengali',serif;font-weight:800;color:#000;text-align:center;line-height:1.2}
 `;
 const CFX='https://fonts.googleapis.com/css2?family=Allura&family=Sacramento&family=Parisienne&family=Kaushan+Script&display=swap';
 const CFD=[['d1','ক্লাসিক সোনালি'],['d2','রয়্যাল নীল'],['d3','আধুনিক সবুজ'],['d4','সাদা-কালো'],['d5','মেরুন ঐতিহ্য'],['d6','রঙিন তরঙ্গ'],['d7','নকশি চেকার'],['d8','কালো-সোনালি'],['d9','লাল-সোনালি ডোরা'],['d10','মিনিমাল'],['d11','পেস্টেল আধুনিক'],['d12','সাদা-কালো নকশা']];
@@ -4938,18 +4962,25 @@ function cfSheet(){if(!document.getElementById('cfxl')){const l=document.createE
   q('#cf_pr').onclick=()=>{const n=names();if(!n.length)return toast('আগে শিক্ষার্থী বেছে নাও বা নাম লেখো');prFrame(all().map(h=>`<div style="width:1123px;height:794px;page-break-after:always;break-after:page;overflow:hidden">${h}</div>`).join(''),CFCSS,'297mm 210mm')};
   q('#cf_x').onclick=closeSheet;stl();pv();sm();th()})}
 /* ---- ভর্তি ফরম ---- */
-function afHtml(v,fill){const V=k=>fill?E(v[k]||''):'',F=(l,k,c)=>`<div class="af-fl${c?' af-full':''}"><span class="af-l">${l}:</span><span class="af-v">${V(k)}</span></div>`;
+const afLg=()=>{try{return LS.getItem('trsm_aflogo')||cfLogo()}catch(e){return ''}};
+const afWl=()=>{try{return LS.getItem('trsm_afwm')||''}catch(e){return ''}};
+function afHtml(v,fill,zm){const C=SM.cfg.af||{},V=k=>fill?E(v[k]||''):'',F=(l,k,c)=>`<div class="af-fl${c?' af-full':''}"><span class="af-l">${l}:</span><span class="af-v">${V(k)}</span></div>`;
  const CB=(a,on)=>a.map((x,i)=>`<span class="af-cb"><i>${fill&&on===i?'✔':''}</i>${x}</span>`).join('');
  const adr=(()=>{try{return PF().addr||DEF.addr}catch(x){return DEF.addr}})(),sx=v.sx==='ছেলে'?0:v.sx==='মেয়ে'?1:-1;
- return `<div class="afx"><style>${AFCSS}</style><div class="af-fr"></div><div class="af-h"><div class="af-t"><h2>${E(inst())}</h2><p>${E(adr)}</p></div><div class="af-ph">ছবি<br>(পাসপোর্ট<br>সাইজ)</div></div>
- <div class="af-tt">ভর্তি ফরম</div><div class="af-m"><span>ফরম নং: ………………</span><span>তারিখ: ${E(dLabel(todayS()))}</span></div>
+ const lg=afLg(),lp=lg?(C.lp||'none'):'none',ls=+C.ls||90,lx=+C.lx||0,ly=+C.ly||0,im=`<img class="af-lg" src="${lg}" style="height:${ls}px;max-width:${Math.round(ls*2.4)}px;left:${lx}px;top:${ly}px">`;
+ const wm=C.wm||'none',wo=(+C.wo||8)/100,ws=(+C.ws||100)/100,wx=+C.wx||0,wy=+C.wy||0,tf=`translate(-50%,-50%) translate(${wx}px,${wy}px)`;let wk='';
+ if(wm==='name'||wm==='text'){const w=wm==='name'?inst():C.wt;if(w)wk=`<div class="af-wmk" style="opacity:${wo};font-size:${56*ws}px;transform:${tf} rotate(-20deg)">${E(w)}</div>`}else if(wm==='logo'&&afWl())wk=`<img class="af-wmk" src="${afWl()}" style="opacity:${wo};height:${420*ws}px;transform:${tf}">`;
+ return `<div class="afx"><style>${AFCSS}</style><div class="af-fr"></div>${wk}<div class="af-c"><div class="af-i"${zm?` style="zoom:${zm}"`:''}><div class="af-h"><div class="af-hl">${lp==='left'?im:''}</div><div class="af-t">${lp==='top'?im:''}<h2>${E(inst())}</h2><p>${E(adr)}</p></div><div class="af-hr"><div class="af-ph">ছবি<br>(পাসপোর্ট<br>সাইজ)</div></div></div>
+ <div class="af-tt">ভর্তি ফরম</div><div class="af-m"><span>ফরম নং: ${v.fn?E(v.fn):'………………'}</span><span>তারিখ: ${E(dLabel(todayS()))}</span></div>
  <div class="af-sh">১। শিক্ষার্থীর তথ্য</div><div class="af-g">${F('নাম (বাংলায়)','n',1)}${F('নাম (ইংরেজিতে)','e',1)}${F('জন্ম তারিখ','dob')}${F('রক্তের গ্রুপ','bg')}<div class="af-fl"><span class="af-l">লিঙ্গ:</span>${CB(['ছেলে','মেয়ে'],sx)}</div>${F('ধর্ম','rl')}${F('বর্তমান স্কুল','sc',1)}${F('শ্রেণি','c')}${F('রোল','r')}</div>
  <div class="af-sh">২। অভিভাবকের তথ্য</div><div class="af-g">${F('অভিভাবকের নাম','g')}${F('পেশা','gj')}${F('মাতার নাম','mn',1)}${F('মোবাইল','p')}${F('জরুরি নম্বর','em')}${F('ঠিকানা','ad',1)}</div>
  <div class="af-sh">৩। ভর্তির তথ্য</div><div class="af-g">${F('ভর্তির শ্রেণি','c')}${F('ব্যাচ','b')}${F('বিষয়সমূহ','x',1)}${F('মাসিক বেতন','fee')}${F('ভর্তি ফি','y')}</div>
  <div class="af-sh">৪। অঙ্গীকারনামা</div><ol><li>আমি/আমরা প্রতিষ্ঠানের সকল নিয়ম-কানুন মেনে চলতে সম্মত আছি।</li><li>প্রতি মাসের ১০ তারিখের মধ্যে বেতন পরিশোধ করব।</li><li>কারণ ছাড়া তিন দিন অনুপস্থিত থাকলে অভিভাবককে জানানো হবে।</li><li>ভর্তি ফি ও মাসিক বেতন কোনো অবস্থায় ফেরতযোগ্য নয়।</li></ol>
- <div class="af-o"><span>অফিস ব্যবহারের জন্য:</span><span>রসিদ নং: ………………</span><span>গৃহীত: ………………</span></div>
+ <div class="af-o"><span>অফিস ব্যবহারের জন্য:</span><span>রসিদ নং: ………………</span><span>গৃহীত: ………………</span></div></div></div>
  <div class="af-s"><div>শিক্ষার্থীর স্বাক্ষর</div><div>অভিভাবকের স্বাক্ষর</div><div>পরিচালকের স্বাক্ষর</div></div></div>`}
-const afPrint=(v,fill)=>prFrame(`<div style="width:794px;height:1123px;overflow:hidden">${afHtml(v,fill)}</div>`,'','210mm 297mm');
+function afPrint(v,fill){const m=document.createElement('div');m.style.cssText='position:fixed;left:-9999px;top:0;width:794px;height:1123px';m.innerHTML=afHtml(v,fill);document.body.appendChild(m);const c=m.querySelector('.af-c'),i=m.querySelector('.af-i'),r=Math.min(1,(c.clientHeight-4)/(i.offsetHeight||1));m.remove();
+ prFrame(`<div style="width:794px;height:1123px;overflow:hidden">${afHtml(v,fill,r<1?r.toFixed(3):0)}</div>`,'','210mm 297mm')}
+const afSld=(id,l,a,b,v,st,u)=>`<div class="sm-f" style="margin-bottom:8px"><label style="display:flex;justify-content:space-between;align-items:center">${l} <span><b id="${id}_v">${v}</b>${u} <button type="button" class="btn s" data-ars="${id}" style="padding:2px 9px">↺</button></span></label><input type="range" id="${id}" min="${a}" max="${b}" step="${st}" value="${v}" style="width:100%"></div>`;
 /* ---- রসিদ প্রিন্ট (অফিস + অভিভাবক কপি) ---- */
 function rcPrint(html){const wrap=h=>`<div style="padding:26px;background:#fff;width:760px;color:#16213a;font-family:'Hind Siliguri',sans-serif">${h}</div>`,m=document.createElement('div');m.style.cssText='position:fixed;left:-9999px;top:0;width:760px';m.innerHTML=wrap(html);document.body.appendChild(m);const h=m.offsetHeight||520;m.remove();
  const z=Math.min(718/760,470/h),cp=n=>`<div style="height:505px;overflow:hidden"><div style="font:600 13px 'Hind Siliguri',sans-serif;color:#555;margin:0 0 4px 4px">${n}</div><div style="width:760px;zoom:${z.toFixed(3)}">${wrap(html)}</div></div>`;
@@ -5376,6 +5407,8 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v123',d:'১১ নভেম্বর ২০২৬',t:['🖨️ ভর্তি ফরমের সব লেখা, দাগ ও ফ্রেম কালো — সাদা-কালো প্রিন্টে পরিষ্কার']},
+{v:'v122',d:'১১ নভেম্বর ২০২৬',t:['📝 ভর্তি ফরমের লেখা Noto Sans Bengali ফন্টে — সংখ্যা ও রোল পরিষ্কার','📝 হেডার ঠিক মাঝখানে; নিচের অফিস অংশ ও স্বাক্ষর আর মিলে যাবে না (পাতা ভরে গেলে নিজে ছোট হয়ে এক পাতায় আসে)','🏫 ফরমের লোগো ও ওয়াটারমার্ক (সাইজ, ডানে-বামে, উপরে-নিচে, গাঢ়ত্ব) এবং ফরম নং নিজে লেখার ঘর']},
 {v:'v121',d:'১১ নভেম্বর ২০২৬',t:['💧 ওয়াটারমার্কের লোগো এখন হেডারের লোগো থেকে সম্পূর্ণ আলাদা; আলাদা করে আনা ও সরানো যায়']},
 {v:'v120',d:'১১ নভেম্বর ২০২৬',t:['💧 ওয়াটারমার্ক এখন "লোগো ও হেডার" অপশনের ভেতরেই (নিচের অংশে)']},
 {v:'v119',d:'১১ নভেম্বর ২০২৬',t:['💧 সনদে ওয়াটারমার্ক: প্রতিষ্ঠানের নাম, লোগো বা নিজের লেখা; গাঢ়ত্ব, সাইজ ও অবস্থান বদলানো যায়','🏫 লোগোর জায়গায় "নেই" থাকলে আর লোগোর স্লাইডার দেখায় না']},
