@@ -1091,7 +1091,7 @@ html[data-mode=dark] .rtgp{background:#0a0f19}
 .ms-ex{font-weight:700;font-size:1.15em;margin-top:.4em}
 .ms-logo{display:block;max-height:5.2em;max-width:9em;object-fit:contain}
 .ms-inf{display:grid;grid-template-columns:1fr 1fr;gap:.45em 1.5em}
-.ms-inf span{color:#555}.ms-inf b{font-weight:700;margin-left:.35em}
+.ms-inf .ms-sj{grid-column:1/-1;white-space:nowrap}.ms-inf span{color:#555}.ms-inf b{font-weight:700;margin-left:.35em}
 .ms-kv{width:100%;border-collapse:collapse;font-size:calc(1em*var(--tz,1))}
 .ms-kv th{width:46%;background:#e8f3f1;color:var(--a);text-align:left;font-weight:700;padding:var(--rp) .9em;border:1px solid #b8c9c6}
 .ms-kv td{padding:var(--rp) .9em;border:1px solid #b8c9c6;font-weight:600}
@@ -4039,6 +4039,7 @@ en:{title:'Personal Marksheet',top:'TOPPER',name:'Name',roll:'Roll',cls:'Class',
 bn:{title:'ব্যক্তিগত মার্কশিট',top:'টপার',name:'নাম',roll:'রোল',cls:'শ্রেণি',sec:'শাখা',bat:'ব্যাচ',sub:'বিষয়',date:'তারিখ',comp:'বিষয় / অংশ',full:'পূর্ণমান',marks:'প্রাপ্ত নম্বর',total:'মোট',grade:'গ্রেড',gpa:'GPA',pos:'অবস্থান',pm:'আগের নম্বর',pp:'আগের অবস্থান',now:'এবার',res:'ফলাফল',P:'পাস',F:'ফেল',A:'অনুপস্থিত',avg:'শ্রেণির গড়',hi:'সর্বোচ্চ নম্বর',cnt:'শিক্ষার্থী',rem:'মন্তব্য',sch:'বৃত্তি',cmt:'শিক্ষকের মন্তব্য',nt:'বিশেষ বার্তা',gs:'অভিভাবকের স্বাক্ষর',ct:'শ্রেণি শিক্ষক',hd:'পরিচালক',
  up:n=>`▲ ${n} ধাপ এগিয়েছে`,dn:n=>`▼ ${n} ধাপ পিছিয়েছে`,eq:'● অবস্থান অপরিবর্তিত',mu:n=>`▲ ${n} নম্বর বেড়েছে`,md:n=>`▼ ${n} নম্বর কমেছে`,me:'● নম্বর অপরিবর্তিত'}};
 const MSCB={Bangla:'বাংলা','Eng-1':'ইংরেজি ১ম','Eng-2':'ইংরেজি ২য়',Math:'গণিত',Science:'বিজ্ঞান',Global:'বিশ্বপরিচয়',MCQ:'বহুনির্বাচনী (MCQ)',CQ:'সৃজনশীল (CQ)',Practical:'ব্যবহারিক'};
+const MSXB={A:'ক',B:'খ',C:'গ',D:'ঘ',E:'ঙ',F:'চ'},MSBB={morning:'সকাল',afternoon:'বিকাল',noon:'দুপুর',evening:'সন্ধ্যা',day:'দিন',night:'রাত'},MSJB={bangla:'বাংলা','english-1':'ইংরেজি ১ম','english-2':'ইংরেজি ২য়','eng-1':'ইংরেজি ১ম','eng-2':'ইংরেজি ২য়',english:'ইংরেজি',math:'গণিত',mathematics:'গণিত',science:'বিজ্ঞান','general science':'সাধারণ বিজ্ঞান',global:'বিশ্বপরিচয়','bangladesh & global studies':'বাংলাদেশ ও বিশ্বপরিচয়',ict:'তথ্য ও যোগাযোগ প্রযুক্তি',religion:'ধর্ম',islam:'ইসলাম শিক্ষা','islam & moral education':'ইসলাম ও নৈতিক শিক্ষা',hindu:'হিন্দুধর্ম',social:'সমাজ','social science':'সমাজ বিজ্ঞান',physics:'পদার্থবিজ্ঞান',chemistry:'রসায়ন',biology:'জীববিজ্ঞান','higher math':'উচ্চতর গণিত',agriculture:'কৃষিশিক্ষা'};
 const MSSB={Talentpool:'ট্যালেন্টপুল','Talent Pool':'ট্যালেন্টপুল','Talent pool':'ট্যালেন্টপুল',General:'সাধারণ','Not applied':'প্রযোজ্য নয়','Not Applied':'প্রযোজ্য নয়','Not applicable':'প্রযোজ্য নয়'};
 const MSRB={Excellent:'চমৎকার','Very Good':'অতি ভালো','Very good':'অতি ভালো',Good:'ভালো',Fair:'মোটামুটি',Bad:'দুর্বল',Weak:'দুর্বল',Failed:'অকৃতকার্য',Outstanding:'অসাধারণ',Average:'গড়পড়তা'};
 /* [id, name, default colour, 2nd colour, header: c=centred b=band bc=centred band] */
@@ -4073,7 +4074,7 @@ function msPage(r,d,i,o){
  const rib=(o.tp&&!ab&&pn===1&&!x.fail)?`<div class="ms-rib" style="${bn?'letter-spacing:0':''}">${esc((o.rbt||'').trim()||T.top)}</div>`:'';
   const head=(band?`<div class="ms-hd2${hdr==='bc'?' ms-hc':''}">${logo}<div>${nm}</div>${badge}</div>`:`<div class="ms-hd1">${logo}${nm}</div>`)+rib;
  const cap=o.tpl==='classic'||!o.ttl?'':`<div class="ms-tt">${T.title}</div>`;
- const info=[[T.name,esc(s.n)],...(r.cols.roll&&s.rl?[[T.roll,esc(D(s.rl))]]:[]),[T.cls,esc(D(r.cls||'—'))],...(r.sec?[[T.sec,esc(D(r.sec))]]:[]),...(r.bat?[[T.bat,esc(r.bat)]]:[]),...(r.subject?[[T.sub,esc(r.subject)]]:[])].map(([k,v])=>`<div><span>${k}:</span><b>${v}</b></div>`).join('');
+ const info=[[T.name,esc(s.n)],...(r.cols.roll&&s.rl?[[T.roll,esc(D(s.rl))]]:[]),[T.cls,esc(D(r.cls||'—'))],...(r.sec?[[T.sec,esc(D(bn?(MSXB[String(r.sec).trim().toUpperCase()]||r.sec):r.sec))]]:[]),...(r.bat?[[T.bat,esc(bn?(MSBB[String(r.bat).trim().toLowerCase()]||r.bat):r.bat)]]:[]),...(r.subject?[[T.sub,esc(bn?String(r.subject).split(/\s*,\s*/).map(x=>MSJB[x.toLowerCase()]||x).join(', '):r.subject),1]]:[])].map(([k,v,w])=>w?`<div class="ms-sj"><span>${k}:</span><b style="font-size:${Math.max(.7,Math.min(1,66/Math.max(1,String(v).replace(/<[^>]*>/g,'').length))).toFixed(2)}em">${v}</b></div>`:`<div><span>${k}:</span><b>${v}</b></div>`).join('');
  const pm=num(s.pm),pp=num(s.pp),rt=x.rem?(bn?(MSRB[x.rem]||x.rem):x.rem):'';
  const rs=ab?`<span class="ab">${T.A}</span>`:x.m==null?'—':x.fail?`<span class="f">${T.F}</span>`:`<span class="ok">${T.P}</span>`;
  const kv=[[T.marks,ab?'<span class="ab">Ab</span>':`<span class="${x.fail?'f':''}">${fm(x.m)}</span>`]];
@@ -5412,6 +5413,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v130',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংকের শিটে পাতা ডানে সরে যাওয়া ঠিক','📄 পার্সোনাল মার্কশিটে সব বিষয় এক লাইনে; বাংলা বেছে নিলে বিষয়, শাখা (ক/খ/গ) আর ব্যাচ (সকাল/বিকাল) বাংলায় — নাম ইংরেজিই থাকে']},
 {v:'v129',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংক: Firebase কনফিগ আগে থেকেই বসানো — অ্যাপে আর পেস্ট করতে হবে না, শুধু ইমেইল-পাসওয়ার্ড দিলেই হবে']},
 {v:'v128',d:'১৩ নভেম্বর ২০২৬',t:['🎓 নতুন: বৃত্তি ফলাফল লিংক — রেজাল্ট ট্যাব থেকে বাটন চাপলে অভিভাবকের জন্য রোল-সার্চ লিংক তৈরি হয় (Firebase দরকার, সঙ্গে নতুন ফাইল britti.html আপলোড করতে হবে)']},
 {v:'v127',d:'১১ নভেম্বর ২০২৬',t:['🧾 "পরিশোধিত" স্ট্যাম্প আবার রশিদের ঠিক মাঝখানে (কুপন ডিজাইনে সাদা অংশের মাঝে)']},
@@ -6441,10 +6443,10 @@ function bsOpen(pid){
  const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
  if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
  let r=Rs.find(x=>x.id===(pid||b.last))||Rs[0];
- const lab=x=>[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';
+ const lab=x=>{const t=[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';return t.length>34?t.slice(0,33)+'…':t};
  sheet(`<h3 style="margin:0 0 4px;font-size:20px">🎓 বৃত্তি ফলাফল লিংক</h3><p style="margin:0 0 12px;color:var(--mut);font-size:13.5px">রেজাল্ট শিটের Scholarship কলাম থেকে ফল নিয়ে অভিভাবকের জন্য রোল-সার্চ লিংক বানায়। নম্বর কোথাও যায় না।</p>
- <div class="sm-f"><label>কোন রেজাল্ট শিট</label><select id="bs_r">${Rs.map(x=>`<option value="${E(x.id)}"${x===r?' selected':''}>${E(lab(x))}</option>`).join('')}</select></div>
- <div id="bs_b"></div>`,box=>{
+ <style>.bs-w,.bs-w *{min-width:0;box-sizing:border-box}.bs-w{max-width:100%;overflow-x:hidden}.bs-w input,.bs-w select,.bs-w textarea{max-width:100%;width:100%}.bs-w .sm-g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}</style><div class="bs-w"><div class="sm-f"><label>কোন রেজাল্ট শিট</label><select id="bs_r">${Rs.map(x=>`<option value="${E(x.id)}"${x===r?' selected':''}>${E(lab(x))}</option>`).join('')}</select></div>
+ <div id="bs_b"></div></div>`,box=>{
   const q=x=>box.querySelector(x);let tm;
   const sv=()=>{clearTimeout(tm);tm=setTimeout(smSave,300)};
   const S0=()=>{const S=b.sh[r.id]=b.sh[r.id]||{};S.d=S.d&&typeof S.d==='object'?S.d:{};S.rows=S.rows&&typeof S.rows==='object'?S.rows:{};if(!S.yr)S.yr=String(new Date().getFullYear());if(S.title==null)S.title='বৃত্তি মডেল টেস্ট';return S};
@@ -6452,9 +6454,9 @@ function bsOpen(pid){
   const auto=s=>isAb(s.m)?'N':bsRes(schOf(r,s,mv(r,s)));
   const fin=(S,i)=>{const s=r.students[i],k=keys()[i],w=S.rows[k]||{},d=S.d;return{n:String(s.n).trim(),rl:bsRoll(w.rl||''),rs:w.rs||auto(s),sc:(w.sc||d.sc||'').trim(),up:(w.up||d.up||'').trim(),dt:(w.dt||d.dt||'').trim(),dv:(w.dv||d.dv||'').trim()}};
   const draw=()=>{const S=S0(),ks=keys(),rows=r.students.map((s,i)=>ks[i]==null?'':(()=>{const w=S.rows[ks[i]]||{},a=auto(s);
-   return`<div class="sm-card" style="padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px"><b style="font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis">${E(String(s.n).trim())}</b><select data-i="${i}" data-f="rs" style="max-width:48%;padding:6px"><option value="">স্বয়ংক্রিয়: ${BSN[a]}</option>${['T','G','N'].map(x=>`<option value="${x}"${w.rs===x?' selected':''}>${BSN[x]}</option>`).join('')}</select></div>
+   return`<div class="sm-card" style="padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px"><b style="font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis">${E(String(s.n).trim())}</b><select data-i="${i}" data-f="rs" style="max-width:48%;width:auto;padding:6px"><option value="">স্বয়ংক্রিয়: ${BSN[a]}</option>${['T','G','N'].map(x=>`<option value="${x}"${w.rs===x?' selected':''}>${BSN[x]}</option>`).join('')}</select></div>
    <div class="sm-g2" style="margin-bottom:6px"><input data-i="${i}" data-f="rl" inputmode="numeric" placeholder="বৃত্তির রোল *" value="${E(w.rl||'')}"><input data-i="${i}" data-f="sc" placeholder="${E(S.d.sc||'বিদ্যালয়')}" value="${E(w.sc||'')}"></div>
-   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><input data-i="${i}" data-f="up" placeholder="${E(S.d.up||'উপজেলা')}" value="${E(w.up||'')}"><input data-i="${i}" data-f="dt" placeholder="${E(S.d.dt||'জেলা')}" value="${E(w.dt||'')}"><input data-i="${i}" data-f="dv" placeholder="${E(S.d.dv||'বিভাগ')}" value="${E(w.dv||'')}"></div></div>`})()).join('');
+   <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px"><input data-i="${i}" data-f="up" placeholder="${E(S.d.up||'উপজেলা')}" value="${E(w.up||'')}"><input data-i="${i}" data-f="dt" placeholder="${E(S.d.dt||'জেলা')}" value="${E(w.dt||'')}"><input data-i="${i}" data-f="dv" placeholder="${E(S.d.dv||'বিভাগ')}" value="${E(w.dv||'')}"></div></div>`})()).join('');
    const lk=S.link?`<div class="sm-card" style="padding:12px;margin-top:10px;border:2px solid #16a34a"><b>✅ লিংক চালু আছে</b><div style="word-break:break-all;margin:6px 0;font-size:14px;direction:ltr;text-align:left" id="bs_lk">${E(S.link)}</div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn" id="bs_cp">📋 কপি</button><button type="button" class="btn p" id="bs_wa">💬 WhatsApp</button></div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn s" id="bs_op">🔗 খুলে দেখো</button><button type="button" class="btn s d" id="bs_off">🚫 লিংক বন্ধ করো</button></div></div>`:'';
    q('#bs_b').innerHTML=`<div class="sm-g2"><div class="sm-f"><label>পাতার শিরোনাম</label><input id="bs_t" value="${E(S.title)}"></div><div class="sm-f"><label>পরীক্ষার সন</label><input id="bs_y" inputmode="numeric" value="${E(bn(S.yr))}"></div></div>
    <div class="sm-lb" style="margin:2px 0 6px">সবার জন্য একসাথে (খালি ঘরে বসবে)</div>
