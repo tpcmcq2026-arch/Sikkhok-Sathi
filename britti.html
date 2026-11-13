@@ -46,6 +46,13 @@ body{font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);c
 .spin{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .hide{display:none!important}
+.cd{margin:20px 0 0;padding:18px 12px;border-radius:18px;background:linear-gradient(135deg,#0f766e,#0b5f58);color:#fff;text-align:center}
+.cd small{display:block;font-size:14px;opacity:.9;margin-bottom:8px}
+.cd .tm{display:flex;justify-content:center;gap:8px;direction:ltr}
+.cd .tm div{min-width:62px;background:rgba(255,255,255,.14);border-radius:12px;padding:8px 4px}
+.cd .tm b{display:block;font-size:28px;font-weight:800;line-height:1.2}
+.cd .tm i{font-style:normal;font-size:12px;opacity:.85}
+.cd p{margin:10px 0 0;font-size:13.5px;opacity:.95}
 </style>
 </head>
 <body>
@@ -59,6 +66,7 @@ body{font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);c
    <button id="go" type="submit">খুঁজুন</button>
    <p class="hint">শিক্ষার্থীর বৃত্তি পরীক্ষার রোল নম্বর দিন</p>
   </form>
+  <div id="cd" class="cd hide"></div>
   <div id="out"></div>
   <div class="note">
    <p>এই ফলাফলটি শুধুমাত্র তথ্য প্রদানের জন্য।</p>
@@ -80,7 +88,7 @@ const bn=s=>String(s==null?'':s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮�
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normRoll=s=>en(s).replace(/[\s\/\\.#?\[\]]+/g,'').toLowerCase();
 const B=new URLSearchParams(location.search).get('b')||'';
-let db=null,ready=false,batch=null;
+let db=null,ready=false,batch=null,openMs=0,tick=null;
 function say(h){$('#out').innerHTML=h}
 function warn(t){say(`<div class="msg">${esc(t)}</div>`)}
 async function init(){
@@ -93,13 +101,25 @@ async function init(){
     batch=d.data();ready=true;
     if(batch.center)$('#ct').textContent=batch.center;
     if(batch.title){$('#tt').textContent=batch.title;document.title=batch.title}
-    $('#q').focus();
+    const oa=batch.openAt;openMs=oa&&oa.toMillis?oa.toMillis():(+oa||0);
+    if(openMs>Date.now())lock();else $('#q').focus();
   }catch(e){warn('ইন্টারনেট সংযোগ দেখুন, তারপর আবার চেষ্টা করুন।')}
 }
+function lock(){
+  const q=$('#q'),g=$('#go'),c=$('#cd');q.disabled=g.disabled=true;c.classList.remove('hide');
+  const P=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Dhaka',day:'numeric',month:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(openMs)).map(x=>[x.type,x.value]));
+  const MO=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'],H=+P.hour,per=H>=4&&H<12?'সকাল':H>=12&&H<15?'দুপুর':H>=15&&H<18?'বিকাল':H>=18&&H<20?'সন্ধ্যা':'রাত';
+  const when=bn(P.day)+' '+MO[P.month-1]+' '+bn(P.year)+', '+per+' '+bn(H%12||12)+':'+bn(P.minute);
+  const pad=n=>bn(String(n).padStart(2,'0'));
+  const draw=()=>{const left=openMs-Date.now();
+    if(left<=0){clearInterval(tick);c.classList.add('hide');q.disabled=g.disabled=false;q.focus();return}
+    const s=Math.floor(left/1e3),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;
+    c.innerHTML=`<small>ফলাফল প্রকাশ হবে</small><div class="tm">${d?`<div><b>${bn(d)}</b><i>দিন</i></div>`:''}<div><b>${pad(h)}</b><i>ঘণ্টা</i></div><div><b>${pad(m)}</b><i>মিনিট</i></div><div><b>${pad(x)}</b><i>সেকেন্ড</i></div></div><p>${esc(when)}</p>`};
+  draw();clearInterval(tick);tick=setInterval(draw,1000)}
 function box(rs){
   if(rs==='T')return`<div class="box t"><b>ট্যালেন্টপুল</b><small>বৃত্তিপ্রাপ্ত</small></div>`;
   if(rs==='G')return`<div class="box g"><b>সাধারণ</b><small>বৃত্তিপ্রাপ্ত</small></div>`;
-  return`<div class="box n"><b>বৃত্তি প্রযোজ্য নয়</b><small>আগামীতে আরও ভালো করবে</small></div>`}
+  return`<div class="box n"><b style="border:0;padding:6px 0">বৃত্তি প্রযোজ্য নয়</b></div>`}
 async function find(e){
   e.preventDefault();
   if(!ready){await init();if(!ready)return}
@@ -111,7 +131,7 @@ async function find(e){
     if(!d.exists){warn('এই রোল নম্বরে কোনো ফলাফল পাওয়া যায়নি। রোল নম্বর আবার দেখে লিখুন।');return}
     const x=d.data(),row=(l,v)=>v?`<div class="row"><span>${l}</span><b>${esc(v)}</b></div>`:'';
     say(`<div class="res">${row('পরীক্ষার্থীর নাম',x.n)}${row('রোল নম্বর',bn(x.rl||roll))}${row('বিদ্যালয়ের নাম',x.sc)}${row('উপজেলা/থানা',x.up)}${row('জেলা',x.dt)}${row('বিভাগ',x.dv)}${row('পরীক্ষার সন',bn(batch.yr||''))}<div class="fl">ফলাফল</div>${box(x.rs)}</div>`);
-  }catch(err){warn('ফলাফল আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')}
+  }catch(err){warn(err&&err.code==='permission-denied'?'ফলাফল এখনো প্রকাশ হয়নি। একটু পরে আবার চেষ্টা করুন।':'ফলাফল আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')}
   finally{btn.disabled=false;btn.textContent='খুঁজুন'}
 }
 $('#f').addEventListener('submit',find);

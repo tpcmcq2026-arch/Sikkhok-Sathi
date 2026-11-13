@@ -5413,6 +5413,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v131',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংকে ফল প্রকাশের সময় ঠিক করা যায় — আগে খুললে কাউন্টডাউন, সময় হলে রোল দিয়ে ফল (Firestore Rules আপডেট করতে হবে)','🎓 "বৃত্তি প্রযোজ্য নয়" বাক্সে শুধু এই লেখাটুকু থাকে']},
 {v:'v130',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংকের শিটে পাতা ডানে সরে যাওয়া ঠিক','📄 পার্সোনাল মার্কশিটে সব বিষয় এক লাইনে; বাংলা বেছে নিলে বিষয়, শাখা (ক/খ/গ) আর ব্যাচ (সকাল/বিকাল) বাংলায় — নাম ইংরেজিই থাকে']},
 {v:'v129',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংক: Firebase কনফিগ আগে থেকেই বসানো — অ্যাপে আর পেস্ট করতে হবে না, শুধু ইমেইল-পাসওয়ার্ড দিলেই হবে']},
 {v:'v128',d:'১৩ নভেম্বর ২০২৬',t:['🎓 নতুন: বৃত্তি ফলাফল লিংক — রেজাল্ট ট্যাব থেকে বাটন চাপলে অভিভাবকের জন্য রোল-সার্চ লিংক তৈরি হয় (Firebase দরকার, সঙ্গে নতুন ফাইল britti.html আপলোড করতে হবে)']},
@@ -6449,7 +6450,8 @@ function bsOpen(pid){
  <div id="bs_b"></div></div>`,box=>{
   const q=x=>box.querySelector(x);let tm;
   const sv=()=>{clearTimeout(tm);tm=setTimeout(smSave,300)};
-  const S0=()=>{const S=b.sh[r.id]=b.sh[r.id]||{};S.d=S.d&&typeof S.d==='object'?S.d:{};S.rows=S.rows&&typeof S.rows==='object'?S.rows:{};if(!S.yr)S.yr=String(new Date().getFullYear());if(S.title==null)S.title='বৃত্তি মডেল টেস্ট';return S};
+  const S0=()=>{const S=b.sh[r.id]=b.sh[r.id]||{};S.d=S.d&&typeof S.d==='object'?S.d:{};S.rows=S.rows&&typeof S.rows==='object'?S.rows:{};if(!S.yr)S.yr=String(new Date().getFullYear());if(S.title==null)S.title='বৃত্তি মডেল টেস্ট';if(typeof S.open!=='number')S.open=0;return S};
+  const tli=ms=>{const d=new Date(ms-new Date(ms).getTimezoneOffset()*6e4);return d.toISOString().slice(0,16)};
   const keys=()=>{const c={};return r.students.map(s=>{const n=String(s.n||'').trim();if(!n)return null;c[n]=(c[n]||0)+1;return c[n]>1?n+' #'+c[n]:n})};
   const auto=s=>isAb(s.m)?'N':bsRes(schOf(r,s,mv(r,s)));
   const fin=(S,i)=>{const s=r.students[i],k=keys()[i],w=S.rows[k]||{},d=S.d;return{n:String(s.n).trim(),rl:bsRoll(w.rl||''),rs:w.rs||auto(s),sc:(w.sc||d.sc||'').trim(),up:(w.up||d.up||'').trim(),dt:(w.dt||d.dt||'').trim(),dv:(w.dv||d.dv||'').trim()}};
@@ -6457,8 +6459,9 @@ function bsOpen(pid){
    return`<div class="sm-card" style="padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px"><b style="font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis">${E(String(s.n).trim())}</b><select data-i="${i}" data-f="rs" style="max-width:48%;width:auto;padding:6px"><option value="">স্বয়ংক্রিয়: ${BSN[a]}</option>${['T','G','N'].map(x=>`<option value="${x}"${w.rs===x?' selected':''}>${BSN[x]}</option>`).join('')}</select></div>
    <div class="sm-g2" style="margin-bottom:6px"><input data-i="${i}" data-f="rl" inputmode="numeric" placeholder="বৃত্তির রোল *" value="${E(w.rl||'')}"><input data-i="${i}" data-f="sc" placeholder="${E(S.d.sc||'বিদ্যালয়')}" value="${E(w.sc||'')}"></div>
    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px"><input data-i="${i}" data-f="up" placeholder="${E(S.d.up||'উপজেলা')}" value="${E(w.up||'')}"><input data-i="${i}" data-f="dt" placeholder="${E(S.d.dt||'জেলা')}" value="${E(w.dt||'')}"><input data-i="${i}" data-f="dv" placeholder="${E(S.d.dv||'বিভাগ')}" value="${E(w.dv||'')}"></div></div>`})()).join('');
-   const lk=S.link?`<div class="sm-card" style="padding:12px;margin-top:10px;border:2px solid #16a34a"><b>✅ লিংক চালু আছে</b><div style="word-break:break-all;margin:6px 0;font-size:14px;direction:ltr;text-align:left" id="bs_lk">${E(S.link)}</div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn" id="bs_cp">📋 কপি</button><button type="button" class="btn p" id="bs_wa">💬 WhatsApp</button></div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn s" id="bs_op">🔗 খুলে দেখো</button><button type="button" class="btn s d" id="bs_off">🚫 লিংক বন্ধ করো</button></div></div>`:'';
+   const lk=S.link?`<div class="sm-card" style="padding:12px;margin-top:10px;border:2px solid #16a34a"><b>✅ লিংক চালু আছে</b>${S.open&&S.open>Date.now()?`<div style="font-size:13px;margin-top:3px">⏰ ফল দেখা যাবে: ${E(bn(new Date(S.open).toLocaleString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true})))}</div>`:''}<div style="word-break:break-all;margin:6px 0;font-size:14px;direction:ltr;text-align:left" id="bs_lk">${E(S.link)}</div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn" id="bs_cp">📋 কপি</button><button type="button" class="btn p" id="bs_wa">💬 WhatsApp</button></div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn s" id="bs_op">🔗 খুলে দেখো</button><button type="button" class="btn s d" id="bs_off">🚫 লিংক বন্ধ করো</button></div></div>`:'';
    q('#bs_b').innerHTML=`<div class="sm-g2"><div class="sm-f"><label>পাতার শিরোনাম</label><input id="bs_t" value="${E(S.title)}"></div><div class="sm-f"><label>পরীক্ষার সন</label><input id="bs_y" inputmode="numeric" value="${E(bn(S.yr))}"></div></div>
+   <div class="sm-f"><label>ফল দেখা যাবে যখন (খালি রাখলে এখনই)</label><input id="bs_o" type="datetime-local" value="${S.open?tli(S.open):''}"><div style="font-size:12px;color:var(--mut);margin-top:4px">সময়ের আগে অভিভাবক লিংক খুললে কাউন্টডাউন দেখবে, সময় হলে রোল দিয়ে ফল দেখতে পারবে।</div></div>
    <div class="sm-lb" style="margin:2px 0 6px">সবার জন্য একসাথে (খালি ঘরে বসবে)</div>
    <div class="sm-g2" style="margin-bottom:6px"><input id="bs_dsc" placeholder="বিদ্যালয়" value="${E(S.d.sc||'')}"><input id="bs_dup" placeholder="উপজেলা" value="${E(S.d.up||'')}"></div><div class="sm-g2" style="margin-bottom:12px"><input id="bs_ddt" placeholder="জেলা" value="${E(S.d.dt||'')}"><input id="bs_ddv" placeholder="বিভাগ" value="${E(S.d.dv||'')}"></div>
    <div class="sm-lb" style="margin:2px 0 6px">শিক্ষার্থী — <span id="bs_cn"></span></div>${rows}
@@ -6469,7 +6472,7 @@ function bsOpen(pid){
   q('#bs_r').onchange=e=>{r=Rs.find(x=>x.id===e.target.value)||r;b.last=r.id;sv();draw()};
   box.addEventListener('input',e=>{const t=e.target,S=S0();
    if(t.dataset.f){const k=keys()[+t.dataset.i];const w=S.rows[k]=S.rows[k]||{};w[t.dataset.f]=t.value;sv();if(t.dataset.f==='rl')cnt();return}
-   if(t.id==='bs_t'){S.title=t.value;sv()}else if(t.id==='bs_y'){S.yr=en(t.value);sv()}
+   if(t.id==='bs_t'){S.title=t.value;sv()}else if(t.id==='bs_y'){S.yr=en(t.value);sv()}else if(t.id==='bs_o'){const v=t.value?new Date(t.value).getTime():0;S.open=isNaN(v)?0:v;sv()}
    else if(/^bs_d(sc|up|dt|dv)$/.test(t.id)){S.d[t.id.slice(4)]=t.value;sv()}
    else if(t.id==='bs_fc'){b.fb=t.value;sv()}else if(t.id==='bs_em'){b.em=t.value.trim();sv()}});
   box.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.f==='rs'){const S=S0(),k=keys()[+t.dataset.i];(S.rows[k]=S.rows[k]||{}).rs=t.value;sv()}});
@@ -6488,7 +6491,7 @@ function bsOpen(pid){
      const pwv=q('#bs_pw')?q('#bs_pw').value:'';b.em=(q('#bs_em')?q('#bs_em').value:b.em||'').trim();
      await bsAuth(b.em,pwv);
      const db=firebase.firestore(),bid=S.bid||Array.from(crypto.getRandomValues(new Uint8Array(8)),x=>'abcdefghjkmnpqrstuvwxyz23456789'[x%31]).join(''),br=db.collection('britti').doc(bid);
-     await br.set({title:String(S.title).trim(),center:inst(),yr:S.yr||'',n:items.length,at:firebase.firestore.FieldValue.serverTimestamp()});
+     await br.set({title:String(S.title).trim(),center:inst(),yr:S.yr||'',n:items.length,openAt:firebase.firestore.Timestamp.fromMillis(S.open||0),at:firebase.firestore.FieldValue.serverTimestamp()});
      const col=br.collection('r'),ex=await col.get(),keep=new Set(items.map(x=>x.rl)),ops=[...items.map(x=>[0,col.doc(x.rl),{n:x.n,rl:x.rl,rs:x.rs,sc:x.sc,up:x.up,dt:x.dt,dv:x.dv}]),...ex.docs.filter(d=>!keep.has(d.id)).map(d=>[1,d.ref])];
      for(let i=0;i<ops.length;i+=400){const w=db.batch();ops.slice(i,i+400).forEach(o=>o[0]?w.delete(o[1]):w.set(o[1],o[2]));await w.commit()}
      S.bid=bid;S.link=new URL('britti.html?b='+bid,location.href).href;S.at=Date.now();b.last=r.id;smSave();draw();toast('✅ '+bn(items.length)+' জনের ফল প্রকাশ হয়েছে');
