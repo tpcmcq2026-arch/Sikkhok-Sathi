@@ -3751,11 +3751,11 @@ if(a==='edit'){cur=r;view='edit';editor()}else if(a==='rev'){cur=r;review()}else
 else if(a==='dup'){const c=JSON.parse(JSON.stringify(r));c.id='r'+Date.now().toString(36);c.exam+=' (Copy)';c.locked=false;c.created=Date.now();R.unshift(c);save();toast('Result copied');go(view)}
 else if(a==='del'&&r.locked)toast('Locked — unlock it first to delete');else if(a==='del')confirmBox(`Delete “${esc(r.exam)} – Class ${esc(r.cls)}”? It will move to Trash (Settings), where you can restore it for 30 days.`,()=>{toTrash(r);R=R.filter(x=>x!==r);save();toast('Moved to Trash');go(view)})})}
 function dash(){$('#main').innerHTML=`<h2>Dashboard</h2><div class="stats"><div class="stat"><b>${R.length}</b><span>Saved results</span></div><div class="stat"><b>${new Set(R.map(r=>r.cls)).size}</b><span>Classes</span></div><div class="stat"><b>${R.reduce((a,r)=>a+r.students.length,0)}</b><span>Students entered</span></div></div>
-<h2 style="font-size:17px">Recent results</h2>${R.length?`<div class="grid">${R.slice(0,6).map(card).join('')}</div>`:'<div class="empty">No results yet. Create your first result sheet.</div>'}`;
+<button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()" style="margin:0 0 16px">🎓 বৃত্তি ফলাফল লিংক</button><h2 style="font-size:17px">Recent results</h2>${R.length?`<div class="grid">${R.slice(0,6).map(card).join('')}</div>`:'<div class="empty">No results yet. Create your first result sheet.</div>'}`;
 wire($('#main'))}
 function results(){const u=k=>[...new Set(R.map(r=>r[k]).filter(Boolean))].sort();
 const sel=(id,k,l)=>`<select id="${id}"><option value="">All ${l}</option>${u(k).map(x=>`<option>${esc(x)}</option>`).join('')}</select>`;
-$('#main').innerHTML=`<h2>Saved Results</h2><div class="filters"><input id="q" placeholder="Search institution, exam, subject…">${sel('fc','cls','classes')}${sel('fe','exam','exams')}${sel('fs','subject','subjects')}</div><div id="rl"></div>`;
+$('#main').innerHTML=`<h2>Saved Results</h2><button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()" style="margin:0 0 12px">🎓 বৃত্তি ফলাফল লিংক</button><div class="filters"><input id="q" placeholder="Search institution, exam, subject…">${sel('fc','cls','classes')}${sel('fe','exam','exams')}${sel('fs','subject','subjects')}</div><div id="rl"></div>`;
 const f=()=>{const q=$('#q').value.toLowerCase(),c=$('#fc').value,e=$('#fe').value,s=$('#fs').value;
 const L=R.filter(r=>(!c||r.cls===c)&&(!e||r.exam===e)&&(!s||r.subject===s)&&(!q||[r.inst,r.exam,r.subject,r.cls].join(' ').toLowerCase().includes(q)));
 $('#rl').innerHTML=L.length?`<div class="grid">${L.map(card).join('')}</div>`:'<div class="empty">No matching results.</div>';wire($('#rl'))};
@@ -5412,6 +5412,8 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v129',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংক: Firebase কনফিগ আগে থেকেই বসানো — অ্যাপে আর পেস্ট করতে হবে না, শুধু ইমেইল-পাসওয়ার্ড দিলেই হবে']},
+{v:'v128',d:'১৩ নভেম্বর ২০২৬',t:['🎓 নতুন: বৃত্তি ফলাফল লিংক — রেজাল্ট ট্যাব থেকে বাটন চাপলে অভিভাবকের জন্য রোল-সার্চ লিংক তৈরি হয় (Firebase দরকার, সঙ্গে নতুন ফাইল britti.html আপলোড করতে হবে)']},
 {v:'v127',d:'১১ নভেম্বর ২০২৬',t:['🧾 "পরিশোধিত" স্ট্যাম্প আবার রশিদের ঠিক মাঝখানে (কুপন ডিজাইনে সাদা অংশের মাঝে)']},
 {v:'v126',d:'১১ নভেম্বর ২০২৬',t:['🧾 "পরিশোধিত" স্ট্যাম্প সব ১৫টি রশিদ-ডিজাইনে লেখার ওপর না পড়ে খালি জায়গায় বসে (ডার্ক ও সোনালিতে উজ্জ্বল রঙে)','🧾 সার্টিফিকেট রশিদে লোগো আর শিরোনাম আর মিশে যায় না']},
 {v:'v125',d:'১১ নভেম্বর ২০২৬',t:['🧾 টিকিট-ধাঁচের রশিদে "পরিশোধিত" স্ট্যাম্প সবুজ অংশে মিশে যেত — এখন সাদা অংশে নিচের দিকে, পড়া যায়']},
@@ -6413,6 +6415,85 @@ function cdPick(){const l0=cdList();sheet(`<h3>👤 একজনের কার
 new MutationObserver(()=>{if($('#smN').classList.contains('hide'))camStop()}).observe($('#smN'),{attributes:true,attributeFilter:['class']});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)camStop()});
 
+/* ===== v128: বৃত্তি ফলাফল লিংক (রেজাল্ট শিট → অভিভাবকের রোল-সার্চ পাতা) ===== */
+const BSFB={apiKey:"AIzaSyD1E4aP33VOZ-udF8mghUeJIUXfgm8U7g8",authDomain:"tpc-britti.firebaseapp.com",projectId:"tpc-britti",storageBucket:"tpc-britti.firebasestorage.app",messagingSenderId:"969573714270",appId:"1:969573714270:web:7870f03fc83519fe64e7cf"},BSV='10.12.2';
+const bsC=()=>{const b=SM.cfg.bs=SM.cfg.bs&&typeof SM.cfg.bs==='object'?SM.cfg.bs:{};b.sh=b.sh&&typeof b.sh==='object'?b.sh:{};return b};
+const bsRoll=s=>en(s).replace(/[\s\/\\.#?\[\]]+/g,'').toLowerCase();
+const bsRes=t=>{t=String(t||'');return /talent|ট্যালেন্ট|টেলেন্ট/i.test(t)?'T':/general|সাধারণ/i.test(t)?'G':'N'};
+const BSN={T:'ট্যালেন্টপুল',G:'সাধারণ',N:'বৃত্তি প্রযোজ্য নয়'};
+const bsConf=()=>{if(BSFB)return BSFB;const t=bsC().fb||'',o={};t.replace(/(\w+)\s*:\s*["']([^"']+)["']/g,(m,k,v)=>{o[k]=v});return o.apiKey&&o.projectId?o:null};
+let bsLd=null;
+const bsLoad=()=>bsLd||(bsLd=(async()=>{const L=u=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=()=>no(new Error('net'));document.head.appendChild(s)});const B='https://www.gstatic.com/firebasejs/'+BSV+'/firebase-';await L(B+'app-compat.js');await Promise.all([L(B+'auth-compat.js'),L(B+'firestore-compat.js')])})().catch(e=>{bsLd=null;throw e}));
+async function bsAuth(email,pw){const c=bsConf();if(!c)throw new Error('conf');await bsLoad();if(!firebase.apps.length)firebase.initializeApp(c);const a=firebase.auth();
+ const u=await new Promise(r=>{const f=a.onAuthStateChanged(x=>{f();r(x)})});
+ if(u&&(!email||u.email.toLowerCase()===email.toLowerCase()))return u;
+ if(!email||!pw)throw new Error('login');
+ return (await a.signInWithEmailAndPassword(email,pw)).user}
+const bsErr=e=>{const c=String((e&&(e.code||e.message))||'');
+ if(c==='conf')return'আগে Firebase কনফিগ বসাও (নিচে "Firebase ও লগইন")';
+ if(c==='login')return'ইমেইল আর পাসওয়ার্ড দাও (নিচে "Firebase ও লগইন")';
+ if(/invalid-credential|wrong-password|user-not-found|invalid-email/.test(c))return'ইমেইল বা পাসওয়ার্ড ঠিক নয়';
+ if(/permission/.test(c))return'অনুমতি নেই — Firestore Rules ঠিক করা আছে কি, আর এই ইমেইলটাই Rules-এ দেওয়া আছে কি?';
+ if(/network|net|unavailable|offline/i.test(c))return'ইন্টারনেট সংযোগ দেখো';
+ if(/too-many/.test(c))return'অনেকবার ভুল হয়েছে, একটু পরে চেষ্টা করো';
+ return'হয়নি: '+c.slice(0,80)};
+function bsOpen(pid){
+ const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
+ if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
+ let r=Rs.find(x=>x.id===(pid||b.last))||Rs[0];
+ const lab=x=>[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';
+ sheet(`<h3 style="margin:0 0 4px;font-size:20px">🎓 বৃত্তি ফলাফল লিংক</h3><p style="margin:0 0 12px;color:var(--mut);font-size:13.5px">রেজাল্ট শিটের Scholarship কলাম থেকে ফল নিয়ে অভিভাবকের জন্য রোল-সার্চ লিংক বানায়। নম্বর কোথাও যায় না।</p>
+ <div class="sm-f"><label>কোন রেজাল্ট শিট</label><select id="bs_r">${Rs.map(x=>`<option value="${E(x.id)}"${x===r?' selected':''}>${E(lab(x))}</option>`).join('')}</select></div>
+ <div id="bs_b"></div>`,box=>{
+  const q=x=>box.querySelector(x);let tm;
+  const sv=()=>{clearTimeout(tm);tm=setTimeout(smSave,300)};
+  const S0=()=>{const S=b.sh[r.id]=b.sh[r.id]||{};S.d=S.d&&typeof S.d==='object'?S.d:{};S.rows=S.rows&&typeof S.rows==='object'?S.rows:{};if(!S.yr)S.yr=String(new Date().getFullYear());if(S.title==null)S.title='বৃত্তি মডেল টেস্ট';return S};
+  const keys=()=>{const c={};return r.students.map(s=>{const n=String(s.n||'').trim();if(!n)return null;c[n]=(c[n]||0)+1;return c[n]>1?n+' #'+c[n]:n})};
+  const auto=s=>isAb(s.m)?'N':bsRes(schOf(r,s,mv(r,s)));
+  const fin=(S,i)=>{const s=r.students[i],k=keys()[i],w=S.rows[k]||{},d=S.d;return{n:String(s.n).trim(),rl:bsRoll(w.rl||''),rs:w.rs||auto(s),sc:(w.sc||d.sc||'').trim(),up:(w.up||d.up||'').trim(),dt:(w.dt||d.dt||'').trim(),dv:(w.dv||d.dv||'').trim()}};
+  const draw=()=>{const S=S0(),ks=keys(),rows=r.students.map((s,i)=>ks[i]==null?'':(()=>{const w=S.rows[ks[i]]||{},a=auto(s);
+   return`<div class="sm-card" style="padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px"><b style="font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis">${E(String(s.n).trim())}</b><select data-i="${i}" data-f="rs" style="max-width:48%;padding:6px"><option value="">স্বয়ংক্রিয়: ${BSN[a]}</option>${['T','G','N'].map(x=>`<option value="${x}"${w.rs===x?' selected':''}>${BSN[x]}</option>`).join('')}</select></div>
+   <div class="sm-g2" style="margin-bottom:6px"><input data-i="${i}" data-f="rl" inputmode="numeric" placeholder="বৃত্তির রোল *" value="${E(w.rl||'')}"><input data-i="${i}" data-f="sc" placeholder="${E(S.d.sc||'বিদ্যালয়')}" value="${E(w.sc||'')}"></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><input data-i="${i}" data-f="up" placeholder="${E(S.d.up||'উপজেলা')}" value="${E(w.up||'')}"><input data-i="${i}" data-f="dt" placeholder="${E(S.d.dt||'জেলা')}" value="${E(w.dt||'')}"><input data-i="${i}" data-f="dv" placeholder="${E(S.d.dv||'বিভাগ')}" value="${E(w.dv||'')}"></div></div>`})()).join('');
+   const lk=S.link?`<div class="sm-card" style="padding:12px;margin-top:10px;border:2px solid #16a34a"><b>✅ লিংক চালু আছে</b><div style="word-break:break-all;margin:6px 0;font-size:14px;direction:ltr;text-align:left" id="bs_lk">${E(S.link)}</div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn" id="bs_cp">📋 কপি</button><button type="button" class="btn p" id="bs_wa">💬 WhatsApp</button></div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn s" id="bs_op">🔗 খুলে দেখো</button><button type="button" class="btn s d" id="bs_off">🚫 লিংক বন্ধ করো</button></div></div>`:'';
+   q('#bs_b').innerHTML=`<div class="sm-g2"><div class="sm-f"><label>পাতার শিরোনাম</label><input id="bs_t" value="${E(S.title)}"></div><div class="sm-f"><label>পরীক্ষার সন</label><input id="bs_y" inputmode="numeric" value="${E(bn(S.yr))}"></div></div>
+   <div class="sm-lb" style="margin:2px 0 6px">সবার জন্য একসাথে (খালি ঘরে বসবে)</div>
+   <div class="sm-g2" style="margin-bottom:6px"><input id="bs_dsc" placeholder="বিদ্যালয়" value="${E(S.d.sc||'')}"><input id="bs_dup" placeholder="উপজেলা" value="${E(S.d.up||'')}"></div><div class="sm-g2" style="margin-bottom:12px"><input id="bs_ddt" placeholder="জেলা" value="${E(S.d.dt||'')}"><input id="bs_ddv" placeholder="বিভাগ" value="${E(S.d.dv||'')}"></div>
+   <div class="sm-lb" style="margin:2px 0 6px">শিক্ষার্থী — <span id="bs_cn"></span></div>${rows}
+   <details id="bs_fb" style="margin:12px 0"${bsConf()&&b.em?'':' open'}><summary style="font-weight:700;cursor:pointer;padding:6px 0">🔐 Firebase ও লগইন</summary>${BSFB?'':`<div class="sm-f"><label>Firebase কনফিগ (firebaseConfig কপি করে পেস্ট)</label><textarea id="bs_fc" rows="5" placeholder="const firebaseConfig = { apiKey: &quot;…&quot;, … }" style="width:100%;font-size:12px;direction:ltr">${E(b.fb||'')}</textarea></div>`}<div class="sm-g2"><input id="bs_em" type="email" placeholder="ইমেইল" autocomplete="username" value="${E(b.em||'')}"><input id="bs_pw" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"></div><p style="font-size:12px;color:var(--mut);margin:6px 0 0">একবার লগইন করলে ফোনে মনে থাকবে। পাসওয়ার্ড অ্যাপে সেভ হয় না।</p></details>
+   <button type="button" class="btn p" id="bs_go" style="width:100%;padding:14px;font-size:16px;border-radius:14px">🔗 ${S.link?'লিংক হালনাগাদ করো':'লিংক তৈরি করুন'}</button>${lk}`;
+   cnt()};
+  const cnt=()=>{const S=S0(),ks=keys();let n=0;r.students.forEach((s,i)=>{if(ks[i]!=null&&bsRoll((S.rows[ks[i]]||{}).rl||''))n++});q('#bs_cn').textContent=bn(n)+' জনের রোল বসানো — শুধু এদের ফল লিংকে যাবে'};
+  q('#bs_r').onchange=e=>{r=Rs.find(x=>x.id===e.target.value)||r;b.last=r.id;sv();draw()};
+  box.addEventListener('input',e=>{const t=e.target,S=S0();
+   if(t.dataset.f){const k=keys()[+t.dataset.i];const w=S.rows[k]=S.rows[k]||{};w[t.dataset.f]=t.value;sv();if(t.dataset.f==='rl')cnt();return}
+   if(t.id==='bs_t'){S.title=t.value;sv()}else if(t.id==='bs_y'){S.yr=en(t.value);sv()}
+   else if(/^bs_d(sc|up|dt|dv)$/.test(t.id)){S.d[t.id.slice(4)]=t.value;sv()}
+   else if(t.id==='bs_fc'){b.fb=t.value;sv()}else if(t.id==='bs_em'){b.em=t.value.trim();sv()}});
+  box.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.f==='rs'){const S=S0(),k=keys()[+t.dataset.i];(S.rows[k]=S.rows[k]||{}).rs=t.value;sv()}});
+  box.addEventListener('click',async e=>{const t=e.target.closest('button');if(!t)return;const S=S0();
+   if(t.id==='bs_cp'){try{await navigator.clipboard.writeText(S.link)}catch(x){const a=document.createElement('textarea');a.value=S.link;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}toast('লিংক কপি হয়েছে ✓')}
+   else if(t.id==='bs_wa'){const m=(S.title||'বৃত্তি ফলাফল')+'\nরোল নম্বর দিয়ে ফলাফল দেখুন:\n'+S.link;window.open('https://wa.me/?text='+encodeURIComponent(m),'_blank')}
+   else if(t.id==='bs_op'){window.open(S.link,'_blank')}
+   else if(t.id==='bs_off'){confirmBox('লিংক বন্ধ করলে অভিভাবক আর ফল দেখতে পাবে না। বন্ধ করবে?',async()=>{try{toast('বন্ধ হচ্ছে…');const u=await bsAuth(b.em,box.querySelector('#bs_pw')&&q('#bs_pw').value);const db=firebase.firestore(),br=db.collection('britti').doc(S.bid),old=await br.collection('r').get();const ds=old.docs;for(let i=0;i<ds.length;i+=400){const w=db.batch();ds.slice(i,i+400).forEach(d=>w.delete(d.ref));await w.commit()}await br.delete();S.bid='';S.link='';smSave();draw();toast('লিংক বন্ধ হয়েছে')}catch(x){toast(bsErr(x))}},'বন্ধ করো')}
+   else if(t.id==='bs_go'){
+    const items=[],seen={};let bad='';
+    r.students.forEach((s,i)=>{if(bad||keys()[i]==null)return;const f=fin(S,i);if(!f.rl)return;if(seen[f.rl]){bad='একই রোল ('+bn(f.rl)+') দুইজনের ঘরে আছে — '+seen[f.rl]+' ও '+f.n;return}seen[f.rl]=f.n;items.push(f)});
+    if(bad)return toast(bad);if(!items.length)return toast('অন্তত একজনের বৃত্তির রোল বসাও');
+    if(!String(S.title||'').trim())return toast('পাতার শিরোনাম দাও');
+    const old=t.innerHTML;t.disabled=true;t.textContent='⏳ পাঠানো হচ্ছে…';
+    try{
+     const pwv=q('#bs_pw')?q('#bs_pw').value:'';b.em=(q('#bs_em')?q('#bs_em').value:b.em||'').trim();
+     await bsAuth(b.em,pwv);
+     const db=firebase.firestore(),bid=S.bid||Array.from(crypto.getRandomValues(new Uint8Array(8)),x=>'abcdefghjkmnpqrstuvwxyz23456789'[x%31]).join(''),br=db.collection('britti').doc(bid);
+     await br.set({title:String(S.title).trim(),center:inst(),yr:S.yr||'',n:items.length,at:firebase.firestore.FieldValue.serverTimestamp()});
+     const col=br.collection('r'),ex=await col.get(),keep=new Set(items.map(x=>x.rl)),ops=[...items.map(x=>[0,col.doc(x.rl),{n:x.n,rl:x.rl,rs:x.rs,sc:x.sc,up:x.up,dt:x.dt,dv:x.dv}]),...ex.docs.filter(d=>!keep.has(d.id)).map(d=>[1,d.ref])];
+     for(let i=0;i<ops.length;i+=400){const w=db.batch();ops.slice(i,i+400).forEach(o=>o[0]?w.delete(o[1]):w.set(o[1],o[2]));await w.commit()}
+     S.bid=bid;S.link=new URL('britti.html?b='+bid,location.href).href;S.at=Date.now();b.last=r.id;smSave();draw();toast('✅ '+bn(items.length)+' জনের ফল প্রকাশ হয়েছে');
+     setTimeout(()=>{const l=q('#bs_lk');if(l)l.scrollIntoView({behavior:'smooth',block:'center'})},200);
+    }catch(x){toast(bsErr(x));t.disabled=false;t.innerHTML=old}}});
+  draw()})}
+window.bsOpen=bsOpen;
 window.smOpenWa=openWa;
 window.smApi={xrRoll,xrSet,xrPut,xrRange,xrDig,XRD,SM:()=>SM,diary:()=>SM.diary,bn,en,MO,WDS,money,mLabel,ymOf,addM,iso,todayS,pIso,dLabel,clsList,bList,inCls,clsAt,clsDays,monthDue,paidOf,remOf,dueBefore,totDue,stOf,openWa};
 window.smDbg={spPgOf,spArr,spCombo,nzGo,scanDo,nzAllSheet,nzQueue,nzDayData,nzDayPages,nzDaySheet,nzMonData,nzMonPages,nzMonSheet,RPM,cdBack,cdBackSheet,cdPages,cdPer,cdNPg,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
