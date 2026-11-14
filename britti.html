@@ -48,7 +48,9 @@ body{font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);c
 .hide{display:none!important}
 .acts{display:flex;gap:8px;justify-content:center;margin:18px 0 0;flex-wrap:wrap}
 .acts button{font:inherit;font-weight:700;font-size:15px;padding:11px 18px;border-radius:12px;border:2px solid var(--brand);background:transparent;color:var(--brand);cursor:pointer}
+.acts button{min-width:150px;transition:opacity .15s}
 .acts button:active{transform:scale(.97)}
+.acts button.busy{opacity:.55;pointer-events:none}
 .cd{margin:20px 0 0;padding:18px 12px;border-radius:18px;background:linear-gradient(135deg,#0f766e,#0b5f58);color:#fff;text-align:center}
 .cd small{display:block;font-size:14px;opacity:.9;margin-bottom:8px}
 .cd .tm{display:flex;justify-content:center;gap:8px;direction:ltr}
@@ -168,11 +170,11 @@ async function cardCanvas(){
 function wireActs(){
   const dl=$('#dl'),sh=$('#sh'),name=()=>'britti-result-'+(cur.roll||'x')+'.png';
   const blob=async()=>{const c=await cardCanvas();return new Promise(r=>c.toBlob(r,'image/png'))};
-  dl.onclick=async()=>{dl.disabled=true;const o=dl.textContent;dl.textContent='⏳ ছবি হচ্ছে…';
+  dl.onclick=async()=>{if(dl.classList.contains('busy'))return;dl.classList.add('busy');
     try{const b=await blob(),u=URL.createObjectURL(b);
       if(!('download' in HTMLAnchorElement.prototype)){window.open(u,'_blank');return}
       const a=document.createElement('a');a.href=u;a.download=name();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)}
-    catch(e){alert('ছবি বানানো যায়নি। আবার চেষ্টা করুন।')}finally{dl.disabled=false;dl.textContent=o}};
+    catch(e){alert('ছবি বানানো যায়নি। আবার চেষ্টা করুন।')}finally{setTimeout(()=>dl.classList.remove('busy'),500)}};
   if(navigator.canShare&&navigator.share){try{const t=new File([new Blob([''],{type:'image/png'})],'a.png',{type:'image/png'});if(navigator.canShare({files:[t]})){sh.classList.remove('hide');
     sh.onclick=async()=>{try{const b=await blob();await navigator.share({files:[new File([b],name(),{type:'image/png'})],title:batch.title||'বৃত্তি ফলাফল'})}catch(e){}}}}catch(e){}}}
 function box(rs){
