@@ -46,6 +46,9 @@ body{font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);c
 .spin{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .hide{display:none!important}
+.acts{display:flex;gap:8px;justify-content:center;margin:18px 0 0;flex-wrap:wrap}
+.acts button{font:inherit;font-weight:700;font-size:15px;padding:11px 18px;border-radius:12px;border:2px solid var(--brand);background:transparent;color:var(--brand);cursor:pointer}
+.acts button:active{transform:scale(.97)}
 .cd{margin:20px 0 0;padding:18px 12px;border-radius:18px;background:linear-gradient(135deg,#0f766e,#0b5f58);color:#fff;text-align:center}
 .cd small{display:block;font-size:14px;opacity:.9;margin-bottom:8px}
 .cd .tm{display:flex;justify-content:center;gap:8px;direction:ltr}
@@ -88,7 +91,7 @@ const bn=s=>String(s==null?'':s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮�
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normRoll=s=>en(s).replace(/[\s\/\\.#?\[\]]+/g,'').toLowerCase();
 const B=new URLSearchParams(location.search).get('b')||'';
-let db=null,ready=false,batch=null,openMs=0,tick=null;
+let db=null,ready=false,batch=null,openMs=0,tick=null,cur=null;
 function say(h){$('#out').innerHTML=h}
 function warn(t){say(`<div class="msg">${esc(t)}</div>`)}
 async function init(){
@@ -116,6 +119,62 @@ function lock(){
     const s=Math.floor(left/1e3),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;
     c.innerHTML=`<small>ফলাফল প্রকাশ হবে</small><div class="tm">${d?`<div><b>${bn(d)}</b><i>দিন</i></div>`:''}<div><b>${pad(h)}</b><i>ঘণ্টা</i></div><div><b>${pad(m)}</b><i>মিনিট</i></div><div><b>${pad(x)}</b><i>সেকেন্ড</i></div></div><p>${esc(when)}</p>`};
   draw();clearInterval(tick);tick=setInterval(draw,1000)}
+/* ফলের কার্ড ছবি (canvas দিয়ে আঁকা) */
+async function cardCanvas(){
+  const x=cur.x,W=1080,P=70,F='"Noto Sans Bengali",system-ui,sans-serif';
+  try{await Promise.all([document.fonts.load('400 34px '+F),document.fonts.load('600 34px '+F),document.fonts.load('800 34px '+F)])}catch(e){}
+  const c=document.createElement('canvas');c.width=W;c.height=2200;const g=c.getContext('2d');
+  let X=g;const font=(w,s)=>g.font=`${w} ${s}px ${F}`;
+  const wrap=(t,mw)=>{const out=[];let l='';for(const w of String(t).split(/\s+/)){const n=l?l+' '+w:w;if(X.measureText(n).width>mw&&l){out.push(l);l=w}else l=n}if(l)out.push(l);return out};
+  const rr=(a,b,w,h,r)=>{X.beginPath();X.moveTo(a+r,b);X.arcTo(a+w,b,a+w,b+h,r);X.arcTo(a+w,b+h,a,b+h,r);X.arcTo(a,b+h,a,b,r);X.arcTo(a,b,a+w,b,r);X.closePath()};
+  g.fillStyle='#eef2f7';g.fillRect(0,0,W,c.height);
+  const cx=40,cw=W-80;let y=60;
+  // কার্ডের ব্যাকগ্রাউন্ড পরে আঁকব (উচ্চতা জানার পর) — আগে বিষয়বস্তু আঁকার জন্য অস্থায়ী ক্যানভাসে
+  const body=document.createElement('canvas');body.width=W;body.height=2200;const gb=body.getContext('2d');
+  const G=g;const draw=(gx)=>{
+    X=gx;const f=(w,s)=>gx.font=`${w} ${s}px ${F}`;
+    gx.textBaseline='alphabetic';let yy=60;
+    // লোগো
+    const im=document.querySelector('.logo'),R=90;
+    gx.save();gx.beginPath();gx.arc(W/2,yy+R,R,0,Math.PI*2);gx.clip();gx.fillStyle='#fff';gx.fillRect(W/2-R,yy,R*2,R*2);try{gx.drawImage(im,W/2-R,yy,R*2,R*2)}catch(e){}gx.restore();
+    yy+=R*2+62;
+    gx.textAlign='center';gx.fillStyle='#0b2a6b';f(800,56);gx.fillText($('#ct').textContent,W/2,yy);yy+=58;
+    gx.fillStyle='#64748b';f(600,36);gx.fillText($('#tt').textContent,W/2,yy);yy+=46;
+    gx.strokeStyle='#e2e8f0';gx.lineWidth=2;gx.beginPath();gx.moveTo(P+20,yy);gx.lineTo(W-P-20,yy);gx.stroke();yy+=20;
+    // সারি
+    const rows=[['পরীক্ষার্থীর নাম',x.n],['রোল নম্বর',bn(x.rl||cur.roll)],['বিদ্যালয়ের নাম',x.sc],['উপজেলা/থানা',x.up],['জেলা',x.dt],['বিভাগ',x.dv],['পরীক্ষার সন',bn(batch.yr||'')]].filter(r=>r[1]);
+    gx.textAlign='left';
+    rows.forEach(([k,v],i)=>{f(600,38);const ls=wrap(v,W-P*2-440-20);const h=ls.length*52+30;
+      f(400,36);gx.fillStyle='#64748b';gx.fillText(k,P+20,yy+54);
+      f(700,38);gx.fillStyle='#0f172a';ls.forEach((l,j)=>gx.fillText(l,P+20+420,yy+54+j*52));
+      yy+=h+6;if(i<rows.length-1){gx.setLineDash([8,8]);gx.beginPath();gx.moveTo(P+20,yy);gx.lineTo(W-P-20,yy);gx.strokeStyle='#e2e8f0';gx.stroke();gx.setLineDash([])}});
+    yy+=34;gx.textAlign='center';gx.fillStyle='#0f172a';f(700,40);gx.fillText('ফলাফল',W/2,yy+30);yy+=62;
+    // ফলের বাক্স
+    const rs=x.rs,bw=660,bh=rs==='N'?150:236,bx=(W-bw)/2,col=rs==='T'?['#22a74f','#16873d']:rs==='G'?['#27a9c6','#1b8ca6']:['#8a94a6','#6b7587'];
+    gx.save();gx.shadowColor='rgba(0,0,0,.25)';gx.shadowBlur=36;gx.shadowOffsetY=14;const gr=gx.createLinearGradient(0,yy,0,yy+bh);gr.addColorStop(0,col[0]);gr.addColorStop(1,col[1]);gx.fillStyle=gr;rr(bx,yy,bw,bh,40);gx.fill();gx.restore();
+    gx.fillStyle='#fff';
+    if(rs==='N'){f(800,64);gx.fillText('বৃত্তি প্রযোজ্য নয়',W/2,yy+bh/2+22)}
+    else{f(800,76);gx.fillText(rs==='T'?'ট্যালেন্টপুল':'সাধারণ',W/2,yy+92);gx.fillStyle='rgba(255,255,255,.6)';gx.fillRect(bx+40,yy+122,bw-80,3);gx.fillStyle='#fff';f(700,48);gx.fillText('বৃত্তিপ্রাপ্ত',W/2,yy+190)}
+    yy+=bh+66;
+    gx.fillStyle='#64748b';f(400,29);
+    ['এই ফলাফলটি শুধুমাত্র তথ্য প্রদানের জন্য।'].concat(wrap('এটি সেন্টারের নিজস্ব বৃত্তি মডেল টেস্টের ফল, সরকারি বৃত্তি পরীক্ষার ফল নয়।',W-P*2-60)).forEach(l=>{gx.fillText(l,W/2,yy);yy+=42});
+    yy+=26;return yy};
+  const H=draw(gb);X=g;
+  const ch=H+10;
+  g.save();g.shadowColor='rgba(15,23,42,.14)';g.shadowBlur=40;g.shadowOffsetY=12;g.fillStyle='#fff';rr(cx,y-20,cw,ch+10,48);g.fill();g.restore();
+  g.drawImage(body,0,0);
+  g.fillStyle='#94a3b8';g.textAlign='center';font(400,26);g.fillText('© তৌফিক প্রাইভেট সেন্টার · শিক্ষাই আলো',W/2,y-20+ch+10+60);
+  const out=document.createElement('canvas');out.width=W;out.height=y-20+ch+10+100;out.getContext('2d').drawImage(c,0,0);return out}
+function wireActs(){
+  const dl=$('#dl'),sh=$('#sh'),name=()=>'britti-result-'+(cur.roll||'x')+'.png';
+  const blob=async()=>{const c=await cardCanvas();return new Promise(r=>c.toBlob(r,'image/png'))};
+  dl.onclick=async()=>{dl.disabled=true;const o=dl.textContent;dl.textContent='⏳ ছবি হচ্ছে…';
+    try{const b=await blob(),u=URL.createObjectURL(b);
+      if(!('download' in HTMLAnchorElement.prototype)){window.open(u,'_blank');return}
+      const a=document.createElement('a');a.href=u;a.download=name();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)}
+    catch(e){alert('ছবি বানানো যায়নি। আবার চেষ্টা করুন।')}finally{dl.disabled=false;dl.textContent=o}};
+  if(navigator.canShare&&navigator.share){try{const t=new File([new Blob([''],{type:'image/png'})],'a.png',{type:'image/png'});if(navigator.canShare({files:[t]})){sh.classList.remove('hide');
+    sh.onclick=async()=>{try{const b=await blob();await navigator.share({files:[new File([b],name(),{type:'image/png'})],title:batch.title||'বৃত্তি ফলাফল'})}catch(e){}}}}catch(e){}}}
 function box(rs){
   if(rs==='T')return`<div class="box t"><b>ট্যালেন্টপুল</b><small>বৃত্তিপ্রাপ্ত</small></div>`;
   if(rs==='G')return`<div class="box g"><b>সাধারণ</b><small>বৃত্তিপ্রাপ্ত</small></div>`;
@@ -130,7 +189,8 @@ async function find(e){
     const d=await db.collection('britti').doc(B).collection('r').doc(roll).get();
     if(!d.exists){warn('এই রোল নম্বরে কোনো ফলাফল পাওয়া যায়নি। রোল নম্বর আবার দেখে লিখুন।');return}
     const x=d.data(),row=(l,v)=>v?`<div class="row"><span>${l}</span><b>${esc(v)}</b></div>`:'';
-    say(`<div class="res">${row('পরীক্ষার্থীর নাম',x.n)}${row('রোল নম্বর',bn(x.rl||roll))}${row('বিদ্যালয়ের নাম',x.sc)}${row('উপজেলা/থানা',x.up)}${row('জেলা',x.dt)}${row('বিভাগ',x.dv)}${row('পরীক্ষার সন',bn(batch.yr||''))}<div class="fl">ফলাফল</div>${box(x.rs)}</div>`);
+    say(`<div class="res">${row('পরীক্ষার্থীর নাম',x.n)}${row('রোল নম্বর',bn(x.rl||roll))}${row('বিদ্যালয়ের নাম',x.sc)}${row('উপজেলা/থানা',x.up)}${row('জেলা',x.dt)}${row('বিভাগ',x.dv)}${row('পরীক্ষার সন',bn(batch.yr||''))}<div class="fl">ফলাফল</div>${box(x.rs)}<div class="acts"><button type="button" id="dl">📥 ছবি ডাউনলোড</button><button type="button" id="sh" class="hide">📤 শেয়ার</button></div></div>`);
+    cur={x,roll};wireActs();
   }catch(err){warn(err&&err.code==='permission-denied'?'ফলাফল এখনো প্রকাশ হয়নি। একটু পরে আবার চেষ্টা করুন।':'ফলাফল আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')}
   finally{btn.disabled=false;btn.textContent='খুঁজুন'}
 }
