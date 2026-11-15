@@ -150,15 +150,15 @@ function box(rs){
   if(rs==='G')return`<div class="box g"><b>সাধারণ</b><small>বৃত্তিপ্রাপ্ত</small></div>`;
   return`<div class="box n"><b style="border:0;padding:6px 0">বৃত্তি প্রযোজ্য নয়</b></div>`}
 const row=(l,v)=>v?`<div class="row"><span>${l}</span><b>${esc(v)}</b></div>`:'';
-const sec=x=>[batch.cls?'শ্রেণি '+bn(batch.cls):'',batch.sec?'শাখা '+bn(batch.sec):''].filter(Boolean).join(' · ');
+const sec=x=>[batch.cls?bn(batch.cls):'',batch.sec?bn(batch.sec):''].filter(Boolean).join(' · ');
 function markHtml(x){
   const rows=x.rows||[],hasP=rows.some(c=>c.p!=null);
   const tr=rows.map(c=>{const bad=!x.ab&&c.b;return`<tr class="${bad?'bd':''}"><td>${esc(c.l)}</td><td>${c.f!=null?bn(c.f):'—'}</td>${hasP?`<td>${c.p!=null?bn(c.p):'—'}</td>`:''}<td>${x.ab||c.v===''||c.v==null?'—':bn(c.v)}${bad?'<em>ফেল</em>':''}</td></tr>`}).join('');
   const F=x.F||rows.reduce((a,c)=>a+(c.f||0),0),bads=rows.filter(c=>c.b).map(c=>c.l);
-  return`<div class="res">${row('নাম',x.n)}${row('রোল নম্বর',bn(x.rl))}${row('শ্রেণি · শাখা',sec(x))}
+  return`<div class="res">${row('নাম',x.n)}${row('রোল নম্বর',bn(x.rl))}${row(batch.sec?'শ্রেণি · শাখা':'শ্রেণি',sec(x))}${row('ব্যাচ',batch.bat)}${row('পরীক্ষা',batch.ex)}${row('পরীক্ষার সন',bn(batch.yr||''))}
   <table class="mt"><tr><th>বিষয়</th><th>পূর্ণমান</th>${hasP?'<th>পাস</th>':''}<th>প্রাপ্ত নম্বর</th></tr>${tr}<tr class="tot"><td>মোট</td><td>${bn(F)}</td>${hasP?'<td></td>':''}<td>${x.ab||x.m==null?'—':bn(x.m)}</td></tr></table>
   ${x.ab?'':`<div class="kv"><div><span>গ্রেড</span><b>${esc(x.g)}</b></div><div><span>GPA</span><b>${bn(x.gp)}</b></div><div><span>অবস্থান</span><b>${x.pos!=null?bn(x.pos):'—'}</b></div><div><span>মন্তব্য</span><b style="font-size:16px">${esc(x.rem||'—')}</b></div></div>`}
-  <div class="pf ${x.ab?'ab':x.fail?'no':'ok'}">${x.ab?'অনুপস্থিত':x.fail?'ফেল':'পাস'}${x.fail&&!x.ab&&bads.length?`<small>পাস নম্বর পাননি: ${esc(bads.join(', '))}</small>`:''}</div>
+  <div class="pf ${x.ab?'ab':x.fail?'no':'ok'}">${x.ab?'অনুপস্থিত':x.fail?'ফেল':'পাস'}</div>
   <div class="acts"><button type="button" id="dl">📥 ছবি ডাউনলোড</button><button type="button" id="sh" class="hide">📤 শেয়ার</button></div></div>`}
 function schHtml(x,roll){
   return`<div class="res">${row('পরীক্ষার্থীর নাম',x.n)}${row('রোল নম্বর',bn(x.rl||roll))}${row('বিদ্যালয়ের নাম',x.sc)}${row('উপজেলা/থানা',x.up)}${row('জেলা',x.dt)}${row('বিভাগ',x.dv)}${row('পরীক্ষার সন',bn(batch.yr||''))}<div class="fl">ফলাফল</div>${box(x.rs)}<div class="acts"><button type="button" id="dl">📥 ছবি ডাউনলোড</button><button type="button" id="sh" class="hide">📤 শেয়ার</button></div></div>`}
@@ -194,7 +194,7 @@ async function cardCanvas(){
     gx.fillStyle='#64748b';f(600,36);gx.fillText($('#tt').textContent,W/2,yy);yy+=46;
     const line=(dash)=>{gx.strokeStyle='#e2e8f0';gx.lineWidth=2;gx.setLineDash(dash?[8,8]:[]);gx.beginPath();gx.moveTo(P+20,yy);gx.lineTo(W-P-20,yy);gx.stroke();gx.setLineDash([])};
     line();yy+=20;gx.textAlign='left';
-    const rows=isR?[['নাম',x.n],['রোল নম্বর',bn(x.rl)],['শ্রেণি · শাখা',sec(x)]]:[['পরীক্ষার্থীর নাম',x.n],['রোল নম্বর',bn(x.rl||cur.roll)],['বিদ্যালয়ের নাম',x.sc],['উপজেলা/থানা',x.up],['জেলা',x.dt],['বিভাগ',x.dv],['পরীক্ষার সন',bn(batch.yr||'')]];
+    const rows=isR?[['নাম',x.n],['রোল নম্বর',bn(x.rl)],[batch.sec?'শ্রেণি · শাখা':'শ্রেণি',sec(x)],['ব্যাচ',batch.bat],['পরীক্ষা',batch.ex],['পরীক্ষার সন',bn(batch.yr||'')]]:[['পরীক্ষার্থীর নাম',x.n],['রোল নম্বর',bn(x.rl||cur.roll)],['বিদ্যালয়ের নাম',x.sc],['উপজেলা/থানা',x.up],['জেলা',x.dt],['বিভাগ',x.dv],['পরীক্ষার সন',bn(batch.yr||'')]];
     rows.filter(r=>r[1]).forEach(([k,v],i,a)=>{f(700,38);const ls=wrap(v,W-P*2-440-20),h=ls.length*52+30;
       f(400,36);gx.fillStyle='#64748b';gx.fillText(k,P+20,yy+54);f(700,38);gx.fillStyle='#0f172a';ls.forEach((l,j)=>gx.fillText(l,P+20+420,yy+54+j*52));
       yy+=h+6;if(i<a.length-1||isR){line(1)}});
@@ -212,10 +212,9 @@ async function cardCanvas(){
       yy+=30;
       if(!x.ab){const st=[['গ্রেড',x.g],['GPA',bn(x.gp)],['অবস্থান',x.pos!=null?bn(x.pos):'—'],['মন্তব্য',x.rem||'—']],bw=(W-P*2-20)/2;
         st.forEach((s,i)=>{const bx=P+(i%2)*(bw+20),by=yy+Math.floor(i/2)*130;gx.fillStyle='#f3f6f9';rr(bx,by,bw,112,22);gx.fill();gx.strokeStyle='#e2e8f0';gx.lineWidth=2;gx.stroke();gx.textAlign='center';gx.fillStyle='#64748b';f(400,26);gx.fillText(s[0],bx+bw/2,by+38);gx.fillStyle='#0f172a';f(800,i===3?34:44);gx.fillText(s[1],bx+bw/2,by+90)});yy+=260+10}
-      const bads=rs.filter(r=>r.b).map(r=>r.l),bh=x.fail&&!x.ab&&bads.length?190:140,col=x.ab?['#8a94a6','#6b7587']:x.fail?['#ef4444','#c62828']:['#22a74f','#16873d'];
+      const bads=rs.filter(r=>r.b).map(r=>r.l),bh=140,col=x.ab?['#8a94a6','#6b7587']:x.fail?['#ef4444','#c62828']:['#22a74f','#16873d'];
       gx.save();gx.shadowColor='rgba(0,0,0,.25)';gx.shadowBlur=30;gx.shadowOffsetY=12;const gr=gx.createLinearGradient(0,yy,0,yy+bh);gr.addColorStop(0,col[0]);gr.addColorStop(1,col[1]);gx.fillStyle=gr;rr(P,yy,W-P*2,bh,34);gx.fill();gx.restore();
       gx.fillStyle='#fff';gx.textAlign='center';f(800,66);gx.fillText(x.ab?'অনুপস্থিত':x.fail?'ফেল':'পাস',W/2,yy+(bh>150?84:bh/2+22));
-      if(bh>150){f(600,34);wrap('পাস নম্বর পাননি: '+bads.join(', '),W-P*2-60).slice(0,2).forEach((l,i)=>gx.fillText(l,W/2,yy+138+i*40))}
       yy+=bh+60}
     else{
       yy+=34;gx.textAlign='center';gx.fillStyle='#0f172a';f(700,40);gx.fillText('ফলাফল',W/2,yy+30);yy+=62;
