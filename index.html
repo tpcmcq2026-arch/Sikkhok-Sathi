@@ -5413,6 +5413,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v137',d:'১৫ নভেম্বর ২০২৬',t:['📨 ফল প্রকাশের বার্তা এখন শুধু গ্রুপের জন্য (আলাদা আলাদা পাঠানো বাদ); বার্তায় সন যেভাবে লেখা তেমনই যায় (ইংরেজি সংখ্যা)']},
 {v:'v135',d:'১৫ নভেম্বর ২০২৬',t:['📨 অভিভাবক ও বৃত্তি লিংকে নতুন: ফল প্রকাশের WhatsApp বার্তা — গ্রুপে একবারে, অথবা প্রতি অভিভাবকের নম্বরে নাম ও রোলসহ আলাদা; "পরের জনকে পাঠাও" বোতামে একে একে','🔗 লিংকের পাতার শিরোনামের নিচে পরীক্ষার সন দেখায়']},
 {v:'v134',d:'১৫ নভেম্বর ২০২৬',t:['🔗 অভিভাবক লিংক: শিরোনাম এখন "পরীক্ষার ফল" (সন আলাদা); পরীক্ষার নাম (যেমন Monthly Exam) আলাদা সারিতে; ফেল বক্সে শুধু "ফেল" লেখা','👥 Students-এর বাটন দুটো পর্দার ভেতরে থাকে']},
 {v:'v133',d:'১৫ নভেম্বর ২০২৬',t:['📚 বিষয় তালিকায় এখন আলাদা English (সংক্ষেপে Eng) আছে — English-1, English-2 আগের মতোই; সবগুলো আলাদা টিক দেওয়া যায়','🔗 অভিভাবক লিংক: পাতার শিরোনাম ও পরীক্ষার সন আলাদা ঘর; শ্রেণি · শাখা (ক খ গ ঘ) ও ব্যাচ (সকাল/বিকাল) দেখায়','👥 Students-এ Load ও Save বাটন পাশাপাশি']},
@@ -6447,25 +6448,20 @@ const bsErr=e=>{const c=String((e&&(e.code||e.message))||'');
 /* ---- ফল প্রকাশের WhatsApp বার্তা (অভিভাবক ও বৃত্তি লিংক দুটোতেই) ---- */
 const waDt=ms=>bn(new Date(ms).toLocaleString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true}));
 const waWhen=S=>S.open&&S.open>Date.now()?'\n⏰ ফল দেখা যাবে: '+waDt(S.open):'';
-const waGrp=(S,w)=>'আসসালামু আলাইকুম। '+inst()+'-এর ফল প্রকাশিত হয়েছে ('+String(S.title||'').trim()+(S.yr?' '+bn(S.yr):'')+')।\nফল দেখতে নিচের লিংকে ঢুকে আপনার সন্তানের রোল নম্বর দিন:\n'+S.link+waWhen(S)+'\n\nধন্যবাদ।';
-const waOne=(S,w,x)=>{const g=window.smGuardian?window.smGuardian(x.cls,x.n):null;return'আসসালামু আলাইকুম'+(g&&g.guardian?', '+g.guardian:'')+'। '+x.n+'-এর ফল প্রকাশিত হয়েছে ('+String(S.title||'').trim()+(S.yr?' '+bn(S.yr):'')+')। লিংকে ঢুকে রোল নম্বর '+bn(x.rl)+' দিন:\n'+S.link+waWhen(S)+'\n— '+inst()}
-const waItems=(L,cls)=>L.map(x=>{const g=window.smGuardian?window.smGuardian(cls,x.n):null;return{n:x.n,rl:x.rl,cls,p:g?g.phone:''}});
-function waHtml(S,L,cls,w){if(!S.link)return'';const it=waItems(L,cls),ws=S.ws||{},gm=(S.wg||'').trim()||waGrp(S,w);
+const waGrp=(S,w)=>'আসসালামু আলাইকুম। '+inst()+'-এর ফল প্রকাশিত হয়েছে ('+String(S.title||'').trim()+(S.yr?' '+S.yr:'')+')।\nফল দেখতে নিচের লিংকে ঢুকে আপনার সন্তানের রোল নম্বর দিন:\n'+S.link+waWhen(S)+'\n\nধন্যবাদ।';
+function waHtml(S,L,cls,w){if(!S.link)return'';const gm=(S.wg||'').trim()||waGrp(S,w);
  return`<div class="sm-card" style="padding:12px;margin-top:12px"><b>📨 ফল প্রকাশের বার্তা</b>
- <div style="font-size:13px;color:var(--mut);margin:8px 0 4px">১) অভিভাবকদের গ্রুপে একবারে</div>
+ <div style="font-size:13px;color:var(--mut);margin:8px 0 4px">অভিভাবকদের গ্রুপে পাঠানোর বার্তা</div>
  <textarea id="wa_g" style="width:100%;min-height:120px;resize:vertical">${E(gm)}</textarea>
  <div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn s" data-wa="cp" style="flex:1">📋 কপি</button><button type="button" class="btn p" data-wa="gp" style="flex:2;color:#fff">🟢 গ্রুপে পাঠাও</button></div>
- <div style="font-size:13px;color:var(--mut);margin:14px 0 4px">২) প্রতি অভিভাবকের নম্বরে আলাদা — পাঠানো হয়েছে ${bn(it.filter(x=>ws[x.rl]).length)}/${bn(it.length)} জনকে</div>
- ${it.map(x=>`<div class="sm-hi" style="border-top:0"><span><b>${E(x.n)}</b> <small style="color:var(--mut)">· রোল ${E(bn(x.rl))}</small><br><small style="color:var(--mut)">${x.p?E(bn(x.p)):'নম্বর নেই — প্রোফাইলে যোগ করো'}</small></span>${x.p?`<button type="button" class="btn s p" style="color:#fff" data-wa="one" data-rl="${E(x.rl)}">${ws[x.rl]?'✓ আবার':'পাঠাও'}</button>`:'<small style="color:#dc2626">নম্বর নেই</small>'}</div>`).join('')}
- <button type="button" class="btn" data-wa="nx" style="width:100%;margin-top:8px">⏭ পরের জনকে পাঠাও</button>
- <p style="font-size:12.5px;color:var(--mut);margin:8px 0 0">WhatsApp খুলবে, তুমি শুধু Send চাপবে — নিজে নিজে যায় না। নম্বর আসে শিক্ষার্থীর প্রোফাইলে সেভ করা অভিভাবকের ফোন থেকে।</p></div>`}
+ <p style="font-size:12.5px;color:var(--mut);margin:8px 0 0">WhatsApp খুলে গ্রুপ বেছে নিতে বলবে, তুমি শুধু Send চাপবে — নিজে নিজে যায় না।</p></div>`}
 function waWire(box,ctx,save,redraw){
  box.addEventListener('input',e=>{if(e.target.id==='wa_g'){const c=ctx();c.S.wg=e.target.value;save()}});
- box.addEventListener('click',async e=>{const t=e.target.closest('[data-wa]');if(!t)return;const c=ctx(),S=c.S,it=waItems(c.L,c.cls);S.ws=S.ws||{};const k=t.dataset.wa;
+ box.addEventListener('click',async e=>{const t=e.target.closest('[data-wa]');if(!t)return;const c=ctx(),S=c.S;const k=t.dataset.wa;
   const gm=()=>(S.wg||'').trim()||waGrp(S,c.w);
   if(k==='cp'){const tx=gm();try{await navigator.clipboard.writeText(tx)}catch(x){const a=document.createElement('textarea');a.value=tx;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}toast('বার্তা কপি হয়েছে ✓')}
   else if(k==='gp'){window.open('https://wa.me/?text='+encodeURIComponent(gm()),'_blank')}
-  else if(k==='one'||k==='nx'){const x=k==='one'?it.find(y=>y.rl===t.dataset.rl):it.find(y=>y.p&&!S.ws[y.rl]);if(!x)return toast('সবাইকে পাঠানো হয়ে গেছে ✓');S.ws[x.rl]=1;save();openWa(x.p,waOne(S,c.w,x));redraw()}})}
+  })}
 function bsOpen(pid){
  const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
  if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
