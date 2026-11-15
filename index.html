@@ -3751,11 +3751,11 @@ if(a==='edit'){cur=r;view='edit';editor()}else if(a==='rev'){cur=r;review()}else
 else if(a==='dup'){const c=JSON.parse(JSON.stringify(r));c.id='r'+Date.now().toString(36);c.exam+=' (Copy)';c.locked=false;c.created=Date.now();R.unshift(c);save();toast('Result copied');go(view)}
 else if(a==='del'&&r.locked)toast('Locked — unlock it first to delete');else if(a==='del')confirmBox(`Delete “${esc(r.exam)} – Class ${esc(r.cls)}”? It will move to Trash (Settings), where you can restore it for 30 days.`,()=>{toTrash(r);R=R.filter(x=>x!==r);save();toast('Moved to Trash');go(view)})})}
 function dash(){$('#main').innerHTML=`<h2>Dashboard</h2><div class="stats"><div class="stat"><b>${R.length}</b><span>Saved results</span></div><div class="stat"><b>${new Set(R.map(r=>r.cls)).size}</b><span>Classes</span></div><div class="stat"><b>${R.reduce((a,r)=>a+r.students.length,0)}</b><span>Students entered</span></div></div>
-<button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()" style="margin:0 0 16px">🎓 বৃত্তি ফলাফল লিংক</button><h2 style="font-size:17px">Recent results</h2>${R.length?`<div class="grid">${R.slice(0,6).map(card).join('')}</div>`:'<div class="empty">No results yet. Create your first result sheet.</div>'}`;
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px"><button type="button" class="btn p" onclick="window.prOpen&&prOpen()">👨‍👩‍👦 অভিভাবক ফল লিংক</button><button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()">🎓 বৃত্তি ফলাফল লিংক</button></div><h2 style="font-size:17px">Recent results</h2>${R.length?`<div class="grid">${R.slice(0,6).map(card).join('')}</div>`:'<div class="empty">No results yet. Create your first result sheet.</div>'}`;
 wire($('#main'))}
 function results(){const u=k=>[...new Set(R.map(r=>r[k]).filter(Boolean))].sort();
 const sel=(id,k,l)=>`<select id="${id}"><option value="">All ${l}</option>${u(k).map(x=>`<option>${esc(x)}</option>`).join('')}</select>`;
-$('#main').innerHTML=`<h2>Saved Results</h2><button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()" style="margin:0 0 12px">🎓 বৃত্তি ফলাফল লিংক</button><div class="filters"><input id="q" placeholder="Search institution, exam, subject…">${sel('fc','cls','classes')}${sel('fe','exam','exams')}${sel('fs','subject','subjects')}</div><div id="rl"></div>`;
+$('#main').innerHTML=`<h2>Saved Results</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px"><button type="button" class="btn p" onclick="window.prOpen&&prOpen()">👨‍👩‍👦 অভিভাবক ফল লিংক</button><button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()">🎓 বৃত্তি ফলাফল লিংক</button></div><div class="filters"><input id="q" placeholder="Search institution, exam, subject…">${sel('fc','cls','classes')}${sel('fe','exam','exams')}${sel('fs','subject','subjects')}</div><div id="rl"></div>`;
 const f=()=>{const q=$('#q').value.toLowerCase(),c=$('#fc').value,e=$('#fe').value,s=$('#fs').value;
 const L=R.filter(r=>(!c||r.cls===c)&&(!e||r.exam===e)&&(!s||r.subject===s)&&(!q||[r.inst,r.exam,r.subject,r.cls].join(' ').toLowerCase().includes(q)));
 $('#rl').innerHTML=L.length?`<div class="grid">${L.map(card).join('')}</div>`:'<div class="empty">No matching results.</div>';wire($('#rl'))};
@@ -5413,6 +5413,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v132',d:'১৫ নভেম্বর ২০২৬',t:['👨‍👩‍👦 নতুন: অভিভাবক ফল লিংক — রেজাল্ট ট্যাব থেকে একটা লিংক বানালে অভিভাবক শুধু রোল দিয়ে সন্তানের মার্কশিট (বিষয়ওয়ারী নম্বর, গ্রেড, GPA, অবস্থান, পাস/ফেল) দেখেন; সময় ঠিক করা ও কাউন্টডাউন আছে','⚡ অভিভাবকের পাতা এখন দ্রুত খোলে ও রোল দিলে দ্রুত ফল আসে (ভারী Firebase লাইব্রেরি ছাড়া)']},
 {v:'v131',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংকে ফল প্রকাশের সময় ঠিক করা যায় — আগে খুললে কাউন্টডাউন, সময় হলে রোল দিয়ে ফল (Firestore Rules আপডেট করতে হবে)','🎓 "বৃত্তি প্রযোজ্য নয়" বাক্সে শুধু এই লেখাটুকু থাকে']},
 {v:'v130',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংকের শিটে পাতা ডানে সরে যাওয়া ঠিক','📄 পার্সোনাল মার্কশিটে সব বিষয় এক লাইনে; বাংলা বেছে নিলে বিষয়, শাখা (ক/খ/গ) আর ব্যাচ (সকাল/বিকাল) বাংলায় — নাম ইংরেজিই থাকে']},
 {v:'v129',d:'১৩ নভেম্বর ২০২৬',t:['🎓 বৃত্তি লিংক: Firebase কনফিগ আগে থেকেই বসানো — অ্যাপে আর পেস্ট করতে হবে না, শুধু ইমেইল-পাসওয়ার্ড দিলেই হবে']},
@@ -6499,6 +6500,53 @@ function bsOpen(pid){
     }catch(x){toast(bsErr(x));t.disabled=false;t.innerHTML=old}}});
   draw()})}
 window.bsOpen=bsOpen;
+/* ===== v132: অভিভাবকের জন্য পরীক্ষার ফল লিংক (রেজাল্ট শিট → রোল-সার্চ মার্কশিট) ===== */
+function prOpen(pid){
+ const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
+ if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
+ let r=Rs.find(x=>x.id===(pid||b.lastp))||Rs[0];
+ const lab=x=>{const t=[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';return t.length>34?t.slice(0,33)+'…':t};
+ sheet(`<style>.bs-w,.bs-w *{min-width:0;box-sizing:border-box}.bs-w{max-width:100%;overflow-x:hidden}.bs-w input,.bs-w select{max-width:100%;width:100%}</style><div class="bs-w"><h3 style="margin:0 0 4px;font-size:20px">👨‍👩‍👦 অভিভাবক ফল লিংক</h3><p style="margin:0 0 12px;color:var(--mut);font-size:13.5px">রেজাল্ট শিট থেকে নম্বর, গ্রেড, GPA, অবস্থান নিয়ে একটা লিংক বানায়। অভিভাবক রোল দিয়ে সন্তানের মার্কশিট দেখেন।</p>
+ <div class="sm-f"><label>কোন রেজাল্ট শিট</label><select id="pr_r">${Rs.map(x=>`<option value="${E(x.id)}"${x===r?' selected':''}>${E(lab(x))}</option>`).join('')}</select></div><div id="pr_b"></div></div>`,box=>{
+  const q=x=>box.querySelector(x);let tm;const sv=()=>{clearTimeout(tm);tm=setTimeout(smSave,300)};
+  const K=()=>r.id+'#r';
+  const S0=()=>{const S=b.sh[K()]=b.sh[K()]||{};if(S.title==null)S.title=[r.exam||'পরীক্ষার ফল',r.date?String(r.date).slice(-4):''].filter(Boolean).join(' – ');if(typeof S.open!=='number')S.open=0;return S};
+  const tli=ms=>{const d=new Date(ms-new Date(ms).getTimezoneOffset()*6e4);return d.toISOString().slice(0,16)};
+  const jb=t=>MSJB[String(t||'').toLowerCase()]||t;
+  const data=()=>{const d=msData(r),c=r.cols;return d.list.map(x=>{const s=x.s;return{n:String(s.n).trim(),rl:bsRoll(c.roll?s.rl:''),ab:x.ab?1:0,fail:x.fail?1:0,g:x.g,gp:x.gp,pos:x.pos,m:x.m,rem:x.rem?(MSRB[x.rem]||x.rem):'',rows:CMP.filter(([k])=>c[k]).map(([k,l])=>({l:jb(l),f:num(r[k+'Full']),p:num(r[k+'Pass']),v:s[k]===''||s[k]==null?'':String(s[k]),b:qf(r,s,k)?1:0})),F:d.F}})};
+  const draw=()=>{const S=S0(),L=data(),withRoll=L.filter(x=>x.rl).length,no=L.length-withRoll;
+   q('#pr_b').innerHTML=`<div class="sm-g2"><div class="sm-f"><label>পাতার শিরোনাম</label><input id="pr_t" value="${E(S.title)}"></div><div class="sm-f"><label>ফল দেখা যাবে যখন (খালি = এখনই)</label><input id="pr_o" type="datetime-local" value="${S.open?tli(S.open):''}"></div></div>
+   ${r.cols.roll?'':'<div class="sm-card" style="padding:10px;margin:8px 0;border:1px solid #f59e0b"><b>⚠️ এই শিটে Roll কলাম চালু নেই।</b> রেজাল্ট শিটে Roll কলাম চালু করে রোল লিখে তারপর আসো।</div>'}
+   <div class="sm-lb" style="margin:8px 0 6px">লিংকে যাবে — ${bn(withRoll)} জন${no?` · রোল ছাড়া ${bn(no)} জন বাদ`:''}</div>
+   <div class="sm-card" style="padding:4px 12px;margin:0 0 12px">${L.map(x=>`<div style="display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);${x.rl?'':'opacity:.5'}"><div style="min-width:0"><b>${E(x.n)}</b><div style="font-size:12.5px;color:var(--mut)">${x.rl?'রোল '+bn(x.rl):'রোল নেই'} · ${x.ab?'অনুপস্থিত':'মোট '+bn(x.m==null?'—':x.m)+'/'+bn(x.F)+' · '+E(x.g)}${x.fail&&!x.ab?' · '+x.rows.filter(c=>c.b).map(c=>E(c.l)).join(', ')+(x.rows.some(c=>c.b)?'-এ ফেল':''):''}</div></div><span style="font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;color:#fff;background:${x.ab?'#6b7587':x.fail?'#dc2626':'#16873d'}">${x.ab?'অনুপস্থিত':x.fail?'ফেল':'পাস'}</span></div>`).join('')}</div>
+   <details id="pr_fb" style="margin:0 0 12px"><summary style="font-weight:700;cursor:pointer;padding:6px 0">🔐 লগইন</summary><div class="sm-g2"><input id="pr_em" type="email" placeholder="ইমেইল" autocomplete="username" value="${E(b.em||'')}"><input id="pr_pw" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"></div><p style="font-size:12px;color:var(--mut);margin:6px 0 0">একবার লগইন করলে ফোনে মনে থাকে। বৃত্তি লিংকের লগইনই এটা।</p></details>
+   <button type="button" class="btn p" id="pr_go" style="width:100%;padding:14px;font-size:16px;border-radius:14px">🔗 ${S.link?'লিংক হালনাগাদ করো':'লিংক তৈরি করুন'}</button>
+   ${S.link?`<div class="sm-card" style="padding:12px;margin-top:10px;border:2px solid #16a34a"><b>✅ লিংক চালু আছে</b>${S.open&&S.open>Date.now()?`<div style="font-size:13px;margin-top:3px">⏰ ফল দেখা যাবে: ${E(bn(new Date(S.open).toLocaleString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true})))}</div>`:''}<div style="word-break:break-all;margin:6px 0;font-size:14px;direction:ltr;text-align:left" id="pr_lk">${E(S.link)}</div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn" id="pr_cp">📋 কপি</button><button type="button" class="btn p" id="pr_wa">💬 WhatsApp</button></div><div class="sm-btns" style="margin-top:6px"><button type="button" class="btn s" id="pr_op">🔗 খুলে দেখো</button><button type="button" class="btn s d" id="pr_off">🚫 লিংক বন্ধ করো</button></div></div>`:''}
+   <p style="font-size:12.5px;color:var(--mut);margin:10px 0 0">নম্বর ভুল হলে শিটে ঠিক করে "লিংক হালনাগাদ করো" চাপো, আগের লিংকেই নতুন ফল যাবে।</p>`};
+  q('#pr_r').onchange=e=>{r=Rs.find(x=>x.id===e.target.value)||r;b.lastp=r.id;sv();draw()};
+  box.addEventListener('input',e=>{const t=e.target,S=S0();if(t.id==='pr_t'){S.title=t.value;sv()}else if(t.id==='pr_o'){const v=t.value?new Date(t.value).getTime():0;S.open=isNaN(v)?0:v;sv()}else if(t.id==='pr_em'){b.em=t.value.trim();sv()}});
+  box.addEventListener('click',async e=>{const t=e.target.closest('button');if(!t)return;const S=S0();
+   if(t.id==='pr_cp'){try{await navigator.clipboard.writeText(S.link)}catch(x){const a=document.createElement('textarea');a.value=S.link;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}toast('লিংক কপি হয়েছে ✓')}
+   else if(t.id==='pr_wa'){window.open('https://wa.me/?text='+encodeURIComponent((S.title||'পরীক্ষার ফল')+'\nরোল নম্বর দিয়ে ফল দেখুন:\n'+S.link),'_blank')}
+   else if(t.id==='pr_op'){window.open(S.link,'_blank')}
+   else if(t.id==='pr_off'){confirmBox('লিংক বন্ধ করলে অভিভাবক আর ফল দেখতে পাবে না। বন্ধ করবে?',async()=>{try{toast('বন্ধ হচ্ছে…');await bsAuth(b.em,q('#pr_pw')&&q('#pr_pw').value);const db=firebase.firestore(),br=db.collection('britti').doc(S.bid),old=await br.collection('r').get(),ds=old.docs;for(let i=0;i<ds.length;i+=400){const w=db.batch();ds.slice(i,i+400).forEach(d=>w.delete(d.ref));await w.commit()}await br.delete();S.bid='';S.link='';smSave();draw();toast('লিংক বন্ধ হয়েছে')}catch(x){toast(bsErr(x))}},'বন্ধ করো')}
+   else if(t.id==='pr_go'){
+    const L=data(),items=[],seen={};let bad='';
+    L.forEach(x=>{if(bad||!x.rl)return;if(seen[x.rl]){bad='একই রোল ('+bn(x.rl)+') দুইজনের ঘরে আছে — '+seen[x.rl]+' ও '+x.n;return}seen[x.rl]=x.n;items.push(x)});
+    if(bad)return toast(bad);if(!items.length)return toast('কারো রোল নেই — শিটে রোল লিখে আসো');
+    if(!String(S.title||'').trim())return toast('পাতার শিরোনাম দাও');
+    const old=t.innerHTML;t.disabled=true;t.textContent='⏳ পাঠানো হচ্ছে…';
+    try{
+     b.em=(q('#pr_em')?q('#pr_em').value:b.em||'').trim();await bsAuth(b.em,q('#pr_pw')?q('#pr_pw').value:'');
+     const db=firebase.firestore(),bid=S.bid||Array.from(crypto.getRandomValues(new Uint8Array(8)),x=>'abcdefghjkmnpqrstuvwxyz23456789'[x%31]).join(''),br=db.collection('britti').doc(bid);
+     await br.set({kind:'r',title:String(S.title).trim(),center:inst(),yr:'',cls:String(r.cls||''),sec:String(r.sec||''),bat:String(r.bat||''),n:items.length,openAt:firebase.firestore.Timestamp.fromMillis(S.open||0),at:firebase.firestore.FieldValue.serverTimestamp()});
+     const col=br.collection('r'),ex=await col.get(),keep=new Set(items.map(x=>x.rl)),ops=[...items.map(x=>[0,col.doc(x.rl),{n:x.n,rl:x.rl,ab:x.ab,fail:x.fail,g:String(x.g),gp:String(x.gp),pos:x.pos==null?null:x.pos,m:x.m==null?null:x.m,F:x.F,rem:x.rem,rows:x.rows.map(c=>({l:c.l,f:c.f==null?null:c.f,p:c.p==null?null:c.p,v:c.v,b:c.b}))}]),...ex.docs.filter(d=>!keep.has(d.id)).map(d=>[1,d.ref])];
+     for(let i=0;i<ops.length;i+=200){const w=db.batch();ops.slice(i,i+200).forEach(o=>o[0]?w.delete(o[1]):w.set(o[1],o[2]));await w.commit()}
+     S.bid=bid;S.link=new URL('britti.html?b='+bid,location.href).href;S.at=Date.now();b.lastp=r.id;smSave();draw();toast('✅ '+bn(items.length)+' জনের ফল প্রকাশ হয়েছে');
+    }catch(x){toast(bsErr(x));t.disabled=false;t.innerHTML=old}}});
+  draw()})}
+window.prOpen=prOpen;
+
 window.smOpenWa=openWa;
 window.smApi={xrRoll,xrSet,xrPut,xrRange,xrDig,XRD,SM:()=>SM,diary:()=>SM.diary,bn,en,MO,WDS,money,mLabel,ymOf,addM,iso,todayS,pIso,dLabel,clsList,bList,inCls,clsAt,clsDays,monthDue,paidOf,remOf,dueBefore,totDue,stOf,openWa};
 window.smDbg={spPgOf,spArr,spCombo,nzGo,scanDo,nzAllSheet,nzQueue,nzDayData,nzDayPages,nzDaySheet,nzMonData,nzMonPages,nzMonSheet,RPM,cdBack,cdBackSheet,cdPages,cdPer,cdNPg,QRM,qrURL,scanDo,nzMsg,nzList,rN,CD,cdCard,cdSheet,nzBtSheet,nzMsSheet,nzMan,nzSend,SM:()=>SM,V,smOpen,smHome,rcptImg,rcptSheet,paySheet,RCD,taka,wRisk,spArr,spHallImg,spDoorImg,spSlipPages,spCombo,wDetSheet,spSumImg,spOneImg,spSlipOf,SPS,glPages,rcSet,glSheet,RCI};
