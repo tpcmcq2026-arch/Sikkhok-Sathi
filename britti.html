@@ -106,7 +106,8 @@ const bn=s=>String(s==null?'':s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮�
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normRoll=s=>en(s).replace(/[\s\/\\.#?\[\]]+/g,'').toLowerCase();
 const B=new URLSearchParams(location.search).get('b')||'';
-let ready=false,batch=null,openMs=0,tick=null,cur=null;
+let ready=false,batch=null,openMs=0,closeMs=0,tick=null,cur=null;
+const CLOSED_MSG='ফলাফল এখনো প্রকাশ হয়নি। একটু পরে আবার চেষ্টা করুন।';
 const say=h=>{$('#out').innerHTML=h},warn=t=>say(`<div class="msg">${esc(t)}</div>`);
 /* ---- হালকা Firestore REST (ভারী লাইব্রেরি ছাড়া) ---- */
 const fv=v=>v==null?null:'stringValue' in v?v.stringValue:'integerValue' in v?+v.integerValue:'doubleValue' in v?v.doubleValue:'booleanValue' in v?v.booleanValue:'timestampValue' in v?new Date(v.timestampValue).getTime():'arrayValue' in v?(v.arrayValue.values||[]).map(fv):'mapValue' in v?fm(v.mapValue.fields||{}):null;
@@ -132,7 +133,7 @@ async function init(){
     if(batch.yr){const y=$('#yr');y.textContent='পরীক্ষার সন: '+bn(batch.yr);y.classList.remove('hide')}
     $('#hint').textContent=batch.kind==='r'?'শিক্ষার্থীর রোল নম্বর দিন':'শিক্ষার্থীর বৃত্তি পরীক্ষার রোল নম্বর দিন';
     $('#foot2').classList.toggle('hide',batch.kind==='r');
-    openMs=+batch.openAt||0;
+    openMs=+batch.openAt||0;closeMs=+batch.closeAt||0;
     if(openMs>Date.now())lock();else $('#q').focus();
     return true
   }catch(e){warn('ইন্টারনেট সংযোগ দেখুন, তারপর আবার চেষ্টা করুন।');return false}
@@ -169,6 +170,7 @@ async function find(e){
   e.preventDefault();
   if(!ready&&!(await init()))return;
   if(openMs>Date.now())return;
+  if(closeMs&&Date.now()>=closeMs){warn(CLOSED_MSG);return}
   const roll=normRoll($('#q').value);
   if(!roll){warn('রোল নম্বর লিখুন।');return}
   const btn=$('#go');btn.disabled=true;btn.innerHTML='<span class="spin"></span>';
@@ -176,7 +178,7 @@ async function find(e){
     const x=await getDoc('britti/'+encodeURIComponent(B)+'/r/'+encodeURIComponent(roll));
     if(!x){warn('এই রোল নম্বরে কোনো ফলাফল পাওয়া যায়নি। রোল নম্বর আবার দেখে লিখুন।');return}
     cur={x,roll};say(batch.kind==='r'?markHtml(x):schHtml(x,roll));wireActs();
-  }catch(err){warn(err&&err.code==='permission-denied'?'ফলাফল এখনো প্রকাশ হয়নি। একটু পরে আবার চেষ্টা করুন।':err&&err.name==='AbortError'?'নেটওয়ার্ক ধীর। আবার চেষ্টা করুন।':'ফলাফল আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')}
+  }catch(err){warn(err&&err.code==='permission-denied'?CLOSED_MSG:err&&err.name==='AbortError'?'নেটওয়ার্ক ধীর। আবার চেষ্টা করুন।':'ফলাফল আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')}
   finally{btn.disabled=false;btn.textContent='খুঁজুন'}
 }
 /* ---- ফলের কার্ড ছবি (canvas) ---- */
