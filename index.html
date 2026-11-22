@@ -2542,6 +2542,15 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 .x2nb{left:50%;right:auto;bottom:14px;transform:translateX(-50%);width:min(560px,92vw);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.16);box-sizing:border-box}
 #qpb{left:50%;right:auto;bottom:14px;transform:translateX(-50%);width:min(560px,92vw);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.16);box-sizing:border-box}
 }
+@media(min-width:1100px){
+.x2v:not(.hide){display:grid;grid-template-columns:minmax(14px,1fr) minmax(540px,680px) minmax(0,800px) minmax(14px,1fr);column-gap:18px;align-items:start}
+.x2v .rth{grid-column:1/-1;grid-row:1}
+.x2v .x2w,.x2v.pvm .x2w{display:block;grid-column:2;grid-row:2;max-width:none;margin:0;width:100%;box-sizing:border-box}
+.x2v .x2pvw,.x2v:not(.pvm) .x2pvw{display:block;grid-column:3;grid-row:2;max-width:none;margin:0;position:sticky;top:64px;padding:0 12px 110px 0}
+.x2v .x2pa{max-height:calc(100vh - 230px);overflow:auto}
+.x2v [data-a=npv]{display:none!important}
+.x2v .x2nb{width:min(560px,92vw)}
+}
 @media(min-width:761px){#main>.panel[style*="max-width:420px"]{max-width:640px!important;margin-left:auto;margin-right:auto}#main:has(>.panel[style*="max-width:420px"])>h2{max-width:640px;margin-left:auto;margin-right:auto}}
 @media(min-width:1100px){#home{max-width:1020px}#home:not(.hide){grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}}
 </style>
@@ -5447,6 +5456,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v144',d:'২২ নভেম্বর ২০২৬',t:['🖥️ পিসি: প্রগতি রিপোর্ট ও প্রবেশপত্রে এডিটের পাশেই লাইভ প্রিভিউ (বড় স্ক্রিনে) — ফোনে আগের মতো প্রিভিউ বাটন']},
 {v:'v143',d:'২২ নভেম্বর ২০২৬',t:['🖥️ পিসি/বড় স্ক্রিন: নোটিশ ও প্রশ্নপত্র ও প্রগতি রিপোর্টের নিচের মেনু সুন্দর করে মাঝখানে বসানো, হোম পাতা বড় স্ক্রিনে ৪ কলামে, Settings পাতা মাঝখানে — ফোনে কোনো পরিবর্তন নেই']},
 {v:'v142',d:'২২ নভেম্বর ২০২৬',t:['🎓 বৃত্তি: Percentage ট্যাব আবার আগের মতো (শুধু শতকরা); নম্বর দিয়ে চাইলে Number Scholarship ট্যাব']},
 {v:'v141',d:'২২ নভেম্বর ২০২৬',t:['🛠 Space & Size ভাগ করার পর Live preview Edit-এ চলে আসছিল ও Design-এর আগে ফাঁকা দেখাচ্ছিল — ঠিক করা হয়েছে']},
@@ -9228,8 +9238,9 @@ function closeOv(){const o=Q('.x2ov');if(o){o.remove();return true}return false}
 /* ---------- ইভেন্ট ---------- */
 const FREE=['fold','mo','lock','npv','ndl','nsv','pv','nx','pgp','pgn','or','zm','goS'];
 const isPv=k=>!!k&&$('#x2'+k).classList.contains('pvm');
+const SBS=()=>innerWidth>=1100;
 const afterCh=()=>isPv(MODE)?pvRender():rebuild();
-const cur=()=>MODE==='a'?A:P,rebuild=()=>MODE==='a'?acBuild():rpBuild(),pvNow=()=>MODE==='a'?acSum():rpSum();
+const cur=()=>MODE==='a'?A:P,rebuild=()=>{MODE==='a'?acBuild():rpBuild();if(MODE&&SBS())pvRender()},pvNow=()=>{MODE==='a'?acSum():rpSum();if(MODE&&SBS())pvRender()};
 let xrT;const xrList=()=>{const m=new Map(stuList(A).map(s=>[s.id,s]));QA('[data-sec=stu] .x2sr').forEach(r=>{const c=Q('[data-id]',r),s=c&&m.get(c.dataset.id),sm=Q('.nm small',r);if(s&&sm&&xrM()!=='s')sm.textContent='পরীক্ষার রোল '+(xr(s)?bn(xr(s)):'—')+' · শ্রেণি '+bn(s.c)+(s.b?' · '+s.b:'')})};const xrRefresh=()=>{clearTimeout(xrT);xrT=setTimeout(()=>{xrList();pvNow()},300)};
 let pvT;const pvLazy=()=>{clearTimeout(pvT);pvT=setTimeout(pvNow,120)};
 const curStu=()=>stuSel(P)[ri];
@@ -9382,12 +9393,12 @@ function dlPop(){const k=MODE,rp=k==='r',l=stuSel(cur());if(!l.length)return toa
 /* ---------- খোলা/বন্ধ ---------- */
 const HID=['#app','#nt','#rev','#rt','#qp'];
 function x2Open(k){HID.forEach(x=>$(x).classList.add('hide'));$('#home').classList.add('hide');['#x2a','#x2r'].forEach(x=>$(x).classList.add('hide'));const v=$('#x2'+k);v.classList.remove('hide','pvm');document.body.classList.remove('in-ed');scrollTo(0,0);MODE=k;ai=ap=ri=0;PZ[k]=1;SC[k]={e:0,p:0};
- delete X.open[k];v.classList.toggle('lk',!!X.lk[k]);hideMenu();k==='a'?acBuild():rpBuild();H[k]={s:[],i:-1};hist(k);x2Nav()}
+ delete X.open[k];v.classList.toggle('lk',!!X.lk[k]);hideMenu();k==='a'?acBuild():rpBuild();H[k]={s:[],i:-1};hist(k);x2Nav();if(SBS())pvRender()}
 function x2Close(){closeOv();hideMenu();closeDlg();['#x2a','#x2r'].forEach(x=>$(x).classList.add('hide'));$('#x2m').innerHTML='';xf();MODE='';showHome()}
 window.x2Back=()=>{if(closeOv())return true;if(!$('#x2a').classList.contains('hide')||!$('#x2r').classList.contains('hide')){if(Q('.x2mm:not(.hide)')){hideMenu();return true}if(isPv(MODE)){togglePv();return true}x2Close();return true}return false};
 document.querySelectorAll('.x2b').forEach(b=>b.onclick=x2Close);
 document.addEventListener('click',e=>{const b=e.target.closest('[data-x2]');if(b)x2Open(b.dataset.x2)});
-addEventListener('resize',()=>{if(MODE&&isPv(MODE))pvScale()});
+let rzT;addEventListener('resize',()=>{if(!MODE)return;if(SBS()){clearTimeout(rzT);rzT=setTimeout(()=>{if(!MODE)return;if(isPv(MODE))togglePv();pvRender()},150)}else if(isPv(MODE))pvScale()});
 window.x2Dbg={A,P,X:()=>X,acCard,rpHTML,rpData,acPage,fitAc,fitRp,x2Open,wmHTML};
 })();
 </script>
