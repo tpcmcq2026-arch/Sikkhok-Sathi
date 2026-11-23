@@ -3798,7 +3798,7 @@ function card(r){return`<div class="rc"><h3 data-nolang>${r.locked?'🔒 ':''}${
 <div class="acts"><button class="btn s" data-a="edit" data-id="${r.id}">Edit</button><button class="btn s" data-a="rev" data-id="${r.id}">Review</button><button class="btn s p" data-a="dl" data-id="${r.id}">Download</button><button class="btn s" data-a="ms" data-id="${r.id}">👤 Marksheets</button><button class="btn s" data-a="dup" data-id="${r.id}">Copy</button><button class="btn s d" data-a="del" data-id="${r.id}">Delete</button></div></div>`}
 function wire(root){root.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const r=R.find(x=>x.id===b.dataset.id),a=b.dataset.a;
 if(a==='edit'){cur=r;view='edit';editor()}else if(a==='rev'){cur=r;review()}else if(a==='dl'){cur=r;review(true)}else if(a==='ms'){msOpen(r)}
-else if(a==='dup'){const c=JSON.parse(JSON.stringify(r));c.id='r'+Date.now().toString(36);c.exam+=' (Copy)';c.locked=false;c.created=Date.now();R.unshift(c);save();toast('Result copied');go(view)}
+else if(a==='dup'){const c=JSON.parse(JSON.stringify(r));c.id='r'+Date.now().toString(36);c.exam+=' (Copy)';c.locked=false;c.students=(c.students||[]).map(x=>{const o={n:x.n,m:'',pp:''};if(x.nb)o.nb=x.nb;if(x.rl)o.rl=x.rl;return o});c.created=Date.now();R.unshift(c);save();toast('Result copied');go(view)}
 else if(a==='del'&&r.locked)toast('Locked — unlock it first to delete');else if(a==='del')confirmBox(`Delete “${esc(r.exam)} – Class ${esc(r.cls)}”? It will move to Trash (Settings), where you can restore it for 30 days.`,()=>{toTrash(r);R=R.filter(x=>x!==r);save();toast('Moved to Trash');go(view)})})}
 function dash(){$('#main').innerHTML=`<h2>Dashboard</h2><div class="stats"><div class="stat"><b>${R.length}</b><span>Saved results</span></div><div class="stat"><b>${new Set(R.map(r=>r.cls)).size}</b><span>Classes</span></div><div class="stat"><b>${R.reduce((a,r)=>a+r.students.length,0)}</b><span>Students entered</span></div></div>
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px"><button type="button" class="btn p" onclick="window.prOpen&&prOpen()">👨‍👩‍👦 অভিভাবক ফল লিংক</button><button type="button" class="btn p" onclick="window.bsOpen&&bsOpen()">🎓 বৃত্তি ফলাফল লিংক</button></div><h2 style="font-size:17px">Recent results</h2>${R.length?`<div class="grid">${R.slice(0,6).map(card).join('')}</div>`:'<div class="empty">No results yet. Create your first result sheet.</div>'}`;
@@ -5515,6 +5515,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v152',d:'২৩ নভেম্বর ২০২৬',t:['📋 রেজাল্ট কপি করলে নাম ও রোল থাকে, কিন্তু সব নম্বর (বিষয়, মোট, Previous Marks/Position) খালি থাকে']},
 {v:'v151',d:'২৩ নভেম্বর ২০২৬',t:['🎨 ক্লাস/পরীক্ষা রুটিনের ডিজাইন তালিকা এখন ডানে-বামে সোয়াইপ করা যায় (পেজ আর লম্বা হয় না); বাছা ডিজাইন মাঝখানে স্থির থাকে']},
 {v:'v150',d:'২৩ নভেম্বর ২০২৬',t:['🔤 রেজাল্ট ট্যাবে নতুন "ফন্ট" অপশন — ডিফল্টসহ ১৫টি ফন্ট (বাংলা ৯, ইংরেজি ৫), নির্বাচন করলেই প্রিভিউ বদলায়']},
 {v:'v149',d:'২৩ নভেম্বর ২০২৬',t:['📄 অ্যাপ বাংলা থাকলে রেজাল্ট শীট (প্রিভিউ, প্রিন্ট, PNG, PDF) পুরো বাংলা — কলামের নাম সংক্ষেপে, সংখ্যা বাংলা অঙ্কে','🔤 রেজাল্ট ট্যাবের বাকি ইংরেজি লেখাগুলোও বাংলা']},
