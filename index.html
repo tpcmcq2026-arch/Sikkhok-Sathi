@@ -2575,6 +2575,7 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 .dg-rds{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}.dg-n2{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;border-radius:999px;padding:4px 14px;font-size:13.5px;font-weight:600}
 .dg-rl{display:flex;flex-direction:column;gap:8px}.dg-rr{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:7px}.dg-rr.on{border-color:rgba(220,38,38,.55);background:linear-gradient(0deg,rgba(220,38,38,.07),rgba(220,38,38,.07)),var(--card)}.dg-rn{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.dg-rn small{color:var(--mut);font-size:12px}
 .dg-rc{display:flex;flex-wrap:wrap;gap:6px}.dg-rc button{border:1.5px solid var(--line);background:transparent;color:inherit;border-radius:999px;padding:5px 13px;font-size:13.5px;cursor:pointer}.dg-rc button.on{background:#dc2626;border-color:#dc2626;color:#fff;font-weight:600}.dg-rc button.on::before{content:'✓ '}
+.dg-rc button.dg-pb{border-style:dashed;opacity:.9}.dg-rc button.dg-pb.op{border-color:#0d9488;color:#0d9488}.dg-pk{background:rgba(13,148,136,.07);border:1px solid rgba(13,148,136,.35);border-radius:14px;padding:8px 10px}.dg-pk small{display:block;color:var(--mut);font-size:12px;margin-bottom:6px}.dg-pk .dg-rc button.on{background:#dc2626}
 @media(min-width:900px){.dg-two3{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:20px;align-items:start}.dg-rda{position:sticky;top:120px}.dg-rl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.dg-rl .dg-rr{margin:0}}
 </style>
 </head>
@@ -5365,7 +5366,7 @@ function trashSheet(){
    syncRos(s.c);smSave();rS();trashSheet();toast(s.n+' ফিরে এসেছে ✓')});
   box.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>confirmBox('চিরতরে মুছবে? আর ফেরানো যাবে না।',()=>{SM.trash=SM.trash.filter(x=>x.s.id!==b.dataset.d);smSave();rS();trashSheet()},'মুছো'))})}
 /* ---------- ক্লাস ডায়েরি / হোমওয়ার্ক ---------- */
-const DSUB=['বাংলা','ইংরেজি','গণিত','বিজ্ঞান','সমাজ','ধর্ম','আইসিটি'];
+const DSUB=['বাংলা','বাংলা ১ম','বাংলা ২য়','ইংরেজি ১ম','ইংরেজি ২য়','গণিত','বিজ্ঞান','বিশ্বপরিচয়','ইসলাম','অন্যান্য'];
 const dkey=(d,c,b,sh)=>d+'|'+c+'|'+(!b||b==='*'?'':b)+(sh&&sh!=='*'?'|'+sh:'');
 const dQ=e=>bq({b:e.b||'*',sh:e.sh||'*'});
 const dLb=(b,sh)=>[sh&&sh!=='*'?(sh==='_'?'শাখা নেই':'শাখা '+sh):'',b&&b!=='*'?(b==='_'?'ব্যাচ নেই':b):''].filter(Boolean).join(' · ');
@@ -5374,7 +5375,7 @@ const dFilled=e=>e&&(e.subs.some(s=>(s.t||'').trim()||(s.h||'').trim())||(e.note
 const dClean=()=>{SM.diary=SM.diary.filter(e=>e.subs.length||(e.note||'').trim()||Object.keys(e.rd||{}).length)};
 const dText=e=>e.subs.filter(s=>(s.t||'').trim()||(s.h||'').trim()).map(s=>`📘 ${(s.s||'').trim()||'বিষয়'}\n`+((s.t||'').trim()?`পড়ানো টপিক: ${s.t.trim()}\n`:'')+((s.h||'').trim()?`বাড়ির কাজ: ${s.h.trim()}\n`:'')).join('\n').trim();
 const dMsg=(e,mode,st)=>fill(mode==='g'?(SM.cfg.m_dg||DEFM.dg):(SM.cfg.m_dp||DEFM.dp),{'অভিভাবক':(st&&st.g)||'অভিভাবক','নাম':st?st.n:'শিক্ষার্থী','শ্রেণি':bn(e.c)+(e.sh||e.b?' ('+[e.sh,e.b].filter(Boolean).join(', ')+')':''),'তারিখ':dLabel(e.d)+', '+WDN[pIso(e.d).getDay()],'ডায়েরি':dText(e)||'…','নোট':(e.note||'').trim()?'\n\n📌 '+e.note.trim():'','প্রতিষ্ঠান':inst()});
-const dSubList=()=>{const u=SM.cfg.subs||[];return [...new Set(DSUB.concat(u))]};
+const dSubList=()=>DSUB.slice();
 function dPrevSubs(c,d){const l=SM.diary.filter(x=>x.c===c&&x.d<d&&x.subs.length).sort((a,b)=>a.d<b.d?1:-1);return l[0]?l[0].subs.map(s=>(s.s||'').trim()).filter(Boolean):[]}
 
 /* ---------- ডায়েরির A4 ছবি ও টেমপ্লেট ---------- */
@@ -5464,9 +5465,9 @@ const tab=v.tab|0,nF=e.subs.filter(x=>(x.t||'').trim()||(x.h||'').trim()).length
    <div class="sm-two" style="margin:10px 0 8px"><button class="btn p" data-a="dsend">📩 অভিভাবকদের আলাদা পাঠাও</button><button class="btn" data-a="dgrp">👥 গ্রুপে পাঠাও</button></div><div class="sm-two" style="margin:0"><button class="btn" data-a="dcpy">📋 গ্রুপের বার্তা কপি</button><button class="btn" data-a="dcfg">⚙️ বার্তা সেটিংস</button></div><div class="sm-two one" style="margin:8px 0 0"><button class="btn" data-a="dcto">📑 অন্য শ্রেণিতেও কপি করো</button></div></div>
   </div></div>`;
  }else if(tab===2){
-  const sj=dRdSubs(e),rd=e.rd||{},cnt=list.filter(x=>rd[x.id]&&rd[x.id].length).length,att=SM.att[v.d]||{};
-  body=`<div class="dg-two3"><div><div class="sm-card"><b style="font-size:15px">📖 কে কোন বিষয়ে পড়া পারেনি?</b><p class="sub" style="margin:3px 0 10px;font-size:12.5px">নামের পাশে বিষয়ে চাপ দাও — একজনের একাধিক বিষয়ও হতে পারে। আবার চাপলে টিক উঠে যাবে।</p><div class="dg-rds"><span class="dg-n2" id="drc">${bn(cnt)} জন পারেনি</span><button class="btn s" data-a="drall">✓ সবাই পেরেছে</button></div></div>
-  <div class="dg-rl">${list.length?list.map(x=>{const a=rd[x.id]||[];return `<div class="dg-rr${a.length?' on':''}" data-id="${x.id}"><div class="dg-rn"><b>${E(x.n)}</b><small>রোল ${x.r?E(bn(x.r)):'—'}${att[x.id]==='a'?' · <span style="color:#dc2626">সেদিন অনুপস্থিত</span>':''}</small></div><div class="dg-rc">${sj.map(y=>`<button type="button" class="${a.includes(y)?'on':''}" data-a="drt" data-id="${x.id}" data-sub="${E(y)}">${E(y)}</button>`).join('')}</div></div>`}).join(''):'<div class="sm-emp"><b>এই শ্রেণি/ব্যাচে শিক্ষার্থী নেই</b></div>'}</div></div>
+  const rd=e.rd||{};dRdMap={},cnt=list.filter(x=>rd[x.id]&&rd[x.id].length).length,att=SM.att[v.d]||{};
+  body=`<div class="dg-two3"><div><div class="sm-card"><b style="font-size:15px">📖 কে কোন বিষয়ে পড়া পারেনি?</b><p class="sub" style="margin:3px 0 10px;font-size:12.5px">“বিষয় সিলেক্ট করুন” চাপলে তালিকা আসবে — যেটায় চাপবে সেটাই সিলেক্ট হবে (একজনের সর্বোচ্চ ৪টি)। আবার চাপলে বাদ যাবে।</p><div class="dg-rds"><span class="dg-n2" id="drc">${bn(cnt)} জন পারেনি</span><button class="btn s" data-a="drall">✓ সবাই পেরেছে</button></div></div>
+  <div class="dg-rl">${list.length?list.map(x=>{dRdMap[x.id]=x;return `<div class="dg-rr${(rd[x.id]||[]).length?' on':''}" data-id="${x.id}">${dRdRow(x,e,att)}</div>`}).join(''):'<div class="sm-emp"><b>এই শ্রেণি/ব্যাচে শিক্ষার্থী নেই</b></div>'}</div></div>
   <div class="dg-rda"><div class="sm-card"><div class="sm-bub dg-bub" id="drb">${E(dRdPrev(e))}</div><div class="sm-two" style="margin:10px 0 8px"><button class="btn p" data-a="drsend" id="drsb">📩 অভিভাবকদের আলাদা পাঠাও (${bn(cnt)})</button><button class="btn" data-a="drgrp">👥 গ্রুপে পাঠাও</button></div><div class="sm-two" style="margin:0"><button class="btn" data-a="drcpy">📋 গ্রুপের বার্তা কপি</button><button class="btn" data-a="dcfg">⚙️ বার্তা সেটিংস</button></div></div></div></div>`;
  }else{
   body=`<div class="dg-two2"><div class="sm-card" style="border-color:rgba(245,158,11,.45)"><b style="font-size:15px">✅ বাড়ির কাজ যাচাই</b><p class="sub" style="margin:3px 0 10px;font-size:12.5px">${e.hwv?dHwSum(e):'পরদিন কে বাড়ির কাজ করেনি মার্ক করো — শুধু তার অভিভাবককে আলাদা বার্তা যাবে।'}</p><button class="btn p" data-a="dhw">${e.hwv?'যাচাই দেখো / বদলাও':'বাড়ির কাজ যাচাই করো'}</button></div>
@@ -5478,14 +5479,17 @@ const tab=v.tab|0,nF=e.subs.filter(x=>(x.t||'').trim()||(x.h||'').trim()).length
 
 /* ---------- পড়া পারেনি ---------- */
 const dJoin=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' ও '+a[a.length-1];
+const dRdRow=(x,e,att)=>{const a=((e.rd||{})[x.id]||[]).slice().sort((p,q)=>dSubList().indexOf(p)-dSubList().indexOf(q)),open=V.D.pk===x.id,full=a.length>=4;
+ return `<div class="dg-rn"><b>${E(x.n)}</b><small>রোল ${x.r?E(bn(x.r)):'—'}${att&&att[x.id]==='a'?' · <span style="color:#dc2626">সেদিন অনুপস্থিত</span>':''}</small></div><div class="dg-rc">${a.map(y=>`<button type="button" class="on" data-a="drt" data-id="${x.id}" data-sub="${E(y)}">${E(y)} ✕</button>`).join('')}<button type="button" class="dg-pb${open?' op':''}" data-a="drpick" data-id="${x.id}">${a.length?'＋ আরও':'বিষয় সিলেক্ট করুন'} ${open?'▴':'▾'}</button></div>${open?`<div class="dg-pk"><small>${full?'সর্বোচ্চ ৪টি নেওয়া হয়েছে — আগে একটি বাদ দাও':'চাপ দিলে সিলেক্ট হবে (সর্বোচ্চ ৪টি)'}</small><div class="dg-rc">${dSubList().map(y=>`<button type="button" class="${a.includes(y)?'on':''}" data-a="drt" data-id="${x.id}" data-sub="${E(y)}">${E(y)}</button>`).join('')}</div></div>`:''}`};
+let dRdMap={};
 const dRdN=e=>Object.keys(e.rd||{}).filter(i=>(e.rd[i]||[]).length).length;
 function dRdSubs(e){const a=(e.subs||[]).filter(x=>(x.t||'').trim()&&(x.s||'').trim()).map(x=>x.s.trim());const b=(e.subs||[]).map(x=>(x.s||'').trim()).filter(Boolean);return [...new Set(a.length?a:b.length?b:dSubList().slice(0,7))]}
 const dRdFail=e=>inClsAt(e.c,dQ(e),e.d.slice(0,7)).filter(s=>e.rd&&(e.rd[s.id]||[]).length).map(s=>[s,e.rd[s.id]]);
 const dRdMsg=(e,s,a)=>fill(SM.cfg.m_dr||DEFM.dr,{'অভিভাবক':(s&&s.g)||'অভিভাবক','নাম':s?s.n:'শিক্ষার্থী','শ্রেণি':bn(e.c),'দিন':dRel(e.d),'বিষয়':dJoin(a),'প্রতিষ্ঠান':inst()});
 const dRdGMsg=(e,L)=>fill(SM.cfg.m_dq||DEFM.dq,{'শ্রেণি':bn(e.c)+(e.sh||e.b?' ('+[e.sh,e.b].filter(Boolean).join(', ')+')':''),'দিন':dRel(e.d),'তালিকা':L.map(([s,a],i)=>bn(i+1)+'. '+s.n+' — '+a.join(', ')).join('\n'),'প্রতিষ্ঠান':inst()});
-const dRdPrev=e=>{const L=dRdFail(e);return L.length?dRdGMsg(e,L):'এখনো কাউকে “পারেনি” মার্ক করা হয়নি — নামের পাশে বিষয়ে চাপ দিলে গ্রুপের বার্তা এখানে সাজানো হবে।'};
+const dRdPrev=e=>{const L=dRdFail(e);return L.length?dRdGMsg(e,L):'এখনো কাউকে “পারেনি” মার্ক করা হয়নি — নামের নিচে “বিষয় সিলেক্ট করুন” চাপলে গ্রুপের বার্তা এখানে সাজানো হবে।'};
 async function dClip(t){try{await navigator.clipboard.writeText(t)}catch(x){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}}
-function dRdUpd(){const e=dEntry(false);if(!e)return;const rd=e.rd||{};document.querySelectorAll('#smDb .dg-rr').forEach(r=>{const a=rd[r.dataset.id]||[];r.classList.toggle('on',a.length>0);r.querySelectorAll('[data-sub]').forEach(b=>b.classList.toggle('on',a.includes(b.dataset.sub)))});
+function dRdUpd(){const e=dEntry(false)||{d:V.D.d,rd:{},subs:[],c:V.D.c};const rd=e.rd||{};const att=SM.att[e.d]||{};document.querySelectorAll('#smDb .dg-rr').forEach(r=>{const x=dRdMap[r.dataset.id];if(!x)return;r.classList.toggle('on',(rd[x.id]||[]).length>0);r.innerHTML=dRdRow(x,e,att)});
  const n=dRdN(e),c=$('#drc'),b=$('#drb'),sb=$('#drsb');if(c)c.textContent=bn(n)+' জন পারেনি';if(b)b.textContent=dRdPrev(e);if(sb)sb.textContent='📩 অভিভাবকদের আলাদা পাঠাও ('+bn(n)+')'}
 function dRdSend(){const e=dEntry(false),L=e?dRdFail(e):[];if(!L.length)return toast('আগে কাউকে “পারেনি” মার্ক করো');e.rsn=e.rsn||{};
  const paint=box=>{box.querySelector('#rs_c').textContent=bn(Object.keys(e.rsn).filter(i=>L.some(([s])=>s.id===i)).length)+'/'+bn(L.length)+' জনকে পাঠানো হয়েছে';
@@ -5638,6 +5642,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v157',d:'২৪ নভেম্বর ২০২৬',t:['📖 “পড়া পারেনি” ট্যাবে প্রতিজনের নিচে “বিষয় সিলেক্ট করুন” — তালিকা থেকে সর্বোচ্চ ৪টি বিষয়','📚 নতুন বিষয়ের তালিকা: বাংলা, বাংলা ১ম/২য়, ইংরেজি ১ম/২য়, গণিত, বিজ্ঞান, বিশ্বপরিচয়, ইসলাম, অন্যান্য (আইসিটি বাদ)']},
 {v:'v156',d:'২৪ নভেম্বর ২০২৬',t:['📒 নোটবুক ডিজাইনে প্রতিষ্ঠানের নাম এখন এক লাইনে','🧹 ডায়েরির ছবির নিচের নাম-ঠিকানা ও স্বাক্ষর সরানো হয়েছে','💬 বার্তায় “৫” এর বদলে “শ্রেণি ৫” লেখা হবে']},
 {v:'v155',d:'২৪ নভেম্বর ২০২৬',t:['📖 ক্লাস ডায়েরিতে নতুন “পড়া পারেনি” ট্যাব — কে কোন বিষয়ে পারেনি টিক দিলে অভিভাবককে আলাদা বা গ্রুপে বার্তা, পিসিতে কপি','📊 প্রগতি রিপোর্টে “পড়া” অংশ (কোন দিন কোন বিষয়ে পারেনি)','🗓 হাজিরার ঘরে মাসের নাম ও ব্যাখ্যা; দেরির সংখ্যা শিরোনামে']},
 {v:'v154',d:'২৪ নভেম্বর ২০২৬',t:['📩 বাড়ির কাজ না করার বার্তা: “আপনার সন্তান … আজকের/গতকালের/আগামীকালের বাড়ির কাজ করেনি” — আরও আগে-পরে হলে তারিখসহ']},
@@ -6036,7 +6041,7 @@ wire('#smDb',{
   setTimeout(()=>{const cs=document.querySelectorAll('#dcards .sm-card'),c=cs[cs.length-1];if(c){const el=c.querySelector(nm?'[data-f=t]':'[data-f=s]');if(el)el.focus();c.scrollIntoView({block:'center',behavior:'smooth'})}},60)},
  dsx:t=>{const e=dEntry(false);if(!e)return;const sn=undoPrep();e.subs.splice(+t.dataset.i,1);dClean();smSave();rD();undoShow('বিষয়টা মুছে ফেলা হয়েছে',sn)},
  dpre:()=>{const e=dEntry(true);dPrevSubs(V.D.c,V.D.d).forEach(s=>e.subs.push({s,t:'',h:''}));smSave();rD()},
- dpt:t=>{V.D.pt=t.dataset.v;rD()},dtab:t=>{V.D.tab=+t.dataset.v;rD()},dtp:t=>{V.D.tp=t.dataset.v;SM.cfg.dtp=t.dataset.v;smSave();const sc=document.querySelector('#smDb .dg-tpl').scrollLeft;rD();const n=document.querySelector('#smDb .dg-tpl');if(n)n.scrollLeft=sc;const on=n&&n.querySelector('.on');if(on)n.scrollTo({left:on.offsetLeft-(n.clientWidth-on.offsetWidth)/2,behavior:'smooth'})},dimg:t=>dImg(t.dataset.k),drt:t=>{const e=dEntry(true),id=t.dataset.id,sb=t.dataset.sub;e.rd=e.rd||{};const a=e.rd[id]||[],i=a.indexOf(sb);if(i>=0)a.splice(i,1);else a.push(sb);if(a.length)e.rd[id]=a;else delete e.rd[id];e.rdv=1;smSave();dRdUpd()},drall:()=>{const e=dEntry(true);const sn=undoPrep();e.rd={};e.rdv=1;smSave();rD();undoShow('সবাই পেরেছে ধরা হয়েছে ✓',sn)},drsend:dRdSend,drgrp:dRdGroup,drcpy:dRdCopy,dhw:dHw,dhwo:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.c=e.c;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();dHw()}},dsend:dSend,dgrp:dGroup,dcpy:dCopy,dcfg:dCfg,dcto:dCopyTo,
+ dpt:t=>{V.D.pt=t.dataset.v;rD()},dtab:t=>{V.D.tab=+t.dataset.v;rD()},dtp:t=>{V.D.tp=t.dataset.v;SM.cfg.dtp=t.dataset.v;smSave();const sc=document.querySelector('#smDb .dg-tpl').scrollLeft;rD();const n=document.querySelector('#smDb .dg-tpl');if(n)n.scrollLeft=sc;const on=n&&n.querySelector('.on');if(on)n.scrollTo({left:on.offsetLeft-(n.clientWidth-on.offsetWidth)/2,behavior:'smooth'})},dimg:t=>dImg(t.dataset.k),drt:t=>{const e=dEntry(true),id=t.dataset.id,sb=t.dataset.sub;e.rd=e.rd||{};const a=e.rd[id]||[],i=a.indexOf(sb);if(i>=0)a.splice(i,1);else{if(a.length>=4){toast('একজনের জন্য সর্বোচ্চ ৪টি বিষয়');return}a.push(sb)}if(a.length)e.rd[id]=a;else delete e.rd[id];e.rdv=1;smSave();dRdUpd()},drpick:t=>{V.D.pk=V.D.pk===t.dataset.id?'':t.dataset.id;dRdUpd()},drall:()=>{const e=dEntry(true);const sn=undoPrep();e.rd={};e.rdv=1;smSave();rD();undoShow('সবাই পেরেছে ধরা হয়েছে ✓',sn)},drsend:dRdSend,drgrp:dRdGroup,drcpy:dRdCopy,dhw:dHw,dhwo:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.c=e.c;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();dHw()}},dsend:dSend,dgrp:dGroup,dcpy:dCopy,dcfg:dCfg,dcto:dCopyTo,
  dload:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();scrollTo(0,0)}},
  dhdel:t=>{const sn=undoPrep();SM.diary=SM.diary.filter(x=>x.k!==t.dataset.k);smSave();rD();undoShow('ডায়েরি মুছে ফেলা হয়েছে',sn)}});
 $('#smDb').addEventListener('input',e=>{const t=e.target;if(t.id==='smdn'){const en=dEntry(true);en.note=t.value;smSave();dPreview();return}
