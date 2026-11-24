@@ -2553,6 +2553,23 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
 }
 @media(min-width:761px){#main>.panel[style*="max-width:420px"]{max-width:640px!important;margin-left:auto;margin-right:auto}#main:has(>.panel[style*="max-width:420px"])>h2{max-width:640px;margin-left:auto;margin-right:auto}}
 @media(min-width:1100px){#home{max-width:1020px}#home:not(.hide){grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}}
+
+/* ক্লাস ডায়েরি v153 */
+.dg-flt{margin-bottom:2px}.dg-st{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.dg-st span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;color:var(--mut)}.dg-st .dg-n{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;border:0;font-weight:600}.dg-st .dg-n b{font-size:15px}
+.dg-tabs{position:sticky;top:60px;z-index:5;box-shadow:0 6px 14px -10px rgba(0,0,0,.35)}.dg-tabs button{position:relative;white-space:nowrap}.dg-dot{position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:#f59e0b}
+.dg-add{margin:0 0 6px}.dg-add small{display:block;margin:0 4px 5px;color:var(--mut);font-size:12.5px}.dg-add em{font-style:normal;opacity:.8}
+.dg-sc{margin-bottom:10px}.dg-sh{display:flex;gap:8px;align-items:center;margin-bottom:8px}.dg-sh input{font-weight:700}.dg-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dg-2 label{font-weight:600;font-size:13px;display:block;margin:0 0 4px}.dg-2 textarea{min-height:74px;width:100%}
+@media(max-width:560px){.dg-2{grid-template-columns:1fr}}
+.dg-go{width:100%;margin:2px 0 10px}
+.dg-pvb,.dg-thm{position:relative;overflow:hidden;aspect-ratio:794/1123;background:#fff}.dg-pvb{width:100%;max-width:520px;margin:0 auto 10px;border-radius:12px;box-shadow:0 10px 30px -12px rgba(0,0,0,.5),0 0 0 1px var(--line)}.dg-thi{position:absolute;left:0;top:0;width:794px;height:1123px;transform-origin:0 0;pointer-events:none}
+.dg-t1{display:block;font-size:15px;margin-bottom:8px}.dg-t1 small{font-weight:400;color:var(--mut);font-size:12px;margin-left:6px}
+.dg-tpl{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 10px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin}.dg-t{flex:0 0 86px;scroll-snap-align:start;border:2px solid var(--line);background:var(--card);color:inherit;border-radius:12px;padding:5px 5px 6px;cursor:pointer;text-align:center}.dg-t .dg-thm{display:block;width:100%;border-radius:6px;margin-bottom:4px}.dg-t em{font-style:normal;font-size:12px}.dg-t.on{border-color:#14b8a6;box-shadow:0 0 0 2px rgba(20,184,166,.35)}
+.dg-bt{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:6px}
+.dg-bub{max-height:190px;overflow:auto}
+.dg-two2{display:block}
+@media(min-width:900px){.dg-two{display:grid;grid-template-columns:minmax(320px,440px) minmax(0,1fr);gap:20px;align-items:start}.dg-l{position:sticky;top:120px}.dg-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dg-cards .dg-sc{margin-bottom:0}.dg-two2{display:grid;grid-template-columns:minmax(280px,380px) minmax(0,1fr);gap:20px;align-items:start}.dg-tabs{top:70px}}
+@media(min-width:1280px){.dg-two{grid-template-columns:minmax(380px,500px) minmax(0,1fr)}}
+@media(min-width:900px){#smDb.sm-w{max-width:1120px}}@media(max-width:899px){.dg-2 textarea{min-height:54px;field-sizing:content;max-height:160px}.dg-2{gap:6px}.dg-sc{padding:12px}}.dg-tabs button{font-size:13px}
 </style>
 </head>
 <body>
@@ -4377,7 +4394,7 @@ const cnorm=s=>en(s).trim();
 const E=esc;
 const DEFM={fee:'আসসালামু আলাইকুম। {অভিভাবক}, {নাম} ({শ্রেণি})-এর {মাস} মাসের বেতন {টাকা} বাকি আছে। অনুগ্রহ করে পরিশোধ করবেন। ধন্যবাদ।\n— {প্রতিষ্ঠান}',abs:'আসসালামু আলাইকুম। {অভিভাবক}, {নাম} ({শ্রেণি}) আজ ({তারিখ}) ক্লাসে অনুপস্থিত ছিল।\n— {প্রতিষ্ঠান}',
  dp:'আসসালামু আলাইকুম, {অভিভাবক}।\n{নাম}-এর আজকের ক্লাস ডায়েরি ({শ্রেণি}, {তারিখ}):\n\n{ডায়েরি}{নোট}\n\n— {প্রতিষ্ঠান}',
- dh:'আসসালামু আলাইকুম, {অভিভাবক}।\n{নাম} ({শ্রেণি}) {তারিখ} তারিখের বাড়ির কাজ{বিষয়} {অবস্থা}।\nঅনুগ্রহ করে বাড়িতে বিষয়টি নিশ্চিত করবেন।\n— {প্রতিষ্ঠান}',
+ dh:'আসসালামু আলাইকুম, {অভিভাবক}।\nআপনার সন্তান {নাম} ({শ্রেণি}) {দিন} বাড়ির কাজ{বিষয়} {অবস্থা}।\nঅনুগ্রহ করে বাড়িতে বিষয়টি নিশ্চিত করবেন।\n— {প্রতিষ্ঠান}',
  dg:'আসসালামু আলাইকুম, সম্মানিত অভিভাবকবৃন্দ।\nশ্রেণি {শ্রেণি} — আজকের ক্লাস ডায়েরি ({তারিখ}):\n\n{ডায়েরি}{নোট}\n\nঅনুগ্রহ করে সন্তানের বাড়ির কাজ নিশ্চিত করবেন।\n— {প্রতিষ্ঠান}'};
 const fill=(t,m)=>t.replace(/\{([^}]+)\}/g,(x,k)=>m[k]!=null?m[k]:x);
 
@@ -5351,6 +5368,60 @@ const dText=e=>e.subs.filter(s=>(s.t||'').trim()||(s.h||'').trim()).map(s=>`📘
 const dMsg=(e,mode,st)=>fill(mode==='g'?(SM.cfg.m_dg||DEFM.dg):(SM.cfg.m_dp||DEFM.dp),{'অভিভাবক':(st&&st.g)||'অভিভাবক','নাম':st?st.n:'শিক্ষার্থী','শ্রেণি':bn(e.c)+(e.sh||e.b?' ('+[e.sh,e.b].filter(Boolean).join(', ')+')':''),'তারিখ':dLabel(e.d)+', '+WDN[pIso(e.d).getDay()],'ডায়েরি':dText(e)||'…','নোট':(e.note||'').trim()?'\n\n📌 '+e.note.trim():'','প্রতিষ্ঠান':inst()});
 const dSubList=()=>{const u=SM.cfg.subs||[];return [...new Set(DSUB.concat(u))]};
 function dPrevSubs(c,d){const l=SM.diary.filter(x=>x.c===c&&x.d<d&&x.subs.length).sort((a,b)=>a.d<b.d?1:-1);return l[0]?l[0].subs.map(s=>(s.s||'').trim()).filter(Boolean):[]}
+
+/* ---------- ডায়েরির A4 ছবি ও টেমপ্লেট ---------- */
+const DTP=[
+ {id:'cl',n:'ক্লাসিক',bg:'#ffffff',ink:'#16213a',mut:'#64748b',a:'#0f766e',card:'#f1f8f7',hd:'band',st:'bar',pal:['#0f766e']},
+ {id:'rg',n:'রঙিন',bg:'#fffdf8',ink:'#1f2937',mut:'#6b7280',a:'#7c3aed',card:'#ffffff',hd:'grad',st:'chip',pal:['#e11d48','#2563eb','#16a34a','#f59e0b','#7c3aed','#0891b2','#db2777']},
+ {id:'sf',n:'সফট',bg:'#e8f6f2',ink:'#134e4a',mut:'#5b7f7a',a:'#0d9488',card:'#ffffff',hd:'soft',st:'round',pal:['#0d9488']},
+ {id:'nt',n:'নাইট',bg:'#0f172a',ink:'#e8eefc',mut:'#94a3b8',a:'#fbbf24',card:'#1e293b',hd:'night',st:'bar',pal:['#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa']},
+ {id:'nb',n:'নোটবুক',bg:'#fffbea',ink:'#1e293b',mut:'#78716c',a:'#dc2626',card:'transparent',hd:'note',st:'line',pal:['#2563eb']},
+ {id:'ry',n:'রয়্যাল',bg:'#fffdf5',ink:'#1e2a4a',mut:'#6b6f80',a:'#b8892b',card:'#ffffff',hd:'royal',st:'frame',pal:['#1e2a4a']}];
+const dTp=()=>{const t=V.D.tp||SM.cfg.dtp;return DTP.some(x=>x.id===t)?t:'cl'};
+const dDemo=e=>Object.assign({},e,{subs:[{s:'বাংলা',t:'গদ্য — আদর্শ ছেলে',h:'প্রশ্ন ১–৫ লিখে আনবে'},{s:'ইংরেজি',t:'Unit 3 — Tense',h:'Exercise 3.2'},{s:'গণিত',t:'অধ্যায় ২ — ভগ্নাংশ',h:'অনুশীলনী ২.১ এর ১–৮'}],note:'শুক্রবার ক্লাস টেস্ট'});
+function dSheet(e,tid){
+ const t=DTP.find(x=>x.id===tid)||DTP[0],U=n=>`calc(${n}px*var(--u))`,subs=(e.subs||[]).filter(x=>(x.t||'').trim()||(x.h||'').trim()),pal=t.pal,night=t.hd==='night';
+ const ln=dLb(e.b,e.sh),chips=[`শ্রেণি ${bn(e.c)}`].concat(e.sh?['শাখা '+(e.sh==='_'?'নেই':e.sh)]:[],e.b?[e.b]:[]);
+ const ad=(()=>{try{return PF().addr||DEF.addr}catch(x){return DEF.addr||''}})();
+ const chip=(x,bg,fg)=>`<span style="display:inline-block;background:${bg};color:${fg};border-radius:999px;padding:${U(4)} ${U(14)};font-size:${U(17)};font-weight:600;margin:0 ${U(5)} 0 0">${E(x)}</span>`;
+ const dt=dLabel(e.d)+' · '+WDN[pIso(e.d).getDay()];
+ let hd='';
+ const nm=`<div style="font-size:${U(34)};font-weight:700;line-height:1.2">${E(inst())}</div>${ad?`<div style="font-size:${U(15)};opacity:.85;margin-top:${U(2)}">${E(ad)}</div>`:''}`;
+ if(t.hd==='band')hd=`<div style="background:linear-gradient(135deg,${t.a},#14b8a6);color:#fff;padding:${U(26)} ${U(40)} ${U(22)};text-align:center">${nm}<div style="margin-top:${U(10)};font-size:${U(24)};font-weight:700;letter-spacing:.5px">ক্লাস ডায়েরি</div></div><div style="padding:${U(12)} ${U(40)} 0;display:flex;justify-content:space-between;align-items:center"><div>${chips.map(x=>chip(x,t.card,t.a)).join('')}</div><b style="font-size:${U(18)};color:${t.mut}">${dt}</b></div>`;
+ else if(t.hd==='grad')hd=`<div style="margin:${U(26)} ${U(34)} 0;border-radius:${U(26)};background:linear-gradient(120deg,#7c3aed,#db2777 60%,#f59e0b);color:#fff;padding:${U(22)} ${U(30)};text-align:center">${nm}<div style="margin-top:${U(8)};display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:${U(3)} ${U(20)};font-size:${U(22)};font-weight:700">ক্লাস ডায়েরি</div></div><div style="padding:${U(12)} ${U(40)} 0;display:flex;justify-content:space-between;align-items:center"><div>${chips.map(x=>chip(x,'#f3e8ff','#6d28d9')).join('')}</div><b style="font-size:${U(18)};color:${t.mut}">${dt}</b></div>`;
+ else if(t.hd==='soft')hd=`<div style="margin:${U(28)} ${U(34)} 0;border-radius:${U(28)};background:#fff;border:${U(3)} dotted ${t.a};padding:${U(20)} ${U(30)};text-align:center;color:${t.ink}">${nm}<div style="margin-top:${U(8)};display:inline-block;background:${t.a};color:#fff;border-radius:999px;padding:${U(4)} ${U(24)};font-size:${U(22)};font-weight:700">ক্লাস ডায়েরি</div></div><div style="padding:${U(12)} ${U(40)} 0;display:flex;justify-content:space-between;align-items:center"><div>${chips.map(x=>chip(x,'#fff',t.a)).join('')}</div><b style="font-size:${U(18)};color:${t.mut}">${dt}</b></div>`;
+ else if(night)hd=`<div style="padding:${U(30)} ${U(40)} ${U(16)};text-align:center;border-bottom:${U(4)} solid ${t.a};margin:0 ${U(30)}">${nm.replace('<div style="font-size','<div style="color:#fbbf24;font-size')}<div style="margin-top:${U(8)};font-size:${U(22)};font-weight:600;letter-spacing:1px">ক্লাস ডায়েরি</div></div><div style="padding:${U(12)} ${U(40)} 0;display:flex;justify-content:space-between;align-items:center"><div>${chips.map(x=>chip(x,'#334155','#fbbf24')).join('')}</div><b style="font-size:${U(18)};color:${t.mut}">${dt}</b></div>`;
+ else if(t.hd==='note')hd=`<div style="padding:${U(34)} ${U(50)} 0 ${U(74)}"><div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:${U(3)} solid ${t.ink};padding-bottom:${U(8)}"><div>${nm}</div><div style="text-align:right"><div style="font-size:${U(26)};font-weight:700;color:${t.a}">ক্লাস ডায়েরি</div><div style="font-size:${U(17)};color:${t.mut}">${dt}</div></div></div><div style="margin-top:${U(10)}">${chips.map(x=>chip(x,'#fee2e2','#b91c1c')).join('')}</div></div>`;
+ else hd=`<div style="text-align:center;padding:${U(34)} ${U(40)} ${U(8)};color:${t.ink}">${nm}<div style="margin:${U(10)} auto 0;width:${U(220)};height:${U(3)};background:linear-gradient(90deg,transparent,${t.a},transparent)"></div><div style="margin-top:${U(8)};font-size:${U(26)};font-weight:700;color:${t.a};letter-spacing:1px">ক্লাস ডায়েরি</div><div style="margin-top:${U(8)}">${chips.map(x=>chip(x,'#1e2a4a','#f5d68a')).join('')}<b style="font-size:${U(18)};color:${t.mut};margin-left:${U(8)}">${dt}</b></div></div>`;
+ const padL=t.hd==='note'?74:40;
+ const blk=(lb,tx,c)=>`<div style="flex:1;min-width:0"><div style="font-size:${U(15)};font-weight:700;color:${c};letter-spacing:.3px;margin-bottom:${U(3)}">${lb}</div><div style="font-size:${U(21)};line-height:1.5;white-space:pre-wrap;word-break:break-word">${E(tx.trim())}</div></div>`;
+ const card=(x,i)=>{const c=pal[i%pal.length],hasT=(x.t||'').trim(),hasH=(x.h||'').trim(),nmE=E((x.s||'').trim()||'বিষয়');
+  const inner=`<div style="display:flex;gap:${U(22)}">${hasT?blk('আজকের পড়া',x.t,c):''}${hasH?blk('বাড়ির কাজ',x.h,t.hd==='royal'?'#b8892b':c):''}</div>`;
+  const base=`margin-bottom:${U(12)};`;
+  if(t.st==='bar')return `<div style="${base}background:${t.card};border-left:${U(7)} solid ${c};border-radius:${U(10)};padding:${U(12)} ${U(18)}"><div style="font-size:${U(24)};font-weight:700;color:${c};margin-bottom:${U(6)}">${nmE}</div>${inner}</div>`;
+  if(t.st==='chip')return `<div style="${base}background:#fff;border:${U(2)} solid ${c}33;border-top:${U(6)} solid ${c};border-radius:${U(14)};padding:${U(10)} ${U(18)} ${U(12)}"><span style="display:inline-block;background:${c};color:#fff;border-radius:999px;padding:${U(2)} ${U(18)};font-size:${U(21)};font-weight:700;margin-bottom:${U(8)}">${nmE}</span>${inner}</div>`;
+  if(t.st==='round')return `<div style="${base}background:#fff;border-radius:${U(24)};padding:${U(14)} ${U(22)};box-shadow:0 ${U(3)} ${U(10)} rgba(13,148,136,.15)"><div style="font-size:${U(24)};font-weight:700;color:${c};margin-bottom:${U(6)}">● ${nmE}</div>${inner}</div>`;
+  if(t.st==='line')return `<div style="${base}border-bottom:${U(2)} dashed #a8a29e;padding:${U(4)} 0 ${U(12)}"><div style="font-size:${U(25)};font-weight:700;color:${c};margin-bottom:${U(4)};text-decoration:underline;text-decoration-color:#a8a29e">${nmE}</div>${inner}</div>`;
+  return `<div style="${base}background:#fff;border:${U(1.5)} solid #1e2a4a;border-radius:${U(4)};overflow:hidden"><div style="background:#1e2a4a;color:#f5d68a;font-size:${U(22)};font-weight:700;padding:${U(5)} ${U(18)}">${nmE}</div><div style="padding:${U(10)} ${U(18)} ${U(12)}">${inner}</div></div>`};
+ const note=(e.note||'').trim()?`<div style="margin-top:${U(4)};background:${night?'#334155':'#fff7e0'};border:${U(2)} dashed ${t.a};border-radius:${U(10)};padding:${U(10)} ${U(18)};font-size:${U(20)};line-height:1.45"><b style="color:${t.a}">📌 নোট: </b>${E(e.note.trim())}</div>`:'';
+ const ft=`<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:${U(10)} ${U(40)} ${U(22)} ${U(padL)};font-size:${U(15)};color:${t.mut}"><div>${E(inst())}${ad?' · '+E(ad):''}</div><div style="text-align:center;min-width:${U(150)}"><div style="border-top:${U(1.5)} solid ${t.mut};padding-top:${U(3)}">শিক্ষকের স্বাক্ষর</div></div></div>`;
+ const decor=t.hd==='royal'?`<div style="position:absolute;inset:${U(14)};border:${U(4)} double #b8892b;pointer-events:none"></div><div style="position:absolute;inset:${U(24)};border:${U(1)} solid #1e2a4a;pointer-events:none"></div>`:t.hd==='note'?`<div style="position:absolute;inset:0;background:repeating-linear-gradient(transparent 0,transparent ${U(37)},#bfdbfe ${U(37)},#bfdbfe ${U(38)});opacity:.7;pointer-events:none"></div><div style="position:absolute;left:${U(58)};top:0;bottom:0;width:${U(2)};background:#fca5a5;pointer-events:none"></div>`:'';
+ return `<div class="dgp" style="--u:1;position:relative;width:794px;height:1123px;overflow:hidden;box-sizing:border-box;background:${t.bg};color:${t.ink};font-family:'Hind Siliguri',sans-serif;display:flex;flex-direction:column">${decor}<div style="position:relative;flex:none">${hd}</div><div class="dgb" style="position:relative;flex:1;min-height:0;overflow:hidden;padding:${U(18)} ${U(40)} 0 ${U(padL)}">${subs.map(card).join('')}${note}</div><div style="position:relative;flex:none">${ft}</div></div>`}
+function dFit(root){const b=root.querySelector('.dgb');if(!b)return;let u=1.45;for(;u>0.5;u-=0.05){root.style.setProperty('--u',u.toFixed(2));if(b.scrollHeight<=b.clientHeight+1)break}if(u<=0.5)root.style.setProperty('--u','0.5')}
+function dScale(){const r=$('#smDb');if(!r)return;r.querySelectorAll('.dgp').forEach(dFit);r.querySelectorAll('[data-dsc]').forEach(pp=>{const i=pp.firstElementChild,w=pp.clientWidth;if(i&&w)i.style.transform='scale('+(w/794)+')'})}
+window.addEventListener('resize',()=>{clearTimeout(window.__dsr);window.__dsr=setTimeout(dScale,120)});
+let dBlob=null,dBk='';
+async function dMake(e,tp){const key=JSON.stringify([e.subs,e.note,e.d,e.c,e.b,e.sh,tp,inst()]);if(dBlob&&dBk===key)return dBlob;
+ if(!window.html2canvas)throw new Error('lib');try{await document.fonts.ready}catch(x){}
+ const h=document.createElement('div');h.style.cssText='position:fixed;left:-9999px;top:0;width:794px;height:1123px';h.innerHTML=dSheet(e,tp);document.body.appendChild(h);
+ try{const el=h.firstChild;dFit(el);const cv=await html2canvas(el,{scale:2,backgroundColor:null,useCORS:true,width:794,height:1123,windowWidth:794});dBlob=await new Promise(r=>cv.toBlob(r,'image/png'));dBk=key;return dBlob}finally{h.remove()}}
+async function dImg(kind,text){const e=dEntry(false);if(!dFilled(e))return toast('আগে অন্তত একটা বিষয়ের পড়া বা বাড়ির কাজ লেখো');
+ toast('ছবি তৈরি হচ্ছে…');let bl;try{bl=await dMake(e,dTp())}catch(x){return toast('ছবি বানানো যায়নি — ইন্টারনেট দরকার, না হলে লেখা শেয়ার করো')}
+ const nm='class-diary-'+e.d,f=new File([bl],nm+'.png',{type:'image/png'});
+ if(kind==='copy'){try{await navigator.clipboard.write([new ClipboardItem({'image/png':bl})]);toast('ছবি কপি হয়েছে ✓ — WhatsApp-এ পেস্ট করো')}catch(x){toast('এই ব্রাউজারে ছবি কপি হয় না — সেভ করো')}return}
+ if(kind==='share'){const d={files:[f],text:text||dMsg(e,'g',null)};if(navigator.canShare&&navigator.canShare(d)){try{await navigator.share(d)}catch(x){}return}
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]})}catch(x){}return}}
+ const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=nm+'.png';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast('ছবি সেভ হয়েছে ✓')}
 function rD(){
  const v=V.D,T=todayS(),mo=v.d.slice(0,7),cl=clsListAt(mo),b=$('#smDb');
  if(!cl.length){b.innerHTML=emptyStu();return}
@@ -5359,37 +5430,52 @@ function rD(){
  v.sh=v.sh||'*';if(v.sh!=='*'&&!shList(v.c,mo).some(x=>x[0]===v.sh))v.sh='*';
  const e=dEntry(false)||{d:v.d,c:v.c,b:v.b==='*'?'':v.b,sh:v.sh==='*'?'':v.sh,subs:[],note:'',sent:{}},used=new Set(e.subs.map(s=>(s.s||'').trim())),maxD=addD(T,7),prev=!e.subs.length?dPrevSubs(v.c,v.d):[];
  const list=inClsAt(v.c,bq(v),mo),first=list[0],pend=dPending(v.c,T,e.k);
- b.innerHTML=`<div class="sm-dh"><div><b>${WDN[pIso(v.d).getDay()]}${v.d===T?' · আজ':''}</b><small>${dLabel(v.d)}</small></div><div style="display:flex;gap:6px;align-items:center"><button class="sm-nv" data-a="dp" aria-label="আগের দিন">‹</button><button class="sm-nv" data-a="dn" ${v.d>=maxD?'disabled':''} aria-label="পরের দিন">›</button><button class="sm-nv" data-a="pick" aria-label="তারিখ বাছো">📅</button>${v.d!==T?'<button class="btn s" data-a="today">আজ</button>':''}<input type="date" id="smdd" value="${v.d}" style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none" tabindex="-1"></div></div>
- <div class="sm-chs">${cl.map(([c,n])=>`<button class="sm-ch${v.c===c?' on':''}" data-a="dc" data-c="${E(c)}">শ্রেণি ${E(bn(c))} <b>${bn(n)}</b></button>`).join('')}</div>${bChips(v.c,v.b,'data-a="db" data-b',mo)}${shChips(v.c,v.sh,'data-a="dsh" data-h',mo)}
- <div class="sm-hero" style="padding:14px 16px"><div class="sm-hr"><div><small>শ্রেণি ${E(bn(v.c))}${dLb(v.b,v.sh)?' · '+E(dLb(v.b,v.sh)):''} · ক্লাস ডায়েরি</small><div class="sm-big" style="font-size:28px">${bn(e.subs.filter(s=>(s.t||'').trim()||(s.h||'').trim()).length)}<em>টি বিষয় লেখা হয়েছে</em></div></div></div><div class="sm-hs"><span>${bn(list.length)} জন শিক্ষার্থী</span><span id="dsv">${e.id?'✓ নিজে থেকে সেভ হয়':'নতুন ডায়েরি'}</span>${e.id&&Object.keys(e.sent||{}).length?`<span>${bn(Object.keys(e.sent).length)} জনকে পাঠানো</span>`:''}</div></div>
- ${pend?`<div class="sm-warn" data-a="dhwo" data-k="${E(pend.k)}">📝<b>${dLabel(pend.d)}-এর বাড়ির কাজ যাচাই করা বাকি — কে করেনি দেখো</b>›</div>`:''}
+const tab=v.tab|0,nF=e.subs.filter(x=>(x.t||'').trim()||(x.h||'').trim()).length,tp=dTp(),filled=dFilled(e);
+ const head=`<div class="sm-dh"><div><b>${WDN[pIso(v.d).getDay()]}${v.d===T?' · আজ':''}</b><small>${dLabel(v.d)}</small></div><div style="display:flex;gap:6px;align-items:center"><button class="sm-nv" data-a="dp" aria-label="আগের দিন">‹</button><button class="sm-nv" data-a="dn" ${v.d>=maxD?'disabled':''} aria-label="পরের দিন">›</button><button class="sm-nv" data-a="pick" aria-label="তারিখ বাছো">📅</button>${v.d!==T?'<button class="btn s" data-a="today">আজ</button>':''}<input type="date" id="smdd" value="${v.d}" style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none" tabindex="-1"></div></div>
+ <div class="dg-flt"><div class="sm-chs">${cl.map(([c,n])=>`<button class="sm-ch${v.c===c?' on':''}" data-a="dc" data-c="${E(c)}">শ্রেণি ${E(bn(c))} <b>${bn(n)}</b></button>`).join('')}</div>${bChips(v.c,v.b,'data-a="db" data-b',mo)}${shChips(v.c,v.sh,'data-a="dsh" data-h',mo)}</div>
+ <div class="dg-st"><span class="dg-n"><b id="dnf">${bn(nF)}</b> টি বিষয়</span><span>${bn(list.length)} জন</span><span id="dsv">${e.id?'✓ নিজে থেকে সেভ':'নতুন'}</span>${e.id&&Object.keys(e.sent||{}).length?`<span>${bn(Object.keys(e.sent).length)} জনকে পাঠানো</span>`:''}</div>
+ <div class="sm-seg dg-tabs">${['✏️ লেখো','🖼 ছবি ও বার্তা','✅ যাচাই ও ইতিহাস'].map((t,i)=>`<button data-a="dtab" data-v="${i}" class="${tab===i?'on':''}">${t}${i===2&&pend?'<i class="dg-dot"></i>':''}</button>`).join('')}</div>`;
+ let body='';
+ if(tab===0){
+  body=`${pend?`<div class="sm-warn" data-a="dhwo" data-k="${E(pend.k)}">📝<b>${dLabel(pend.d)}-এর বাড়ির কাজ যাচাই করা বাকি — কে করেনি দেখো</b>›</div>`:''}
  ${prev.length?`<div class="sm-warn" data-a="dpre">📋<b>আগের ডায়েরির বিষয়গুলো (${E(prev.slice(0,4).join(', '))}${prev.length>4?'…':''}) দিয়ে শুরু করো</b>›</div>`:''}
- <p class="sub" style="margin:0 4px 6px;color:var(--mut);font-size:12.5px">বিষয় যোগ করো — যতগুলো ইচ্ছা, একসাথে অনেক বিষয়ের পড়া ও বাড়ির কাজ দেওয়া যায়</p>
- <div class="sm-chs">${dSubList().filter(s=>!used.has(s)).map(s=>`<button class="sm-ch" data-a="dsub" data-s="${E(s)}">+ ${E(s)}</button>`).join('')}<button class="sm-ch" data-a="dsub" data-s="">+ অন্য বিষয়</button></div>
- <div id="dcards">${e.subs.map((s,i)=>`<div class="sm-card" data-i="${i}"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><input data-f="s" value="${E(s.s||'')}" placeholder="বিষয়ের নাম" autocomplete="off" style="font-weight:700"><button class="sm-ic" data-a="dsx" data-i="${i}" aria-label="বিষয় মুছো">🗑</button></div><label style="font-weight:600">আজকের পড়ানো টপিক</label><textarea data-f="t" placeholder="যেমন: অধ্যায় ৩ — ত্রিভুজের ক্ষেত্রফল, উদাহরণ ১–৫">${E(s.t||'')}</textarea><label style="font-weight:600;margin-top:8px;display:block">বাড়ির কাজ</label><textarea data-f="h" placeholder="যেমন: অনুশীলনী ৩.২ এর ১–৮ নম্বর">${E(s.h||'')}</textarea></div>`).join('')}</div>
+ <div class="dg-add"><small>বিষয় যোগ করো <em>(ছবিতে সর্বোচ্চ ৫টি বিষয় সুন্দর দেখায়)</em></small><div class="sm-chs">${dSubList().filter(x=>!used.has(x)).map(x=>`<button class="sm-ch" data-a="dsub" data-s="${E(x)}">+ ${E(x)}</button>`).join('')}<button class="sm-ch" data-a="dsub" data-s="">+ অন্য বিষয়</button></div></div>
+ <div id="dcards" class="dg-cards">${e.subs.map((x,i)=>`<div class="sm-card dg-sc" data-i="${i}"><div class="dg-sh"><input data-f="s" value="${E(x.s||'')}" placeholder="বিষয়ের নাম" autocomplete="off"><button class="sm-ic" data-a="dsx" data-i="${i}" aria-label="বিষয় মুছো">🗑</button></div><div class="dg-2"><div><label>আজকের পড়ানো টপিক</label><textarea data-f="t" rows="2" placeholder="যেমন: অধ্যায় ৩ — ত্রিভুজের ক্ষেত্রফল">${E(x.t||'')}</textarea></div><div><label>বাড়ির কাজ</label><textarea data-f="h" rows="2" placeholder="যেমন: অনুশীলনী ৩.২ এর ১–৮">${E(x.h||'')}</textarea></div></div></div>`).join('')}</div>
  ${e.subs.length?'':`<div class="sm-emp"><i>📖</i><b>এখনো কোনো বিষয় নেই</b>উপরের “+ গণিত” ইত্যাদিতে চাপ দিয়ে বিষয় যোগ করো।</div>`}
- <div class="sm-card"><label style="font-weight:600">পরবর্তী পরীক্ষা / বিশেষ নোট (ঐচ্ছিক, সব বিষয়ের নিচে যাবে)</label><input id="smdn" value="${E(e.note||'')}" placeholder="যেমন: শুক্রবার ক্লাস টেস্ট — অধ্যায় ২ ও ৩" autocomplete="off"></div>
- <div class="sm-seg"><button data-a="dpt" data-v="p" class="${v.pt==='p'?'on':''}">অভিভাবককে আলাদা বার্তা</button><button data-a="dpt" data-v="g" class="${v.pt==='g'?'on':''}">গ্রুপের বার্তা</button></div>
- <div class="sm-bub" id="dbub">${E(dMsg(e,v.pt,v.pt==='p'?first:null))}</div>
- <p class="sub" style="margin:6px 4px 12px;font-size:12px">${v.pt==='p'?'প্রতিটা অভিভাবকের কাছে নাম ধরে আলাদা বার্তা যাবে (নমুনায় প্রথম শিক্ষার্থীর নাম)।':'গ্রুপের বার্তায় নির্দিষ্ট কারও নাম থাকে না — সব অভিভাবকের জন্য একটাই।'}</p>
- <div class="sm-card"><div class="sm-two" style="margin:0 0 8px"><button class="btn p" data-a="dsend">📩 অভিভাবকদের আলাদা আলাদা পাঠাও</button><button class="btn" data-a="dgrp">👥 গ্রুপে পাঠাও</button></div><div class="sm-two" style="margin:0"><button class="btn" data-a="dcpy">📋 গ্রুপের বার্তা কপি</button><button class="btn" data-a="dcfg">⚙️ বার্তা সেটিংস</button></div><div class="sm-two one" style="margin:8px 0 0"><button class="btn" data-a="dcto">📑 অন্য শ্রেণিতেও কপি করো</button></div></div>
- <div class="sm-card" style="border-color:rgba(245,158,11,.45)"><b style="font-size:15px">✅ বাড়ির কাজ যাচাই</b><p class="sub" style="margin:3px 0 10px;font-size:12.5px">${e.hwv?dHwSum(e):'পরদিন কে বাড়ির কাজ করেনি মার্ক করো — শুধু তার অভিভাবককে আলাদা বার্তা যাবে।'}</p><button class="btn p" data-a="dhw">${e.hwv?'যাচাই দেখো / বদলাও':'বাড়ির কাজ যাচাই করো'}</button></div>
- ${dHist()}`;
+ <div class="sm-card"><label style="font-weight:600">পরবর্তী পরীক্ষা / বিশেষ নোট <small style="font-weight:400;color:var(--mut)">(ঐচ্ছিক)</small></label><input id="smdn" value="${E(e.note||'')}" placeholder="যেমন: শুক্রবার ক্লাস টেস্ট — অধ্যায় ২ ও ৩" autocomplete="off"></div>
+ ${e.subs.length?`<button class="btn p dg-go" data-a="dtab" data-v="1">🖼 ছবি ও বার্তা দেখো ›</button>`:''}`;
+ }else if(tab===1){
+  const ed=filled?e:dDemo(e);
+  body=`<div class="dg-two"><div class="dg-l"><div class="dg-pvb" data-dsc><div class="dg-thi">${dSheet(ed,tp)}</div></div>${filled?'':'<p class="sub" style="text-align:center;margin:6px 0 0;font-size:12px">এটা নমুনা — “লেখো” ট্যাবে লিখলে তোমার লেখা বসবে</p>'}</div>
+  <div class="dg-r">
+   <div class="sm-card"><b class="dg-t1">🎨 ডিজাইন বাছো <small>ডানে-বামে সোয়াইপ করো</small></b><div class="dg-tpl">${DTP.map(t=>`<button class="dg-t${tp===t.id?' on':''}" data-a="dtp" data-v="${t.id}"><span class="dg-thm" data-dsc><span class="dg-thi">${dSheet(ed,t.id)}</span></span><em>${t.n}</em></button>`).join('')}</div>
+   <div class="dg-bt"><button class="btn p" data-a="dimg" data-k="share">📤 ছবি পাঠাও</button><button class="btn" data-a="dimg" data-k="save">⬇ ছবি সেভ</button>${window.ClipboardItem?'<button class="btn" data-a="dimg" data-k="copy">📋 ছবি কপি</button>':''}</div>
+   <p class="sub" style="margin:8px 2px 0;font-size:12px">ফোনে “ছবি পাঠাও” চাপলে WhatsApp বেছে নিয়ে গ্রুপ বা কন্ট্যাক্টে ছবি যায়। পিসিতে ছবি সেভ বা কপি করে WhatsApp Web-এ দাও।</p></div>
+   <div class="sm-card"><div class="sm-seg" style="margin-bottom:10px"><button data-a="dpt" data-v="p" class="${v.pt==='p'?'on':''}">অভিভাবককে আলাদা</button><button data-a="dpt" data-v="g" class="${v.pt==='g'?'on':''}">গ্রুপের বার্তা</button></div>
+   <div class="sm-bub dg-bub" id="dbub">${E(dMsg(e,v.pt,v.pt==='p'?first:null))}</div>
+   <div class="sm-two" style="margin:10px 0 8px"><button class="btn p" data-a="dsend">📩 অভিভাবকদের আলাদা পাঠাও</button><button class="btn" data-a="dgrp">👥 গ্রুপে পাঠাও</button></div><div class="sm-two" style="margin:0"><button class="btn" data-a="dcpy">📋 গ্রুপের বার্তা কপি</button><button class="btn" data-a="dcfg">⚙️ বার্তা সেটিংস</button></div><div class="sm-two one" style="margin:8px 0 0"><button class="btn" data-a="dcto">📑 অন্য শ্রেণিতেও কপি করো</button></div></div>
+  </div></div>`;
+ }else{
+  body=`<div class="dg-two2"><div class="sm-card" style="border-color:rgba(245,158,11,.45)"><b style="font-size:15px">✅ বাড়ির কাজ যাচাই</b><p class="sub" style="margin:3px 0 10px;font-size:12.5px">${e.hwv?dHwSum(e):'পরদিন কে বাড়ির কাজ করেনি মার্ক করো — শুধু তার অভিভাবককে আলাদা বার্তা যাবে।'}</p><button class="btn p" data-a="dhw">${e.hwv?'যাচাই দেখো / বদলাও':'বাড়ির কাজ যাচাই করো'}</button></div>
+  <div>${dHist()}</div></div>`;
+ }
+ b.innerHTML=head+body;dScale();
+ if(tab===1&&filled){clearTimeout(window.__dpre);window.__dpre=setTimeout(()=>{dMake(e,tp).catch(()=>{})},500)}
 }
 function dHist(){
  const v=V.D,l=SM.diary.filter(x=>x.c===v.c).sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0).slice(0,12);
  return `<div class="sm-lb" style="margin-top:18px">আগের ডায়েরি (শ্রেণি ${E(bn(v.c))})</div>`+(l.length?l.map(x=>`<div class="sm-row" data-a="dload" data-k="${E(x.k)}" style="flex-wrap:wrap"><div class="sm-nm"><b>${dLabel(x.d)}${dLb(x.b,x.sh)?' · '+E(dLb(x.b,x.sh)):''}</b><small>${E(x.subs.map(s=>(s.s||'').trim()).filter(Boolean).join(' · ')||'—')}${x.hwv?' · '+E(dHwSum(x)):''}</small></div>${Object.keys(x.sent||{}).length?`<span class="sm-pl g">${bn(Object.keys(x.sent).length)} জনকে পাঠানো</span>`:'<span class="sm-pl n">পাঠানো হয়নি</span>'}<button class="sm-ic" data-a="dhdel" data-k="${E(x.k)}" aria-label="মুছো">🗑</button></div>`).join(''):'<div class="sm-emp" style="padding:22px"><b>এখনো কোনো ডায়েরি সেভ হয়নি</b></div>');
 }
 function dPreview(){const v=V.D,e=dEntry(false)||{d:v.d,c:v.c,b:v.b==='*'?'':v.b,sh:v.sh==='*'?'':v.sh,subs:[],note:'',sent:{}},list=inClsAt(v.c,bq(v),v.d.slice(0,7)),el=$('#dbub');if(el)el.textContent=dMsg(e,v.pt,v.pt==='p'?list[0]:null);const s=$('#dsv');if(s)s.textContent='✓ সেভ হয়েছে';
- const n=$('#smDb .sm-big');if(n)n.innerHTML=bn(e.subs.filter(x=>(x.t||'').trim()||(x.h||'').trim()).length)+'<em>টি বিষয় লেখা হয়েছে</em>'}
+ const n=$('#dnf');if(n)n.textContent=bn(e.subs.filter(x=>(x.t||'').trim()||(x.h||'').trim()).length)}
 function dSend(){
  const v=V.D,e=dEntry(false);if(!dFilled(e))return toast('আগে অন্তত একটা বিষয়ের পড়া বা বাড়ির কাজ লেখো');
  const list=inClsAt(v.c,bq(v),v.d.slice(0,7)),att=SM.att[v.d]||{};e.sent=e.sent||{};
  const paint=box=>{const n=Object.keys(e.sent).filter(i=>list.some(s=>s.id===i)).length;box.querySelector('#ds_c').textContent=bn(n)+'/'+bn(list.length)+' জনকে পাঠানো হয়েছে';
   box.querySelector('#ds_l').innerHTML=list.map(s=>`<div class="sm-hi" style="border-top:0"><span><b>${E(s.n)}</b>${att[s.id]==='a'?' <span class="sm-pl r" style="padding:1px 8px;font-size:11px">আজ অনুপস্থিত</span>':''}<br><small style="color:var(--mut)">${s.p?E((s.g?s.g+' · ':'')+bn(s.p)):'নম্বর নেই — প্রোফাইলে যোগ করো'}</small></span><button class="btn s ${e.sent[s.id]?'':'p'}" ${e.sent[s.id]?'':'style="color:#fff"'} data-s="${s.id}">${e.sent[s.id]?'✓ আবার':'পাঠাও'}</button></div>`).join('');
-  box.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const s=list.find(x=>x.id===b.dataset.s);e.sent[s.id]=1;smSave();openWa(s.p,dMsg(e,'p',s));paint(box);rD()})};
- sheet(`<h3>অভিভাবকদের আলাদা আলাদা পাঠাও</h3><p class="sub" id="ds_c"></p><p class="sub" style="margin-top:-8px">প্রতিটা অভিভাবকের WhatsApp নাম ধরে আলাদা বার্তাসহ খোলে। যাদের পাঠানো হয়েছে তাদের ✓ থাকে।</p><div class="sm-btns" style="margin:0 0 6px"><button class="btn p" id="ds_nx">▶ পরের বাকি জনকে খোলো</button></div><div id="ds_l"></div>`,box=>{paint(box);
-  box.querySelector('#ds_nx').onclick=()=>{const s=list.find(x=>!e.sent[x.id]&&x.p)||list.find(x=>!e.sent[x.id]);if(!s)return toast('সবাইকে পাঠানো হয়ে গেছে ✓');e.sent[s.id]=1;smSave();openWa(s.p,dMsg(e,'p',s));paint(box);rD()}})}
+  box.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const s=list.find(x=>x.id===b.dataset.s);snd(s);paint(box);rD()})};let box0=null;const snd=s=>{e.sent[s.id]=1;smSave();const im=box0&&box0.querySelector('#ds_img')&&box0.querySelector('#ds_img').checked;SM.cfg.dwi=im?1:0;if(im)dImg('share',dMsg(e,'p',s));else openWa(s.p,dMsg(e,'p',s))};
+ sheet(`<h3>অভিভাবকদের আলাদা আলাদা পাঠাও</h3><p class="sub" id="ds_c"></p><p class="sub" style="margin-top:-8px">প্রতিটা অভিভাবকের WhatsApp নাম ধরে আলাদা বার্তাসহ খোলে। যাদের পাঠানো হয়েছে তাদের ✓ থাকে।</p><label style="display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;font-size:13.5px;line-height:1.5"><input type="checkbox" id="ds_img" ${SM.cfg.dwi?'checked':''} style="margin-top:4px;flex:none"><span>🖼 ডায়েরির ছবিসহ পাঠাও <small style="color:var(--mut)">(শেয়ার মেনু খোলে — WhatsApp-এ কন্ট্যাক্ট নিজে বাছতে হবে)</small></span></label><div class="sm-btns" style="margin:0 0 6px"><button class="btn p" id="ds_nx">▶ পরের বাকি জনকে খোলো</button></div><div id="ds_l"></div>`,box=>{box0=box;paint(box);
+  box.querySelector('#ds_nx').onclick=()=>{const s=list.find(x=>!e.sent[x.id]&&x.p)||list.find(x=>!e.sent[x.id]);if(!s)return toast('সবাইকে পাঠানো হয়ে গেছে ✓');snd(s);paint(box);rD()}})}
 function dGroup(){const e=dEntry(false);if(!dFilled(e))return toast('আগে অন্তত একটা বিষয়ের পড়া বা বাড়ির কাজ লেখো');window.open('https://wa.me/?text='+encodeURIComponent(dMsg(e,'g',null)),'_blank');toast('WhatsApp-এ গ্রুপ বেছে নাও')}
 async function dCopy(){const e=dEntry(false);if(!dFilled(e))return toast('আগে অন্তত একটা বিষয়ের পড়া বা বাড়ির কাজ লেখো');const t=dMsg(e,'g',null);
  try{await navigator.clipboard.writeText(t)}catch(x){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}toast('গ্রুপের বার্তা কপি হয়েছে ✓ — গ্রুপে পেস্ট করো')}
@@ -5398,7 +5484,7 @@ function dCfg(){
  <div class="sm-f"><label>অভিভাবককে আলাদা বার্তা</label><textarea id="dc_p" style="min-height:130px">${E(SM.cfg.m_dp||DEFM.dp)}</textarea></div>
  <div class="sm-f"><label>গ্রুপের বার্তা</label><textarea id="dc_g" style="min-height:130px">${E(SM.cfg.m_dg||DEFM.dg)}</textarea></div>
  <div class="sm-f"><label>বাড়ির কাজ না করলে — অভিভাবককে বার্তা</label><textarea id="dc_h" style="min-height:120px">${E(SM.cfg.m_dh||DEFM.dh)}</textarea></div>
- <p class="sub" style="margin:0 0 4px">ব্যবহারযোগ্য শব্দ: {অভিভাবক} {নাম} {শ্রেণি} {তারিখ} {ডায়েরি} {নোট} {প্রতিষ্ঠান}<br>{ডায়েরি} জায়গায় সব বিষয়ের পড়া ও বাড়ির কাজ বসবে। বাড়ির কাজের বার্তায় আরও: {বিষয়} {অবস্থা}</p>
+ <p class="sub" style="margin:0 0 4px">ব্যবহারযোগ্য শব্দ: {অভিভাবক} {নাম} {শ্রেণি} {তারিখ} {ডায়েরি} {নোট} {প্রতিষ্ঠান}<br>{ডায়েরি} জায়গায় সব বিষয়ের পড়া ও বাড়ির কাজ বসবে। বাড়ির কাজের বার্তায় আরও: {বিষয়} {অবস্থা} {দিন} ({দিন} = আজকের / গতকালের / আগামীকালের, নইলে “২৪ নভেম্বর ২০২৬ তারিখের”)</p>
  <div class="sm-btns"><button class="btn" id="dc_rs">আগের মতো</button><button class="btn p" id="dc_ok">সংরক্ষণ</button></div>`,box=>{
   box.querySelector('#dc_rs').onclick=()=>{box.querySelector('#dc_p').value=DEFM.dp;box.querySelector('#dc_g').value=DEFM.dg;box.querySelector('#dc_h').value=DEFM.dh};
   box.querySelector('#dc_ok').onclick=()=>{const p=box.querySelector('#dc_p').value.trim(),g=box.querySelector('#dc_g').value.trim(),h=box.querySelector('#dc_h').value.trim();SM.cfg.m_dp=p&&p!==DEFM.dp?p:'';SM.cfg.m_dg=g&&g!==DEFM.dg?g:'';SM.cfg.m_dh=h&&h!==DEFM.dh?h:'';smSave();closeSheet();rD();toast('সংরক্ষিত ✓')}})}
@@ -5416,7 +5502,8 @@ function dCopyTo(){
 const dHwCnt=e=>{const hw=e.hw||{},ids=inClsAt(e.c,dQ(e),e.d.slice(0,7)).map(s=>s.id),no=ids.filter(i=>hw[i]&&hw[i].st==='a').length,pt=ids.filter(i=>hw[i]&&hw[i].st==='l').length;return {t:ids.length,no,pt,ok:ids.length-no-pt}};
 const dHwSum=e=>{const c=dHwCnt(e);return bn(c.ok)+'/'+bn(c.t)+' জন করেছে'+(c.pt?' · '+bn(c.pt)+' আংশিক':'')+(c.no?' · '+bn(c.no)+' জন করেনি':'')};
 function dPending(c,T,curK){const l=SM.diary.filter(x=>x.c===c&&x.d<T&&!x.hwv&&x.k!==curK&&x.subs.some(s=>(s.h||'').trim())).sort((a,b)=>a.d<b.d?1:-1);return l[0]}
-const dMsgH=(e,s,h)=>fill(SM.cfg.m_dh||DEFM.dh,{'অভিভাবক':s.g||'অভিভাবক','নাম':s.n,'শ্রেণি':bn(e.c),'তারিখ':dLabel(e.d),'বিষয়':h.m&&h.m.length?' ('+h.m.join(', ')+')':'','অবস্থা':h.st==='l'?'সম্পূর্ণ করেনি':'করেনি','প্রতিষ্ঠান':inst(),'ডায়েরি':dText(e),'নোট':''});
+const dRel=d=>{const T=todayS();return d===T?'আজকের':d===addD(T,-1)?'গতকালের':d===addD(T,1)?'আগামীকালের':dLabel(d)+' তারিখের'};
+const dMsgH=(e,s,h)=>fill(SM.cfg.m_dh||DEFM.dh,{'অভিভাবক':s.g||'অভিভাবক','নাম':s.n,'শ্রেণি':bn(e.c),'তারিখ':dLabel(e.d),'দিন':dRel(e.d),'বিষয়':h.m&&h.m.length?' ('+h.m.join(', ')+')':'','অবস্থা':h.st==='l'?'সম্পূর্ণ করেনি':'করেনি','প্রতিষ্ঠান':inst(),'ডায়েরি':dText(e),'নোট':''});
 function dHw(){
  const e=dEntry(false);if(!e||!e.subs.some(s=>(s.h||'').trim()))return toast('এই দিনে কোনো বাড়ির কাজ লেখা নেই');
  const list=inClsAt(e.c,dQ(e),e.d.slice(0,7)),att=SM.att[e.d]||{},hs=e.subs.filter(s=>(s.h||'').trim()).map(s=>(s.s||'').trim()).filter(Boolean);e.hw=e.hw||{};
@@ -5515,6 +5602,8 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v154',d:'২৪ নভেম্বর ২০২৬',t:['📩 বাড়ির কাজ না করার বার্তা: “আপনার সন্তান … আজকের/গতকালের/আগামীকালের বাড়ির কাজ করেনি” — আরও আগে-পরে হলে তারিখসহ']},
+{v:'v153',d:'২৪ নভেম্বর ২০২৬',t:['🖼 ক্লাস ডায়েরি: A4 ছবি — ৬টি টেমপ্লেট, লাইভ প্রিভিউ, ছবি পাঠাও/সেভ/কপি','🧩 ডায়েরির পেজ ছোট করে ৩ ভাগে: লেখো · ছবি ও বার্তা · যাচাই ও ইতিহাস','📩 অভিভাবকদের আলাদা পাঠানোর সময় “ছবিসহ” অপশন']},
 {v:'v152',d:'২৩ নভেম্বর ২০২৬',t:['📋 রেজাল্ট কপি করলে নাম ও রোল থাকে, কিন্তু সব নম্বর (বিষয়, মোট, Previous Marks/Position) খালি থাকে']},
 {v:'v151',d:'২৩ নভেম্বর ২০২৬',t:['🎨 ক্লাস/পরীক্ষা রুটিনের ডিজাইন তালিকা এখন ডানে-বামে সোয়াইপ করা যায় (পেজ আর লম্বা হয় না); বাছা ডিজাইন মাঝখানে স্থির থাকে']},
 {v:'v150',d:'২৩ নভেম্বর ২০২৬',t:['🔤 রেজাল্ট ট্যাবে নতুন "ফন্ট" অপশন — ডিফল্টসহ ১৫টি ফন্ট (বাংলা ৯, ইংরেজি ৫), নির্বাচন করলেই প্রিভিউ বদলায়']},
@@ -5909,7 +5998,7 @@ wire('#smDb',{
   setTimeout(()=>{const cs=document.querySelectorAll('#dcards .sm-card'),c=cs[cs.length-1];if(c){const el=c.querySelector(nm?'[data-f=t]':'[data-f=s]');if(el)el.focus();c.scrollIntoView({block:'center',behavior:'smooth'})}},60)},
  dsx:t=>{const e=dEntry(false);if(!e)return;const sn=undoPrep();e.subs.splice(+t.dataset.i,1);dClean();smSave();rD();undoShow('বিষয়টা মুছে ফেলা হয়েছে',sn)},
  dpre:()=>{const e=dEntry(true);dPrevSubs(V.D.c,V.D.d).forEach(s=>e.subs.push({s,t:'',h:''}));smSave();rD()},
- dpt:t=>{V.D.pt=t.dataset.v;rD()},dhw:dHw,dhwo:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.c=e.c;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();dHw()}},dsend:dSend,dgrp:dGroup,dcpy:dCopy,dcfg:dCfg,dcto:dCopyTo,
+ dpt:t=>{V.D.pt=t.dataset.v;rD()},dtab:t=>{V.D.tab=+t.dataset.v;rD()},dtp:t=>{V.D.tp=t.dataset.v;SM.cfg.dtp=t.dataset.v;smSave();const sc=document.querySelector('#smDb .dg-tpl').scrollLeft;rD();const n=document.querySelector('#smDb .dg-tpl');if(n)n.scrollLeft=sc;const on=n&&n.querySelector('.on');if(on)n.scrollTo({left:on.offsetLeft-(n.clientWidth-on.offsetWidth)/2,behavior:'smooth'})},dimg:t=>dImg(t.dataset.k),dhw:dHw,dhwo:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.c=e.c;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();dHw()}},dsend:dSend,dgrp:dGroup,dcpy:dCopy,dcfg:dCfg,dcto:dCopyTo,
  dload:t=>{const e=SM.diary.find(x=>x.k===t.dataset.k);if(e){V.D.d=e.d;V.D.b=e.b||'*';V.D.sh=e.sh||'*';rD();scrollTo(0,0)}},
  dhdel:t=>{const sn=undoPrep();SM.diary=SM.diary.filter(x=>x.k!==t.dataset.k);smSave();rD();undoShow('ডায়েরি মুছে ফেলা হয়েছে',sn)}});
 $('#smDb').addEventListener('input',e=>{const t=e.target;if(t.id==='smdn'){const en=dEntry(true);en.note=t.value;smSave();dPreview();return}
