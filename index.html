@@ -13950,7 +13950,7 @@ async function tplLoad() {
         <div style="background:linear-gradient(135deg,#4285f4,#0f9d58);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">✨</div>
         <div>
           <div style="font-weight:700;font-size:0.95rem;">Gemini API</div>
-          <div style="font-size:0.72rem;color:var(--text-muted);">gemini-2.0-flash • প্রতিদিন ১,৫০০ request ফ্রি</div>
+          <div style="font-size:0.72rem;color:var(--text-muted);">Gemini ফ্রি টিয়ার • লিমিট AI Studio-তে দেখো</div>
         </div>
         <div id="aiGeminiStatus" style="margin-left:auto;font-size:0.72rem;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.05);color:var(--text-muted);border:1px solid var(--border);">লোড হচ্ছে...</div>
       </div>
@@ -15746,20 +15746,27 @@ async function _tAiCallGroq(messages, key) {
 }
 
 async function _tAiCallGemini(messages, key) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
   const systemPrompt = messages.find(m => m.role === 'system')?.content || '';
   const history = messages.filter(m => m.role !== 'system');
   const contents = history.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] }));
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ system_instruction: { parts: [{ text: systemPrompt }] }, contents, generationConfig: { maxOutputTokens: 1024, temperature: 0.7 } })
-  });
-  const data = await res.json();
-  if(!res.ok) throw new Error(data.error?.message || 'Gemini error');
-  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if(!reply) throw new Error('Gemini: empty reply');
-  return reply;
+  const models = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash'];
+  let lastErr = 'Gemini error';
+  for (const mdl of models) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${key}`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ system_instruction: { parts: [{ text: systemPrompt }] }, contents, generationConfig: { maxOutputTokens: 2048, temperature: 0.7 } })
+      });
+      const data = await res.json();
+      if(!res.ok) { lastErr = data.error?.message || ('Gemini error ' + res.status); if(res.status === 400 || res.status === 401 || res.status === 403) break; continue; }
+      const reply = (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
+      if(!reply) { lastErr = 'Gemini: empty reply'; continue; }
+      return reply;
+    } catch(e) { lastErr = e.message || 'Gemini network error'; }
+  }
+  throw new Error(lastErr);
 }
 
 async function tAiSirSend() {
@@ -15815,14 +15822,14 @@ async function tAiSirSend() {
     // Groq চেষ্টা
     if(groqData?.active && groqData?.key) {
       try { reply = await _tAiCallGroq(messages, groqData.key); }
-      catch(e) { console.warn('Teacher Groq failed:', e.message); }
+      catch(e) { console.warn('Teacher Groq failed:', e.message); (window._aiE=window._aiE||[]).push('Groq: '+e.message); }
     }
     // Gemini Fallback
     if(!reply && geminiData?.active && geminiData?.key) {
       try { reply = await _tAiCallGemini(messages, geminiData.key); }
-      catch(e) { console.warn('Teacher Gemini failed:', e.message); }
+      catch(e) { console.warn('Teacher Gemini failed:', e.message); (window._aiE=window._aiE||[]).push('Gemini: '+e.message); }
     }
-    if(!reply) throw new Error('উভয় API ব্যর্থ হয়েছে');
+    if(!reply) throw new Error((window._aiE||[]).join(' | ') || 'কোনো Key চালু নেই — Key দিয়ে "চালু করো" চাপো');
 
     _tAiHistory.push({ role: 'user', content: text });
     _tAiHistory.push({ role: 'assistant', content: reply });
@@ -15845,12 +15852,13 @@ async function tAiSirSend() {
       </div>`);
 
   } catch(e) {
+    window._aiE = [];
     document.getElementById(typingId)?.remove();
     area.insertAdjacentHTML('beforeend', `
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:32px;height:32px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;">🤖</div>
         <div style="background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.2);border-radius:4px 16px 16px 16px;padding:12px 14px;max-width:85%;">
-          <div style="font-size:0.85rem;color:#ff4d6d;">❌ API কাজ করছে না। Key চালু আছে কিনা দেখো।</div>
+          <div style="font-size:0.85rem;color:#ff4d6d;">❌ API কাজ করছে না।<div style="font-size:0.72rem;opacity:.85;margin-top:6px;word-break:break-word;">${String((e&&e.message)||'').replace(/[<>&]/g,'').slice(0,300)}</div></div>
         </div>
       </div>`);
   }
@@ -19156,6 +19164,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v174',d:'২৬ নভেম্বর ২০২৬',t:['🤖 AI স্যার: Gemini-র পুরোনো মডেল (gemini-2.0-flash) Google বন্ধ করে দিয়েছে — নতুন মডেলে বদলানো হয়েছে, একটা না চললে পরেরটা চেষ্টা করে','⚠️ AI স্যার ব্যর্থ হলে এখন আসল কারণ (যেমন Key ভুল/লিমিট শেষ) লেখা দেখায়']},
 {v:'v173',d:'২৬ নভেম্বর ২০২৬',t:['🖥️ শিক্ষক প্যানেল (পিসি): চ্যাট, হোমওয়ার্কসহ কয়েকটি পেজ পুরো স্ক্রিন জুড়ে ছড়িয়ে যেত — এখন সব পেজ মাঝখানে সমান মাপে']},
 {v:'v172',d:'২৬ নভেম্বর ২০২৬',t:['🔧 শিক্ষক প্যানেল: অপশন থেকে বেরিয়ে এলে নিচে AI স্যারের অংশ দেখা যাওয়ার সমস্যা ঠিক করা হয়েছে','🧩 এক লাইনে ৩টি করে কার্ড — পেজ ছোট ও গোছানো']},
 {v:'v171',d:'২৬ নভেম্বর ২০২৬',t:['🎨 শিক্ষক প্যানেলের নতুন লুক — ওপরের সোয়াইপ-ট্যাব বাদ, তার বদলে হোমের মতো কার্ড-গ্রিড (ফোনে ২ কলাম, পিসিতে ৩ কলাম); কার্ডে চাপলে সেই অপশন খোলে, "← সব অপশন" চাপলে ফেরা যায়']},
