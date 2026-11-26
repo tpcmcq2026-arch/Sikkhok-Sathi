@@ -4432,13 +4432,15 @@ body.hub-tab #hubBar{display:flex}
 .hub-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 2px 14px}
 .hub-hd b{display:block;font-size:1.15rem;color:var(--text)}.hub-hd small{color:var(--text-muted);font-size:.78rem}
 .hub-lo{font-family:inherit;font-size:.78rem;font-weight:600;padding:8px 14px;border-radius:50px;cursor:pointer;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#f87171;white-space:nowrap}
-.hub-g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(min-width:620px){.hub-g{grid-template-columns:repeat(3,1fr);gap:14px}}
-.hub-t{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;text-align:left;font-family:inherit;color:var(--text);cursor:pointer;padding:14px;border-radius:18px;border:1.5px solid var(--border);background:var(--surface);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 17%,var(--surface)),var(--surface));border-color:color-mix(in srgb,var(--c) 40%,transparent);-webkit-tap-highlight-color:transparent;transition:transform .15s,box-shadow .15s}
+.hub-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+@media(min-width:620px){.hub-g{gap:14px}}
+body.hub-on [id$="Page"]{display:none!important}
+.hub-t{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;text-align:left;font-family:inherit;color:var(--text);cursor:pointer;padding:11px 9px;border-radius:16px;border:1.5px solid var(--border);background:var(--surface);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 17%,var(--surface)),var(--surface));border-color:color-mix(in srgb,var(--c) 40%,transparent);-webkit-tap-highlight-color:transparent;transition:transform .15s,box-shadow .15s}
 .hub-t:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.28)}.hub-t:active{transform:scale(.98)}
-.hub-t i{font-style:normal;font-size:22px;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:var(--c);box-shadow:0 4px 12px rgba(0,0,0,.28)}
-.hub-t b{display:block;font-size:.98rem;line-height:1.25}.hub-t span{display:block;font-size:.76rem;line-height:1.3;color:var(--text-muted)}
-.hub-t u{position:absolute;right:12px;top:10px;text-decoration:none;color:var(--text-muted);font-size:1.3rem}
+.hub-t i{font-style:normal;font-size:20px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--c);box-shadow:0 4px 12px rgba(0,0,0,.28)}
+.hub-t b{display:block;font-size:.84rem;line-height:1.25}.hub-t span{display:block;font-size:.68rem;line-height:1.3;color:var(--text-muted)}
+@media(min-width:620px){.hub-t{padding:14px}.hub-t i{width:46px;height:46px;font-size:22px}.hub-t b{font-size:.98rem}.hub-t span{font-size:.76rem}}
+.hub-t u{display:none}
 #hubBar{position:sticky;top:0;z-index:50;align-items:center;gap:10px;margin:-6px 0 14px;padding:8px 10px;border-radius:50px;background:var(--surface);border:1px solid var(--border);box-shadow:0 4px 14px rgba(0,0,0,.25)}
 #hubBar button{font-family:inherit;font-size:.8rem;font-weight:600;padding:8px 16px;border:0;border-radius:50px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--accent),#0056c7);white-space:nowrap}
 #hubBar b{font-size:.95rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -16059,7 +16061,7 @@ document.querySelectorAll('#mainTabs .tab-btn').forEach(function(b){var r=/switc
 var t=document.createElement('button');t.className='hub-t';t.style.setProperty('--c',d[3]);t.innerHTML='<i>'+d[0]+'</i><div><b>'+d[1]+'</b><span>'+d[2]+'</span></div><u>›</u>';
 t.onclick=function(){hubGo(k,d[0]+' '+d[1])};g.appendChild(t)});
 window.hubGo=function(k,l){bd.classList.remove('hub-on');bd.classList.add('hub-tab');document.getElementById('hubT').textContent=l;switchTab(k);window.scrollTo(0,0)};
-window.hubHome=function(){bd.classList.remove('hub-tab');bd.classList.add('hub-on');window.scrollTo(0,0)};
+window.hubHome=function(){bd.classList.remove('hub-tab');bd.classList.add('hub-on');try{switchTab('__hub')}catch(e){}window.scrollTo(0,0)};
 window.hubBack=function(){if(bd.classList.contains('hub-tab')){hubHome();return true}return false};
 var s0=showTeacherMode;showTeacherMode=function(){s0.apply(this,arguments);hubHome()};
 var l0=logout;logout=function(){l0.apply(this,arguments);bd.classList.remove('hub-on','hub-tab')};
@@ -19152,6 +19154,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v172',d:'২৬ নভেম্বর ২০২৬',t:['🔧 শিক্ষক প্যানেল: অপশন থেকে বেরিয়ে এলে নিচে AI স্যারের অংশ দেখা যাওয়ার সমস্যা ঠিক করা হয়েছে','🧩 এক লাইনে ৩টি করে কার্ড — পেজ ছোট ও গোছানো']},
 {v:'v171',d:'২৬ নভেম্বর ২০২৬',t:['🎨 শিক্ষক প্যানেলের নতুন লুক — ওপরের সোয়াইপ-ট্যাব বাদ, তার বদলে হোমের মতো কার্ড-গ্রিড (ফোনে ২ কলাম, পিসিতে ৩ কলাম); কার্ডে চাপলে সেই অপশন খোলে, "← সব অপশন" চাপলে ফেরা যায়']},
 {v:'v170',d:'২৬ নভেম্বর ২০২৬',t:['🧑‍🏫 নতুন: হোম স্ক্রিনে "শিক্ষক প্যানেল" — আগের শিক্ষক অ্যাপ এখন শিক্ষক সাথীর ভেতরেই পুরো স্ক্রিনে খোলে (ফোন ও পিসি দুটোতেই)','🔗 পরীক্ষার লিংক খুললে সরাসরি পরীক্ষার পাতা আসে']},
 {v:'v169',d:'২৬ নভেম্বর ২০২৬',t:['📷 শিক্ষকের ফর্মের ছবির নিচের লেখা ঠিক করা হয়েছে — শিক্ষকের ছবি শুধু আইডি কার্ডে বসে, প্রবেশপত্রে নয়']},
