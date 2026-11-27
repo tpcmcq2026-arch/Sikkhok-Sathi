@@ -19235,6 +19235,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v177',d:'২৭ নভেম্বর ২০২৬',t:['👤 বৃত্তি ফলাফল লিংক ও অভিভাবক ফল লিংকে পরীক্ষার্থীর নাম এখন শিক্ষক ও শিক্ষার্থী ট্যাব থেকে বাংলায় আসবে (বাংলা নাম না থাকলে ইংরেজি) — লিংক হালনাগাদ করলে নতুন নাম যাবে']},
 {v:'v176',d:'২৭ নভেম্বর ২০২৬',t:['🔧 রেজাল্ট ট্যাবে "অভিভাবক ফল লিংক" ও "বৃত্তি ফলাফল লিংক" বাটন ক্লিকে কিছু হচ্ছিল না — ঠিক করা হয়েছে']},
 {v:'v175',d:'২৭ নভেম্বর ২০২৬',t:['💬 শিক্ষক প্যানেলের চ্যাট: শিক্ষকের মেসেজ এখন ডানে, ছাত্রের মেসেজ বামে','🤖 শিক্ষক অ্যাপের বাইরে থাকলে ছাত্র মেসেজ দিলেই প্রতিবার auto-reply যাবে (ছাত্র অ্যাপ v48_4 লাগবে)','🧮 AI স্যার: গণিতের ভগ্নাংশ, ×, ÷, √, ঘাত পরিষ্কারভাবে দেখাবে']},
 {v:'v174',d:'২৬ নভেম্বর ২০২৬',t:['🤖 AI স্যার: Gemini-র পুরোনো মডেল (gemini-2.0-flash) Google বন্ধ করে দিয়েছে — নতুন মডেলে বদলানো হয়েছে, একটা না চললে পরেরটা চেষ্টা করে','⚠️ AI স্যার ব্যর্থ হলে এখন আসল কারণ (যেমন Key ভুল/লিমিট শেষ) লেখা দেখায়']},
@@ -20621,6 +20622,12 @@ function waWire(box,ctx,save,redraw){
   if(k==='cp'){const tx=gm();try{await navigator.clipboard.writeText(tx)}catch(x){const a=document.createElement('textarea');a.value=tx;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(y){}a.remove()}toast('বার্তা কপি হয়েছে ✓')}
   else if(k==='gp'){window.open('https://wa.me/?text='+encodeURIComponent(gm()),'_blank')}
   })}
+/* ---- ফল লিংকে নাম: Students ট্যাব থেকে বাংলা নাম (না থাকলে ইংরেজি, না মিললে শিটের নাম) ---- */
+const stBn=(r,s)=>{const nm=x=>String(x||'').trim().toLowerCase().replace(/\s+/g,' '),a=String(s.nb||'').trim(),b=String(s.n||'').trim(),fb=a||b,k=[nm(a),nm(b)].filter(Boolean);
+ try{let m=(SM.st||[]).filter(x=>x&&(!r.cls||en(String(x.c||''))===en(String(r.cls)))&&(k.includes(nm(x.n))||k.includes(nm(x.e))));
+ if(m.length>1&&s.rl){const q=m.filter(x=>x.r&&en(String(x.r))===en(String(s.rl)));if(q.length)m=q}
+ if(m.length===1)return String(m[0].n||'').trim()||String(m[0].e||'').trim()||fb}catch(e){}
+ return fb};
 function bsOpen(pid){
  const b=bsC(),Rs=J('trsm_results',[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
  if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
@@ -20635,7 +20642,7 @@ function bsOpen(pid){
   const tli=ms=>{const d=new Date(ms-new Date(ms).getTimezoneOffset()*6e4);return d.toISOString().slice(0,16)};
   const keys=()=>{const c={};return r.students.map(s=>{const n=String(s.n||'').trim();if(!n)return null;c[n]=(c[n]||0)+1;return c[n]>1?n+' #'+c[n]:n})};
   const auto=s=>isAb(s.m)?'N':bsRes(schOf(r,s,mv(r,s)));
-  const fin=(S,i)=>{const s=r.students[i],k=keys()[i],w=S.rows[k]||{},d=S.d;return{n:String(s.nb||s.n).trim(),rl:bsRoll(w.rl||''),rs:w.rs||auto(s),sc:(w.sc||d.sc||'').trim(),up:(w.up||d.up||'').trim(),dt:(w.dt||d.dt||'').trim(),dv:(w.dv||d.dv||'').trim()}};
+  const fin=(S,i)=>{const s=r.students[i],k=keys()[i],w=S.rows[k]||{},d=S.d;return{n:stBn(r,s),rl:bsRoll(w.rl||''),rs:w.rs||auto(s),sc:(w.sc||d.sc||'').trim(),up:(w.up||d.up||'').trim(),dt:(w.dt||d.dt||'').trim(),dv:(w.dv||d.dv||'').trim()}};
   const draw=()=>{const S=S0(),ks=keys(),rows=r.students.map((s,i)=>ks[i]==null?'':(()=>{const w=S.rows[ks[i]]||{},a=auto(s);
    return`<div class="sm-card" style="padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px"><b style="font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis">${E(String(s.n).trim())}</b><select data-i="${i}" data-f="rs" style="max-width:48%;width:auto;padding:6px"><option value="">স্বয়ংক্রিয়: ${BSN[a]}</option>${['T','G','N'].map(x=>`<option value="${x}"${w.rs===x?' selected':''}>${BSN[x]}</option>`).join('')}</select></div>
    <div class="sm-g2" style="margin-bottom:6px"><input data-i="${i}" data-f="rl" inputmode="numeric" placeholder="বৃত্তির রোল *" value="${E(w.rl||'')}"><input data-i="${i}" data-f="sc" placeholder="${E(S.d.sc||'বিদ্যালয়')}" value="${E(w.sc||'')}"></div>
@@ -20696,7 +20703,7 @@ function prOpen(pid){
   const S0=()=>{const S=b.sh[K()]=b.sh[K()]||{};if(S.yr==null)S.yr=r.date?String(r.date).slice(-4):'';if(S.title==null)S.title='পরীক্ষার ফল';if(!S.m134){S.m134=1;S.title=String(S.title).replace(/\s*[–-]\s*\d{4}$/,'').trim()||'পরীক্ষার ফল';if(S.title===r.exam)S.title='পরীক্ষার ফল'}if(typeof S.open!=='number')S.open=0;return S};
   const tli=ms=>{const d=new Date(ms-new Date(ms).getTimezoneOffset()*6e4);return d.toISOString().slice(0,16)};
   const jb=t=>MSJB[String(t||'').toLowerCase()]||t;
-  const data=()=>{const d=msData(r),c=r.cols;return d.list.map(x=>{const s=x.s;return{n:String(s.nb||s.n).trim(),rl:bsRoll(c.roll?s.rl:''),ab:x.ab?1:0,fail:x.fail?1:0,g:x.g,gp:x.gp,pos:x.pos,m:x.m,rem:x.rem?(MSRB[x.rem]||x.rem):'',rows:CMP.filter(([k])=>c[k]).map(([k,l])=>({l:isXk(k)?(xi(r,k,'b')||l):jb(l),f:num(r[k+'Full']),p:num(r[k+'Pass']),v:s[k]===''||s[k]==null?'':String(s[k]),b:qf(r,s,k)?1:0})),F:d.F}})};
+  const data=()=>{const d=msData(r),c=r.cols;return d.list.map(x=>{const s=x.s;return{n:stBn(r,s),rl:bsRoll(c.roll?s.rl:''),ab:x.ab?1:0,fail:x.fail?1:0,g:x.g,gp:x.gp,pos:x.pos,m:x.m,rem:x.rem?(MSRB[x.rem]||x.rem):'',rows:CMP.filter(([k])=>c[k]).map(([k,l])=>({l:isXk(k)?(xi(r,k,'b')||l):jb(l),f:num(r[k+'Full']),p:num(r[k+'Pass']),v:s[k]===''||s[k]==null?'':String(s[k]),b:qf(r,s,k)?1:0})),F:d.F}})};
   const draw=()=>{const S=S0(),L=data(),withRoll=L.filter(x=>x.rl).length,no=L.length-withRoll;
    q('#pr_b').innerHTML=`<div class="sm-g2"><div class="sm-f"><label>পাতার শিরোনাম</label><input id="pr_t" value="${E(S.title)}"></div><div class="sm-f"><label>পরীক্ষার সন</label><input id="pr_y" value="${E(S.yr||'')}" inputmode="numeric"></div></div><div class="sm-f"><label>ফল দেখা যাবে যখন (খালি = এখনই)</label><input id="pr_o" type="datetime-local" value="${S.open?tli(S.open):''}"></div><div class="sm-f"><label>ফল দেখা বন্ধ হবে যখন (খালি রাখলে বন্ধ হবে না)</label><input id="pr_c" type="datetime-local" value="${S.close?tli(S.close):''}"><div style="font-size:12px;color:var(--mut);margin-top:4px">এই সময়ের পর রোল দিয়ে খুঁজলেও ফল দেখা যাবে না।</div></div>
    ${r.cols.roll?'':'<div class="sm-card" style="padding:10px;margin:8px 0;border:1px solid #f59e0b"><b>⚠️ এই শিটে Roll কলাম চালু নেই।</b> রেজাল্ট শিটে Roll কলাম চালু করে রোল লিখে তারপর আসো।</div>'}
