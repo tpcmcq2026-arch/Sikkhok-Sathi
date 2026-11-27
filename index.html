@@ -3490,6 +3490,9 @@ html[data-mode=dark] .qwarn{background:#3b2a07;color:#fcd34d}
     catch(e) { return null; }
   };
 
+  window.fbTeacherPresence = async function(active) {
+    try { await setDoc(doc(db,"settings","teacherPresence"),{active:!!active,ts:Date.now()}); return true; } catch(e) { return false; }
+  };
   window.fbSendTeacherChatAsAuto = async function({studentName, text}) {
     try {
       await addDoc(collection(db,"chat"),{studentName,text,sender:'teacher',sentAt:serverTimestamp(),seenByTeacher:true,seenByStudent:false,autoReply:true});
@@ -4425,6 +4428,18 @@ hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
 
 </style>
 <style id="hubcss">
+.t-chat-row{display:flex;align-items:flex-start;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;margin-bottom:6px;width:100%}
+.t-chat-row.t-teacher-row{justify-content:flex-end}
+.t-chat-row.t-student-row{justify-content:flex-start}
+.t-chat-row.t-teacher-row::before{content:'↩';opacity:0;font-size:1.1rem;padding:0 6px;transition:opacity .2s;flex-shrink:0;order:-1;color:var(--accent)}
+.t-chat-row.t-student-row::after{content:'↩';opacity:0;font-size:1.1rem;padding:0 6px;transition:opacity .2s;flex-shrink:0;color:var(--accent)}
+.t-chat-row.swiping::before,.t-chat-row.swiping::after{opacity:1}
+.aim-f{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.3;font-size:1em}
+.aim-f>span:first-child{border-bottom:1.5px solid currentColor;padding:0 5px 1px}
+.aim-f>span:last-child{padding:1px 5px 0}
+.aim-r{border-top:1.5px solid currentColor;padding:0 2px;margin-left:1px}
+.aim-b{margin:8px 0;padding:9px 12px;background:rgba(139,92,246,.13);border-left:3px solid #8b5cf6;border-radius:8px;text-align:center;font-size:1.05em;overflow-x:auto;line-height:1.9}
+.aim-i{white-space:nowrap}
 #tabsWrap{display:none!important}
 #tpHub,#hubBar{display:none}
 body.hub-on #tpHub{display:block}body.hub-on #mainApp{display:none!important}
@@ -11944,7 +11959,7 @@ function chatStartListen() {
         !m.autoReply &&
         !_prevMsgIds.has(m._id)
       );
-      if(newStudentMsgs.length > 0 && window.fbGetAutoReply && window.fbSendTeacherChatAsAuto) {
+      if(false && newStudentMsgs.length > 0 && window.fbGetAutoReply && window.fbSendTeacherChatAsAuto) { /* auto-reply এখন ছাত্র অ্যাপ থেকে যায় (শিক্ষক অফলাইনে থাকলে) */
         const ar = await window.fbGetAutoReply();
         if(ar && ar.enabled && ar.text) {
           for(const m of newStudentMsgs) {
@@ -15769,6 +15784,58 @@ async function _tAiCallGemini(messages, key) {
   throw new Error(lastErr);
 }
 
+/* AI উত্তর → পরিষ্কার গণিত/টেক্সট (LaTeX → সহজ চিহ্ন, ভগ্নাংশ উপর-নিচে) */
+function aiFmt(raw){
+  var s=String(raw==null?'':raw).replace(/\r/g,'');
+  s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  var SY={times:'×',div:'÷',cdot:'·',pm:'±',mp:'∓',le:'≤',leq:'≤',ge:'≥',geq:'≥',ne:'≠',neq:'≠',approx:'≈',to:'→',rightarrow:'→',Rightarrow:'⇒',leftarrow:'←',leftrightarrow:'↔',infty:'∞',pi:'π',theta:'θ',alpha:'α',beta:'β',gamma:'γ',delta:'δ',Delta:'Δ',lambda:'λ',mu:'μ',sigma:'σ',omega:'ω',Omega:'Ω',phi:'φ',degree:'°',circ:'°',therefore:'∴',because:'∵',angle:'∠',triangle:'△',perp:'⊥',parallel:'∥',sum:'∑',int:'∫',propto:'∝',cup:'∪',cap:'∩',subset:'⊂',emptyset:'∅',ldots:'…',dots:'…',cdots:'…'};
+  function bal(t,re,n,fn){
+    var last;
+    for(var guard=0;guard<50;guard++){
+      var m,pos=-1,mm=null;re.lastIndex=0;
+      while((m=re.exec(t))){var e=m.index+m[0].length;var ok=true,g=[],p=e;
+        for(var i=0;i<n;i++){while(t[p]===' ')p++;if(t[p]!=='{'){ok=false;break;}var d=0,q=p;for(;q<t.length;q++){if(t[q]==='{')d++;else if(t[q]==='}'){d--;if(!d)break;}}if(d){ok=false;break;}g.push(t.slice(p+1,q));p=q+1;}
+        if(ok){pos=m.index;mm={m:m,g:g,end:p};}
+        if(m[0].length===0)re.lastIndex++;
+      }
+      if(!mm)return t;
+      t=t.slice(0,mm.m.index)+fn(mm.g,mm.m)+t.slice(mm.end);
+    }
+    return t;
+  }
+  function tex(t,whole){
+    t=t.replace(/\\(?:left|right|bigl|bigr|big|Big)(?![A-Za-z])\s*/g,'').replace(/\\(?:quad|qquad)(?![A-Za-z])/g,' ').replace(/\\[,;:! ]/g,' ');
+    t=t.replace(/\^\s*\{?\\circ\}?/g,'°');
+    t=t.replace(/\\(?:text|mathrm|mathbf|textbf|mathit|operatorname|mbox)\s*\{([^{}]*)\}/g,'$1');
+    t=bal(t,/\\[dt]?frac(?![A-Za-z])/g,2,function(g){return '<span class="aim-f"><span>'+g[0].trim()+'</span><span>'+g[1].trim()+'</span></span>';});
+    t=t.replace(/\\sqrt\s*\[([^\]]*)\]/g,'\\rt$1 ');
+    t=bal(t,/\\rt([^\s{]*) ?(?=\{)/g,1,function(g,m){return '<sup>'+m[1]+'</sup>√<span class="aim-r">'+g[0]+'</span>';});
+    t=bal(t,/\\sqrt(?![A-Za-z])\s*/g,1,function(g){return '√<span class="aim-r">'+g[0]+'</span>';});
+    t=t.replace(/\\sqrt\s*([A-Za-z0-9০-৯]+)/g,'√$1');
+    t=bal(t,/\^\s*(?=\{)/g,1,function(g){return '<sup>'+g[0]+'</sup>';});
+    t=t.replace(/\^\s*([A-Za-z0-9০-৯])/g,'<sup>$1</sup>');
+    if(!whole){t=bal(t,/_\s*(?=\{)/g,1,function(g){return '<sub>'+g[0]+'</sub>';});t=t.replace(/_\s*([A-Za-z0-9০-৯])/g,'<sub>$1</sub>');}
+    t=t.replace(/\\%/g,'%').replace(/\\&amp;/g,'&amp;').replace(/\\\\/g,'<br>');
+    t=t.replace(/\\([A-Za-z]+)/g,function(_,w){return SY[w]!==undefined?SY[w]:w;});
+    t=t.replace(/[{}]/g,'');
+    return t;
+  }
+  s=s.replace(/\\\$/g,'\u0004');
+  s=s.replace(/\$\$([\s\S]+?)\$\$/g,function(_,m){return '<div class="aim-b">'+tex(m)+'</div>';});
+  s=s.replace(/\\\[([\s\S]+?)\\\]/g,function(_,m){return '<div class="aim-b">'+tex(m)+'</div>';});
+  s=s.replace(/\\\(([\s\S]+?)\\\)/g,function(_,m){return '<span class="aim-i">'+tex(m)+'</span>';});
+  s=s.replace(/\$(?=\S)([^$\n]*?\S)\$/g,function(_,m){return '<span class="aim-i">'+tex(m)+'</span>';});
+  if(/\\[A-Za-z]/.test(s)) s=tex(s,true);
+  s=s.replace(/([A-Za-z0-9০-৯\)])\^\{([^{}\s]+)\}/g,'$1<sup>$2</sup>').replace(/([A-Za-z0-9০-৯\)])\^([A-Za-z0-9০-৯]+)/g,'$1<sup>$2</sup>');
+  s=s.replace(/\u0004/g,'$');
+  s=s.replace(/(^|\n)([ \t]*)[*\-][ \t]+/g,'$1$2• ');
+  s=s.replace(/([A-Za-z0-9০-৯\)])[ \t]*(?<!\*)\*(?!\*)[ \t]*(?=[A-Za-z0-9০-৯\(])/g,'$1 × ');
+  s=s.replace(/\*\*([\s\S]+?)\*\*/g,'<strong>$1</strong>').replace(/\*([^*\n]+)\*/g,'<em>$1</em>');
+  s=s.replace(/^#{1,4}[ \t]+(.+)$/gm,'<div style="font-weight:700;color:#a78bfa;margin:6px 0 2px;">$1</div>');
+  s=s.replace(/(<\/div>)\n/g,'$1').replace(/\n/g,'<br>');
+  return s;
+}
+
 async function tAiSirSend() {
   const inp = document.getElementById('tAiInput');
   const text = inp.value.trim();
@@ -15810,7 +15877,8 @@ async function tAiSirSend() {
     const groqData   = keys.groq   || null;
     const geminiData = keys.gemini || null;
 
-    const systemPrompt = `তুমি একজন বাংলাদেশী শিক্ষক। তোমার নাম "AI স্যার"। তুমি তৌফিক প্রাইভেট সেন্টার এর ছাত্রদের পড়াও। সবসময় বাংলায় উত্তর দাও। সহজ ও বন্ধুত্বপূর্ণ ভাষায় বোঝাও। গণিত, বিজ্ঞান, বাংলা, ইংরেজি, ইতিহাস সব বিষয়ে সাহায্য করো। উত্তর সংক্ষিপ্ত ও স্পষ্ট রাখো।`;
+    const systemPrompt = `তুমি একজন বাংলাদেশী শিক্ষক। তোমার নাম "AI স্যার"। তুমি তৌফিক প্রাইভেট সেন্টার এর ছাত্রদের পড়াও। সবসময় বাংলায় উত্তর দাও। সহজ ও বন্ধুত্বপূর্ণ ভাষায় বোঝাও। গণিত, বিজ্ঞান, বাংলা, ইংরেজি, ইতিহাস সব বিষয়ে সাহায্য করো। উত্তর সংক্ষিপ্ত ও স্পষ্ট রাখো।
+গণিত/বিজ্ঞানের নিয়ম: কখনোই LaTeX বা $ চিহ্ন ব্যবহার করবে না। গুণ ×, ভাগ ÷, বর্গমূল √, ঘাত x², ভগ্নাংশ ১/২ — সাধারণ চিহ্নে লিখবে। সূত্র আলাদা লাইনে, সমাধান ধাপে ধাপে।`;
     const messages = [
       { role: 'system', content: systemPrompt },
       ..._tAiHistory,
@@ -15837,11 +15905,7 @@ async function tAiSirSend() {
 
     document.getElementById(typingId)?.remove();
 
-    const formatted = reply
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/^#{1,3}\s+(.+)$/gm, '<div style="font-weight:700;color:#a78bfa;margin:6px 0 2px;">$1</div>')
-      .replace(/\n/g, '<br>');
+    const formatted = aiFmt(reply);
 
     area.insertAdjacentHTML('beforeend', `
       <div style="display:flex;gap:10px;align-items:flex-start;">
@@ -16073,8 +16137,15 @@ t.onclick=function(){hubGo(k,d[0]+' '+d[1])};g.appendChild(t)});
 window.hubGo=function(k,l){bd.classList.remove('hub-on');bd.classList.add('hub-tab');document.getElementById('hubT').textContent=l;switchTab(k);window.scrollTo(0,0)};
 window.hubHome=function(){bd.classList.remove('hub-tab');bd.classList.add('hub-on');try{switchTab('__hub')}catch(e){}window.scrollTo(0,0)};
 window.hubBack=function(){if(bd.classList.contains('hub-tab')){hubHome();return true}return false};
-var s0=showTeacherMode;showTeacherMode=function(){s0.apply(this,arguments);hubHome()};
-var l0=logout;logout=function(){l0.apply(this,arguments);bd.classList.remove('hub-on','hub-tab')};
+var P={logged:false,vis:true};
+function pOn(){return P.logged&&P.vis&&document.visibilityState!=='hidden'}
+function pPush(){try{if(window.fbTeacherPresence)window.fbTeacherPresence(pOn())}catch(e){}}
+window.__tpSet=function(k,v){P[k]=v;pPush()};
+setInterval(function(){if(pOn())pPush()},30000);
+document.addEventListener('visibilitychange',pPush);
+window.addEventListener('pagehide',function(){P.vis=false;pPush()});
+var s0=showTeacherMode;showTeacherMode=function(){s0.apply(this,arguments);hubHome();P.logged=true;P.vis=true;pPush()};
+var l0=logout;logout=function(){l0.apply(this,arguments);bd.classList.remove('hub-on','hub-tab');P.logged=false;pPush()};
 })();
 </script>
 </body>
@@ -17005,11 +17076,11 @@ LS.setItem('trsm_sess','1');enter()};
 function enter(){$('#login').classList.add('hide');showHome()}
 loginUI();if(LS.getItem('trsm_sess')&&U)enter();
 /* ---- শিক্ষক প্যানেল (v34 অ্যাপ এমবেড) ---- */
-function openTw(ex){const tp=$('#twp');if(!tp)return;$('#home').classList.add('hide');tp.classList.toggle('ex',!!ex);tp.classList.remove('hide');document.body.style.overflow='hidden';
+function openTw(ex){const tp=$('#twp');if(!tp)return;$('#home').classList.add('hide');tp.classList.toggle('ex',!!ex);tp.classList.remove('hide');document.body.style.overflow='hidden';try{tp.querySelector('iframe').contentWindow.__tpSet('vis',true)}catch(e){}
  if(!tp.querySelector('iframe')){let s='';try{s=$('#tw_src').textContent.replace(/\ue000/g,'')}catch(e){}
   const f=document.createElement('iframe');f.title='শিক্ষক প্যানেল';f.allow='camera; microphone; clipboard-read; clipboard-write; fullscreen; geolocation';
   f.onload=()=>$('#twl').classList.add('hide');f.srcdoc=s;tp.appendChild(f)}}
-function twClose(){const tp=$('#twp');if(!tp||tp.classList.contains('hide'))return;tp.classList.add('hide');document.body.style.overflow=''}
+function twClose(){const tp=$('#twp');if(!tp||tp.classList.contains('hide'))return;tp.classList.add('hide');document.body.style.overflow='';try{tp.querySelector('iframe').contentWindow.__tpSet('vis',false)}catch(e){}}
 $('#twph').onclick=()=>{try{const f=$('#twp iframe');if(f&&f.contentWindow.hubBack&&f.contentWindow.hubBack())return}catch(e){}showHome()};
 try{const q=new URLSearchParams(location.search).get('exam');if(q){$('#login').classList.add('hide');openTw(true)}}catch(e){}
 
@@ -19164,6 +19235,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v175',d:'২৭ নভেম্বর ২০২৬',t:['💬 শিক্ষক প্যানেলের চ্যাট: শিক্ষকের মেসেজ এখন ডানে, ছাত্রের মেসেজ বামে','🤖 শিক্ষক অ্যাপের বাইরে থাকলে ছাত্র মেসেজ দিলেই প্রতিবার auto-reply যাবে (ছাত্র অ্যাপ v48_4 লাগবে)','🧮 AI স্যার: গণিতের ভগ্নাংশ, ×, ÷, √, ঘাত পরিষ্কারভাবে দেখাবে']},
 {v:'v174',d:'২৬ নভেম্বর ২০২৬',t:['🤖 AI স্যার: Gemini-র পুরোনো মডেল (gemini-2.0-flash) Google বন্ধ করে দিয়েছে — নতুন মডেলে বদলানো হয়েছে, একটা না চললে পরেরটা চেষ্টা করে','⚠️ AI স্যার ব্যর্থ হলে এখন আসল কারণ (যেমন Key ভুল/লিমিট শেষ) লেখা দেখায়']},
 {v:'v173',d:'২৬ নভেম্বর ২০২৬',t:['🖥️ শিক্ষক প্যানেল (পিসি): চ্যাট, হোমওয়ার্কসহ কয়েকটি পেজ পুরো স্ক্রিন জুড়ে ছড়িয়ে যেত — এখন সব পেজ মাঝখানে সমান মাপে']},
 {v:'v172',d:'২৬ নভেম্বর ২০২৬',t:['🔧 শিক্ষক প্যানেল: অপশন থেকে বেরিয়ে এলে নিচে AI স্যারের অংশ দেখা যাওয়ার সমস্যা ঠিক করা হয়েছে','🧩 এক লাইনে ৩টি করে কার্ড — পেজ ছোট ও গোছানো']},
