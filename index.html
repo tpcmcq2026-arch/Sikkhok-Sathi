@@ -19235,6 +19235,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v176',d:'২৭ নভেম্বর ২০২৬',t:['🔧 রেজাল্ট ট্যাবে "অভিভাবক ফল লিংক" ও "বৃত্তি ফলাফল লিংক" বাটন ক্লিকে কিছু হচ্ছিল না — ঠিক করা হয়েছে']},
 {v:'v175',d:'২৭ নভেম্বর ২০২৬',t:['💬 শিক্ষক প্যানেলের চ্যাট: শিক্ষকের মেসেজ এখন ডানে, ছাত্রের মেসেজ বামে','🤖 শিক্ষক অ্যাপের বাইরে থাকলে ছাত্র মেসেজ দিলেই প্রতিবার auto-reply যাবে (ছাত্র অ্যাপ v48_4 লাগবে)','🧮 AI স্যার: গণিতের ভগ্নাংশ, ×, ÷, √, ঘাত পরিষ্কারভাবে দেখাবে']},
 {v:'v174',d:'২৬ নভেম্বর ২০২৬',t:['🤖 AI স্যার: Gemini-র পুরোনো মডেল (gemini-2.0-flash) Google বন্ধ করে দিয়েছে — নতুন মডেলে বদলানো হয়েছে, একটা না চললে পরেরটা চেষ্টা করে','⚠️ AI স্যার ব্যর্থ হলে এখন আসল কারণ (যেমন Key ভুল/লিমিট শেষ) লেখা দেখায়']},
 {v:'v173',d:'২৬ নভেম্বর ২০২৬',t:['🖥️ শিক্ষক প্যানেল (পিসি): চ্যাট, হোমওয়ার্কসহ কয়েকটি পেজ পুরো স্ক্রিন জুড়ে ছড়িয়ে যেত — এখন সব পেজ মাঝখানে সমান মাপে']},
@@ -20621,7 +20622,7 @@ function waWire(box,ctx,save,redraw){
   else if(k==='gp'){window.open('https://wa.me/?text='+encodeURIComponent(gm()),'_blank')}
   })}
 function bsOpen(pid){
- const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
+ const b=bsC(),Rs=J('trsm_results',[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
  if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
  let r=Rs.find(x=>x.id===(pid||b.last))||Rs[0];
  const lab=x=>{const t=[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';return t.length>34?t.slice(0,33)+'…':t};
@@ -20684,7 +20685,7 @@ function bsOpen(pid){
 window.bsOpen=bsOpen;
 /* ===== v132: অভিভাবকের জন্য পরীক্ষার ফল লিংক (রেজাল্ট শিট → রোল-সার্চ মার্কশিট) ===== */
 function prOpen(pid){
- const b=bsC(),Rs=(typeof R!=='undefined'?R:[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
+ const b=bsC(),Rs=J('trsm_results',[]).filter(r=>r&&Array.isArray(r.students)&&r.students.some(s=>String(s.n||'').trim()));
  if(!Rs.length){toast('আগে রেজাল্ট ট্যাবে একটা রেজাল্ট শিট বানাও');return}
  let r=Rs.find(x=>x.id===(pid||b.lastp))||Rs[0];
  const lab=x=>{const t=[x.exam,x.cls?'শ্রেণি '+x.cls:'',x.subject,x.date].filter(Boolean).join(' · ')||'রেজাল্ট শিট';return t.length>34?t.slice(0,33)+'…':t};
