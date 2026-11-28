@@ -1472,6 +1472,10 @@ html[data-mode=dark] .sm-pl.g{color:#6fdc9c}html[data-mode=dark] .sm-pl.y{color:
 /* ===== প্রশ্নপত্র (qp) ===== */
 #qp{--qsh:0px;min-height:100vh;background:var(--bg);padding-bottom:104px}
 #qp .rth #qph{justify-self:start}
+.qsib{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:4px 2px 6px}.qsib b{font-size:13px;color:var(--mut);margin-right:2px}
+.qsib button{min-width:38px;height:34px;padding:0 12px;border:1.5px solid var(--line);background:var(--card);color:inherit;border-radius:999px;font:inherit;font-weight:700;cursor:pointer}
+.qsib button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.qpvh .qsib{padding:0 4px 0 0;flex:none}
 .qp-seg{position:sticky;top:var(--rth,52px);z-index:15;display:flex;gap:8px;align-items:center;padding:8px 12px;background:var(--bg)}
 .qp-seg .sg{flex:1;display:flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px;box-shadow:var(--sh)}
 .qp-seg .sg button{flex:1;border:0;background:none;color:var(--mut);padding:9px 6px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer}
@@ -19235,6 +19239,8 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v182',d:'প্রশ্নপত্র এডিটরে সেট বদলানোর বাটন (ক | খ | গ)',t:['একই প্রশ্নপত্রের ক/খ/গ সেট থাকলে এডিটরে ও প্রিভিউয়ের ওপরে সেট-বাটন আসে — তালিকায় না গিয়ে এক ট্যাপে সেট বদলানো যায়','AI দিয়ে সেট তৈরির বার্তা স্পষ্ট করা হলো']},
+{v:'v181',d:'✨ AI চিত্র (প্রশ্নপত্র এডিটরে), অভিন্ন তথ্যভিত্তিক MCQ, ভগ্নাংশ বাগ ঠিক',t:['প্রশ্নপত্র এডিটরে "✨ AI চিত্র" বাটন — বাংলায় লিখলে ত্রিভুজ, আয়তক্ষেত্র, বৃত্ত, কোণ, সংখ্যারেখা, বার লেখচিত্র, পাই চার্ট, ভেন চিত্র নির্ভুল মাপে আঁকে; ভাসমান ছবি বা সরাসরি প্রশ্ন/উদ্দীপকে বসে','AI প্রশ্নপত্র নিজেই দরকারি প্রশ্নে চিত্র বসায়','AI প্রশ্নপত্রে "অভিন্ন তথ্যভিত্তিক MCQ" বিভাগ (উদ্দীপক + চিত্র + MCQ)','AI-এর \\frac ভগ্নাংশ ভেঙে rac{3}{4} দেখানোর বাগ ঠিক করা হলো']},
 {v:'v180',d:'AI প্রশ্নপত্র: ইতিহাস, ক/খ সেট, পাঠ্যাংশ থেকে প্রশ্ন, একটি প্রশ্ন বদলানো',t:['🕘 আগের বানানো প্রশ্নপত্রের ইতিহাস — আবার দেখা, যোগ করা বা একই সেটিংয়ে আবার বানানো যায়','🔀 AI প্রশ্নপত্র থেকে সরাসরি ক/খ/গ/ঘ সেট — শুধু ক্রম বদল অথবা প্রতি সেটে নতুন প্রশ্ন (AI)','📚 বইয়ের অংশ পেস্ট বা পাতার ছবি দিলে শুধু সেখান থেকে প্রশ্ন','🔄 প্রশ্নপত্র কার্ডে প্রশ্ন তালিকা — যেকোনো একটি প্রশ্ন বাটন চেপে বদলানো']},
 {v:'v179',d:'AI কী: শিক্ষক প্যানেল থেকে কী আনা ঠিক করা হলো',t:['"শিক্ষক প্যানেলের AI স্যার থেকে কী আনো" এখন প্যানেল আগে না খুললেও নিজে লোড করে কী আনে','বার্তা (টোস্ট) আগে AI স্ক্রিনের নিচে চাপা পড়ত, এখন সবার উপরে দেখায়']},
 {v:'v178',d:'২৮ নভেম্বর ২০২৬',t:['✨ প্রশ্নপত্র: "AI দিয়ে প্রশ্নপত্র তৈরি" — বিভাগ অনুযায়ী প্রশ্ন, বদলানোর চ্যাট, তৈরি প্রশ্নপত্র সরাসরি এডিটরে (ছবি/টেবিল/ভাসমান বস্তু সহ)','🖼 আগের প্রশ্নপত্রের ছবি/লেখা থেকে হুবহু সাজানো','🏫 প্রতিষ্ঠানের ধরন: সাধারণ স্কুল / কোচিং সেন্টার / প্রাইভেট; পরীক্ষা: বৃত্তি প্রস্তুতি মডেল টেস্ট, মক টেস্ট যোগ; ইংরেজি প্রশ্নে হেডার ইংরেজি','🔧 প্রশ্নপত্রে \\frac ভগ্নাংশ ভেঙে যাচ্ছিল — ঠিক করা হয়েছে']},
@@ -21120,7 +21126,7 @@ function qPvNow(){
  qImgHandles(host);
  qInfoUpd(r);
  if(qsel&&!qFlById(qsel))qsel=null;qSelect(qsel);qBSel();
- document.querySelectorAll('.qvw [data-a]').forEach(b=>b.classList.toggle('p',b.dataset.a==='vw:'+qView));['ftbl','fimg'].forEach(a=>{const b=document.querySelector('.qpvh [data-a="'+a+'"]');if(b)b.style.display=qView==='k'?'none':''});
+ document.querySelectorAll('.qvw [data-a]').forEach(b=>b.classList.toggle('p',b.dataset.a==='vw:'+qView));['ftbl','fimg','afig'].forEach(a=>{const b=document.querySelector('.qpvh [data-a="'+a+'"]');if(b)b.style.display=qView==='k'?'none':''});
  const f=qx.cfg.font;if(!qfOk[f]&&document.fonts){qfOk[f]=1;document.fonts.ready.then(()=>setTimeout(qPvNow,60))}
 }
 const qPv=()=>{clearTimeout(qtmr.pv);qtmr.pv=setTimeout(qPvNow,180)};
@@ -21161,7 +21167,7 @@ function qOpenEd(p){qView='p';
  qx=qMig(p);if(qx.cfg.srcOn===undefined){qx.cfg.srcOn=true;qx.cfg.srcPos='e'}qhist=[];qhi=-1;qSnap();qNav('ed');$('#qph').textContent='← তালিকা';$('#qpt').textContent='প্রশ্নপত্র তৈরি';
  qtab='q';qsel=null;qopenS=p.secs[0]?p.secs[0].id:null;qoq=null;
  $('#qpbody').className='';
- $('#qpbody').innerHTML=`<div class="qp-w"><div class="qp-fm" id="qpfm"></div><div class="qp-pv"><div class="qpvh"><span id="qfbar" class="qfs hide"><button class="btn" id="qfedit" data-a="fedit">✎ এডিট</button><button class="btn al" data-a="fal:l" title="বামে সাজাও">⬅</button><button class="btn al" data-a="fal:c" title="মাঝে সাজাও">⬌</button><button class="btn al" data-a="fal:r" title="ডানে সাজাও">➡</button><button class="btn" data-a="fdup">⧉</button><button class="btn" data-a="fdel" style="color:var(--red)">🗑</button></span><span class="qvw"><button class="btn p" data-a="vw:p">📄 প্রশ্নপত্র</button><button class="btn" data-a="vw:k">🔑 উত্তরমালা</button></span><button class="btn" data-a="ftbl">▦ ভাসমান টেবিল</button><button class="btn" data-a="fimg">🖼 ভাসমান ছবি</button><span class="qzm"><button class="btn" data-a="zout" title="ছোট করো">−</button><button class="btn" data-a="zfit" id="qzv" title="ঠিক মাপে ফেরো">১০০%</button><button class="btn" data-a="zin" title="বড় করো">＋</button></span><button class="btn" data-a="guide" id="qgb" title="গাইডলাইন দেখাও / লুকাও">📐</button><span class="qzm"><button class="btn" data-a="xpgm" title="শেষের বাড়তি পেজ বাদ দাও">−</button><span class="qpgl" id="qxpg">পেজ</span><button class="btn" data-a="xpgp" title="নতুন ফাঁকা পেজ যোগ করো">＋</button></span><span class="grow"></span><span id="qpinfo"></span><div id="qfpop" class="qfpop hide"></div></div><div id="qppv"></div></div></div>`;
+ $('#qpbody').innerHTML=`<div class="qp-w"><div class="qp-fm" id="qpfm"></div><div class="qp-pv"><div class="qpvh">${qSibH()}<span id="qfbar" class="qfs hide"><button class="btn" id="qfedit" data-a="fedit">✎ এডিট</button><button class="btn al" data-a="fal:l" title="বামে সাজাও">⬅</button><button class="btn al" data-a="fal:c" title="মাঝে সাজাও">⬌</button><button class="btn al" data-a="fal:r" title="ডানে সাজাও">➡</button><button class="btn" data-a="fdup">⧉</button><button class="btn" data-a="fdel" style="color:var(--red)">🗑</button></span><span class="qvw"><button class="btn p" data-a="vw:p">📄 প্রশ্নপত্র</button><button class="btn" data-a="vw:k">🔑 উত্তরমালা</button></span><button class="btn" data-a="ftbl">▦ ভাসমান টেবিল</button><button class="btn" data-a="fimg">🖼 ভাসমান ছবি</button><button class="btn" data-a="afig">✨ AI চিত্র</button><span class="qzm"><button class="btn" data-a="zout" title="ছোট করো">−</button><button class="btn" data-a="zfit" id="qzv" title="ঠিক মাপে ফেরো">১০০%</button><button class="btn" data-a="zin" title="বড় করো">＋</button></span><button class="btn" data-a="guide" id="qgb" title="গাইডলাইন দেখাও / লুকাও">📐</button><span class="qzm"><button class="btn" data-a="xpgm" title="শেষের বাড়তি পেজ বাদ দাও">−</button><span class="qpgl" id="qxpg">পেজ</span><button class="btn" data-a="xpgp" title="নতুন ফাঁকা পেজ যোগ করো">＋</button></span><span class="grow"></span><span id="qpinfo"></span><div id="qfpop" class="qfpop hide"></div></div><div id="qppv"></div></div></div>`;
  qSeg(false);qEd();qPvNow();scrollTo(0,0);
 }
 const qScr={ed:0,pv:0};
@@ -21203,7 +21209,7 @@ function qQC(s,si,q,qi,force){
   else if(s.ty==='match'){b=ta('t','নির্দেশনা (ঐচ্ছিক)',1)+`<div class="qfm-g" style="margin-top:8px"><div><label>বাম পাশ (প্রতি লাইনে একটি)</label>${ta('l','',4)}</div><div><label>ডান পাশ (প্রতি লাইনে একটি)</label>${ta('r','',4)}</div></div>`}
   else{b=ta('t',s.ty==='fill'?'বাক্য লিখুন, ফাঁকা জায়গায় ___ দাও':'প্রশ্ন লিখুন…',2)+(s.showMk?`<div style="margin-top:6px;max-width:220px"><label>এই প্রশ্নের নম্বর (ফাঁকা = বিভাগের)</label><input class="qpt" type="number" min="0" data-q="${P}:m" value="${q.m??''}"></div>`:'')}
   const sel=(k,L,v)=>`<select class="qpt" data-q="${P}:${k}">${L.map(x=>`<option value="${x[0]}"${(v||L[0][0])===x[0]?' selected':''}>${x[1]}</option>`).join('')}</select>`;
-  const im=q.img?`<img src="${q.img}"><input type="range" min="10" max="100" data-q="${P}:iw" value="${q.iw||50}" title="ছবির আকার"><button class="btn" data-a="rmimg:${P}" style="padding:4px 10px">✕</button><div class="qimx"><button class="btn" data-a="ied:${P}" style="padding:5px 11px;font-size:13px">✎ ছবি এডিট (ঘোরাও, ছাঁটো, তীর)</button><div class="qhint" style="margin:4px 0">লেখায় <code>[[ছবি]]</code> লিখলে ক্যাপশনের নম্বর (যেমন "চিত্র ১") নিজে বসবে।</div><label class="qck"><input type="checkbox" data-q="${P}:capOn"${q.capOn?' checked':''}> ছবির ক্যাপশন দাও (চিত্র ১, ২ …)</label><input class="qpt" data-q="${P}:cap" value="${esc(q.cap||'')}" placeholder="ক্যাপশনের লেখা (ঐচ্ছিক)"><div class="qrw"><label>ছবির অবস্থান</label>${sel('ip',[['b','লেখার নিচে'],['t','লেখার উপরে'],['l','লেখার বামে'],['r','লেখার ডানে']],q.ip)}</div><label style="font-weight:600;font-size:13px">↔ ছবি কোথায় বসবে</label>${qAl3('ial:'+P,q.ia)}<div class="qhint" style="margin:2px 0 6px">বামে/মাঝে/ডানে — লেখার নিচে বা উপরে থাকলে কাজ করবে। ছবি ইচ্ছামতো সরাতে প্রিভিউতে ছবির কোণার <b>✥</b> চিহ্ন ধরে টানো।</div>${(q.ix||q.iy)?`<button class="btn" data-a="iof:${P}" style="padding:4px 10px;font-size:12.5px">↺ ছবির জায়গা আগের মতো করো</button>`:''}</div>`:`<button class="btn" data-a="img:${P}" style="padding:5px 11px;font-size:13px">🖼 প্রশ্নে ছবি যোগ করো</button>`;
+  const im=q.img?`<img src="${q.img}"><input type="range" min="10" max="100" data-q="${P}:iw" value="${q.iw||50}" title="ছবির আকার"><button class="btn" data-a="rmimg:${P}" style="padding:4px 10px">✕</button><div class="qimx"><button class="btn" data-a="ied:${P}" style="padding:5px 11px;font-size:13px">✎ ছবি এডিট (ঘোরাও, ছাঁটো, তীর)</button><div class="qhint" style="margin:4px 0">লেখায় <code>[[ছবি]]</code> লিখলে ক্যাপশনের নম্বর (যেমন "চিত্র ১") নিজে বসবে।</div><label class="qck"><input type="checkbox" data-q="${P}:capOn"${q.capOn?' checked':''}> ছবির ক্যাপশন দাও (চিত্র ১, ২ …)</label><input class="qpt" data-q="${P}:cap" value="${esc(q.cap||'')}" placeholder="ক্যাপশনের লেখা (ঐচ্ছিক)"><div class="qrw"><label>ছবির অবস্থান</label>${sel('ip',[['b','লেখার নিচে'],['t','লেখার উপরে'],['l','লেখার বামে'],['r','লেখার ডানে']],q.ip)}</div><label style="font-weight:600;font-size:13px">↔ ছবি কোথায় বসবে</label>${qAl3('ial:'+P,q.ia)}<div class="qhint" style="margin:2px 0 6px">বামে/মাঝে/ডানে — লেখার নিচে বা উপরে থাকলে কাজ করবে। ছবি ইচ্ছামতো সরাতে প্রিভিউতে ছবির কোণার <b>✥</b> চিহ্ন ধরে টানো।</div>${(q.ix||q.iy)?`<button class="btn" data-a="iof:${P}" style="padding:4px 10px;font-size:12.5px">↺ ছবির জায়গা আগের মতো করো</button>`:''}</div>`:`<button class="btn" data-a="img:${P}" style="padding:5px 11px;font-size:13px">🖼 প্রশ্নে ছবি যোগ করো</button> <button class="btn" data-a="aifg:${P}" style="padding:5px 11px;font-size:13px">✨ AI চিত্র</button>`;
   if(s.ty==='fill')b+=qBlr(P);
   if(s.ty==='tf')b+=qTfRow(P,q);
   else if(s.ty!=='mcq'&&s.ty!=='grp'&&s.ty!=='cq')b+=`<textarea class="qpt qma" rows="2" data-q="${P}:ma" placeholder="${s.ty==='tf'||s.ty==='fill'?'🔑 উত্তর (যেমন: True / শূন্যস্থানের শব্দ) — উত্তরমালায় আসবে':'🔑 আদর্শ উত্তর (ঐচ্ছিক — উত্তরমালা পেজে দেখাবে)'}">${esc(q.ma||'')}</textarea>`;
@@ -21234,7 +21240,7 @@ ${qAcc(s,si,'b','🖼','ছবি, টেবিল ও শব্দ বাক্
 `)}
 ${(s.ty==='mcq'||s.ty==='grp')?qAcc(s,si,'e','📖','উদ্দীপক (ঐচ্ছিক)',` ${s.ty==='mcq'?`<div class="qrow" style="margin:8px 0"><button class="btn" data-a="tgrp:${si}">🖼 কয়েকটি প্রশ্নে একই উদ্দীপক (ছবি/অনুচ্ছেদ) যোগ করো</button></div>`:s.ty==='grp'?`<div class="qrow" style="margin:8px 0"><button class="btn" data-a="ugrp:${si}">↩ অভিন্ন উদ্দীপক সরাও (সাধারণ MCQ বিভাগ)</button></div>`:''}
  ${s.ty==='grp'?`<div class="qpn" style="margin:8px 0"><h4>🖼 অভিন্ন তথ্য (সব প্রশ্নের উপরে দেখাবে)</h4><label>উদ্দীপক লেখা (ঐচ্ছিক)</label><textarea class="qpt" rows="3" data-s="${si}:gtx" placeholder="ঐচ্ছিক — শুধু ছবি দিলেও চলবে">${esc(s.gtx||'')}</textarea>
- <div class="qimr">${s.gimg?`<img src="${s.gimg}"><input type="range" min="10" max="100" data-s="${si}:giw" value="${s.giw||60}" title="ছবির আকার"><button class="btn" data-a="gied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmgimg:${si}" style="padding:4px 10px">✕</button>`:`<button class="btn" data-a="gimg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো (ঐচ্ছিক)</button>`}</div>
+ <div class="qimr">${s.gimg?`<img src="${s.gimg}"><input type="range" min="10" max="100" data-s="${si}:giw" value="${s.giw||60}" title="ছবির আকার"><button class="btn" data-a="gied:${si}" style="padding:4px 10px">✎ এডিট</button><button class="btn" data-a="rmgimg:${si}" style="padding:4px 10px">✕</button>`:`<button class="btn" data-a="gimg:${si}" style="padding:5px 11px;font-size:13px">🖼 ছবি যোগ করো (ঐচ্ছিক)</button> <button class="btn" data-a="aifg:${si}" style="padding:5px 11px;font-size:13px">✨ AI চিত্র</button>`}</div>
  ${s.gimg?qAl3('gial:'+si,s.gia)+`<label class="qck"><input type="checkbox" data-s="${si}:gcapOn"${s.gcapOn?' checked':''}> ছবির ক্যাপশন দাও</label>${qIn(`data-s="${si}:gcap"`,s.gcap,'ক্যাপশনের লেখা (ঐচ্ছিক)','')}`:''}
  ${qIn(`data-s="${si}:gl"`,s.gl,'নির্দেশনা লাইন','ফাঁকা = অটো: উপরের চিত্র থেকে ১২৭ ও ১২৮ নং প্রশ্নের উত্তর দাও :   ({r} = প্রশ্ন নম্বর)')}</div>`:''}
 `,s.ty==='grp'?'অভিন্ন উদ্দীপক আছে':''):''}
@@ -21323,7 +21329,7 @@ function qEd(){
  const fm=$('#qpfm');if(!fm||!qx)return;const qsy=window.scrollY,qmh=fm.offsetHeight;fm.style.minHeight=qmh+'px';const oldT=fm.querySelector('.qtabs'),sl0=oldT?oldT.scrollLeft:null;
  const tabs=`<div class="qtabs">${[['p','📄','পেজ সেটআপ'],['q','📚','প্রশ্ন'],['hc','🎨','হেডার কাস্টমাইজেশন'],['h','🏫','হেডার তথ্য'],['d','✏️','ডিজাইন'],['g','🖼','লোগো']].map(t=>`<button class="${qtab===t[0]?'on':''}" data-a="tab:${t[0]}"><i>${t[1]}</i>${t[2]}</button>`).join('')}</div>`;
  const sw=qInd(qx)?`<div class="qcsw">${qx.pc.slice(0,qx.cfg.cols).map((x,i)=>`<button class="${i===qx.cur?'on':''}" data-a="col:${i}"><b>কলাম ${qbn(i+1)}</b><small>${esc([x.h.cls,x.h.sub].filter(Boolean).join(' · ')||'—')}</small></button>`).join('')}</div>`:'';
- fm.innerHTML=`<div class="qsticky">${sw}${tabs}${qtab==='q'?qTbHtml():''}</div>`+(qtab==='q'?qTabQ():qtab==='p'?qTabP():qtab==='hc'?qTabHC():qtab==='h'?qTabH():qtab==='d'?qTabD():qTabG());
+ fm.innerHTML=`<div class="qsticky">${qSibH()}${sw}${tabs}${qtab==='q'?qTbHtml():''}</div>`+(qtab==='q'?qTabQ():qtab==='p'?qTabP():qtab==='hc'?qTabHC():qtab==='h'?qTabH():qtab==='d'?qTabD():qTabG());
  {const nt=fm.querySelector('.qtabs'),on=nt&&nt.querySelector('.on');if(nt&&on){const tx=on.offsetLeft-(nt.clientWidth-on.offsetWidth)/2;if(sl0==null)nt.scrollLeft=tx;else{nt.scrollLeft=sl0;if(qTabMv)nt.scrollTo({left:tx,behavior:'smooth'})}}qTabMv=false}
  if(qtab==='p')qSyncMp();
  qLbl();
@@ -21358,6 +21364,8 @@ function qAct(a,el){
  const[k,x,y,z]=a.split(':'),S=()=>qx.secs[+x],Q=()=>qx.secs[+x].qs[+y];
  switch(k){
   case'find':{qFindDlg();return}
+  case'sib':{qSibGo(x);return}
+  case'aifg':{qaiFigDlg(y==null?'g:'+x:'q:'+x+':'+y);return}
   case'tbr':{const t=S().tb,d=+y;if(d>0)t.cells.push(Array(t.c).fill(''));else if(t.cells.length>1)t.cells.pop();t.r=t.cells.length;qTouch(true);return}
   case'tbc':{const t=S().tb,d=+y;if(d>0){t.cells.forEach(rw=>rw.push(''));t.c++}else if(t.c>1){t.cells.forEach(rw=>rw.pop());t.c--}qTouch(true);return}
   case'alltxt':{qCopyTxt(qPlainAll());return}
@@ -22185,6 +22193,8 @@ function qSetDlg(){
 /* answer key page */
 let qView='p';
 function qKeySibs(p){if(!p.sg)return null;const L=QL.filter(z=>z.sg===p.sg&&z.h.set).sort((a,b)=>a.created-b.created);return L.length>1&&L.includes(p)?L:null}
+function qSibH(){const L=qx?qKeySibs(qx):null;if(!L)return'';return `<div class="qsib"><b>🅰 সেট:</b>${L.map(z=>`<button class="${z===qx?'on':''}" data-a="sib:${z.id}" title="${esc(z.name||'')}">${esc(z.h.set||'—')}</button>`).join('')}</div>`}
+function qSibGo(id){const t=QL.find(z=>z.id===id);if(!t||t===qx)return;qFlush();qOpenEd(t)}
 function qAltPaper0(p){const k=cp(p),sibs=qKeySibs(p);
  k.fl=[];k.cfg.cols=1;k.cfg.indep=false;k.cfg.key=false;k.cfg.xpg=0;k.cfg.hdrAll=false;delete k.pc;
  if(sibs){k.hs.set=false;k.h.set=''}
@@ -22296,6 +22306,8 @@ root.addEventListener('click',e=>{
   if(['bcopy','bcut','bdup','bpaste','btext','bmulti','ball'].includes(k))return qBAct(k);
   if(k==='ftbl')return qTblDlg(null);
   if(k==='fimg'){$('#qpfimg').click();return}
+  if(k==='afig')return qaiFigDlg();
+  if(k==='sib')return qSibGo(x);
   if(k==='fal'){const f=qFlById(qsel);if(f)qFlAlign(f,x);return}
   if(k==='fedit'){const f=qFlById(qsel);if(f&&f.ty==='tbl')qTblDlg(f);else if(f&&f.ty==='img')qImgEd(f.src,(u,al)=>{f.src=u;if(al)qFlAlign(f,al);qTouch(false);qPvNow()},'');return}
   if(k==='fdup')return qFlDup();
@@ -22797,7 +22809,7 @@ const QAI={
  exam:[['সাপ্তাহিক পরীক্ষা','Weekly Exam'],['মাসিক পরীক্ষা','Monthly Exam'],['অর্ধবার্ষিক পরীক্ষা','Half-Yearly Exam'],['বার্ষিক পরীক্ষা','Annual Exam'],['মডেল টেস্ট','Model Test'],['বৃত্তি প্রস্তুতি মডেল টেস্ট','Scholarship Preparation Model Test'],['মক টেস্ট','Mock Test']],
  cls:[['প্রথম','One'],['দ্বিতীয়','Two'],['তৃতীয়','Three'],['চতুর্থ','Four'],['পঞ্চম','Five'],['ষষ্ঠ','Six'],['সপ্তম','Seven'],['অষ্টম','Eight'],['নবম','Nine'],['দশম','Ten'],['একাদশ','Eleven'],['দ্বাদশ','Twelve']],
  sub:[['বাংলা','Bangla'],['ইংরেজি','English'],['গণিত','Mathematics'],['বিজ্ঞান','Science'],['বাংলাদেশ ও বিশ্বপরিচয়','Bangladesh and Global Studies'],['ধর্ম ও নৈতিক শিক্ষা','Religion and Moral Education'],['ICT','ICT'],['পদার্থবিজ্ঞান','Physics'],['রসায়ন','Chemistry'],['জীববিজ্ঞান','Biology'],['উচ্চতর গণিত','Higher Mathematics']],
- ty:{mcq:['🔘','বহুনির্বাচনি (MCQ)'],poly:['🔢','বহুপদী MCQ (i, ii, iii)'],cq:['🧩','সৃজনশীল'],short:['✍️','সংক্ষিপ্ত প্রশ্ন'],fill:['▁','শূন্যস্থান পূরণ'],tf:['⚖️','সত্য / মিথ্যা'],match:['🔗','মিলকরণ'],text:['📝','রচনামূলক'],pas:['📖','অনুচ্ছেদ (Passage)']},
+ ty:{mcq:['🔘','বহুনির্বাচনি (MCQ)'],poly:['🔢','বহুপদী MCQ (i, ii, iii)'],grp:['📖','অভিন্ন তথ্যভিত্তিক MCQ'],cq:['🧩','সৃজনশীল'],short:['✍️','সংক্ষিপ্ত প্রশ্ন'],fill:['▁','শূন্যস্থান পূরণ'],tf:['⚖️','সত্য / মিথ্যা'],match:['🔗','মিলকরণ'],text:['📝','রচনামূলক'],pas:['📖','অনুচ্ছেদ (Passage)']},
  pre:[['MCQ + সংক্ষিপ্ত',[['mcq',5,1,0],['short',5,2,0]]],['MCQ + সৃজনশীল',[['mcq',10,1,0],['cq',7,10,5]]],['পূর্ণাঙ্গ',[['mcq',10,1,0],['short',6,2,5],['cq',3,10,2]]],['প্রাথমিক',[['fill',5,1,0],['tf',5,1,0],['match',5,1,0],['short',5,2,0]]]]
 };
 let qaiS=null,qaiCur=null,qaiBusy=false;
@@ -22813,7 +22825,7 @@ function qaiRules(en){
  return `তুমি বাংলাদেশের একজন অভিজ্ঞ শিক্ষক ও প্রশ্নপত্র প্রণেতা। জাতীয় শিক্ষাক্রম (NCTB) অনুযায়ী নির্ভুল, মানসম্পন্ন প্রশ্ন বানাও।
 আউটপুট: শুধুমাত্র একটি বৈধ JSON অবজেক্ট। JSON-এর বাইরে কোনো কথা, ব্যাখ্যা বা markdown (\`\`\`) লিখবে না।
 JSON কাঠামো:
-{"sections":[{"type":"mcq|poly|cq|short|fill|tf|match|text|pas","title":"বিভাগের শিরোনাম (ক/খ/১/২ জাতীয় ক্রমিক চিহ্ন ছাড়া)","note":"ঐচ্ছিক ছোট নির্দেশনা","marks":প্রতি প্রশ্নের নম্বর (cq-তে 0),"choose":যেকোনো কতটির উত্তর দিতে হবে (না থাকলে 0),"questions":[ ... ]}]}
+{"sections":[{"type":"mcq|poly|grp|cq|short|fill|tf|match|text|pas","title":"বিভাগের শিরোনাম (ক/খ/১/২ জাতীয় ক্রমিক চিহ্ন ছাড়া)","note":"ঐচ্ছিক ছোট নির্দেশনা","marks":প্রতি প্রশ্নের নম্বর (cq-তে 0),"choose":যেকোনো কতটির উত্তর দিতে হবে (না থাকলে 0),"questions":[ ... ]}]}
 প্রতি type-এর questions:
 - mcq: {"text":"প্রশ্ন","options":["…","…","…","…"],"answer":সঠিক অপশনের ইনডেক্স 0-3}
 - poly (বহুপদী): {"text":"প্রশ্ন","statements":["i-এর বিবৃতি","ii-এর বিবৃতি","iii-এর বিবৃতি"],"options":${en?'["i and ii","i and iii","ii and iii","i, ii and iii"]':'["i ও ii","i ও iii","ii ও iii","i, ii ও iii"]'},"answer":0-3}
@@ -22821,6 +22833,8 @@ JSON কাঠামো:
 - short / text / fill / tf: {"text":"প্রশ্ন"} — fill-এ শূন্যস্থান ___ দিয়ে দেখাও
 - match: ঠিক ১টি প্রশ্ন: {"left":["…",…],"right":["…",…]} — left ও right সমান সংখ্যক, right এলোমেলো ক্রমে
 - pas: ঠিক ১টি: {"passage":"অনুচ্ছেদের পুরো লেখা"} — এই বিভাগের পরের বিভাগগুলোর প্রশ্ন এই অনুচ্ছেদ থেকে হবে
+- grp (অভিন্ন তথ্যভিত্তিক MCQ): বিভাগে ১টি উদ্দীপক "passage":"উদ্দীপকের লেখা" (প্রয়োজনে "figure":{…}) এবং questions হবে mcq-এর মতো — সব প্রশ্ন ওই উদ্দীপক/চিত্র থেকে
+${FIGRULE}
 নিয়ম: প্রশ্নের লেখায় নম্বর/ক্রম (১।, ক), (a)) বসাবে না; অপশনের শুরুতে ক/খ/গ/ঘ লিখবে না। সঠিক উত্তর বিভিন্ন অপশনে ছড়িয়ে দাও। প্রতিটি প্রশ্ন সুনির্দিষ্ট ও দ্ব্যর্থহীন হবে।
 গণিত/বিজ্ঞানের লেখা: ভগ্নাংশ \\frac{লব}{হর}, বর্গমূল \\sqrt{…}, ঘাত x^{2}, নিচের অক্ষর H_{2}O আকারে লেখো; $ বা অন্য LaTeX চিহ্ন ব্যবহার করবে না। ×, ÷, ≤, ≥, π, ° সরাসরি লিখতে পারো।
 প্রশ্নের ভাষা: ${en?'সম্পূর্ণ English (শিরোনাম, নির্দেশনা, প্রশ্ন সব English-এ)':'বাংলা; সংখ্যা বাংলা অঙ্কে (১২৩)'}।`}
@@ -22828,7 +22842,7 @@ function qaiSys(S){
  const en=S.lang==='en',cl=qaiClsName(S,false),sb=qaiSubName(S,false),rules=qaiRules(en);
  if(S.own)return rules+`
 কাজ: ব্যবহারকারী একটি তৈরি প্রশ্নপত্র (ছবি ও/অথবা লেখা) দিয়েছে। এটি হুবহু কপি করে উপরের JSON কাঠামোয় সাজাও। ছবির মতোই বিভাগ (সংখ্যা, ক্রম, শিরোনাম), প্রশ্নের ক্রম ও লেখা রাখো। নতুন প্রশ্ন বানাবে না, অনুবাদ করবে না, কিছু জিজ্ঞেসও করবে না। ছবিতে উত্তর চিহ্নিত থাকলে "answer" দাও। প্রতিটি বিভাগের সঠিক type বেছে নাও।`;
- const spec=S.secs.map((s,i)=>`বিভাগ ${i+1}: type="${s.ty}" (${QAI.ty[s.ty][1]}) — ${s.ty==='pas'?'১টি অনুচ্ছেদ':s.ty==='match'?'১টি প্রশ্ন, '+s.n+' সারি':'ঠিক '+s.n+'টি প্রশ্ন'}${s.ty==='cq'?', প্রতিটি ১০ নম্বর':s.ty==='pas'?'':', প্রতিটি '+s.m+' নম্বর'}${s.ch>0&&s.ch<s.n?` (পরীক্ষার্থী যেকোনো ${s.ch}টির উত্তর দেবে, তবু ${s.n}টি প্রশ্নই দাও)`:''}`).join('\n');
+ const spec=S.secs.map((s,i)=>`বিভাগ ${i+1}: type="${s.ty}" (${QAI.ty[s.ty][1]}) — ${s.ty==='pas'?'১টি অনুচ্ছেদ':s.ty==='grp'?'১টি উদ্দীপক ("passage") সহ ঠিক '+s.n+'টি MCQ — সব প্রশ্ন ওই উদ্দীপক থেকে':s.ty==='match'?'১টি প্রশ্ন, '+s.n+' সারি':'ঠিক '+s.n+'টি প্রশ্ন'}${s.ty==='cq'?', প্রতিটি ১০ নম্বর':s.ty==='pas'?'':', প্রতিটি '+s.m+' নম্বর'}${s.ch>0&&s.ch<s.n?` (পরীক্ষার্থী যেকোনো ${s.ch}টির উত্তর দেবে, তবু ${s.n}টি প্রশ্নই দাও)`:''}`).join('\n');
  return rules+`
 প্রশ্নপত্রের তথ্য:
 শ্রেণি: ${cl}${en?' (Class '+qaiClsName(S,true)+')':''}
@@ -22868,14 +22882,17 @@ async function qaiCall(sys,user,img){
  if(k.groq&&!img){try{return await qaiGroq(k.groq,sys,user)}catch(e){err+=(err?' | ':'')+'Groq: '+e.message}}
  if(img&&!k.gemini)throw new Error('ছবি পড়তে Gemini কী লাগবে (Groq ছবি পড়ে না)');
  throw new Error(err||'কোনো AI কী সেট করা নেই — ওপরের 🔑 চাপো')}
-function qaiParse(t){
- t=String(t||'').replace(/```(?:json)?/gi,'');const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a<0||b<a)throw new Error('AI-এর উত্তরে JSON পাওয়া যায়নি');
- let s=t.slice(a,b+1),j;try{j=JSON.parse(s)}catch(e){try{j=JSON.parse(s.replace(/,\s*([}\]])/g,'$1'))}catch(e2){throw new Error('AI-এর উত্তর অসম্পূর্ণ/ভাঙা — আবার চেষ্টা করো')}}
- if(!j||!Array.isArray(j.sections)||!j.sections.length)throw new Error('AI কোনো বিভাগ দেয়নি — আবার চেষ্টা করো');return j}
+const qaiLx='frac|dfrac|tfrac|times|text|textbf|theta|tan|tau|therefore|triangle|to|right|rightarrow|rho|nu|neq|ne|neg|nabla|not|beta|bar|begin|bigcup|bigcap|binom|boxed|bullet|forall|approx|angle|alpha|lambda|le|leq|geq|ge|infty|in|cdot|circ|sqrt|pi|pm|div|sum|sin|cos|log|ln|sigma|delta|omega|mu|phi|perp|parallel|cup|cap|subset|vec|hat|overline|underline|degree|ldots|dots|left|Rightarrow|Delta|Omega|Sigma|Pi|Theta|Phi|Lambda';
+const qaiLxFix=s=>s.replace(new RegExp('(\\\\+)('+qaiLx+')\\b','g'),(m,b,c)=>(b.length%2?b+'\\':b)+c);
+function qaiJ(t){t=String(t||'').replace(/```(?:json)?/gi,'');const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a<0||b<a)throw new Error('AI-এর উত্তরে JSON পাওয়া যায়নি');
+ const s=qaiLxFix(t.slice(a,b+1)),tc=x=>x.replace(/,\s*([}\]])/g,'$1');
+ for(const x of [s,tc(s),tc(s.replace(/(\\+)(?!["\\\/])/g,(m,b)=>b.length%2?b+'\\':b))]){try{return JSON.parse(x)}catch(e){}}
+ throw new Error('AI-এর উত্তর অসম্পূর্ণ/ভাঙা — আবার চেষ্টা করো')}
+function qaiParse(t){const j=qaiJ(t);if(!j||!Array.isArray(j.sections)||!j.sections.length)throw new Error('AI কোনো বিভাগ দেয়নি — আবার চেষ্টা করো');return j}
 
 /* ---- JSON → প্রশ্নপত্র (এডিটরের নিজস্ব ফরম্যাটে) ---- */
 function qaiToPaper(j,S){
- const en=S.lang==='en',P=(typeof PF==='function'?PF():{})||{},str=x=>String(x==null?'':x).trim();
+ const en=S.lang==='en',P=(typeof PF==='function'?PF():{})||{},str=x=>String(x==null?'':x).replace(/\x0c/g,'\\f').replace(/\t(?=imes)/g,'\\t').trim();
  const p={id:uid(),name:'',created:Date.now(),updated:Date.now(),cfg:{...QD,hlp:LS.getItem('trsm_hlogo')?'left':'none'},hs:{...HS},fl:[],h:{inst:P.inst||DEF.inst,addr:P.addr||DEF.addr,exam:qaiL(QAI.exam[S.ei],en),cls:qaiClsName(S,en),sub:qaiSubName(S,en),time:'',full:'',date:'',set:'',note:''},secs:[]};
  Object.assign(p.cfg,{font:'nsnb',fs:14,lh:128,gapQ:3,mt:8,mb:8,ml:10,mr:10});
  if(en)Object.assign(p.cfg,{lang:'en',numSt:'en',optSt:'enp'});
@@ -22890,11 +22907,13 @@ function qaiToPaper(j,S){
    const ch=sj.choose!=null?+sj.choose:(cf&&cf.ch>0&&cf.ch<cf.n?cf.ch:0);s.choose=ch>0&&ch<qs.length?ch:0}
   const ans=q=>{const a=Number(q.answer);return Number.isInteger(a)&&a>=0&&a<4?a:-1};
   if(ty==='pas'){s.ptx=str(sj.passage||(qs[0]&&(qs[0].passage||qs[0].text)));s.sm=false;s.qs=[]}
-  else if(ty==='mcq')s.qs=qs.map(q=>{const o=(Array.isArray(q.options)?q.options:[]).map(str);while(o.length<4)o.push('');return{t:str(q.text),o:o.slice(0,4),ans:ans(q)}});
+  else if(ty==='mcq'||ty==='grp')s.qs=qs.map(q=>{const o=(Array.isArray(q.options)?q.options:[]).map(str);while(o.length<4)o.push('');return{t:str(q.text),o:o.slice(0,4),ans:ans(q)}});
   else if(ty==='poly'){s.pl=true;s.qs=qs.map(q=>{const st=(Array.isArray(q.statements)?q.statements:[]).map(str);while(st.length<3)st.push('');const o=(Array.isArray(q.options)&&q.options.length>=4)?q.options.slice(0,4).map(str):POL.slice();return{t:str(q.text),st:st.slice(0,3),o,ans:ans(q)}})}
   else if(ty==='cq')s.qs=qs.map(q=>{const pr=(Array.isArray(q.parts)?q.parts:[]).map((x,k)=>({t:str(x&&x.text!=null?x.text:x),m:+(x&&x.marks)||k+1}));while(pr.length<4)pr.push({t:'',m:pr.length+1});return{t:str(q.text),parts:pr.slice(0,4)}});
   else if(ty==='match'){const q=qs[0]||{},L=(Array.isArray(q.left)?q.left:[]).map(str),R=(Array.isArray(q.right)?q.right:[]).map(str);s.qs=[{t:'',l:L.join('\n'),r:R.join('\n')}]}
   else s.qs=qs.map(q=>({t:str(q&&q.text!=null?q.text:q)}));
+  if(ty==='grp'){s.gtx=str(sj.passage||sj.stimulus||'');const r=sj.figure?qaiFig(sj.figure):null;if(r){s.gimg=r.url;s.giw=50}}
+  if(!['pas','match'].includes(ty))qs.forEach((q,k)=>{const r=q&&q.figure?qaiFig(q.figure):null;if(r&&s.qs[k]){s.qs[k].img=r.url;s.qs[k].iw=45}});
   p.secs.push(s)});
  const tot=qTotalAll(p),m=S.time.trim()||qaiTime(Math.max(20,Math.round(tot*1.5/5)*5),en);
  p.h.time=m;p.h.full=en?String(tot):aiToBn(tot);
@@ -23097,7 +23116,7 @@ function qaiScroll(){const b=$('#qaiBody');setTimeout(()=>b.scrollTo({top:b.scro
 async function qaiRun(fn,intro){
  const S=qaiS;qaiBusy=true;const ty=qaiAdd0('<span class="qai-dots"><span></span><span></span><span></span></span>');
  try{
-  const t=await fn(),j=(t&&typeof t==='object')?t:qaiParse(t),p=qaiToPaper(j,S);qaiCur=j;qaiHSave(p);ty.remove();
+  await qaiFonts();const t=await fn(),j=(t&&typeof t==='object')?t:qaiParse(t),p=qaiToPaper(j,S);qaiCur=j;qaiHSave(p);ty.remove();
   const tot=qTotalAll(p),want=+S.full||0;let msg=intro||'প্রশ্নপত্র তৈরি করেছি।';
   if(!S.own&&S.mode==='direct'&&tot!==want)msg+=` মোট নম্বর হয়েছে ${aiToBn(tot)} (পূর্ণমান ${aiToBn(want)}) — চাইলে "নম্বর ঠিক করো" বলো।`;
   await qaiPaper(p,msg)
@@ -23120,6 +23139,113 @@ async function qaiRefine(txt){
  const user=`বর্তমান প্রশ্নপত্র (JSON):\n${JSON.stringify(qaiCur)}\n\nনির্দেশ: ${cmd}\n\nনির্দেশ অনুযায়ী বদলে সম্পূর্ণ প্রশ্নপত্র আগের একই JSON কাঠামোয় দাও। যা বদলাতে বলা হয়নি তা অপরিবর্তিত রাখো; বিভাগের সংখ্যা/ধরন বদলাবে না (বলা না হলে)।`;
  await qaiRun(()=>qaiCall(qaiRules(S.lang==='en'),user,null),'আপডেট করেছি।')}
 
+/* ---- চিত্র ইঞ্জিন: AI শুধু তথ্য দেয়, নির্ভুল চিত্র আঁকে এই কোড ---- */
+const FIGSPEC=`চিত্রের "figure" অবজেক্ট (অ্যাপ নিজে আঁকবে, তাই শুধু তথ্য দাও; মাপ ইংরেজি অঙ্কে, লেবেল/লেখা প্রশ্নের ভাষায়):
+- ত্রিভুজ: {"kind":"triangle","labels":["A","B","C"],"AB":3,"BC":4,"AC":0,"right":"B","lAB":"৩ সেমি","lBC":"৪ সেমি","lAC":"?","angles":{"A":"৩০°"}} — right = সমকোণের শীর্ষ ("A"/"B"/"C", না থাকলে ""); সমকোণী হলে অতিভুজ নিজে হিসাব হবে (সেটার মান 0 দাও); অন্যথায় তিন বাহুই দাও। lAB/lBC/lAC ও angles ঐচ্ছিক
+- আয়তক্ষেত্র/বর্গ: {"kind":"rect","w":8,"h":5,"lw":"৮ সেমি","lh":"৫ সেমি","labels":["A","B","C","D"]}
+- বৃত্ত: {"kind":"circle","center":"O","radius":"৭ সেমি","show":"radius"} (show: radius বা diameter)
+- কোণ: {"kind":"angle","labels":["A","O","B"],"deg":60}
+- সংখ্যারেখা: {"kind":"numberline","min":-5,"max":5,"step":1,"points":[{"v":-3,"l":"A"}]}
+- বার লেখচিত্র: {"kind":"bar","title":"…","labels":["…","…"],"values":[12,18]}
+- পাই চার্ট: {"kind":"pie","title":"…","labels":["…","…"],"values":[30,25]}
+- ভেন চিত্র: {"kind":"venn","a":"ক্রিকেট","b":"ফুটবল","onlyA":12,"both":5,"onlyB":8,"out":3}`;
+const FIGRULE=`চিত্র: যে প্রশ্ন চিত্র ছাড়া বোঝা যায় না (জ্যামিতি, লেখচিত্র, সংখ্যারেখা, ভেন চিত্র ইত্যাদি), শুধু সেই প্রশ্নের অবজেক্টে (grp হলে বিভাগে) "figure" যোগ করো এবং প্রশ্নের লেখায় "নিচের চিত্রে…" বলো। চিত্র দরকার না হলে "figure" দেবে না।
+${FIGSPEC}`;
+const FIGF='"Noto Sans Bengali","Hind Siliguri","Noto Sans",sans-serif';
+const qaiFonts=()=>{try{return Promise.all([document.fonts.load('400 16px "Noto Sans Bengali"'),document.fonts.load('700 16px "Noto Sans Bengali"')]).catch(()=>0)}catch(e){return Promise.resolve()}};
+const fnum=(v,d)=>{const x=parseFloat(String(v==null?'':v).replace(/[০-৯]/g,c=>'০১২৩৪৫৬৭৮৯'.indexOf(c)).replace('−','-'));return isFinite(x)?x:d};
+const fbn=v=>aiToBn(String(Math.round(v*100)/100)).replace(/-/g,'−');
+const fstr=(x,n)=>String(x==null?'':x).slice(0,n||40);
+function figCv(W,H,fn){const c=document.createElement('canvas'),k=2.5;c.width=Math.round(W*k);c.height=Math.round(H*k);const g=c.getContext('2d');g.scale(k,k);g.fillStyle='#fff';g.fillRect(0,0,W,H);g.lineJoin='round';g.lineCap='round';fn(g);return{url:c.toDataURL('image/png'),w:W,h:H}}
+const ftx=(g,x,y,t,o)=>{o=o||{};g.font=`${o.b?700:400} ${o.s||14}px ${FIGF}`;g.fillStyle=o.c||'#111';g.textAlign=o.a||'center';g.textBaseline='middle';g.fillText(String(t==null?'':t),x,y)};
+const fln=(g,x1,y1,x2,y2,w,c)=>{g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.lineWidth=w||2;g.strokeStyle=c||'#111';g.stroke()};
+const fdot=(g,x,y,r,c)=>{g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fillStyle=c||'#111';g.fill()};
+const FIG={};
+FIG.triangle=s=>{
+ const L=(Array.isArray(s.labels)&&s.labels.length>=3?s.labels:['A','B','C']).map(x=>fstr(x,3));let rv=String(s.right||'').trim().toUpperCase();
+ if(rv&&!['A','B','C'].includes(rv)){const ix=L.findIndex(x=>x.toUpperCase()===rv);rv=ix>=0&&ix<3?'ABC'[ix]:''}
+ let c=fnum(s.AB,0),a=fnum(s.BC,0),b=fnum(s.AC,0);
+ if(rv==='B'&&c>0&&a>0)b=Math.hypot(a,c);else if(rv==='A'&&c>0&&b>0)a=Math.hypot(b,c);else if(rv==='C'&&a>0&&b>0)c=Math.hypot(a,b);
+ if(!(a>0&&b>0&&c>0)||a+b<=c*1.0001||a+c<=b*1.0001||b+c<=a*1.0001)throw new Error('ত্রিভুজের মাপ মেলেনি');
+ const W=300,H=240,x=(c*c+a*a-b*b)/(2*a),y=Math.sqrt(Math.max(0,c*c-x*x)),P0=[[x,-y],[0,0],[a,0]];
+ const xs=P0.map(p=>p[0]),ys=P0.map(p=>p[1]),mnx=Math.min(...xs),mxx=Math.max(...xs),mny=Math.min(...ys),mxy=Math.max(...ys),k=Math.min((W-110)/(mxx-mnx||1),(H-90)/(mxy-mny||1));
+ const P=P0.map(p=>[55+(p[0]-mnx)*k+((W-110)-(mxx-mnx)*k)/2,45+(p[1]-mny)*k+((H-90)-(mxy-mny)*k)/2]),cx=(P[0][0]+P[1][0]+P[2][0])/3,cy=(P[0][1]+P[1][1]+P[2][1])/3;
+ return figCv(W,H,g=>{
+  g.beginPath();g.moveTo(...P[0]);g.lineTo(...P[1]);g.lineTo(...P[2]);g.closePath();g.fillStyle='#eef6ff';g.fill();g.lineWidth=2;g.strokeStyle='#111';g.stroke();
+  const dir=(p,q)=>{const vx=p[0]-q[0],vy=p[1]-q[1],n=Math.hypot(vx,vy)||1;return[vx/n,vy/n]};
+  P.forEach((p,i)=>{const u=dir(p,[cx,cy]);ftx(g,p[0]+u[0]*17,p[1]+u[1]*17,L[i],{s:17,b:1})});
+  const side=(p,q,t)=>{if(!t)return;const m=[(p[0]+q[0])/2,(p[1]+q[1])/2],u=dir(m,[cx,cy]),an=u[0]<-.5?'right':u[0]>.5?'left':'center';ftx(g,m[0]+u[0]*9,m[1]+u[1]*(Math.abs(u[1])>.5?13:2),fstr(t,14),{s:13.5,c:'#0f766e',b:1,a:an})};
+  side(P[0],P[1],s.lAB);side(P[1],P[2],s.lBC);side(P[0],P[2],s.lAC);
+  const ang=s.angles&&typeof s.angles==='object'?s.angles:{};['A','B','C'].forEach((n,i)=>{if(!ang[n])return;const u=dir([cx,cy],P[i]);ftx(g,P[i][0]+u[0]*30,P[i][1]+u[1]*30,fstr(ang[n],8),{s:12.5,c:'#b45309',b:1})});
+  const ri=['A','B','C'].indexOf(rv);if(ri>=0){const V=P[ri],nb=[P[(ri+1)%3],P[(ri+2)%3]].map(q=>{const u=dir(q,V);return[u[0]*14,u[1]*14]});g.beginPath();g.moveTo(V[0]+nb[0][0],V[1]+nb[0][1]);g.lineTo(V[0]+nb[0][0]+nb[1][0],V[1]+nb[0][1]+nb[1][1]);g.lineTo(V[0]+nb[1][0],V[1]+nb[1][1]);g.lineWidth=1.6;g.strokeStyle='#111';g.stroke()}
+ })};
+FIG.rect=s=>{const w=Math.max(.1,fnum(s.w,8)),h=Math.max(.1,fnum(s.h,5)),W=300,H=230,L=(Array.isArray(s.labels)&&s.labels.length>=4?s.labels:['A','B','C','D']).map(x=>fstr(x,3));
+ return figCv(W,H,g=>{const k=Math.min(190/w,120/h),rw=w*k,rh=h*k,x0=(W-rw)/2,y0=(H-rh)/2;g.fillStyle='#eef6ff';g.fillRect(x0,y0,rw,rh);g.lineWidth=2;g.strokeStyle='#111';g.strokeRect(x0,y0,rw,rh);
+  ftx(g,x0-12,y0-11,L[0],{s:16,b:1});ftx(g,x0+rw+12,y0-11,L[1],{s:16,b:1});ftx(g,x0+rw+12,y0+rh+12,L[2],{s:16,b:1});ftx(g,x0-12,y0+rh+12,L[3],{s:16,b:1});
+  if(s.lw)ftx(g,x0+rw/2,y0+rh+16,fstr(s.lw,14),{s:13.5,c:'#0f766e',b:1});if(s.lh)ftx(g,x0+rw+10,y0+rh/2,fstr(s.lh,14),{s:13.5,c:'#0f766e',b:1,a:'left'})})};
+FIG.circle=s=>figCv(280,230,g=>{const cx=130,cy=115,r=85,dm=String(s.show||'').toLowerCase().startsWith('d');g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.fillStyle='#eef6ff';g.fill();g.lineWidth=2;g.strokeStyle='#111';g.stroke();fdot(g,cx,cy,3.5);ftx(g,cx-2,cy+16,fstr(s.center||'O',3),{s:16,b:1});
+ if(dm){fln(g,cx-r,cy,cx+r,cy,2,'#0f766e');fdot(g,cx-r,cy,3);fdot(g,cx+r,cy,3);ftx(g,cx,cy-12,fstr(s.radius||s.diameter||'',14),{s:14,c:'#0f766e',b:1})}
+ else{fln(g,cx,cy,cx+r,cy,2,'#0f766e');fdot(g,cx+r,cy,3);ftx(g,cx+r/2,cy-12,fstr(s.radius||'',14),{s:14,c:'#0f766e',b:1})}});
+FIG.angle=s=>{const L=(Array.isArray(s.labels)&&s.labels.length>=3?s.labels:['A','O','B']).map(x=>fstr(x,3)),d=Math.min(179,Math.max(1,fnum(s.deg,60))),r=d*Math.PI/180,len=d>75?115:175,ox=50+(d>90?-Math.cos(r)*len+10:0),bx=Math.max(ox+120,255),W=Math.max(290,bx+35);
+ return figCv(W,210,g=>{const oy=170,ex=ox+len*Math.cos(r),ey=oy-len*Math.sin(r);fln(g,ox,oy,bx,oy,2);fln(g,ox,oy,ex,ey,2);g.beginPath();g.arc(ox,oy,42,-r,0);g.lineWidth=2;g.strokeStyle='#0f766e';g.stroke();
+  ftx(g,ox-12,oy+16,L[1],{s:16,b:1});ftx(g,bx+9,oy+16,L[2],{s:16,b:1});ftx(g,ex+8*Math.cos(r)+(Math.cos(r)<0?-4:4),ey-10,L[0],{s:16,b:1});const m=r/2;ftx(g,ox+68*Math.cos(m),oy-68*Math.sin(m),fbn(d)+'°',{s:14,c:'#0f766e',b:1})})};
+FIG.numberline=s=>{const W=340,H=120;let mn=fnum(s.min,-5),mx=fnum(s.max,5),st=fnum(s.step,1);if(mx<=mn)mx=mn+10;if(!(st>0)||(mx-mn)/st>40)st=(mx-mn)/10;
+ return figCv(W,H,g=>{const x0=28,x1=W-28,X=v=>x0+(v-mn)/(mx-mn)*(x1-x0);fln(g,10,66,W-10,66,2);g.fillStyle='#111';[[10,1],[W-10,-1]].forEach(([x,d])=>{g.beginPath();g.moveTo(x,66);g.lineTo(x+d*9,61);g.lineTo(x+d*9,71);g.fill()});
+  for(let v=mn,i=0;v<=mx+1e-9&&i<60;v+=st,i++){fln(g,X(v),60,X(v),72,1.6);ftx(g,X(v),88,fbn(v),{s:13})}
+  (Array.isArray(s.points)?s.points:[]).slice(0,8).forEach(p=>{const v=fnum(p&&p.v,NaN);if(!isFinite(v)||v<mn||v>mx)return;fdot(g,X(v),66,5.5,'#0f766e');ftx(g,X(v),44,fstr(p.l,6),{s:15,b:1,c:'#0f766e'})})})};
+FIG.bar=s=>{const V=(Array.isArray(s.values)?s.values:[]).slice(0,12).map(x=>Math.max(0,fnum(x,0))),Lb=(Array.isArray(s.labels)?s.labels:[]).map(x=>fstr(x,10));if(!V.length)throw new Error('মান নেই');
+ const W=340,H=250,raw=Math.max(...V,1)/4,pw=Math.pow(10,Math.floor(Math.log10(raw))),stp=[1,2,2.5,5,10].map(m=>m*pw).find(x=>x>=raw)||raw,top=stp*4;
+ return figCv(W,H,g=>{ftx(g,W/2,16,fstr(s.title,40),{s:15,b:1});for(let i=0;i<=4;i++){const y=210-i*40;fln(g,50,y,W-10,y,1,'#d6dbe6');ftx(g,44,y,fbn(stp*i),{a:'right',s:11,c:'#555'})}
+  fln(g,50,40,50,210,1.6);fln(g,50,210,W-10,210,1.6);const bw=(W-65)/V.length;
+  V.forEach((v,i)=>{const h=v/top*160,x=56+i*bw+bw*.15;g.fillStyle='#14b8a6';g.fillRect(x,210-h,bw*.7,h);g.lineWidth=1.2;g.strokeStyle='#0f766e';g.strokeRect(x,210-h,bw*.7,h);ftx(g,x+bw*.35,203-h,fbn(v),{s:12,b:1});ftx(g,x+bw*.35,226,Lb[i]||'',{s:V.length>7?10:12})})})};
+FIG.pie=s=>{const V=(Array.isArray(s.values)?s.values:[]).slice(0,8).map(x=>Math.max(0,fnum(x,0))),Lb=(Array.isArray(s.labels)?s.labels:[]).map(x=>fstr(x,12)),tot=V.reduce((a,b)=>a+b,0);if(!tot)throw new Error('মান নেই');
+ const col=['#bfe3df','#fde1b3','#c9d8f6','#f6c9d8','#dccaf3','#d7ecb8','#f3d9c4','#cfd8dc'];
+ return figCv(340,270,g=>{ftx(g,170,16,fstr(s.title,40),{s:15,b:1});const cx=170,cy=145,r=78;let a0=-Math.PI/2;
+  V.forEach((v,i)=>{const a1=a0+v/tot*Math.PI*2;g.beginPath();g.moveTo(cx,cy);g.arc(cx,cy,r,a0,a1);g.closePath();g.fillStyle=col[i%col.length];g.fill();g.lineWidth=1.6;g.strokeStyle='#333';g.stroke();
+   const m=(a0+a1)/2,lx=cx+Math.cos(m)*(r+14),ly=cy+Math.sin(m)*(r+14),an=Math.cos(m)<-.2?'right':Math.cos(m)>.2?'left':'center';ftx(g,lx,ly-(Lb[i]?6:0),Lb[i]||'',{s:12,a:an,b:1});ftx(g,lx,ly+(Lb[i]?8:0),fbn(v),{s:11.5,a:an,c:'#444'});a0=a1})})};
+FIG.venn=s=>figCv(310,205,g=>{g.lineWidth=1.6;g.strokeStyle='#111';g.strokeRect(5,5,300,195);
+ g.beginPath();g.arc(120,105,62,0,Math.PI*2);g.fillStyle='rgba(20,184,166,.28)';g.fill();g.lineWidth=2;g.strokeStyle='#0f766e';g.stroke();
+ g.beginPath();g.arc(190,105,62,0,Math.PI*2);g.fillStyle='rgba(245,158,11,.28)';g.fill();g.strokeStyle='#b45309';g.stroke();
+ ftx(g,95,105,fbn(fnum(s.onlyA,0)),{s:17,b:1});ftx(g,155,105,fbn(fnum(s.both,0)),{s:17,b:1});ftx(g,215,105,fbn(fnum(s.onlyB,0)),{s:17,b:1});
+ ftx(g,100,40,fstr(s.a,12),{s:13,b:1,c:'#0f766e'});ftx(g,210,40,fstr(s.b,12),{s:13,b:1,c:'#b45309'});ftx(g,290,188,fbn(fnum(s.out,0)),{s:15,b:1,a:'right'})});
+function qaiFig(spec){try{if(!spec||typeof spec!=='object')return null;const f=FIG[String(spec.kind||'').toLowerCase()];return f?f(spec):null}catch(e){return null}}
+
+/* ---- এডিটরে ✨ AI চিত্র ---- */
+function qaiFigTargets(){const o=[['f','🖼 ভাসমান ছবি (পেপারে টেনে বসাও)']];
+ qx.secs.forEach((s,si)=>{if(['ttl','pas','tab'].includes(s.ty))return;const sn=String(s.title||'').slice(0,20);
+  if(s.ty==='grp')o.push(['g:'+si,'📖 '+sn+' — অভিন্ন তথ্যের চিত্র']);
+  (s.qs||[]).forEach((q,qi)=>o.push(['q:'+si+':'+qi,'প্রশ্ন · '+sn+' · '+aiToBn(qi+1)+'। '+String(q.t||'').replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g,'$1/$2').replace(/[\\{}]/g,'').replace(/\s+/g,' ').slice(0,24)]))});return o}
+function qaiFigPut(tg,r){
+ if(tg==='f'){const w=240;qFlAdd({ty:'img',src:r.url,x:80,y:240,w,h:Math.round(w*r.h/r.w)});toast('চিত্র যোগ হয়েছে — টেনে সরাও, কোণা ধরে ছোট-বড় করো');return}
+ const a=tg.split(':'),sc=qx.secs[+a[1]];if(!sc)return;
+ if(a[0]==='g'){sc.gimg=r.url;sc.giw=sc.giw||50}else{const q=sc.qs[+a[2]];if(!q)return;q.img=r.url;q.iw=q.iw||45}
+ qTouch(true);toast('চিত্র যোগ হয়েছে ✓')}
+function qaiFigDlg(pre){
+ if(!qx)return;qaiCSS();const d=document.createElement('div');d.className='qai-dlg';d.style.zIndex=320;
+ const T=qaiFigTargets(),tg0=T.some(x=>x[0]===pre)?pre:'f';let res=null,busy=false;
+ const EX=['ABC সমকোণী ত্রিভুজ, ∠B=৯০°, AB=৩ সেমি, BC=৪ সেমি','O কেন্দ্রের বৃত্ত, ব্যাসার্ধ ৫ সেমি','৮ সেমি দৈর্ঘ্য ও ৫ সেমি প্রস্থের আয়তক্ষেত্র ABCD','সংখ্যারেখায় −৩ ও ২ বিন্দু','৬০° কোণ AOB','বার লেখচিত্র: শনি ১২, রবি ১৮, সোম ৯','পাই চার্ট: বাংলা ৩০, গণিত ২৫, ইংরেজি ২০','ভেন চিত্র: ক্রিকেট ১২, উভয়ই ৫, ফুটবল ৮, কোনোটিই নয় ৩'];
+ d.innerHTML=`<div><h3 style="margin:0 0 4px">✨ AI চিত্র</h3><div class="qai-note" style="margin-bottom:6px">কী আঁকতে হবে লেখো। AI শুধু মাপ-তথ্য দেয়, অ্যাপ নিজে নির্ভুল চিত্র আঁকে।</div>
+ <textarea id="afp" rows="3" placeholder="যেমন: ${EX[0]}" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:inherit;font:inherit"></textarea>
+ <div class="qai-ch" id="afx" style="margin:8px 0">${EX.map(x=>`<span>${qaiE(x.length>22?x.slice(0,22)+'…':x)}</span>`).join('')}</div>
+ <button class="qai-big" id="afg" style="margin:0 0 8px">✨ চিত্র বানাও</button><div id="afr"></div>
+ <button class="qai-big sec" id="afc" style="margin:8px 0 0">বন্ধ করো</button></div>`;
+ const ta=d.querySelector('#afp'),g=d.querySelector('#afg'),R=d.querySelector('#afr');
+ d.querySelectorAll('#afx span').forEach((sp,i)=>sp.onclick=()=>{ta.value=EX[i];ta.focus()});
+ d.querySelector('#afc').onclick=()=>d.remove();
+ const show=()=>{R.innerHTML=`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;text-align:center"><img src="${res.r.url}" style="max-width:100%;height:auto"></div>
+  <details style="margin:6px 0"><summary class="qai-note" style="cursor:pointer">AI যে তথ্য দিয়েছে</summary><pre style="white-space:pre-wrap;font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px;margin:4px 0">${qaiE(JSON.stringify(res.spec,null,1))}</pre></details>
+  <label style="font-weight:600;font-size:13px;color:var(--mut)">কোথায় বসবে?</label><select id="aft" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:inherit;font:inherit;margin:4px 0 8px">${T.map(x=>`<option value="${qaiE(x[0])}"${x[0]===(res.tg||tg0)?' selected':''}>${qaiE(x[1])}</option>`).join('')}</select>
+  <button class="qai-big" id="afa" style="margin:0">＋ যোগ করুন</button>`;
+  R.querySelector('#aft').onchange=e=>res.tg=e.target.value;
+  R.querySelector('#afa').onclick=()=>{try{qaiFigPut(R.querySelector('#aft').value,res.r);d.remove()}catch(e){toast('❌ '+e.message)}}};
+ g.onclick=async()=>{const t=ta.value.trim();if(!t)return toast('কী আঁকতে হবে লেখো');if(busy)return;busy=true;g.disabled=true;g.textContent='⏳ আঁকা হচ্ছে…';
+  try{const k=aiKeys();if(!k.gemini&&!k.groq)throw new Error('AI কী সেট নেই — "✨ AI দিয়ে প্রশ্নপত্র তৈরি"-র 🔑 চাপো');
+   await qaiFonts();const raw=await qaiCall('তুমি বাংলাদেশের গণিত/বিজ্ঞানের শিক্ষক। ব্যবহারকারীর বর্ণনা থেকে চিত্রের তথ্য দাও। আউটপুট: শুধু একটি JSON {"figure":{…}} — অন্য কিছু লিখবে না।\n'+FIGSPEC,t,null);
+   const j=qaiJ(raw),spec=j&&(j.figure||j),r=qaiFig(spec);if(!r)throw new Error('এই বর্ণনা থেকে চিত্র আঁকা গেল না — মাপসহ আরেকটু স্পষ্ট করে লেখো');
+   res={r,spec,tg:res&&res.tg};show()}
+  catch(e){toast('❌ '+(e.message||'চিত্র হয়নি'))}finally{busy=false;g.disabled=false;g.textContent='↻ আবার বানাও'}};
+ document.body.appendChild(d);setTimeout(()=>ta.focus(),50)}
+
 /* ---- ইতিহাস ---- */
 const QH='trsm_qaih';
 const qaiHL=()=>{const a=J(QH,[]);return Array.isArray(a)?a:[]};
@@ -23135,7 +23261,7 @@ function qaiHist_(){
 function qaiHRe(i){const e=qaiHL()[i];if(!e)return;qaiS=Object.assign(qaiNew(),e.S,{img:null,simg:null,chat:[],hid:null,view:'form'});qaiCur=null;if(e.S&&e.S.own)toast('সেটিং বসেছে — প্রশ্নপত্রের ছবি আবার দিতে হবে');qaiForm()}
 async function qaiHOp(i){const e=qaiHL()[i];if(!e)return;if(!e.j)return toast('এটির শুধু সেটিং আছে — "আবার" চাপো');
  qaiS=Object.assign(qaiNew(),e.S,{img:null,simg:null,chat:[],hid:e.id,view:'chat'});qaiCur=e.j;qaiChatShow();
- try{await qaiPaper(qaiToPaper(e.j,qaiS),'আগের প্রশ্নপত্র। চাইলে নিচে লিখে বদলাতে পারো।')}catch(x){qaiAdd0('❌ '+qaiE(x.message),'er')}}
+ try{await qaiFonts();await qaiPaper(qaiToPaper(e.j,qaiS),'আগের প্রশ্নপত্র। চাইলে নিচে লিখে বদলাতে পারো।')}catch(x){qaiAdd0('❌ '+qaiE(x.message),'er')}}
 function qaiHDel(i){const a=qaiHL();a.splice(i,1);try{LS.setItem(QH,JSON.stringify(a))}catch(e){}qaiHist_()}
 
 /* ---- একটি প্রশ্ন বদলাও ---- */
@@ -23152,7 +23278,7 @@ async function qaiSwap(si,qi){
  const en=S.lang==='en',ty=String(sc.type||'short').toLowerCase();
  const others=sc.questions.filter((_,i)=>i!==qi).map(x=>x&&x.text!=null?x.text:x);
  const sys=qaiRules(en)+'\nএই কাজে আউটপুট: {"sections":[{"type":"'+ty+'","questions":[ঠিক ১টি নতুন প্রশ্ন — উপরের কাঠামোয়]}]}';
- const user=`শ্রেণি: ${qaiClsName(S,false)}, বিষয়: ${qaiSubName(S,false)}${S.book?', বই/অধ্যায়: '+S.book:''}\nবিভাগ: ${sc.title||ty} (type: ${ty})${sc.marks?', প্রতি প্রশ্ন '+sc.marks+' নম্বর':''}\nনিচের প্রশ্নটির বদলে একই ধরনের ও একই মানের সম্পূর্ণ নতুন, ভিন্ন একটি প্রশ্ন দাও।\nবদলাতে হবে: ${JSON.stringify(q)}\nএই বিভাগের অন্য প্রশ্ন (পুনরাবৃত্তি করবে না): ${JSON.stringify(others)}${S.src.trim()?'\nপাঠ্যাংশ (শুধু এখান থেকে): '+S.src.trim().slice(0,6000):''}`;
+ const user=`শ্রেণি: ${qaiClsName(S,false)}, বিষয়: ${qaiSubName(S,false)}${S.book?', বই/অধ্যায়: '+S.book:''}\nবিভাগ: ${sc.title||ty} (type: ${ty})${sc.marks?', প্রতি প্রশ্ন '+sc.marks+' নম্বর':''}${sc.passage?'\nউদ্দীপক (প্রশ্ন এর ভিত্তিতে হবে): '+sc.passage:''}\nনিচের প্রশ্নটির বদলে একই ধরনের ও একই মানের সম্পূর্ণ নতুন, ভিন্ন একটি প্রশ্ন দাও।\nবদলাতে হবে: ${JSON.stringify(q)}\nএই বিভাগের অন্য প্রশ্ন (পুনরাবৃত্তি করবে না): ${JSON.stringify(others)}${S.src.trim()?'\nপাঠ্যাংশ (শুধু এখান থেকে): '+S.src.trim().slice(0,6000):''}`;
  $('#qaiChat').insertAdjacentHTML('beforeend',`<div class="qai-me">🔄 ${qaiE(sc.title||'')} — ${aiToBn(qi+1)} নং প্রশ্ন বদলাও</div>`);qaiScroll();
  await qaiRun(async()=>{const j=qaiParse(await qaiCall(sys,user,null)),nq=j.sections[0]&&j.sections[0].questions&&j.sections[0].questions[0];
   if(!nq||typeof nq!=='object')throw new Error('AI নতুন প্রশ্ন দেয়নি — আবার চেষ্টা করো');
@@ -23183,14 +23309,14 @@ async function qaiMkSets(n,t,m,prog){
     const user=`নিচের প্রশ্নপত্রের মতো হুবহু একই কাঠামো (একই বিভাগ, একই প্রশ্নসংখ্যা, একই নম্বর, একই কাঠিন্য, একই শিরোনাম) রেখে "${nm[i]} সেট" তৈরি করো — কিন্তু সব প্রশ্ন সম্পূর্ণ নতুন ও ভিন্ন হবে। আগের সেটগুলোর কোনো প্রশ্ন, অপশন বা অনুচ্ছেদ পুনরাবৃত্তি করবে না।${S.src.trim()?'\nপাঠ্যাংশ (শুধু এখান থেকে): '+S.src.trim().slice(0,6000):''}\nআগের সেট(গুলো):\n${JSON.stringify(prev)}`;
     const j=qaiParse(await qaiCall(qaiRules(en),user,null));prev.push(j);extra.push(qaiToPaper(j,S))}
   }finally{qaiBusy=false}}
- prog&&prog('⏳ সাজানো হচ্ছে…');
+ prog&&prog('⏳ সাজানো হচ্ছে…');await qaiFonts();
  QL.unshift(p);qOpenEd(p);
  const cs=m==='new'?extra.map((x,i)=>{x.sg=p.sg=p.sg||uid();x.created=Date.now()+i+1;return x}):nm.slice(1).map(lb=>qMkSet(lb,true));
  if(!p.sg)p.sg=uid();
  cs.forEach((c,i)=>{c.sg=p.sg;c.h.set=nm[i+1];c.hs.set=true;c.name=base+' — '+nm[i+1]+' সেট';c.updated=Date.now()});
  p.h.set=nm[0];p.hs.set=true;p.name=base+' — '+nm[0]+' সেট';p.created=Math.min(p.created,Date.now()-1000);
  [...cs].reverse().forEach(c=>QL.unshift(c));QL.splice(QL.indexOf(p),1);QL.unshift(p);
- qSave();qaiClose();qOpenEd(p);toast(nm.join(', ')+' — '+aiToBn(n)+'টি সেট তৈরি হয়েছে ✓ (তালিকায় দেখো)')}
+ qSave();qaiClose();qOpenEd(p);toast(nm.join(', ')+' — '+aiToBn(n)+'টি সেট তৈরি হয়েছে ✓ ওপরের "সেট" বাটনে ক/খ বদলে দেখো')}
 
 /* ---- প্রম্পট কপি মোড ---- */
 function qaiCopyView(){
@@ -23200,7 +23326,7 @@ function qaiCopyView(){
  $('#qaiCp').onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(pr):Promise.reject()).then(()=>toast('প্রম্পট কপি হয়েছে'),()=>toast('কপি হয়নি — প্রম্পটে চেপে ধরে নিজে কপি করো'))};
  $('#qaiUse').onclick=async()=>{let j;try{j=qaiParse($('#qaiPaste').value)}catch(e){return toast(e.message)}
   S.view='chat';qaiChatShow();$('#qaiBar').classList.add('hide');
-  try{qaiCur=j;const pp=qaiToPaper(j,S);qaiHSave(pp);await qaiPaper(pp,'কোড থেকে প্রশ্নপত্র সাজানো হয়েছে।')}catch(e){qaiAdd0('❌ '+qaiE(e.message),'er')}}}
+  try{qaiCur=j;await qaiFonts();const pp=qaiToPaper(j,S);qaiHSave(pp);await qaiPaper(pp,'কোড থেকে প্রশ্নপত্র সাজানো হয়েছে।')}catch(e){qaiAdd0('❌ '+qaiE(e.message),'er')}}}
 
 })();
 </script><script>
