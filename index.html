@@ -1603,7 +1603,7 @@ html[data-mode=dark] .qpvh{background:#0a0f19}
 .qsh.nol,.qsh2.nol{border-bottom:0}.qsh2{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid #666;padding-bottom:2px}.qsn2{font-weight:600}
 .qmt{width:100%;border-collapse:collapse;margin-top:.2em}.qmt th{font-weight:700;border-bottom:1px solid #444;text-align:left;padding:1px 4px}.qmt td{padding:1px 4px;vertical-align:top}.qmt td b{margin-right:.35em}
 .qbl{display:inline-block;border-bottom:1px solid #111}
-.qfrw{display:inline-block;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.2}.qfr>span{display:block;padding:0 .2em}.qfr>span:first-child{border-bottom:1px solid currentColor}
+.qfr{display:inline-block;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.2}.qfr>span{display:block;padding:0 .2em}.qfr>span:first-child{border-bottom:1px solid currentColor}
 .qsq{white-space:nowrap}.qsq>span{border-top:1px solid currentColor;padding:0 .1em}
 .qpf sup,.qpf sub{font-size:.72em;line-height:0}
 .qkey{display:flex;flex-wrap:wrap;gap:.2em 1.2em}.qkey span{white-space:nowrap}
@@ -19235,6 +19235,7 @@ function bkSheet(){
 /* ---------- হোম ---------- */
 /* ---------- নতুন কী আছে (আপডেটের তালিকা ও পপআপ) ---------- */
 const NW=[
+{v:'v178',d:'২৮ নভেম্বর ২০২৬',t:['✨ প্রশ্নপত্র: "AI দিয়ে প্রশ্নপত্র তৈরি" — বিভাগ অনুযায়ী প্রশ্ন, বদলানোর চ্যাট, তৈরি প্রশ্নপত্র সরাসরি এডিটরে (ছবি/টেবিল/ভাসমান বস্তু সহ)','🖼 আগের প্রশ্নপত্রের ছবি/লেখা থেকে হুবহু সাজানো','🏫 প্রতিষ্ঠানের ধরন: সাধারণ স্কুল / কোচিং সেন্টার / প্রাইভেট; পরীক্ষা: বৃত্তি প্রস্তুতি মডেল টেস্ট, মক টেস্ট যোগ; ইংরেজি প্রশ্নে হেডার ইংরেজি','🔧 প্রশ্নপত্রে \\frac ভগ্নাংশ ভেঙে যাচ্ছিল — ঠিক করা হয়েছে']},
 {v:'v177',d:'২৭ নভেম্বর ২০২৬',t:['👤 বৃত্তি ফলাফল লিংক ও অভিভাবক ফল লিংকে পরীক্ষার্থীর নাম এখন শিক্ষক ও শিক্ষার্থী ট্যাব থেকে বাংলায় আসবে (বাংলা নাম না থাকলে ইংরেজি) — লিংক হালনাগাদ করলে নতুন নাম যাবে']},
 {v:'v176',d:'২৭ নভেম্বর ২০২৬',t:['🔧 রেজাল্ট ট্যাবে "অভিভাবক ফল লিংক" ও "বৃত্তি ফলাফল লিংক" বাটন ক্লিকে কিছু হচ্ছিল না — ঠিক করা হয়েছে']},
 {v:'v175',d:'২৭ নভেম্বর ২০২৬',t:['💬 শিক্ষক প্যানেলের চ্যাট: শিক্ষকের মেসেজ এখন ডানে, ছাত্রের মেসেজ বামে','🤖 শিক্ষক অ্যাপের বাইরে থাকলে ছাত্র মেসেজ দিলেই প্রতিবার auto-reply যাবে (ছাত্র অ্যাপ v48_4 লাগবে)','🧮 AI স্যার: গণিতের ভগ্নাংশ, ×, ÷, √, ঘাত পরিষ্কারভাবে দেখাবে']},
@@ -20802,7 +20803,7 @@ function qf(s){
  s=esc(s==null?'':s);
  for(let k=0;k<8;k++){const o=s;
   s=s.replace(/\^\{([^{}]*)\}/g,'<sup>$1</sup>').replace(/_\{([^{}]*)\}/g,'<sub>$1</sub>')
-   .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g,'<span class="qfrw"><span>$1</span><span>$2</span></span>')
+   .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g,'<span class="qfr"><span>$1</span><span>$2</span></span>')
    .replace(/\\sqrt\{([^{}]*)\}/g,'<span class="qsq">√<span>$1</span></span>');
   if(o===s)break}
  return s.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\/\/(.+?)\/\//g,'<i>$1</i>').replace(/~~(.+?)~~/g,'<u>$1</u>').replace(/_{3,}/g,'<span class="qbl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>').replace(/\n/g,'<br>');
@@ -21143,7 +21144,7 @@ function qList(){
  qFlush();qx=null;qNav('list');$('#qph').textContent='← হোম';$('#qpt').textContent='প্রশ্নপত্র';
  const tot=QL.length;
  $('#qpbody').className='';
- $('#qpbody').innerHTML=`<div class="qpl"><h2>প্রশ্নপত্র</h2><button class="btn p qpbig" data-a="new">＋ নতুন প্রশ্নপত্র বানাও</button><button class="btn qpbig" id="qtrb" data-a="trash" style="display:none">🗑 ট্র্যাশ</button>${tot>3?'<input id="qsq" class="qpt" style="width:100%;box-sizing:border-box;margin-bottom:12px;border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)" placeholder="🔍 খোঁজো…">':''}<div id="qlist"></div></div>`;
+ $('#qpbody').innerHTML=`<div class="qpl"><h2>প্রশ্নপত্র</h2><button class="btn p qpbig" data-a="new">＋ নতুন প্রশ্নপত্র বানাও</button><button class="btn qpbig" data-a="ai" style="background:linear-gradient(135deg,#7c3aed,#0f766e);color:#fff;border-color:transparent">✨ AI দিয়ে প্রশ্নপত্র তৈরি</button><button class="btn qpbig" id="qtrb" data-a="trash" style="display:none">🗑 ট্র্যাশ</button>${tot>3?'<input id="qsq" class="qpt" style="width:100%;box-sizing:border-box;margin-bottom:12px;border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--card)" placeholder="🔍 খোঁজো…">':''}<div id="qlist"></div></div>`;
  const draw=()=>{const q=($('#qsq')?$('#qsq').value:'').toLowerCase(),L=QL.filter(p=>!q||(p.name+p.h.sub+p.h.exam+p.h.cls).toLowerCase().includes(q));
   $('#qlist').innerHTML=L.length?L.map(p=>`<div class="qpc"><h3>${esc(p.name||'প্রশ্নপত্র')}</h3><div class="m">${(qInd(p)?p.pc.slice(0,p.cfg.cols).map(x=>[x.h.cls,x.h.sub].filter(Boolean).join(' ')||'—').map(esc).join(' | '):[p.h.cls,p.h.sub,p.h.exam].filter(Boolean).map(esc).join(' · '))||'—'}<br>${qbn((qInd(p)?p.pc.slice(0,p.cfg.cols).flatMap(x=>x.secs):p.secs).reduce((a,s)=>a+s.qs.length,0))}টি প্রশ্ন · ${qbn(qTotalAll(p))} নম্বর · ${(PAPER[p.cfg.size]||PAPER.a4)[0]} ${p.cfg.orient==='l'?'ল্যান্ডস্কেপ':'পোর্ট্রেট'} · ${new Date(p.updated).toLocaleDateString('bn-BD')}</div><div class="acts"><button class="btn p" data-a="open:${p.id}">✏️ এডিট</button><button class="btn" data-a="dup:${p.id}">⧉ কপি</button><button class="btn" data-a="del:${p.id}" style="color:var(--red)">🗑</button></div></div>`).join(''):`<div class="empty" style="text-align:center;padding:30px 10px;color:var(--mut)">${tot?'কিছু পাওয়া যায়নি।':'এখনো কোনো প্রশ্নপত্র নেই। উপরের বাটন চেপে প্রথমটি বানাও।'}</div>`};
  draw();qTrashBtn();if($('#qsq'))$('#qsq').oninput=draw;
@@ -22298,6 +22299,7 @@ root.addEventListener('click',e=>{
   if(k==='fdup')return qFlDup();
   if(k==='fdel')return qFlDel();
   if(k==='new')return qPick();
+  if(k==='ai')return qaiOpen();
   if(k==='mk'){const p=qNew(x);QL.unshift(p);qFresh=p;qSave();return qOpenEd(p)}
   if(k==='open'){const p=QL.find(z=>z.id===x);if(p)qOpenEd(p);return}
   if(k==='dup'){const p=QL.find(z=>z.id===x);if(p){const c=cp(p);c.id=uid();delete c.sg;c.name+=' (কপি)';c.updated=Date.now();QL.unshift(c);qSave();qList();toast('কপি হয়েছে ✓')}return}
@@ -22784,6 +22786,319 @@ function qSh(){const r=$('#qp');if(!r)return;const h=r.querySelector('.rth'),sg=
 {const h=$('#qp .rth'),sg=$('#qpseg');if(window.ResizeObserver){const ro=new ResizeObserver(qSh);if(h)ro.observe(h);if(sg)ro.observe(sg)}}
 let rz;addEventListener('resize',()=>{qSh();clearTimeout(rz);rz=setTimeout(()=>{if(qx&&!root.classList.contains('hide'))qPvNow()},200)});
 addEventListener('beforeunload',()=>{try{qFlush()}catch(e){}});
+/* ===== ✨ AI দিয়ে প্রশ্নপত্র তৈরি ===== */
+const AIK='trsm_qai',BNN='০১২৩৪৫৬৭৮৯';
+const aiToBn=n=>String(n).replace(/\d/g,d=>BNN[d]);
+const aiKeys=()=>{const o=J(AIK,{})||{};return{gemini:String(o.gemini||'').trim(),groq:String(o.groq||'').trim()}};
+const QAI={
+ inst:[['সাধারণ স্কুল','General School'],['কোচিং সেন্টার','Coaching Center'],['প্রাইভেট','Private']],
+ exam:[['সাপ্তাহিক পরীক্ষা','Weekly Exam'],['মাসিক পরীক্ষা','Monthly Exam'],['অর্ধবার্ষিক পরীক্ষা','Half-Yearly Exam'],['বার্ষিক পরীক্ষা','Annual Exam'],['মডেল টেস্ট','Model Test'],['বৃত্তি প্রস্তুতি মডেল টেস্ট','Scholarship Preparation Model Test'],['মক টেস্ট','Mock Test']],
+ cls:[['প্রথম','One'],['দ্বিতীয়','Two'],['তৃতীয়','Three'],['চতুর্থ','Four'],['পঞ্চম','Five'],['ষষ্ঠ','Six'],['সপ্তম','Seven'],['অষ্টম','Eight'],['নবম','Nine'],['দশম','Ten'],['একাদশ','Eleven'],['দ্বাদশ','Twelve']],
+ sub:[['বাংলা','Bangla'],['ইংরেজি','English'],['গণিত','Mathematics'],['বিজ্ঞান','Science'],['বাংলাদেশ ও বিশ্বপরিচয়','Bangladesh and Global Studies'],['ধর্ম ও নৈতিক শিক্ষা','Religion and Moral Education'],['ICT','ICT'],['পদার্থবিজ্ঞান','Physics'],['রসায়ন','Chemistry'],['জীববিজ্ঞান','Biology'],['উচ্চতর গণিত','Higher Mathematics']],
+ ty:{mcq:['🔘','বহুনির্বাচনি (MCQ)'],poly:['🔢','বহুপদী MCQ (i, ii, iii)'],cq:['🧩','সৃজনশীল'],short:['✍️','সংক্ষিপ্ত প্রশ্ন'],fill:['▁','শূন্যস্থান পূরণ'],tf:['⚖️','সত্য / মিথ্যা'],match:['🔗','মিলকরণ'],text:['📝','রচনামূলক'],pas:['📖','অনুচ্ছেদ (Passage)']},
+ pre:[['MCQ + সংক্ষিপ্ত',[['mcq',5,1,0],['short',5,2,0]]],['MCQ + সৃজনশীল',[['mcq',10,1,0],['cq',7,10,5]]],['পূর্ণাঙ্গ',[['mcq',10,1,0],['short',6,2,5],['cq',3,10,2]]],['প্রাথমিক',[['fill',5,1,0],['tf',5,1,0],['match',5,1,0],['short',5,2,0]]]]
+};
+let qaiS=null,qaiCur=null,qaiBusy=false;
+const qaiNew=()=>({view:'form',mode:'direct',lang:'bn',ci:4,cx:'',si:2,sx:'',ii:0,ei:0,full:30,time:'',secs:[{ty:'mcq',n:5,m:1,ch:0},{ty:'short',n:5,m:2,ch:0}],book:'',lv:1,x:'',own:false,ot:'',img:null,chat:[]});
+const qaiL=(a,en)=>en?a[1]:a[0];
+const qaiTot=S=>S.secs.reduce((a,s)=>a+(s.ty==='pas'?0:(s.ty==='cq'?10:(+s.m||0))*(s.ch>0&&s.ch<s.n?s.ch:(+s.n||0))),0);
+const qaiClsName=(S,en)=>S.ci>=0?QAI.cls[S.ci][en?1:0]:(S.cx.trim()||'—');
+const qaiSubName=(S,en)=>S.si>=0?QAI.sub[S.si][en?1:0]:(S.sx.trim()||'—');
+const qaiTime=(m,en)=>{const h=Math.floor(m/60),r=m%60;if(en)return h?(r?`${h} hour${h>1?'s':''} ${r} minutes`:`${h} hour${h>1?'s':''}`):`${r} minutes`;return h?(r?`${aiToBn(h)} ঘণ্টা ${aiToBn(r)} মিনিট`:`${aiToBn(h)} ঘণ্টা`):`${aiToBn(r)} মিনিট`};
+
+/* ---- প্রম্পট ---- */
+function qaiRules(en){
+ return `তুমি বাংলাদেশের একজন অভিজ্ঞ শিক্ষক ও প্রশ্নপত্র প্রণেতা। জাতীয় শিক্ষাক্রম (NCTB) অনুযায়ী নির্ভুল, মানসম্পন্ন প্রশ্ন বানাও।
+আউটপুট: শুধুমাত্র একটি বৈধ JSON অবজেক্ট। JSON-এর বাইরে কোনো কথা, ব্যাখ্যা বা markdown (\`\`\`) লিখবে না।
+JSON কাঠামো:
+{"sections":[{"type":"mcq|poly|cq|short|fill|tf|match|text|pas","title":"বিভাগের শিরোনাম (ক/খ/১/২ জাতীয় ক্রমিক চিহ্ন ছাড়া)","note":"ঐচ্ছিক ছোট নির্দেশনা","marks":প্রতি প্রশ্নের নম্বর (cq-তে 0),"choose":যেকোনো কতটির উত্তর দিতে হবে (না থাকলে 0),"questions":[ ... ]}]}
+প্রতি type-এর questions:
+- mcq: {"text":"প্রশ্ন","options":["…","…","…","…"],"answer":সঠিক অপশনের ইনডেক্স 0-3}
+- poly (বহুপদী): {"text":"প্রশ্ন","statements":["i-এর বিবৃতি","ii-এর বিবৃতি","iii-এর বিবৃতি"],"options":${en?'["i and ii","i and iii","ii and iii","i, ii and iii"]':'["i ও ii","i ও iii","ii ও iii","i, ii ও iii"]'},"answer":0-3}
+- cq (সৃজনশীল): {"text":"উদ্দীপক (গল্প/তথ্য/ঘটনা)","parts":[{"text":"…","marks":1},{"text":"…","marks":2},{"text":"…","marks":3},{"text":"…","marks":4}]} — ক: জ্ঞানমূলক, খ: অনুধাবনমূলক, গ: প্রয়োগমূলক, ঘ: উচ্চতর দক্ষতামূলক
+- short / text / fill / tf: {"text":"প্রশ্ন"} — fill-এ শূন্যস্থান ___ দিয়ে দেখাও
+- match: ঠিক ১টি প্রশ্ন: {"left":["…",…],"right":["…",…]} — left ও right সমান সংখ্যক, right এলোমেলো ক্রমে
+- pas: ঠিক ১টি: {"passage":"অনুচ্ছেদের পুরো লেখা"} — এই বিভাগের পরের বিভাগগুলোর প্রশ্ন এই অনুচ্ছেদ থেকে হবে
+নিয়ম: প্রশ্নের লেখায় নম্বর/ক্রম (১।, ক), (a)) বসাবে না; অপশনের শুরুতে ক/খ/গ/ঘ লিখবে না। সঠিক উত্তর বিভিন্ন অপশনে ছড়িয়ে দাও। প্রতিটি প্রশ্ন সুনির্দিষ্ট ও দ্ব্যর্থহীন হবে।
+গণিত/বিজ্ঞানের লেখা: ভগ্নাংশ \\frac{লব}{হর}, বর্গমূল \\sqrt{…}, ঘাত x^{2}, নিচের অক্ষর H_{2}O আকারে লেখো; $ বা অন্য LaTeX চিহ্ন ব্যবহার করবে না। ×, ÷, ≤, ≥, π, ° সরাসরি লিখতে পারো।
+প্রশ্নের ভাষা: ${en?'সম্পূর্ণ English (শিরোনাম, নির্দেশনা, প্রশ্ন সব English-এ)':'বাংলা; সংখ্যা বাংলা অঙ্কে (১২৩)'}।`}
+function qaiSys(S){
+ const en=S.lang==='en',cl=qaiClsName(S,false),sb=qaiSubName(S,false),rules=qaiRules(en);
+ if(S.own)return rules+`
+কাজ: ব্যবহারকারী একটি তৈরি প্রশ্নপত্র (ছবি ও/অথবা লেখা) দিয়েছে। এটি হুবহু কপি করে উপরের JSON কাঠামোয় সাজাও। ছবির মতোই বিভাগ (সংখ্যা, ক্রম, শিরোনাম), প্রশ্নের ক্রম ও লেখা রাখো। নতুন প্রশ্ন বানাবে না, অনুবাদ করবে না, কিছু জিজ্ঞেসও করবে না। ছবিতে উত্তর চিহ্নিত থাকলে "answer" দাও। প্রতিটি বিভাগের সঠিক type বেছে নাও।`;
+ const spec=S.secs.map((s,i)=>`বিভাগ ${i+1}: type="${s.ty}" (${QAI.ty[s.ty][1]}) — ${s.ty==='pas'?'১টি অনুচ্ছেদ':s.ty==='match'?'১টি প্রশ্ন, '+s.n+' সারি':'ঠিক '+s.n+'টি প্রশ্ন'}${s.ty==='cq'?', প্রতিটি ১০ নম্বর':s.ty==='pas'?'':', প্রতিটি '+s.m+' নম্বর'}${s.ch>0&&s.ch<s.n?` (পরীক্ষার্থী যেকোনো ${s.ch}টির উত্তর দেবে, তবু ${s.n}টি প্রশ্নই দাও)`:''}`).join('\n');
+ return rules+`
+প্রশ্নপত্রের তথ্য:
+শ্রেণি: ${cl}${en?' (Class '+qaiClsName(S,true)+')':''}
+বিষয়: ${sb}${en?' ('+qaiSubName(S,true)+')':''}
+প্রতিষ্ঠানের ধরন: ${QAI.inst[S.ii][0]}
+পরীক্ষা: ${QAI.exam[S.ei][0]}${S.ei===5?' (প্রাথমিক বৃত্তি পরীক্ষার ধাঁচে)':S.ei===6?' (প্রতিযোগিতামূলক/ভর্তি পরীক্ষার ধাঁচে)':''}
+পূর্ণমান: ${qaiTot(S)}${S.book?'\nবই/অধ্যায়: '+S.book:''}
+কাঠিন্য: ${['সহজ','মাঝারি','কঠিন'][S.lv]}${S.x?'\nঅতিরিক্ত নির্দেশনা: '+S.x:''}
+বিভাগ অনুযায়ী ঠিক এই কাঠামোয় প্রশ্ন দাও (সংখ্যা মিলিয়ে):
+${spec}
+বিভাগের শিরোনাম ও নির্দেশনা ${en?'English-এ':'বাংলায়'} দাও (যেমন "বহুনির্বাচনি প্রশ্ন", "সকল প্রশ্নের উত্তর দাও")।`;
+}
+const qaiUser=S=>S.own?(S.ot?'প্রশ্নপত্রের লেখা:\n'+S.ot:'ছবির প্রশ্নপত্রটি JSON-এ সাজাও।'):'এই তথ্য অনুযায়ী প্রশ্নপত্র JSON-এ দাও।';
+
+/* ---- AI কল ---- */
+async function qaiFetch(url,opt){const ac=new AbortController(),t=setTimeout(()=>ac.abort(),120000);try{return await fetch(url,{...opt,signal:ac.signal})}finally{clearTimeout(t)}}
+async function qaiGem(key,sys,user,img){
+ const parts=[];if(img)parts.push({inline_data:{mime_type:'image/jpeg',data:img}});parts.push({text:user});
+ let last='Gemini error';
+ for(const m of['gemini-3.5-flash-lite','gemini-3.6-flash','gemini-3.1-flash-lite']){
+  try{
+   const r=await qaiFetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system_instruction:{parts:[{text:sys}]},contents:[{role:'user',parts}],generationConfig:{temperature:.7,maxOutputTokens:16000,responseMimeType:'application/json'}})});
+   const d=await r.json();
+   if(!r.ok){last=(d.error&&d.error.message)||('Gemini '+r.status);if([400,401,403].includes(r.status))break;continue}
+   const t=((d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts)||[]).map(p=>p.text||'').join('');
+   if(!t){last='Gemini: খালি উত্তর';continue}return t;
+  }catch(e){last=e.name==='AbortError'?'সময় শেষ (নেট ধীর)':(e.message||'নেটওয়ার্ক সমস্যা')}
+ }
+ throw new Error(last)}
+async function qaiGroq(key,sys,user){
+ const r=await qaiFetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:sys},{role:'user',content:user}],max_tokens:8000,temperature:.7,response_format:{type:'json_object'}})});
+ const d=await r.json();if(!r.ok)throw new Error((d.error&&d.error.message)||('Groq '+r.status));
+ const t=d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content;if(!t)throw new Error('Groq: খালি উত্তর');return t}
+async function qaiCall(sys,user,img){
+ const k=aiKeys();let err='';
+ if(k.gemini){try{return await qaiGem(k.gemini,sys,user,img)}catch(e){err='Gemini: '+e.message}}
+ if(k.groq&&!img){try{return await qaiGroq(k.groq,sys,user)}catch(e){err+=(err?' | ':'')+'Groq: '+e.message}}
+ if(img&&!k.gemini)throw new Error('ছবি পড়তে Gemini কী লাগবে (Groq ছবি পড়ে না)');
+ throw new Error(err||'কোনো AI কী সেট করা নেই — ওপরের 🔑 চাপো')}
+function qaiParse(t){
+ t=String(t||'').replace(/```(?:json)?/gi,'');const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a<0||b<a)throw new Error('AI-এর উত্তরে JSON পাওয়া যায়নি');
+ let s=t.slice(a,b+1),j;try{j=JSON.parse(s)}catch(e){try{j=JSON.parse(s.replace(/,\s*([}\]])/g,'$1'))}catch(e2){throw new Error('AI-এর উত্তর অসম্পূর্ণ/ভাঙা — আবার চেষ্টা করো')}}
+ if(!j||!Array.isArray(j.sections)||!j.sections.length)throw new Error('AI কোনো বিভাগ দেয়নি — আবার চেষ্টা করো');return j}
+
+/* ---- JSON → প্রশ্নপত্র (এডিটরের নিজস্ব ফরম্যাটে) ---- */
+function qaiToPaper(j,S){
+ const en=S.lang==='en',P=(typeof PF==='function'?PF():{})||{},str=x=>String(x==null?'':x).trim();
+ const p={id:uid(),name:'',created:Date.now(),updated:Date.now(),cfg:{...QD,hlp:LS.getItem('trsm_hlogo')?'left':'none'},hs:{...HS},fl:[],h:{inst:P.inst||DEF.inst,addr:P.addr||DEF.addr,exam:qaiL(QAI.exam[S.ei],en),cls:qaiClsName(S,en),sub:qaiSubName(S,en),time:'',full:'',date:'',set:'',note:''},secs:[]};
+ Object.assign(p.cfg,{font:'nsnb',fs:14,lh:128,gapQ:3,mt:8,mb:8,ml:10,mr:10});
+ if(en)Object.assign(p.cfg,{lang:'en',numSt:'en',optSt:'enp'});
+ const POL=en?['i and ii','i and iii','ii and iii','i, ii and iii']:['i ও ii','i ও iii','ii ও iii','i, ii ও iii'];
+ const own=S.own;
+ j.sections.forEach((sj,i)=>{
+  let ty=String(sj.type||'short').toLowerCase();if(!QAI.ty[ty])ty='short';
+  const cf0=own?null:S.secs[i],cf=cf0&&cf0.ty===ty?cf0:null,s=mkSec(ty,0);
+  s.title=str(sj.title)||(own?'':en?QAI.ty[ty][1]:QAI.ty[ty][1]);s.note=str(sj.note);s.lines=0;s.showMk=true;
+  const qs=Array.isArray(sj.questions)?sj.questions:[];
+  {const mk=+sj.marks>0?+sj.marks:(cf?+cf.m:0)||qs.map(q=>+q.marks).find(x=>x>0)||1;s.marks=ty==='cq'?0:mk;
+   const ch=sj.choose!=null?+sj.choose:(cf&&cf.ch>0&&cf.ch<cf.n?cf.ch:0);s.choose=ch>0&&ch<qs.length?ch:0}
+  const ans=q=>{const a=Number(q.answer);return Number.isInteger(a)&&a>=0&&a<4?a:-1};
+  if(ty==='pas'){s.ptx=str(sj.passage||(qs[0]&&(qs[0].passage||qs[0].text)));s.sm=false;s.qs=[]}
+  else if(ty==='mcq')s.qs=qs.map(q=>{const o=(Array.isArray(q.options)?q.options:[]).map(str);while(o.length<4)o.push('');return{t:str(q.text),o:o.slice(0,4),ans:ans(q)}});
+  else if(ty==='poly'){s.pl=true;s.qs=qs.map(q=>{const st=(Array.isArray(q.statements)?q.statements:[]).map(str);while(st.length<3)st.push('');const o=(Array.isArray(q.options)&&q.options.length>=4)?q.options.slice(0,4).map(str):POL.slice();return{t:str(q.text),st:st.slice(0,3),o,ans:ans(q)}})}
+  else if(ty==='cq')s.qs=qs.map(q=>{const pr=(Array.isArray(q.parts)?q.parts:[]).map((x,k)=>({t:str(x&&x.text!=null?x.text:x),m:+(x&&x.marks)||k+1}));while(pr.length<4)pr.push({t:'',m:pr.length+1});return{t:str(q.text),parts:pr.slice(0,4)}});
+  else if(ty==='match'){const q=qs[0]||{},L=(Array.isArray(q.left)?q.left:[]).map(str),R=(Array.isArray(q.right)?q.right:[]).map(str);s.qs=[{t:'',l:L.join('\n'),r:R.join('\n')}]}
+  else s.qs=qs.map(q=>({t:str(q&&q.text!=null?q.text:q)}));
+  p.secs.push(s)});
+ const tot=qTotalAll(p),m=S.time.trim()||qaiTime(Math.max(20,Math.round(tot*1.5/5)*5),en);
+ p.h.time=m;p.h.full=en?String(tot):aiToBn(tot);
+ p.name=[p.h.cls,p.h.sub,p.h.exam].filter(Boolean).join(' — ');
+ return qMig(p)}
+
+/* ---- ইউআই ---- */
+const qaiE=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function qaiCSS(){if($('#qaiCss'))return;const st=document.createElement('style');st.id='qaiCss';st.textContent=`
+#qai{position:fixed;inset:0;z-index:300;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+#qai.hide{display:none}
+.qai-top{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line);box-shadow:var(--sh)}
+.qai-top b{flex:1;text-align:center;font-size:16px}
+.qai-top button{border:1px solid var(--line);background:var(--bg);color:inherit;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:15px}
+.qai-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:12px;max-width:820px;width:100%;margin:0 auto;box-sizing:border-box}
+.qai-c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:var(--sh)}
+.qai-c label{display:block;font-size:13.5px;font-weight:600;margin:12px 0 5px;color:var(--mut)}
+.qai-c label:first-child{margin-top:0}
+.qai-c input,.qai-c select,.qai-c textarea,.qai-in textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:inherit;font:inherit}
+.qai-g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qai-ch{display:flex;flex-wrap:wrap;gap:7px}
+.qai-ch span{border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 13px;cursor:pointer;font-size:14px}
+.qai-ch span.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.qai-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.qai-tabs div{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;font-weight:700;font-size:14px}
+.qai-tabs div small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+.qai-tabs div.on{border-color:var(--ac);background:rgba(var(--acr,15,118,110),.1)}
+.qai-key{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:9px 13px;margin-bottom:12px;font-size:14px;background:var(--card)}
+.qai-key.ok{border-color:#16a34a;background:rgba(22,163,74,.08)}.qai-key.no{border-color:#d97706;background:rgba(217,119,6,.08)}
+.qai-sr{display:grid;grid-template-columns:minmax(0,1.6fr) 52px 52px 52px 34px;gap:6px;align-items:center;margin-bottom:7px}
+.qai-sr .h{font-size:11.5px;color:var(--mut);text-align:center}
+.qai-sr button{border:1px solid var(--line);background:var(--bg);color:var(--red);border-radius:8px;height:36px;cursor:pointer}
+.qai-sr input{padding:8px 4px!important;text-align:center}
+.qai-sr select{padding:8px 6px!important}
+.qai-tot{margin-top:8px;font-size:14px;font-weight:700}.qai-tot.bad{color:#d97706}.qai-tot.ok{color:#16a34a}
+.qai-big{width:100%;margin-top:6px;padding:13px;border:0;border-radius:14px;background:linear-gradient(180deg,var(--acl,#14938a),var(--ac));color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+.qai-big.sec{background:var(--card);border:1px solid var(--line);color:inherit}
+.qai-big:disabled{opacity:.55}
+.qai-note{color:var(--mut);font-size:12.5px}
+.qai-chk{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:11px;cursor:pointer;margin-top:12px}
+.qai-chk input{width:18px;height:18px;margin-top:4px;accent-color:var(--ac)}
+.qai-chat{display:flex;flex-direction:column;gap:11px;padding-bottom:6px}
+.qai-me{align-self:flex-end;max-width:92%;background:var(--ac);color:#fff;border-radius:16px 16px 4px 16px;padding:8px 13px;display:flex;flex-wrap:wrap;gap:5px}
+.qai-me i{font-style:normal;background:rgba(255,255,255,.2);border-radius:999px;padding:1px 9px;font-size:13px}
+.qai-ai{align-self:flex-start;max-width:100%;min-width:0;width:100%;display:flex;gap:8px}
+.qai-ai .av{width:30px;height:30px;border-radius:10px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.qai-ai .bb{background:var(--card);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:9px 13px;min-width:0;flex:0 1 auto;max-width:calc(100% - 38px)}
+.qai-ai .bb.pp{flex:1 1 auto;width:calc(100% - 38px)}
+.qai-ai .bb.er{border-color:var(--red);color:var(--red)}
+.qai-dots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mut);margin:0 2px;animation:qaib 1s infinite}.qai-dots span:nth-child(2){animation-delay:.15s}.qai-dots span:nth-child(3){animation-delay:.3s}
+@keyframes qaib{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.qai-pc{margin-top:8px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+.qai-pv{background:#cfd6e2;padding:8px;max-height:430px;overflow:hidden;position:relative}
+html[data-mode=dark] .qai-pv{background:#0a0f19}
+.qai-pv.full{max-height:none}
+.qai-pv:not(.full):after{content:'';position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,rgba(0,0,0,.18))}
+.qai-pg{margin:0 auto 8px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25);overflow:hidden}
+.qai-ac{display:flex;gap:8px;padding:10px}
+.qai-ac button{flex:1;padding:10px 6px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:inherit;font-weight:700;cursor:pointer;font-size:14px}
+.qai-ac .p{background:var(--ac);border-color:var(--ac);color:#fff}
+.qai-bar{background:var(--bg);border-top:1px solid var(--line);padding:6px 0 calc(8px + env(safe-area-inset-bottom))}
+.qai-bar.hide{display:none}
+.qai-sug{display:flex;gap:7px;overflow-x:auto;padding:4px 12px 6px;scrollbar-width:none}.qai-sug::-webkit-scrollbar{display:none}
+.qai-sug button{flex:none;border:1.5px solid var(--line);background:var(--card);color:inherit;border-radius:999px;padding:7px 13px;cursor:pointer;font-size:14px;white-space:nowrap}
+.qai-in{display:flex;gap:8px;padding:0 12px;align-items:flex-end;max-width:820px;margin:0 auto;box-sizing:border-box;width:100%}
+.qai-in textarea{min-height:44px;max-height:100px;resize:none;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:inherit;font:inherit}
+.qai-snd{width:46px;height:44px;border-radius:12px;border:0;background:var(--ac);color:#fff;font-size:18px;cursor:pointer;flex:none}
+.qai-dlg{position:fixed;inset:0;z-index:320;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px}
+.qai-dlg>div{background:var(--card);color:var(--ink);border-radius:16px;padding:16px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
+.qai-dlg input{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:inherit;font:inherit;margin-bottom:8px}
+.qai-pr{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;max-height:200px;overflow:auto;font-family:ui-monospace,Menlo,monospace}
+.qai-img{display:flex;gap:10px;align-items:center;margin-top:8px}.qai-img img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+`;document.head.appendChild(st)}
+
+function qaiOpen(){
+ qaiCSS();qaiS=qaiNew();qaiCur=null;
+ let o=$('#qai');if(!o){o=document.createElement('div');o.id='qai';o.innerHTML=`<div class="qai-top"><button id="qaiB">←</button><b id="qaiT">✨ AI দিয়ে প্রশ্নপত্র</b><button id="qaiK" title="AI কী">🔑</button></div><div class="qai-body" id="qaiBody"></div><div class="qai-bar hide" id="qaiBar"><div class="qai-sug" id="qaiSug"></div><div class="qai-in"><textarea id="qaiMsg" rows="1" placeholder="AI-কে বলো কী বদলাতে হবে… (যেমন: ৩য় প্রশ্ন সহজ করো)"></textarea><button class="qai-snd" id="qaiSend">➤</button></div></div>`;document.body.appendChild(o);
+  o.addEventListener('click',qaiClick);o.addEventListener('input',qaiInput);o.addEventListener('change',qaiInput);
+  $('#qaiB').onclick=qaiBack;$('#qaiK').onclick=qaiKeyDlg;$('#qaiSend').onclick=()=>qaiRefine();
+  $('#qaiMsg').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();qaiRefine()}})}
+ o.classList.remove('hide');document.body.style.overflow='hidden';qaiForm()}
+function qaiClose(){const o=$('#qai');if(o)o.classList.add('hide');document.body.style.overflow='';$('#qaiBar').classList.add('hide')}
+function qaiBack(){const S=qaiS;if(S.view==='form')return qaiClose();S.view='form';qaiForm()}
+function qaiKeyBar(){const k=aiKeys();return k.gemini?`<div class="qai-key ok">✅ <div><b>Gemini সংযুক্ত</b><div class="qai-note">ছবি পড়াও চলবে</div></div></div>`:k.groq?`<div class="qai-key ok">✅ <div><b>Groq সংযুক্ত</b><div class="qai-note">ছবি থেকে সাজানো চলবে না (Gemini কী লাগবে)</div></div></div>`:`<div class="qai-key no">⚠️ <div><b>AI কী সেট নেই</b><div class="qai-note">ওপরের 🔑 চাপো — অথবা নিচের "প্রম্পট কপি" ব্যবহার করো</div></div></div>`}
+function qaiForm(){
+ const S=qaiS,en=S.lang==='en',b=$('#qaiBody'),y=b.scrollTop;S.view='form';$('#qaiBar').classList.add('hide');$('#qaiT').textContent='✨ AI দিয়ে প্রশ্নপত্র';
+ const ch=(arr,sel,k,label)=>`<div class="qai-ch">${arr.map((x,i)=>`<span class="${i===sel?'on':''}" data-a="${k}:${i}">${qaiE(label(x))}</span>`).join('')}</div>`;
+ const tot=qaiTot(S),ok=tot===(+S.full||0);
+ const rows=S.secs.map((s,i)=>`<div class="qai-sr"><select data-r="${i}:ty">${Object.keys(QAI.ty).map(t=>`<option value="${t}"${t===s.ty?' selected':''}>${QAI.ty[t][0]} ${QAI.ty[t][1]}</option>`).join('')}</select>${s.ty==='pas'?'<span></span><span></span><span></span>':`<input type="number" min="1" inputmode="numeric" data-r="${i}:n" value="${s.n}">${s.ty==='cq'?'<input disabled value="১০">':`<input type="number" min="1" inputmode="numeric" data-r="${i}:m" value="${s.m}">`}<input type="number" min="0" inputmode="numeric" data-r="${i}:ch" value="${s.ch||''}" placeholder="—">`}<button data-a="rm:${i}">✕</button></div>`).join('');
+ b.innerHTML=`<div class="qai-tabs"><div class="${S.mode==='direct'?'on':''}" data-a="mode:direct">⚡ সরাসরি AI<small>অ্যাপের ভিতরেই</small></div><div class="${S.mode==='copy'?'on':''}" data-a="mode:copy">📋 প্রম্পট কপি<small>যেকোনো AI চ্যাটে পেস্ট</small></div></div>
+ ${S.mode==='direct'?qaiKeyBar():''}
+ <div class="qai-c">
+  <label>প্রশ্নের ভাষা</label>${ch([['বাংলা'],['English']],en?1:0,'lang',x=>x[0])}
+  <div class="qai-g2"><div><label>শ্রেণি</label><select data-k="ci">${QAI.cls.map((c,i)=>`<option value="${i}"${i===S.ci?' selected':''}>${c[0]}</option>`).join('')}<option value="-1"${S.ci<0?' selected':''}>অন্য…</option></select>${S.ci<0?`<input data-k="cx" value="${qaiE(S.cx)}" placeholder="যেমন: কিন্ডারগার্টেন" style="margin-top:6px">`:''}</div>
+  <div><label>বিষয়</label><select data-k="si">${QAI.sub.map((c,i)=>`<option value="${i}"${i===S.si?' selected':''}>${c[0]}</option>`).join('')}<option value="-1"${S.si<0?' selected':''}>অন্য…</option></select>${S.si<0?`<input data-k="sx" value="${qaiE(S.sx)}" placeholder="বিষয়ের নাম" style="margin-top:6px">`:''}</div></div>
+  <label>প্রতিষ্ঠানের ধরন</label>${ch(QAI.inst,S.ii,'ii',x=>qaiL(x,en))}
+  <label>পরীক্ষার ধরন</label>${ch(QAI.exam,S.ei,'ei',x=>qaiL(x,en))}
+  <label class="qai-chk" style="margin-top:14px;font-weight:500;color:inherit"><input type="checkbox" data-k="own"${S.own?' checked':''}><span><b>আমার কাছে আগে থেকে প্রশ্নপত্র আছে — শুধু সাজাতে চাই</b><br><span class="qai-note">ছবি দিন বা লিখে দিন। ছবির মতোই বিভাগ ও প্রশ্ন রেখে AI হুবহু সাজিয়ে দেবে — নতুন প্রশ্ন বানাবে না।</span></span></label>
+  ${S.own?`<label>প্রশ্নপত্রের ছবি</label><div class="qai-img"><button class="qai-big sec" style="margin:0;width:auto;padding:10px 16px" data-a="pick">📷 ছবি বেছে নাও</button>${S.img?`<img src="data:image/jpeg;base64,${S.img}"><button class="qai-big sec" style="margin:0;width:auto;padding:10px 14px" data-a="noimg">✕</button>`:''}</div><input type="file" id="qaiFile" accept="image/*" class="hide" style="display:none"><label>অথবা লেখা পেস্ট করো (ঐচ্ছিক)</label><textarea data-k="ot" rows="4" placeholder="প্রশ্নপত্রের লেখা…">${qaiE(S.ot)}</textarea>`:`
+  <label>বিভাগ অনুযায়ী প্রশ্ন <span class="qai-note">(যেকোনো কতটি = ঐচ্ছিক)</span></label>
+  <div class="qai-ch" style="margin-bottom:8px">${QAI.pre.map((p,i)=>`<span data-a="pre:${i}">${p[0]}</span>`).join('')}</div>
+  <div class="qai-sr"><div class="h" style="text-align:left">বিভাগ</div><div class="h">প্রশ্ন</div><div class="h">নম্বর</div><div class="h">যেকোনো</div><div></div></div>${rows}
+  <button class="qai-big sec" style="padding:9px" data-a="add">＋ বিভাগ যোগ</button>
+  <div class="qai-g2"><div><label>পূর্ণমান</label><input type="number" data-k="full" inputmode="numeric" value="${S.full}"></div><div><label>সময় (ফাঁকা = স্বয়ংক্রিয়)</label><input data-k="time" value="${qaiE(S.time)}" placeholder="যেমন: ১ ঘণ্টা"></div></div>
+  <div class="qai-tot ${ok?'ok':'bad'}" id="qaiTot">মোট নম্বর: ${aiToBn(tot)} ${ok?'✓ পূর্ণমানের সাথে মিলেছে':'— পূর্ণমান '+aiToBn(+S.full||0)+' এর সাথে মিলছে না'}</div>
+  <label>বই / অধ্যায় (ঐচ্ছিক)</label><input data-k="book" value="${qaiE(S.book)}" placeholder="যেমন: গণিত — ভগ্নাংশ অধ্যায়">
+  <label>কাঠিন্য</label>${ch([['সহজ'],['মাঝারি'],['কঠিন']],S.lv,'lv',x=>x[0])}
+  <label>অতিরিক্ত নির্দেশনা (ঐচ্ছিক)</label><textarea data-k="x" rows="2" placeholder="যেমন: গল্পের মতো করে অঙ্ক দাও…">${qaiE(S.x)}</textarea>`}
+ </div>
+ <button class="qai-big" id="qaiGo" data-a="go">${S.mode==='direct'?'✨ প্রশ্নপত্র তৈরি করুন':'📋 প্রম্পট তৈরি করুন'}</button>
+ <p class="qai-note" style="text-align:center;margin:8px 0 20px">AI-এর বানানো প্রশ্ন ও উত্তর ছাপার আগে নিজে দেখে নিন।</p>`;
+ b.scrollTop=y}
+function qaiInput(e){
+ const S=qaiS,t=e.target,r=t.dataset.r,k=t.dataset.k;
+ if(r){const[i,f]=r.split(':');const s=S.secs[+i];if(f==='ty'){s.ty=t.value;if(s.ty==='cq'){s.m=10;if(!s.ch)s.ch=0}else if(s.m===10)s.m=1;qaiForm();return}s[f]=Math.max(0,+t.value||0);qaiTotUpd();return}
+ if(!k)return;
+ if(t.type==='checkbox'){S[k]=t.checked;qaiForm();return}
+ if(k==='ci'||k==='si'){S[k]=+t.value;qaiForm();if(k==='si'&&S.si===1&&S.lang!=='en'){S.lang='en';qaiForm()}return}
+ S[k]=(k==='full')?(+t.value||0):t.value;if(k==='full')qaiTotUpd()}
+function qaiTotUpd(){const S=qaiS,tot=qaiTot(S),ok=tot===(+S.full||0),el=$('#qaiTot');if(el){el.className='qai-tot '+(ok?'ok':'bad');el.textContent='মোট নম্বর: '+aiToBn(tot)+(ok?' ✓ পূর্ণমানের সাথে মিলেছে':' — পূর্ণমান '+aiToBn(+S.full||0)+' এর সাথে মিলছে না')}}
+function qaiClick(e){
+ const t=e.target.closest('[data-a]');if(!t)return;const[a,v]=t.dataset.a.split(':'),S=qaiS;
+ if(a==='lang'){S.lang=+v?'en':'bn';return qaiForm()}
+ if(a==='ii'||a==='ei'||a==='lv'){S[a]=+v;return qaiForm()}
+ if(a==='mode'){S.mode=v;return qaiForm()}
+ if(a==='add'){S.secs.push({ty:'short',n:3,m:2,ch:0});return qaiForm()}
+ if(a==='rm'){S.secs.splice(+v,1);return qaiForm()}
+ if(a==='pre'){S.secs=QAI.pre[+v][1].map(x=>({ty:x[0],n:x[1],m:x[2],ch:x[3]}));S.full=qaiTot(S);return qaiForm()}
+ if(a==='pick'){const f=$('#qaiFile');f.onchange=()=>qaiImg(f.files[0]);f.click();return}
+ if(a==='noimg'){S.img=null;return qaiForm()}
+ if(a==='go')return qaiGo();
+ if(a==='full'){const pv=t.closest('.qai-pc').querySelector('.qai-pv');pv.classList.toggle('full');t.textContent=pv.classList.contains('full')?'⌃ ছোট করো':'⌄ পুরো পেপার দেখো';return}
+ if(a==='add2')return qaiAdd();
+ if(a==='sug')return qaiRefine(t.textContent.trim());
+ if(a==='retry')return qaiGo(true);
+}
+function qaiImg(f){
+ if(!f)return;const im=new Image(),u=URL.createObjectURL(f);
+ im.onload=()=>{const m=1700,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);qaiS.img=c.toDataURL('image/jpeg',.85).split(',')[1];URL.revokeObjectURL(u);qaiForm()};
+ im.onerror=()=>toast('ছবিটা পড়া যায়নি');im.src=u}
+function qaiKeyDlg(){
+ const k=aiKeys(),d=document.createElement('div');d.className='qai-dlg';
+ d.innerHTML=`<div><h3 style="margin:0 0 4px">🔑 AI কী</h3><p class="qai-note" style="margin:0 0 10px">কী শুধু এই ডিভাইসে থাকে। Gemini থাকলে ছবি পড়াও চলে।</p><label class="qai-note">Gemini API key</label><input id="qkg" type="password" value="${qaiE(k.gemini)}" placeholder="AIza…"><label class="qai-note">Groq API key (ঐচ্ছিক, ব্যাকআপ)</label><input id="qkq" type="password" value="${qaiE(k.groq)}" placeholder="gsk_…"><button class="qai-big sec" id="qki" style="padding:9px;margin-bottom:8px">⬇ শিক্ষক প্যানেলের AI স্যার থেকে কী আনো</button><div style="display:flex;gap:8px"><button class="qai-big sec" id="qkc" style="margin:0">বাতিল</button><button class="qai-big" id="qks" style="margin:0">সেভ</button></div></div>`;
+ document.body.appendChild(d);
+ d.querySelector('#qkc').onclick=()=>d.remove();
+ d.querySelector('#qks').onclick=()=>{try{LS.setItem(AIK,JSON.stringify({gemini:d.querySelector('#qkg').value.trim(),groq:d.querySelector('#qkq').value.trim()}))}catch(e){}d.remove();toast('কী সেভ হয়েছে ✓');if(qaiS&&qaiS.view==='form')qaiForm()};
+ d.querySelector('#qki').onclick=async()=>{
+  try{const f=document.querySelector('#twp iframe'),w=f&&f.contentWindow;if(!w||!w.aiKeyGetAll)return toast('আগে একবার শিক্ষক প্যানেল খুলে AI স্যার পেজে ঢোকো, তারপর এখানে এসো');
+   const o=await w.aiKeyGetAll();const g=o&&o.gemini&&o.gemini.key,q=o&&o.groq&&o.groq.key;if(!g&&!q)return toast('AI স্যারে কোনো কী পাওয়া যায়নি');
+   if(g)d.querySelector('#qkg').value=g;if(q)d.querySelector('#qkq').value=q;toast('কী এসেছে — "সেভ" চাপো')}catch(e){toast('আনা যায়নি')}}}
+
+/* ---- তৈরি ---- */
+function qaiChk(S){
+ if(S.mode==='direct'){const k=aiKeys();if(!k.gemini&&!k.groq){qaiKeyDlg();return'কী লাগবে'}}
+ if(S.own){if(!S.img&&!S.ot.trim()){toast('ছবি দাও অথবা লেখা পেস্ট করো');return'x'}return''}
+ if(!S.secs.length){toast('অন্তত একটি বিভাগ দাও');return'x'}
+ if(S.secs.some(s=>s.ty!=='pas'&&!(s.n>0))){toast('প্রতিটি বিভাগের প্রশ্ন সংখ্যা দাও');return'x'}
+ return''}
+async function qaiGo(re){
+ const S=qaiS;if(qaiBusy)return;if(!re&&qaiChk(S))return;
+ if(S.mode==='copy'){return qaiCopyView()}
+ S.view='chat';S.chat=[];const en=S.lang==='en';
+ const tags=S.own?['সাজানো (আগের প্রশ্নপত্র)',qaiClsName(S,false),qaiSubName(S,false)]:[qaiClsName(S,false),qaiSubName(S,false),QAI.exam[S.ei][0],'পূর্ণমান '+aiToBn(qaiTot(S)),['সহজ','মাঝারি','কঠিন'][S.lv],...S.secs.map(s=>QAI.ty[s.ty][1]+(s.ty==='pas'?'':' '+aiToBn(s.n)))];
+ qaiChatShow();$('#qaiChat').insertAdjacentHTML('beforeend',`<div class="qai-me">${tags.map(x=>`<i>${qaiE(x)}</i>`).join('')}</div>`);
+ await qaiRun(()=>qaiCall(qaiSys(S),qaiUser(S),S.own?S.img:null),S.own?'প্রশ্নপত্রটি সাজিয়ে দিয়েছি।':null)}
+function qaiChatShow(){
+ const b=$('#qaiBody');$('#qaiT').textContent='✨ AI-র সাথে প্রশ্ন তৈরি';b.innerHTML='<div class="qai-chat" id="qaiChat"></div>';$('#qaiBar').classList.remove('hide');
+ $('#qaiSug').innerHTML=['আরও কঠিন করো','আরও সহজ করো','নম্বর ঠিক করো','MCQ যোগ করো','সৃজনশীল যোগ করো','৩য় প্রশ্ন বদলাও'].map(s=>`<button data-a="sug">${s}</button>`).join('')}
+function qaiAdd0(html,cls){$('#qaiChat').insertAdjacentHTML('beforeend',`<div class="qai-ai"><div class="av">✨</div><div class="bb ${cls||''}">${html}</div></div>`);const e=$('#qaiChat').lastElementChild;qaiScroll();return e}
+function qaiScroll(){const b=$('#qaiBody');setTimeout(()=>b.scrollTo({top:b.scrollHeight,behavior:'smooth'}),40)}
+async function qaiRun(fn,intro){
+ const S=qaiS;qaiBusy=true;const ty=qaiAdd0('<span class="qai-dots"><span></span><span></span><span></span></span>');
+ try{
+  const t=await fn(),j=qaiParse(t),p=qaiToPaper(j,S);qaiCur=j;ty.remove();
+  const tot=qTotalAll(p),want=+S.full||0;let msg=intro||'প্রশ্নপত্র তৈরি করেছি।';
+  if(!S.own&&S.mode==='direct'&&tot!==want)msg+=` মোট নম্বর হয়েছে ${aiToBn(tot)} (পূর্ণমান ${aiToBn(want)}) — চাইলে "নম্বর ঠিক করো" বলো।`;
+  await qaiPaper(p,msg)
+ }catch(e){ty.remove();qaiAdd0(`❌ ${qaiE(e.message||'সমস্যা হয়েছে')}<div style="margin-top:8px"><button class="qai-big sec" data-a="retry" style="padding:8px;margin:0">↻ আবার চেষ্টা</button></div>`,'er')}
+ qaiBusy=false}
+async function qaiPaper(p,msg){
+ try{if(document.fonts)await document.fonts.load("14px 'Noto Sans Bengali'")}catch(e){}
+ const r=qLayout(p),el=qaiAdd0(`<div>${qaiE(msg)}</div><div class="qai-pc"><div style="display:flex;gap:10px;align-items:center;padding:9px 12px"><span style="font-size:22px">📄</span><div><b>${qaiE(p.name)}</b><div class="qai-note">${aiToBn(p.secs.reduce((a,s)=>a+s.qs.length,0))}টি প্রশ্ন · ${p.h.full} নম্বর · ${aiToBn(r.n)} পৃষ্ঠা</div></div></div><div class="qai-pv"></div><div class="qai-ac"><button class="p" data-a="add2">＋ আমার পেপারে যোগ করুন</button><button data-a="full">⌄ পুরো পেপার দেখো</button></div></div>`,'pp');
+ const pv=el.querySelector('.qai-pv');const w=Math.max(200,pv.clientWidth-16),z=Math.min(1,w/r.PW);
+ pv.innerHTML=r.pages.map(h=>`<div class="qai-pg" style="width:${r.PW*z}px;height:${r.PH*z}px"><div style="transform:scale(${z});transform-origin:0 0;width:${r.PW}px;height:${r.PH}px">${h}</div></div>`).join('');
+ el._paper=p;qaiScroll()}
+function qaiAdd(){
+ const els=[...document.querySelectorAll('#qaiChat .qai-ai')].filter(e=>e._paper),e=els[els.length-1];if(!e)return;
+ const p=e._paper;QL.unshift(p);qSave();qaiClose();qOpenEd(p);toast('আমার পেপারে যোগ হয়েছে — এখান থেকে ছবি, টেবিল, ভাসমান বস্তু সব যোগ করা যাবে')}
+async function qaiRefine(txt){
+ const S=qaiS;if(qaiBusy||S.view!=='chat')return;const m=(txt||$('#qaiMsg').value).trim();if(!m)return;$('#qaiMsg').value='';
+ if(!qaiCur)return toast('আগে প্রশ্নপত্র তৈরি হোক');
+ $('#qaiChat').insertAdjacentHTML('beforeend',`<div class="qai-me">${qaiE(m)}</div>`);qaiScroll();
+ const cmd=m==='নম্বর ঠিক করো'?`মোট নম্বর ঠিক ${+S.full||qaiTot(S)} করো — প্রশ্নের সংখ্যা বা প্রতি প্রশ্নের নম্বর মিলিয়ে।`:m;
+ const user=`বর্তমান প্রশ্নপত্র (JSON):\n${JSON.stringify(qaiCur)}\n\nনির্দেশ: ${cmd}\n\nনির্দেশ অনুযায়ী বদলে সম্পূর্ণ প্রশ্নপত্র আগের একই JSON কাঠামোয় দাও। যা বদলাতে বলা হয়নি তা অপরিবর্তিত রাখো; বিভাগের সংখ্যা/ধরন বদলাবে না (বলা না হলে)।`;
+ await qaiRun(()=>qaiCall(qaiRules(S.lang==='en'),user,null),'আপডেট করেছি।')}
+
+/* ---- প্রম্পট কপি মোড ---- */
+function qaiCopyView(){
+ const S=qaiS,pr=qaiSys(S)+'\n\n'+qaiUser(S)+(S.own?'\n(প্রশ্নপত্রের ছবি এই চ্যাটে আলাদা করে দাও)':'');
+ S.view='copy';$('#qaiT').textContent='📋 প্রম্পট কপি';
+ $('#qaiBody').innerHTML=`<div class="qai-c"><b>১) এই প্রম্পট কপি করো</b><p class="qai-note" style="margin:4px 0 8px">যেকোনো AI চ্যাটে (ChatGPT, Gemini, Claude…) পেস্ট করো। AI শুধু একটি কোড (JSON) দেবে।</p><div class="qai-pr" id="qaiPr">${qaiE(pr)}</div><button class="qai-big sec" id="qaiCp" style="padding:9px">📋 প্রম্পট কপি</button></div><div class="qai-c"><b>২) AI-র দেওয়া কোড এখানে পেস্ট করো</b><textarea id="qaiPaste" rows="6" style="margin-top:8px" placeholder='{"sections":[ … ]}'></textarea><button class="qai-big" id="qaiUse">✅ প্রশ্নপত্র দেখো</button></div>`;
+ $('#qaiCp').onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(pr):Promise.reject()).then(()=>toast('প্রম্পট কপি হয়েছে'),()=>toast('কপি হয়নি — প্রম্পটে চেপে ধরে নিজে কপি করো'))};
+ $('#qaiUse').onclick=async()=>{let j;try{j=qaiParse($('#qaiPaste').value)}catch(e){return toast(e.message)}
+  S.view='chat';qaiChatShow();$('#qaiBar').classList.add('hide');
+  try{qaiCur=j;await qaiPaper(qaiToPaper(j,S),'কোড থেকে প্রশ্নপত্র সাজানো হয়েছে।')}catch(e){qaiAdd0('❌ '+qaiE(e.message),'er')}}}
+
 })();
 </script><script>
 /* ===== প্রবেশপত্র ও প্রগতি রিপোর্ট (x2) ===== */
